@@ -19,11 +19,15 @@ public class Controlador {
 	 */
 	public void simula(){
 			
-		System.out.println("Introduce un comando\n");
+		
 		String str="";
 		
 		while(!str.toLowerCase().equals("salir")){
+			
+			System.out.println("Introduce un comando\n");
+			
 			str=s.next().toLowerCase().trim();	
+			
 			if (str.equals("paso")){
 				System.out.println("Has escrito paso");
 			}
@@ -33,6 +37,7 @@ public class Controlador {
 			else if (str.equals("crearcelula")){
 				System.out.println("Has escrito crear celula");
 				superficie.crearCelula(2, 2, 3, 1);
+				System.out.println(superficie.toString());
 			}
 			else if (str.equals("eliminarcelula")){
 				System.out.println("Has escrito eliminar celula");
@@ -49,10 +54,6 @@ public class Controlador {
 			else
 				System.out.println("No has escrito un comando correcto");
 			
-			System.out.println(superficie.imprimir());
-			System.out.println("Introduce un comando\n");
-			
-
 		}//fin while
 			
 		/*	try (int s.nextInt());

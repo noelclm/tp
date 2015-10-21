@@ -48,20 +48,20 @@ public class Superficie {
 	}
 	
 	/**
-	 * Solo para probar
+	 * Devuelve un string con la superficie para imprimirla por pantalla.
+	 * @return String con la superficie.
 	 */
-	public String imprimir (){
+	public String toString(){
 		
 		String str = "";
-		
 		for (int i=0; i<this.filas; i++){
 			for (int j=0; j<this.columnas; j++){
 				if(this.superficie[i][j]!= null)
-					str.concat("0");
+					str = str+"0";
 				else
-					str.concat("-");
+					str = str+"-";
 			}
-			str.concat(LINE_SEPARATOR);
+			str = str+LINE_SEPARATOR;
 		}
 		
 		return str;
