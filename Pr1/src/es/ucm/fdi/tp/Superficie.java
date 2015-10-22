@@ -36,9 +36,9 @@ public class Superficie {
 	 */
 	public boolean crearCelula (int f, int c, int maxPasosSinMover, int pasosReproduccion){
 		
-		if (this.superficie[f][c]!=null){
+		if (this.superficie[f-1][c-1]==null){
 			
-			this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
+			this.superficie[f-1][c-1] = new Celula(maxPasosSinMover,pasosReproduccion);	
 			return true;
 			
 		}
@@ -56,10 +56,19 @@ public class Superficie {
 		String str = "";
 		for (int i=0; i<this.filas; i++){
 			for (int j=0; j<this.columnas; j++){
-				if(this.superficie[i][j]!= null)
-					str = str+"0";
-				else
-					str = str+"-";
+				if(this.superficie[i][j]!= null){
+					if(j==this.columnas-1)
+						str = str+this.superficie[i][j].getPasosParaMorir()+"-"+this.superficie[i][j].getQuedaParaReproducirse();
+					else
+						str = str+this.superficie[i][j].getPasosParaMorir()+"-"+this.superficie[i][j].getQuedaParaReproducirse()+" ";
+				}
+				else{
+					if(j==this.columnas-1)
+						str = str+" - ";
+					else
+						str = str+" -  ";
+				}
+					
 			}
 			str = str+LINE_SEPARATOR;
 		}

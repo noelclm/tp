@@ -34,6 +34,15 @@ public class Celula {
 	}
 	
 	/**
+	 * Metodo que reinicia el numero de pasos sin mover.
+	 */
+	public void reiniciaPasosSinMover(){
+		
+		this.pasosSinMover = 0;
+		
+	}
+	
+	/**
 	 * Metodo que suma uno al numero de pasos sin mover.
 	 */
 	public void sumPasosSinMover(){
@@ -59,6 +68,26 @@ public class Celula {
 	public int getPasosSinMover(){
 		
 		return this.pasosSinMover;
+		
+	}
+	
+	/**
+	 * Metodo que devuelve el numero de pasos que queda para que la celula se reproduzca.
+	 * @return Numero de pasos que queda para reproducirse.
+	 */
+	public int getQuedaParaReproducirse(){
+		
+		return this.PASOS_REPRODUCCION-this.pasosDados;
+		
+	}
+	
+	/**
+	 * Metodo que devuelve el numero de pasos que queda para que la celula muera.
+	 * @return Numero de pasos que queda para morir.
+	 */
+	public int getPasosParaMorir(){
+		
+		return this.MAX_PASOS_SIN_MOVER-this.pasosSinMover;
 		
 	}
 	

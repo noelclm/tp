@@ -31,26 +31,39 @@ public class Controlador {
 			if (str.equals("paso")){
 				System.out.println("Has escrito paso");
 			}
+			
 			else if (str.equals("iniciar")){
 				System.out.println("Has escrito iniciar");
 			}
+			
 			else if (str.equals("crearcelula")){
-				System.out.println("Has escrito crear celula");
-				superficie.crearCelula(2, 2, 3, 1);
+				
+	
+				if(superficie.crearCelula(2,2,3,1))
+					System.out.println("Celula creada");
+				else
+					System.out.println("No se ha podido crear la celula");
+				
 				System.out.println(superficie.toString());
+					
 			}
+			
 			else if (str.equals("eliminarcelula")){
 				System.out.println("Has escrito eliminar celula");
 			}
+			
 			else if (str.equals("ayuda")){
 				System.out.println(interpreterHelp());
 			}
+			
 			else if (str.equals("vaciar")){
-				System.out.println("Has escrito vaciar");
+				System.out.println("Vaciando la superficie....");
 			}
+			
 			else if (str.equals("salir")){
-				System.out.println("Has escrito salir");
+				System.out.println("Fin de la simulacion.....");
 			}
+			
 			else
 				System.out.println("No has escrito un comando correcto");
 			
