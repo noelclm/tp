@@ -5,13 +5,13 @@ package es.ucm.fdi.tp;
  */
 public class Mundo {
 	
-	//private Superficie superficie;
+	private Superficie superficie;
 	
 	/**
 	 * Constructor por defecto.
 	 */
-	public Mundo(){
-		
+	public Mundo(int nf, int nc){
+		this.superficie =new Superficie(nf,nc);
 	}
 	
 	/**

@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Controlador {
 	
-	// Para que el salto de linea salga bien en windows y linux.
+	//Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private Superficie superficie =new Superficie(5,5);
 	
@@ -40,7 +40,7 @@ public class Controlador {
 				
 	
 				if(superficie.crearCelula(2,2,3,1))
-					System.out.println("Celula creada");
+					System.out.println("Creamos nueva celula en la posición: (2,2)");
 				else
 					System.out.println("No se ha podido crear la celula");
 				

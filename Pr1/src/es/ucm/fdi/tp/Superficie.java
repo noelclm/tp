@@ -5,6 +5,7 @@ package es.ucm.fdi.tp;
  */
 public class Superficie {
 	
+	//Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private int filas;
 	private int columnas;

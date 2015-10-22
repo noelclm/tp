@@ -34,15 +34,6 @@ public class Celula {
 	}
 	
 	/**
-	 * Metodo que reinicia el numero de pasos sin mover.
-	 */
-	public void reiniciaPasosSinMover(){
-		
-		this.pasosSinMover = 0;
-		
-	}
-	
-	/**
 	 * Metodo que suma uno al numero de pasos sin mover.
 	 */
 	public void sumPasosSinMover(){
