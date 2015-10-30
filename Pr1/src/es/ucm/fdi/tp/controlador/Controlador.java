@@ -2,7 +2,6 @@ package es.ucm.fdi.tp.controlador;
 
 import java.util.*;
 
-import es.ucm.fdi.tp.superficie.Superficie;
 import es.ucm.fdi.tp.mundo.Mundo;
 
 /**
@@ -12,7 +11,7 @@ public class Controlador {
 	
 	//Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
-	private Superficie superficie =new Superficie(5,5);
+	private Mundo mundo =new Mundo(5,5);
 	
 	//Clase que nos permite obtener datos desde el teclado (Deriva de java.util)
 	Scanner s= new Scanner(System.in);
@@ -41,14 +40,14 @@ public class Controlador {
 			
 			else if (str.equals("crearcelula")){
 				
-	
-				if(superficie.crearCelula(2,2,3,1))
-					System.out.println("Creamos nueva celula en la posición: (2,2)");
-				else
-					System.out.println("No se ha podido crear la celula");
-				
-				System.out.println(superficie.toString());
+				if(mundo.crearCelula(2,3)){
+					System.out.println("Creamos nueva celula en la posición: ("+2+","+3+")");
 					
+				}else{
+					System.out.println("No se ha podido crear la celula");
+				}
+				
+				System.out.println(mundo.imprimirSuperficie());
 			}
 			
 			else if (str.equals("eliminarcelula")){

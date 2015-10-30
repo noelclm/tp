@@ -24,5 +24,26 @@ public class Mundo {
 	public void evoluciona(){
 		
 	}
+	
+	/**
+	 * Crea una celula en las coordenadas.
+	 */
+	public boolean crearCelula(int f, int c){
+		
+		if(superficie.crearCelula(f,c,3,1)) // TODO Mirar de donde se sacan los datos de maxPasosSinMover, pasosReproduccion
+			return true;
+		else
+			return false;
+
+	}
+	
+	/**
+	 * Devuelve la superficie en un string para dibujarlo.
+	 */
+	public String imprimirSuperficie(){
+		
+		return superficie.toString();
+		
+	}
 
 }
