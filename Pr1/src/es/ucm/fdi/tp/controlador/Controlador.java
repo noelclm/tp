@@ -1,6 +1,9 @@
-package es.ucm.fdi.tp;
+package es.ucm.fdi.tp.controlador;
 
 import java.util.*;
+
+import es.ucm.fdi.tp.superficie.Superficie;
+import es.ucm.fdi.tp.mundo.Mundo;
 
 /**
  * Clase encargada de pedir los comandos al usuario.

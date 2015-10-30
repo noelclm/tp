@@ -1,4 +1,4 @@
-package es.ucm.fdi.tp;
+package es.ucm.fdi.tp.celula;
 
 /**
  * Representa una celula.

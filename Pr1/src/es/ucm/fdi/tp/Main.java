@@ -1,5 +1,7 @@
 package es.ucm.fdi.tp;
 
+import es.ucm.fdi.tp.controlador.Controlador;
+
 //import java.util.*;
 
 /**

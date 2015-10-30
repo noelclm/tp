@@ -1,4 +1,6 @@
-package es.ucm.fdi.tp;
+package es.ucm.fdi.tp.superficie;
+
+import es.ucm.fdi.tp.celula.Celula;
 
 /**
  * Representa la zona donde trascurre el juego.

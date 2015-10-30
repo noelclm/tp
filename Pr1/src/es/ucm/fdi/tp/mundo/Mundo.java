@@ -1,4 +1,6 @@
-package es.ucm.fdi.tp;
+package es.ucm.fdi.tp.mundo;
+
+import es.ucm.fdi.tp.superficie.Superficie;
 
 /**
  * Clase encargada de gestionar los movimientos.
@@ -11,7 +13,9 @@ public class Mundo {
 	 * Constructor por defecto.
 	 */
 	public Mundo(int nf, int nc){
+		
 		this.superficie =new Superficie(nf,nc);
+		
 	}
 	
 	/**
