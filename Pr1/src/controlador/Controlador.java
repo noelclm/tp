@@ -9,61 +9,59 @@ import controlador.mundo.Mundo;
  */
 public class Controlador {
 	
-	//Para que el salto de linea salga bien en windows y linux.
-	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private Mundo mundo =new Mundo(5,5);
-	
-	//Clase que nos permite obtener datos desde el teclado (Deriva de java.util)
-	Scanner s= new Scanner(System.in);
 	
 	/**
 	 * Pide el comando al usuario y ejecuta la accion.
 	 */
 	public void simula(){
 			
+		//Clase que nos permite obtener datos desde el teclado (Deriva de java.util)
+		Scanner s= new Scanner(System.in);
 		
-		String str="";
+		boolean exit = false;
 		
-		while(!str.toLowerCase().equals("salir")){
+		while(!exit){
 			
 			System.out.println("Introduce un comando\n");
 			
-			str=s.next().toLowerCase().trim();	
+			//String linea = s.next().toLowerCase().trim();
+			String linea = s.nextLine();
 			
-			if (str.equals("paso")){
+			String[] palabras = linea.split(" ");
+			
+			
+			if (palabras[0].equals("paso")){
 				System.out.println("Has escrito paso");
 			}
 			
-			else if (str.equals("iniciar")){
+			else if (palabras[0].equals("iniciar")){
 				System.out.println("Has escrito iniciar");
 			}
 			
-			else if (str.equals("crearcelula")){
-				
-				if(mundo.crearCelula(2,3)){
-					System.out.println("Creamos nueva celula en la posición: ("+2+","+3+")");
-					
-				}else{
-					System.out.println("No se ha podido crear la celula");
-				}
-				
-				System.out.println(mundo.imprimirSuperficie());
+			else if (palabras[0].equals("crearcelula")){
+				// TODO si mete letras en vez de numeros falla
+				int f = Integer.parseInt(palabras[1]); 
+				int c = Integer.parseInt(palabras[2]);
+				mundo.crearCelula(f,c);
+				mundo.imprimirSuperficie();
 			}
 			
-			else if (str.equals("eliminarcelula")){
+			else if (palabras[0].equals("eliminarcelula")){
 				System.out.println("Has escrito eliminar celula");
 			}
 			
-			else if (str.equals("ayuda")){
-				System.out.println(interpreterHelp());
+			else if (palabras[0].equals("ayuda")){
+				mundo.interpreterHelp();
 			}
 			
-			else if (str.equals("vaciar")){
+			else if (palabras[0].equals("vaciar")){
 				System.out.println("Vaciando la superficie....");
 			}
 			
-			else if (str.equals("salir")){
+			else if (palabras[0].equals("salir")){
 				System.out.println("Fin de la simulacion.....");
+				exit = true;
 			}
 			
 			else
@@ -71,6 +69,8 @@ public class Controlador {
 			
 		}//fin while
 			
+		s.close();
+		
 		/*	try (int s.nextInt());
 					
 		}
@@ -78,21 +78,7 @@ public class Controlador {
 			System.out.println("error");
 			System.out.println();
 		}*/
-	}
-
-	/**
-	 * Devuelve la ayuda.
-	 * @return String con la ayuda.
-	 */
-	public String interpreterHelp(){
-		return	"POSIBLES COMANDOS:" + LINE_SEPARATOR + 
-				" PASO: realiza un paso en la simulacion" + LINE_SEPARATOR + 
-				" AYUDA: muestra esta ayuda" + LINE_SEPARATOR + 
-				" SALIR: cierra la aplicación" + LINE_SEPARATOR + 
-				" INICIAR: inicia una nueva simulación" + LINE_SEPARATOR + 
-				" VACIAR: crea un mundo vacío" + LINE_SEPARATOR + 
-				" CREARCELULA F C: crea una nueva celula en la posición (f,c) si es posible" + LINE_SEPARATOR + 
-				" ELIMINARCELULA F C: elimina una celula de la posición (f,c) si es posible" + LINE_SEPARATOR ;
+		
 	}
 
 }

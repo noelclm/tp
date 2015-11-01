@@ -7,6 +7,9 @@ import controlador.mundo.superficie.Superficie;
  */
 public class Mundo {
 	
+	//Para que el salto de linea salga bien en windows y linux.
+	private static final String LINE_SEPARATOR = System.lineSeparator();
+	
 	private Superficie superficie;
 	
 	/**
@@ -26,24 +29,40 @@ public class Mundo {
 	}
 	
 	/**
-	 * Crea una celula en las coordenadas.
+	 * Llama a crear celula he imprime por pantalla si ha podido.
 	 */
-	public boolean crearCelula(int f, int c){
+	public void crearCelula(int f, int c){
 		
 		if(superficie.crearCelula(f,c,3,1)) // TODO Mirar de donde se sacan los datos de maxPasosSinMover, pasosReproduccion
-			return true;
+			System.out.println("Creamos nueva celula en la posición: ("+f+","+c+")");
+			
 		else
-			return false;
+			System.out.println("No se ha podido crear la celula");
 
 	}
 	
 	/**
 	 * Devuelve la superficie en un string para dibujarlo.
 	 */
-	public String imprimirSuperficie(){
+	public void imprimirSuperficie(){
 		
-		return superficie.toString();
+		System.out.println(superficie.toString());
 		
+	}
+	
+	/**
+	 * Devuelve la ayuda.
+	 * @return String con la ayuda.
+	 */
+	public void interpreterHelp(){
+		System.out.println("POSIBLES COMANDOS:" + LINE_SEPARATOR + 
+				" PASO: realiza un paso en la simulacion" + LINE_SEPARATOR + 
+				" AYUDA: muestra esta ayuda" + LINE_SEPARATOR + 
+				" SALIR: cierra la aplicación" + LINE_SEPARATOR + 
+				" INICIAR: inicia una nueva simulación" + LINE_SEPARATOR + 
+				" VACIAR: crea un mundo vacío" + LINE_SEPARATOR + 
+				" CREARCELULA F C: crea una nueva celula en la posición (f,c) si es posible" + LINE_SEPARATOR + 
+				" ELIMINARCELULA F C: elimina una celula de la posición (f,c) si es posible" + LINE_SEPARATOR) ;
 	}
 
 }
