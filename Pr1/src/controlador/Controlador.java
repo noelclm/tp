@@ -1,7 +1,6 @@
 package controlador;
 
 import java.util.*;
-
 import controlador.mundo.Mundo;
 
 /**
@@ -10,14 +9,13 @@ import controlador.mundo.Mundo;
 public class Controlador {
 	
 	private Mundo mundo =new Mundo(5,5);
+	//Clase que nos permite obtener datos desde el teclado (Deriva de java.util)
+	Scanner s= new Scanner(System.in);
 	
 	/**
 	 * Pide el comando al usuario y ejecuta la accion.
 	 */
 	public void simula(){
-			
-		//Clase que nos permite obtener datos desde el teclado (Deriva de java.util)
-		Scanner s= new Scanner(System.in);
 		
 		boolean exit = false;
 		
@@ -26,17 +24,19 @@ public class Controlador {
 			System.out.println("Introduce un comando\n");
 			
 			//String linea = s.next().toLowerCase().trim();
-			String linea = s.nextLine();
+			String linea = s.nextLine().toLowerCase();
 			
 			String[] palabras = linea.split(" ");
 			
 			
 			if (palabras[0].equals("paso")){
-				System.out.println("Has escrito paso");
+				mundo.evoluciona();
+				mundo.imprimirSuperficie();
 			}
 			
 			else if (palabras[0].equals("iniciar")){
-				System.out.println("Has escrito iniciar");
+				mundo.iniciar();
+				mundo.imprimirSuperficie();
 			}
 			
 			else if (palabras[0].equals("crearcelula")){
@@ -48,7 +48,11 @@ public class Controlador {
 			}
 			
 			else if (palabras[0].equals("eliminarcelula")){
-				System.out.println("Has escrito eliminar celula");
+				//System.out.println("Has escrito eliminar celula");
+				int f = Integer.parseInt(palabras[1]);
+				int c = Integer.parseInt(palabras[2]);
+				mundo.eliminarCelula(f, c);
+				mundo.imprimirSuperficie();
 			}
 			
 			else if (palabras[0].equals("ayuda")){
@@ -56,7 +60,8 @@ public class Controlador {
 			}
 			
 			else if (palabras[0].equals("vaciar")){
-				System.out.println("Vaciando la superficie....");
+				mundo.vaciar();
+				mundo.imprimirSuperficie();
 			}
 			
 			else if (palabras[0].equals("salir")){
@@ -68,8 +73,7 @@ public class Controlador {
 				System.out.println("No has escrito un comando correcto");
 			
 		}//fin while
-			
-		s.close();
+		
 		
 		/*	try (int s.nextInt());
 					

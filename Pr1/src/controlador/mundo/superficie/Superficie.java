@@ -50,6 +50,61 @@ public class Superficie {
 		
 	}
 	
+	public int getFilas(){
+		
+		return this.filas;
+	
+	}
+	
+	public int getColumnas(){
+		
+		return this.columnas;
+	
+	}
+	
+	public boolean eliminarCelula (int f, int c){
+		if (this.superficie[f-1][c-1]==null)
+			return false;
+	
+		else {
+			this.superficie[f-1][c-1]=null;
+			return true;
+		}
+	}
+	
+	public void vaciar(){
+		
+		for (int i=0; i<this.filas; i++){
+			for (int j=0; j<this.columnas; j++){
+				
+				this.superficie[i][j]= null;
+			}
+		}
+	}
+	
+	public int[] moverCelula(int f, int c){
+		
+		int[] t = new int[2];
+		
+		if (this.superficie[f][c] != null){
+			int f2 = (int)(Math.random()*this.getFilas()-1);
+			int c2 = (int)(Math.random()*this.getColumnas()-1);
+	
+			if(this.superficie[f2][c2]==null){
+				t[0] = f2;
+				t[1] = c2;
+				this.superficie[f2][c2] = this.superficie[f][c];
+				this.superficie[f][c] = null;
+			}
+			
+		}
+		
+		return t;
+		
+		
+	}
+			
+	
 	/**
 	 * Devuelve un string con la superficie para imprimirla por pantalla.
 	 * @return String con la superficie.
@@ -61,15 +116,15 @@ public class Superficie {
 			for (int j=0; j<this.columnas; j++){
 				if(this.superficie[i][j]!= null){
 					if(j==this.columnas-1)
-						str = str+this.superficie[i][j].getPasosParaMorir()+"-"+this.superficie[i][j].getQuedaParaReproducirse();
+						str = str+this.superficie[i][j].toString();
 					else
-						str = str+this.superficie[i][j].getPasosParaMorir()+"-"+this.superficie[i][j].getQuedaParaReproducirse()+" ";
+						str = str+this.superficie[i][j].toString()+" ";
 				}
 				else{
 					if(j==this.columnas-1)
-						str = str+" - ";
+						str = str+"   -   ";
 					else
-						str = str+" -  ";
+						str = str+"   -    ";
 				}
 					
 			}

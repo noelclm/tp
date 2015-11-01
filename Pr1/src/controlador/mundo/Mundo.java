@@ -9,6 +9,7 @@ public class Mundo {
 	
 	//Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
+	private static int numCelulas = 4;
 	
 	private Superficie superficie;
 	
@@ -26,6 +27,30 @@ public class Mundo {
 	 */
 	public void evoluciona(){
 		
+		boolean[][] tablero = new boolean[superficie.getFilas()][superficie.getColumnas()];
+		
+		for (int i=0; i<superficie.getFilas(); i++){
+			for (int j=0; j<superficie.getColumnas(); j++){
+				
+				tablero[i][j] = false;
+				
+			}
+		}
+		
+		for (int i=0; i<superficie.getFilas(); i++){
+			for (int j=0; j<superficie.getColumnas(); j++){
+				
+				if(tablero[i][j] == false){
+					int[] t = new int[2];
+					t = superficie.moverCelula(i,j);
+					tablero[i][j] = true;
+					tablero[t[0]][t[1]] = true;
+				}
+			}
+		}
+		
+		
+		
 	}
 	
 	/**
@@ -37,8 +62,40 @@ public class Mundo {
 			System.out.println("Creamos nueva celula en la posición: ("+f+","+c+")");
 			
 		else
-			System.out.println("No se ha podido crear la celula");
+			System.out.println("Imposible crear una nueva celula, posicion ocupada");
 
+	}
+	public void eliminarCelula (int f,int c){
+		
+		if (superficie.eliminarCelula(f,c))
+			System.out.println("Se ha eliminado la celula en la posicion: ("+f+","+c+")");
+			
+		else
+			System.out.println("No hay ninguna celula en la posicion: ("+f+","+c+")");
+		
+		
+	}
+	public void vaciar(){
+		
+		System.out.println("Vaciando la superficie....");
+		superficie.vaciar();
+		
+	}
+	
+	public void iniciar (){
+		
+		superficie.vaciar();
+		
+		for(int i = 0; i < numCelulas; i++){
+			int f = (int)(Math.random()*superficie.getFilas());
+			int c = (int)(Math.random()*superficie.getColumnas());
+			while(!superficie.crearCelula(f+1, c+1, 3, 1)){
+				f = (int)(Math.random()*superficie.getFilas());
+				c = (int)(Math.random()*superficie.getColumnas());
+			}
+		}
+		System.out.println ("Iniciando simulación");
+		
 	}
 	
 	/**

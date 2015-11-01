@@ -113,5 +113,14 @@ public class Celula {
 			return false;
 		
 	}
+	
+	/**
+	 * Devuelve un string para pintar la celula en el tablero.
+	 */
+	public String toString(){
+		
+		return "["+this.getPasosParaMorir()+"]-["+this.getQuedaParaReproducirse()+"]";
+		
+	}
 
 }
