@@ -1,4 +1,4 @@
-package es.ucm.fdi.tp.celula;
+package controlador.mundo.superficie.celula;
 
 /**
  * Representa una celula.

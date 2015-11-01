@@ -1,6 +1,6 @@
-package es.ucm.fdi.tp.mundo;
+package controlador.mundo;
 
-import es.ucm.fdi.tp.superficie.Superficie;
+import controlador.mundo.superficie.Superficie;
 
 /**
  * Clase encargada de gestionar los movimientos.

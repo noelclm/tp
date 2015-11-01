@@ -1,6 +1,6 @@
-package es.ucm.fdi.tp.superficie;
+package controlador.mundo.superficie;
 
-import es.ucm.fdi.tp.celula.Celula;
+import controlador.mundo.superficie.celula.Celula;
 
 /**
  * Representa la zona donde trascurre el juego.

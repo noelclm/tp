@@ -1,8 +1,8 @@
-package es.ucm.fdi.tp.controlador;
+package controlador;
 
 import java.util.*;
 
-import es.ucm.fdi.tp.mundo.Mundo;
+import controlador.mundo.Mundo;
 
 /**
  * Clase encargada de pedir los comandos al usuario.
