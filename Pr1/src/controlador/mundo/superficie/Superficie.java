@@ -128,7 +128,6 @@ public class Superficie {
 		
 	}
 			
-	
 	/**
 	 * Devuelve un string con la superficie para imprimirla por pantalla.
 	 * @return String con la superficie.
