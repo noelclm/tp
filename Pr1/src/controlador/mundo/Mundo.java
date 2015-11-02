@@ -9,7 +9,9 @@ public class Mundo {
 	
 	//Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
-	private static int numCelulas = 4;
+	private final int NUM_CELULAS = 3;
+	private final int MAX_PASOS_SIN_MOVER = 4;
+	private final int PASOS_REPRODUCCION = 4;
 	
 	private Superficie superficie;
 	
@@ -58,23 +60,33 @@ public class Mundo {
 	 */
 	public void crearCelula(int f, int c){
 		
-		if(superficie.crearCelula(f,c,3,1)) // TODO Mirar de donde se sacan los datos de maxPasosSinMover, pasosReproduccion
-			System.out.println("Creamos nueva celula en la posición: ("+f+","+c+")");
+		if(superficie.crearCelula(f,c,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
+			System.out.println("Creamos nueva célula en la posición: ("+f+","+c+")");
 			
 		else
-			System.out.println("Imposible crear una nueva celula, posicion ocupada");
+			System.out.println("Imposible crear una nueva célula, posición ocupada");
 
 	}
+	
+	/**
+	 * Elimina una celula.
+	 * @param f fila.
+	 * @param c columna.
+	 */
 	public void eliminarCelula (int f,int c){
 		
 		if (superficie.eliminarCelula(f,c))
-			System.out.println("Se ha eliminado la celula en la posicion: ("+f+","+c+")");
+			System.out.println("Se ha eliminado la célula en la posición: ("+f+","+c+")");
 			
 		else
-			System.out.println("No hay ninguna celula en la posicion: ("+f+","+c+")");
+			System.out.println("No hay ninguna célula en la posición: ("+f+","+c+")");
 		
 		
 	}
+	
+	/**
+	 * Vacia la superficie del tablero.
+	 */
 	public void vaciar(){
 		
 		System.out.println("Vaciando la superficie....");
@@ -82,14 +94,17 @@ public class Mundo {
 		
 	}
 	
+	/**
+	 * Inicia el tablero.
+	 */
 	public void iniciar (){
 		
 		superficie.vaciar();
 		
-		for(int i = 0; i < numCelulas; i++){
+		for(int i = 0; i < NUM_CELULAS; i++){
 			int f = (int)(Math.random()*superficie.getFilas());
 			int c = (int)(Math.random()*superficie.getColumnas());
-			while(!superficie.crearCelula(f+1, c+1, 3, 1)){
+			while(!superficie.crearCelula(f+1, c+1, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION)){
 				f = (int)(Math.random()*superficie.getFilas());
 				c = (int)(Math.random()*superficie.getColumnas());
 			}
@@ -99,7 +114,7 @@ public class Mundo {
 	}
 	
 	/**
-	 * Devuelve la superficie en un string para dibujarlo.
+	 * Imprime el tablero.
 	 */
 	public void imprimirSuperficie(){
 		
@@ -108,8 +123,7 @@ public class Mundo {
 	}
 	
 	/**
-	 * Devuelve la ayuda.
-	 * @return String con la ayuda.
+	 * Imprime la ayuda.
 	 */
 	public void interpreterHelp(){
 		System.out.println("POSIBLES COMANDOS:" + LINE_SEPARATOR + 

@@ -50,18 +50,32 @@ public class Superficie {
 		
 	}
 	
+	/**
+	 * Devuelve el numero de filas totales del tablero.
+	 * @return filas.
+	 */
 	public int getFilas(){
 		
 		return this.filas;
 	
 	}
 	
+	/**
+	 * Devuelve el numero de columnas totales del tablero.
+	 * @return columnnas.
+	 */
 	public int getColumnas(){
 		
 		return this.columnas;
 	
 	}
 	
+	/**
+	 * Elimina una celula del tablero.
+	 * @param f fila.
+	 * @param c columna.
+	 * @return false si no puede borrar y true si la borra.
+	 */
 	public boolean eliminarCelula (int f, int c){
 		if (this.superficie[f-1][c-1]==null)
 			return false;
@@ -72,6 +86,9 @@ public class Superficie {
 		}
 	}
 	
+	/**
+	 * Vacia el tablero entero.
+	 */
 	public void vaciar(){
 		
 		for (int i=0; i<this.filas; i++){
@@ -82,9 +99,17 @@ public class Superficie {
 		}
 	}
 	
+	/**
+	 * Mueve una celula.
+	 * @param f fila de la celula que se quiere mover.
+	 * @param c columna de la celula que se quiere mover.
+	 * @return array con las cordenadas de donde se ha movido la celula.
+	 */
 	public int[] moverCelula(int f, int c){
 		
 		int[] t = new int[2];
+		t[0] = 0;
+		t[1] = 0;
 		
 		if (this.superficie[f][c] != null){
 			int f2 = (int)(Math.random()*this.getFilas()-1);
@@ -100,7 +125,6 @@ public class Superficie {
 		}
 		
 		return t;
-		
 		
 	}
 			

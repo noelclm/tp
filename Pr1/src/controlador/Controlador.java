@@ -8,7 +8,9 @@ import controlador.mundo.Mundo;
  */
 public class Controlador {
 	
-	private Mundo mundo =new Mundo(5,5);
+	private static int filasTablero = 5;
+	private static int columnasTablero = 5;
+	private Mundo mundo =new Mundo(filasTablero,columnasTablero);
 	//Clase que nos permite obtener datos desde el teclado (Deriva de java.util)
 	Scanner s= new Scanner(System.in);
 	
@@ -27,7 +29,6 @@ public class Controlador {
 			String linea = s.nextLine().toLowerCase();
 			
 			String[] palabras = linea.split(" ");
-			
 			
 			if (palabras[0].equals("paso")){
 				mundo.evoluciona();
