@@ -100,17 +100,47 @@ public class Superficie {
 	}
 	
 	/**
+	 * Mira si hay una celula en esa posicion del tablero.
+	 * @param f
+	 * @param c
+	 * @return
+	 */
+	public boolean existeCelula(int f, int c){
+		
+		if (this.superficie[f][c] != null)
+			return true;
+		else
+			return false;
+		
+	}
+	
+	/**
+	 * 
+	 * @param f
+	 * @param c
+	 */
+	public void sumarPaso(int f, int c){
+		this.superficie[f][c].sumPasosDados();
+	}
+	
+	/**
+	 * 
+	 * @param f
+	 * @param c
+	 */
+	public void sumarPasoSinMover(int f, int c){
+		this.superficie[f][c].sumPasosSinMover();
+	}
+	
+	/**
 	 * Mueve una celula.
 	 * @param f fila de la celula que se quiere mover.
 	 * @param c columna de la celula que se quiere mover.
 	 * @return array con las cordenadas de donde se ha movido la celula.
 	 */
-	public int[] moverCelula(int f, int c){
+	public boolean moverCelula(int f, int c, int f2, int c2){
 		
-		int[] t = new int[2];
-		t[0] = 0;
-		t[1] = 0;
-		
+		/*
 		if (this.superficie[f][c] != null){
 			int f2 = (int)(Math.random()*this.getFilas()-1);
 			int c2 = (int)(Math.random()*this.getColumnas()-1);
@@ -123,8 +153,19 @@ public class Superficie {
 			}
 			
 		}
+		*/
 		
-		return t;
+	
+		
+		if(this.superficie[f2][c2]==null){
+			this.superficie[f2][c2] = this.superficie[f][c];
+			this.superficie[f][c] = null;
+			return true;
+		}
+		else
+			return false;
+		
+		
 		
 	}
 			

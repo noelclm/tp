@@ -31,27 +31,89 @@ public class Mundo {
 		
 		boolean[][] tablero = new boolean[superficie.getFilas()][superficie.getColumnas()];
 		
-		for (int i=0; i<superficie.getFilas(); i++){
-			for (int j=0; j<superficie.getColumnas(); j++){
+		for (int f=0; f<superficie.getFilas(); f++){
+			for (int c=0; c<superficie.getColumnas(); c++){
 				
-				tablero[i][j] = false;
+				tablero[f][c] = false;
 				
 			}
 		}
 		
-		for (int i=0; i<superficie.getFilas(); i++){
-			for (int j=0; j<superficie.getColumnas(); j++){
+		for (int f=0; f<this.superficie.getFilas(); f++){
+			for (int c=0; c<this.superficie.getColumnas(); c++){
 				
-				if(tablero[i][j] == false){
+				if(tablero[f][c] == false){
 					int[] t = new int[2];
-					t = superficie.moverCelula(i,j);
-					tablero[i][j] = true;
-					tablero[t[0]][t[1]] = true;
+					t = this.sacarDireccion(f,c);
+					if(t!=null){
+						if(this.superficie.moverCelula(f,c,t[0],t[1])){
+							this.superficie.sumarPaso(t[0],t[1]);
+							tablero[f][c] = true;
+							tablero[t[0]][t[1]] = true;
+						}
+						else{
+							this.superficie.sumarPasoSinMover(f,c);
+							tablero[f][c] = true;
+						}
+					}
 				}
 			}
 		}
+			
+	}
+	
+	/**
+	 * Saca las coordenadas a donde se mueve la celula
+	 * @return array con las cordenadas de donde se va a mover la celula.
+	 */
+	public int[] sacarDireccion(int f,int c){
 		
+		if (this.superficie.existeCelula(f,c)){
+			
+			boolean salir = false;
+			int f2 = 0;
+			int c2 = 0;
+			int[] t = new int [2];
 		
+			while(!salir){
+				
+				int dir = (int)(Math.random()*7);
+				
+				if(dir == 0){ // Arriba Izquierda
+					f2 = f-1;
+					c2 = c-1;
+				}else if(dir == 1){ // Arriba
+					f2 = f-1;
+					c2 = c;
+				}else if(dir == 2){ // Arriba Derecha
+					f2 = f-1;
+					c2 = c+1;
+				}else if(dir == 3){ // Izquierda
+					f2 = f;
+					c2 = c-1;
+				}else if(dir == 4){ // Derecha
+					f2 = f;
+					c2 = c+1;
+				}else if(dir == 5){ // Abajo Izquierda
+					f2 = f+1;
+					c2 = c-1;
+				}else if(dir == 6){ // Abajo
+					f2 = f+1;
+					c2 = c;
+				}else if(dir == 7){ // Abajo Izquierda
+					f2 = f+1;
+					c2 = c+1;
+				}
+				
+				if((f2>=0 && f2<this.superficie.getFilas())&&(c2>=0 && c2<this.superficie.getColumnas())){
+					salir = true;
+					t[0] = f2;
+					t[1] = c2;
+				}		
+			}
+			return t;
+		}
+		return null;
 		
 	}
 	
