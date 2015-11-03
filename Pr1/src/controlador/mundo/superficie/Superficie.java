@@ -39,15 +39,35 @@ public class Superficie {
 	 */
 	public boolean crearCelula (int f, int c, int maxPasosSinMover, int pasosReproduccion){
 		
-		if (this.superficie[f-1][c-1]==null){
+		if (this.superficie[f][c]==null){
 			
-			this.superficie[f-1][c-1] = new Celula(maxPasosSinMover,pasosReproduccion);	
+			this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
 			return true;
 			
 		}
 		
 		return false;
 		
+	}
+	
+	/**
+	 * 
+	 * @param f
+	 * @param c
+	 * @return
+	 */
+	public boolean estasPariendo (int f, int c){
+
+		return this.superficie[f][c].limitePasosDados();
+		
+	}
+	
+	public void reiniciarPasosReproduccion(int f, int c){
+		this.superficie[f][c].setPasosReproduccion();
+	}
+	
+	public boolean sinActividad(int f, int c){
+		return this.superficie[f][c].limitePasosSinMover();
 	}
 	
 	/**
@@ -77,11 +97,11 @@ public class Superficie {
 	 * @return false si no puede borrar y true si la borra.
 	 */
 	public boolean eliminarCelula (int f, int c){
-		if (this.superficie[f-1][c-1]==null)
+		if (this.superficie[f][c]==null)
 			return false;
 	
 		else {
-			this.superficie[f-1][c-1]=null;
+			this.superficie[f][c]=null;
 			return true;
 		}
 	}

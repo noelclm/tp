@@ -64,7 +64,7 @@ public class Controlador {
 						
 						int f = Integer.parseInt(palabras[num1]); 
 						int c = Integer.parseInt(palabras[num2]);
-						mundo.crearCelula(f,c);
+						mundo.crearCelula(f-1,c-1);
 						mundo.imprimirSuperficie();
 						
 					}
@@ -87,7 +87,7 @@ public class Controlador {
 						
 						int f = Integer.parseInt(palabras[num1]);
 						int c = Integer.parseInt(palabras[num2]);
-						mundo.eliminarCelula(f, c);
+						mundo.eliminarCelula(f-1, c-1);
 						mundo.imprimirSuperficie();
 						
 					}

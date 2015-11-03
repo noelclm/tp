@@ -29,7 +29,7 @@ public class Celula {
 	 */
 	public void sumPasosDados(){
 		
-		this.pasosSinMover++;
+		this.pasosDados++;
 		
 	}
 	
@@ -38,7 +38,7 @@ public class Celula {
 	 */
 	public void sumPasosSinMover(){
 		
-		this.pasosDados++;
+		this.pasosSinMover++;
 		
 	}
 	
@@ -103,7 +103,7 @@ public class Celula {
 	 * @return True si tiene que reproducirse.
 	 */
 	public boolean limitePasosDados(){
-		
+			
 		if (this.pasosDados == this.PASOS_REPRODUCCION)
 			
 			return true;
@@ -112,6 +112,13 @@ public class Celula {
 			
 			return false;
 		
+	}
+	
+	/**
+	 * 
+	 */
+	public void setPasosReproduccion(){
+		this.pasosDados = 0;
 	}
 	
 	/**

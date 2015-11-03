@@ -47,13 +47,24 @@ public class Mundo {
 					t = this.sacarDireccion(f,c);
 					if(t!=null){
 						if(this.superficie.moverCelula(f,c,t[0],t[1])){
-							this.superficie.sumarPaso(t[0],t[1]);
+							if (this.superficie.estasPariendo(t[0], t[1])){
+								this.superficie.crearCelula(f, c, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION);
+								this.superficie.reiniciarPasosReproduccion(t[0],t[1]);
+							}else
+								this.superficie.sumarPaso(t[0],t[1]);
 							tablero[f][c] = true;
 							tablero[t[0]][t[1]] = true;
+	
 						}
 						else{
 							this.superficie.sumarPasoSinMover(f,c);
+							if (!this.superficie.sinActividad(f,c))
+								this.superficie.eliminarCelula(f, c);
+							if (this.superficie.estasPariendo(t[0], t[1]))
+								this.superficie.eliminarCelula(f, c);
+							
 							tablero[f][c] = true;
+							
 						}
 					}
 				}
@@ -166,7 +177,7 @@ public class Mundo {
 		for(int i = 0; i < NUM_CELULAS; i++){
 			int f = (int)(Math.random()*superficie.getFilas());
 			int c = (int)(Math.random()*superficie.getColumnas());
-			while(!superficie.crearCelula(f+1, c+1, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION)){
+			while(!superficie.crearCelula(f, c, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION)){
 				f = (int)(Math.random()*superficie.getFilas());
 				c = (int)(Math.random()*superficie.getColumnas());
 			}
