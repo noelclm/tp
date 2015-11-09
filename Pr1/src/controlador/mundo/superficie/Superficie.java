@@ -137,7 +137,7 @@ public class Superficie {
 	/**
 	 * 
 	 * @param f
-	 * @param c
+	 *  @param c
 	 */
 	public void sumarPaso(int f, int c){
 		this.superficie[f][c].sumPasosDados();
@@ -151,6 +151,53 @@ public class Superficie {
 	public void sumarPasoSinMover(int f, int c){
 		this.superficie[f][c].sumPasosSinMover();
 	}
+
+	public boolean paso(){
+	
+	boolean[][] tablero = new boolean[this.filas][this.columnas];
+	
+	for (int f=0; f<this.filas; f++){
+		for (int c=0; c<this.columnas; c++){
+			
+			tablero[f][c] = false;
+			
+		}
+	}
+	
+	for (int f=0; f<this.filas; f++){
+		for (int c=0; c<this.columnas; c++){
+			
+			if(tablero[f][c] == false){
+				int[] t = new int[2];
+				t = this.sacarDireccion(f,c);
+				if(t!=null){
+					if(this.moverCelula(f,c,t[0],t[1])){
+						if (this.estasPariendo(t[0], t[1])){
+							this.crearCelula(f, c, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION);
+							this.reiniciarPasosReproduccion(t[0],t[1]);
+						}else
+							this.sumarPaso(t[0],t[1]);
+						tablero[f][c] = true;
+						tablero[t[0]][t[1]] = true;
+
+					}
+					else{
+						this.sumarPasoSinMover(f,c);
+						if (!this.sinActividad(f,c))
+							this.eliminarCelula(f, c);
+						if (this.estasPariendo(t[0], t[1]))
+							this.eliminarCelula(f, c);
+						
+						tablero[f][c] = true;
+						
+					}
+				}
+			}
+		}
+	}
+		
+}
+
 	
 	/**
 	 * Mueve una celula.

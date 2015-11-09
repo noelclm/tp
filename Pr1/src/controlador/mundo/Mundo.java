@@ -27,48 +27,13 @@ public class Mundo {
 	/**
 	 * Recorre la superficie y ejecuta los pasos acorde a las reglas del juego.
 	 */
-	public void evoluciona(){
+	public String evoluciona(){
 		
-		boolean[][] tablero = new boolean[superficie.getFilas()][superficie.getColumnas()];
-		
-		for (int f=0; f<superficie.getFilas(); f++){
-			for (int c=0; c<superficie.getColumnas(); c++){
-				
-				tablero[f][c] = false;
-				
-			}
+		if (this.superficie.paso()){
+			return "ha evolucionado";
 		}
-		
-		for (int f=0; f<this.superficie.getFilas(); f++){
-			for (int c=0; c<this.superficie.getColumnas(); c++){
-				
-				if(tablero[f][c] == false){
-					int[] t = new int[2];
-					t = this.sacarDireccion(f,c);
-					if(t!=null){
-						if(this.superficie.moverCelula(f,c,t[0],t[1])){
-							if (this.superficie.estasPariendo(t[0], t[1])){
-								this.superficie.crearCelula(f, c, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION);
-								this.superficie.reiniciarPasosReproduccion(t[0],t[1]);
-							}else
-								this.superficie.sumarPaso(t[0],t[1]);
-							tablero[f][c] = true;
-							tablero[t[0]][t[1]] = true;
-	
-						}
-						else{
-							this.superficie.sumarPasoSinMover(f,c);
-							if (!this.superficie.sinActividad(f,c))
-								this.superficie.eliminarCelula(f, c);
-							if (this.superficie.estasPariendo(t[0], t[1]))
-								this.superficie.eliminarCelula(f, c);
-							
-							tablero[f][c] = true;
-							
-						}
-					}
-				}
-			}
+		else{
+			return "ha fallado"; 
 		}
 			
 	}
@@ -189,9 +154,9 @@ public class Mundo {
 	/**
 	 * Imprime el tablero.
 	 */
-	public void imprimirSuperficie(){
+	public String toString(){
 		
-		System.out.println(superficie.toString());
+		return superficie.toString();
 		
 	}
 	

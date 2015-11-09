@@ -36,15 +36,15 @@ public class Controlador {
 				
 				if (palabras[0].equals("paso")){
 					
-					mundo.evoluciona();
-					mundo.imprimirSuperficie();
+					System.out.println(mundo.evoluciona());
+					System.out.println(mundo.toString());
 					
 				}
 				
 				else if (palabras[0].equals("iniciar")){
 					
 					mundo.iniciar();
-					mundo.imprimirSuperficie();
+					System.out.println(mundo.toString());
 					
 				}
 				
@@ -65,7 +65,7 @@ public class Controlador {
 						int f = Integer.parseInt(palabras[num1]); 
 						int c = Integer.parseInt(palabras[num2]);
 						mundo.crearCelula(f-1,c-1);
-						mundo.imprimirSuperficie();
+						System.out.println(mundo.toString());
 						
 					}
 					
@@ -88,7 +88,7 @@ public class Controlador {
 						int f = Integer.parseInt(palabras[num1]);
 						int c = Integer.parseInt(palabras[num2]);
 						mundo.eliminarCelula(f-1, c-1);
-						mundo.imprimirSuperficie();
+						System.out.println(mundo.toString());
 						
 					}
 					
@@ -103,7 +103,7 @@ public class Controlador {
 				else if (palabras[0].equals("vaciar")){
 					
 					mundo.vaciar();
-					mundo.imprimirSuperficie();
+					System.out.println(mundo.toString());
 					
 				}
 				
