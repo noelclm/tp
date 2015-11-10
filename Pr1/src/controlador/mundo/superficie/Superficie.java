@@ -157,7 +157,10 @@ public class Superficie {
 		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
 		boolean[][] posicionesCelulas = new boolean[this.filas][this.columnas];
 		Direccion d = new Direccion();
-		PuntosCardinales[] pc;
+		PuntosCardinales[] puntosCardinales;
+		PuntosCardinales punto;
+		int f2 = 0;
+		int c2 = 0;
 		
 		// Inicia un tablero auxiliar para saber porque posiciones ha pasado ya
 		for (int f=0; f<this.filas; f++){
@@ -185,9 +188,9 @@ public class Superficie {
 				
 				if(posicionesPasadas[f][c] == false){
 					
-					pc = d.sacarDireccion(f,c,posicionesCelulas);
+					puntosCardinales = d.sacarDireccion(f,c,posicionesCelulas);
 					
-					if(pc==null){
+					if(puntosCardinales==null){
 					
 						this.sumarPasoSinMover(f,c);
 						if (!this.sinActividad(f,c) || this.estasPariendo(f,c)){
@@ -196,8 +199,41 @@ public class Superficie {
 						} // if (!this.sinActividad(f,c) || this.estasPariendo(f,c))
 						posicionesPasadas[f][c] = true;
 					
-					} // if(pc.length==0)
-					
+					} // (puntosCardinales==null)
+					else{
+						
+						if(puntosCardinales.length==0)
+							punto = puntosCardinales[0];
+						else
+							punto = puntosCardinales[(int) (Math.random()*puntosCardinales.length-1)];
+						
+						if(punto==PuntosCardinales.NORTE){
+							f2 = f-1;
+							c2 = c;
+						}else if(punto==PuntosCardinales.SUR){
+							f2 = f+1;
+							c2 = c;
+						}else if(punto==PuntosCardinales.ESTE){
+							f2 = f;
+							c2 = c+1;
+						}else if(punto==PuntosCardinales.OESTE){
+							f2 = f;
+							c2 = c-1;
+						}else if(punto==PuntosCardinales.NORESTE){
+							f2 = f-1;
+							c2 = c+1;
+						}else if(punto==PuntosCardinales.NOROESTE){
+							f2 = f-1;
+							c2 = c-1;
+						}else if(punto==PuntosCardinales.SURESTE){
+							f2 = f+1;
+							c2 = c+1;
+						}else if(punto==PuntosCardinales.SUROESTE){
+							f2 = f+1;
+							c2 = c-1;
+						}
+						
+					}
 					/*
 			
 						if(this.moverCelula(f,c,t[0],t[1])){
