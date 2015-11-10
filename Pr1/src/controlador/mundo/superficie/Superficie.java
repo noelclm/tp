@@ -155,10 +155,6 @@ public class Superficie {
 	public boolean paso(){
 		
 		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
-		boolean[][] posicionesCelulas = new boolean[this.filas][this.columnas];
-		Direccion d = new Direccion();
-		PuntosCardinales[] puntosCardinales;
-		PuntosCardinales punto;
 		int f2 = 0;
 		int c2 = 0;
 		
@@ -171,24 +167,27 @@ public class Superficie {
 			} // for (int c=0; c<this.columnas; c++)
 		} // for (int f=0; f<this.filas; f++)
 		
-		// Inicia un tablero auxiliar para saber donde hay celulas
-		for (int f=0; f<this.filas; f++){
-			for (int c=0; c<this.columnas; c++){
-				
-				if(this.superficie[f][c]!=null)
-					posicionesCelulas[f][c] = true;
-				else
-					posicionesCelulas[f][c] = false;
-				
-			} // for (int c=0; c<this.columnas; c++)
-		} // for (int f=0; f<this.filas; f++)
-		
 		for (int f=0; f<this.filas-1; f++){
 			for (int c=0; c<this.columnas-1; c++){
 				
-				if(posicionesPasadas[f][c] == false){
+				if(posicionesPasadas[f][c]==false && this.superficie[f][c]!=null){
 					
-					puntosCardinales = d.sacarDireccion(f,c,posicionesCelulas);
+					int[] posiciones = null;
+					Posicion posicionInicial = new Posicion(f,c);
+					Posicion[] posicionesAdyacentes = posicionInicial.adyacencia(this.filas, this.columnas);
+					
+					for(int i=0; i<posicionesAdyacentes.length; i++){
+						int x = posicionesAdyacentes[i].getX();
+						int y = posicionesAdyacentes[i].getY();
+						if(this.superficie[x][y]==null){
+							posiciones[posiciones.length] = i;
+						}
+					}
+					
+					Posicion posicionFinal = new Posicion(f,c);
+					
+					/*
+					puntosCardinales = p.sacarDireccion(f,c,posicionesCelulas);
 					
 					if(puntosCardinales==null){
 					
