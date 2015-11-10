@@ -1,6 +1,7 @@
 package controlador;
 
 import java.util.*;
+
 import controlador.mundo.Mundo;
 
 /**
@@ -32,7 +33,7 @@ public class Controlador {
 			//Separa la linea en un array identificando los espacios
 			String[] palabras = linea.split(" ");
 			
-			//try{
+			try{
 				
 				if (palabras[0].equals("paso")){
 					
@@ -43,7 +44,7 @@ public class Controlador {
 				
 				else if (palabras[0].equals("iniciar")){
 					
-					mundo.iniciar();
+					System.out.println(mundo.iniciar());
 					System.out.println(mundo.toString());
 					
 				}
@@ -64,7 +65,7 @@ public class Controlador {
 						
 						int f = Integer.parseInt(palabras[num1]); 
 						int c = Integer.parseInt(palabras[num2]);
-						mundo.crearCelula(f-1,c-1);
+						System.out.println(mundo.crearCelula(f-1,c-1));
 						System.out.println(mundo.toString());
 						
 					}
@@ -87,7 +88,7 @@ public class Controlador {
 						
 						int f = Integer.parseInt(palabras[num1]);
 						int c = Integer.parseInt(palabras[num2]);
-						mundo.eliminarCelula(f-1, c-1);
+						System.out.println(mundo.eliminarCelula(f-1, c-1));
 						System.out.println(mundo.toString());
 						
 					}
@@ -96,13 +97,13 @@ public class Controlador {
 				
 				else if (palabras[0].equals("ayuda")){
 					
-					mundo.interpreterHelp();
+					System.out.println(mundo.ayuda());
 					
 				}
 				
 				else if (palabras[0].equals("vaciar")){
 					
-					mundo.vaciar();
+					System.out.println(mundo.vaciar());
 					System.out.println(mundo.toString());
 					
 				}
@@ -117,9 +118,9 @@ public class Controlador {
 				else
 					System.out.println("No has escrito un comando correcto");
 			
-			//} catch (NumberFormatException nfe){
-			//	System.out.println("No ha introducido bien las coordenadas.");
-			//}
+			} catch (NumberFormatException nfe){
+				System.out.println("No ha introducido bien las coordenadas.");
+			}
 			
 		}//fin while
 		

@@ -38,71 +38,17 @@ public class Mundo {
 			
 	}
 	
-	/**
-	 * Saca las coordenadas a donde se mueve la celula
-	 * @return array con las cordenadas de donde se va a mover la celula.
-	 */
-	public int[] sacarDireccion(int f,int c){
-		
-		if (this.superficie.existeCelula(f,c)){
-			
-			boolean salir = false;
-			int f2 = 0;
-			int c2 = 0;
-			int[] t = new int [2];
-		
-			while(!salir){
-				
-				int dir = (int)(Math.random()*7);
-				
-				if(dir == 0){ // Arriba Izquierda
-					f2 = f-1;
-					c2 = c-1;
-				}else if(dir == 1){ // Arriba
-					f2 = f-1;
-					c2 = c;
-				}else if(dir == 2){ // Arriba Derecha
-					f2 = f-1;
-					c2 = c+1;
-				}else if(dir == 3){ // Izquierda
-					f2 = f;
-					c2 = c-1;
-				}else if(dir == 4){ // Derecha
-					f2 = f;
-					c2 = c+1;
-				}else if(dir == 5){ // Abajo Izquierda
-					f2 = f+1;
-					c2 = c-1;
-				}else if(dir == 6){ // Abajo
-					f2 = f+1;
-					c2 = c;
-				}else if(dir == 7){ // Abajo Izquierda
-					f2 = f+1;
-					c2 = c+1;
-				}
-				
-				if((f2>=0 && f2<this.superficie.getFilas())&&(c2>=0 && c2<this.superficie.getColumnas())){
-					salir = true;
-					t[0] = f2;
-					t[1] = c2;
-				}		
-			}
-			return t;
-		}
-		return null;
-		
-	}
 	
 	/**
 	 * Llama a crear celula he imprime por pantalla si ha podido.
 	 */
-	public void crearCelula(int f, int c){
+	public String crearCelula(int f, int c){
 		
-		if(superficie.crearCelula(f,c,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
-			System.out.println("Creamos nueva célula en la posición: ("+f+","+c+")");
+		if(this.superficie.crearCelula(f,c,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
+			return "Creamos nueva célula en la posición: ("+f+","+c+")";
 			
 		else
-			System.out.println("Imposible crear una nueva célula, posición ocupada");
+			return "Imposible crear una nueva célula, posición ocupada";
 
 	}
 	
@@ -111,13 +57,13 @@ public class Mundo {
 	 * @param f fila.
 	 * @param c columna.
 	 */
-	public void eliminarCelula (int f,int c){
+	public String eliminarCelula (int f,int c){
 		
-		if (superficie.eliminarCelula(f,c))
-			System.out.println("Se ha eliminado la célula en la posición: ("+f+","+c+")");
+		if (this.superficie.eliminarCelula(f,c))
+			return "Se ha eliminado la célula en la posición: ("+f+","+c+")";
 			
 		else
-			System.out.println("No hay ninguna célula en la posición: ("+f+","+c+")");
+			return "No hay ninguna célula en la posición: ("+f+","+c+")";
 		
 		
 	}
@@ -125,29 +71,29 @@ public class Mundo {
 	/**
 	 * Vacia la superficie del tablero.
 	 */
-	public void vaciar(){
+	public String vaciar(){
 		
-		System.out.println("Vaciando la superficie....");
-		superficie.vaciar();
+		this.superficie.vaciar();
+		return "Vaciando la superficie....";
 		
 	}
 	
 	/**
 	 * Inicia el tablero.
 	 */
-	public void iniciar (){
+	public String iniciar (){
 		
-		superficie.vaciar();
+		this.superficie.vaciar();
 		
 		for(int i = 0; i < NUM_CELULAS; i++){
-			int f = (int)(Math.random()*superficie.getFilas());
-			int c = (int)(Math.random()*superficie.getColumnas());
-			while(!superficie.crearCelula(f, c, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION)){
-				f = (int)(Math.random()*superficie.getFilas());
-				c = (int)(Math.random()*superficie.getColumnas());
+			int f = (int)(Math.random()*this.superficie.getFilas());
+			int c = (int)(Math.random()*this.superficie.getColumnas());
+			while(!this.superficie.crearCelula(f, c, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION)){
+				f = (int)(Math.random()*this.superficie.getFilas());
+				c = (int)(Math.random()*this.superficie.getColumnas());
 			}
 		}
-		System.out.println ("Iniciando simulación");
+		return "Iniciando simulación";
 		
 	}
 	
@@ -156,22 +102,22 @@ public class Mundo {
 	 */
 	public String toString(){
 		
-		return superficie.toString();
+		return this.superficie.toString();
 		
 	}
 	
 	/**
 	 * Imprime la ayuda.
 	 */
-	public void interpreterHelp(){
-		System.out.println("POSIBLES COMANDOS:" + LINE_SEPARATOR + 
+	public String ayuda(){
+		return  "POSIBLES COMANDOS:" + LINE_SEPARATOR + 
 				" PASO: realiza un paso en la simulacion" + LINE_SEPARATOR + 
 				" AYUDA: muestra esta ayuda" + LINE_SEPARATOR + 
 				" SALIR: cierra la aplicación" + LINE_SEPARATOR + 
 				" INICIAR: inicia una nueva simulación" + LINE_SEPARATOR + 
 				" VACIAR: crea un mundo vacío" + LINE_SEPARATOR + 
 				" CREARCELULA F C: crea una nueva celula en la posición (f,c) si es posible" + LINE_SEPARATOR + 
-				" ELIMINARCELULA F C: elimina una celula de la posición (f,c) si es posible" + LINE_SEPARATOR) ;
+				" ELIMINARCELULA F C: elimina una celula de la posición (f,c) si es posible" + LINE_SEPARATOR ;
 	}
 
 }

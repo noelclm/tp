@@ -153,50 +153,70 @@ public class Superficie {
 	}
 
 	public boolean paso(){
-	
-	boolean[][] tablero = new boolean[this.filas][this.columnas];
-	
-	for (int f=0; f<this.filas; f++){
-		for (int c=0; c<this.columnas; c++){
-			
-			tablero[f][c] = false;
-			
-		}
-	}
-	
-	for (int f=0; f<this.filas; f++){
-		for (int c=0; c<this.columnas; c++){
-			
-			if(tablero[f][c] == false){
-				int[] t = new int[2];
-				t = this.sacarDireccion(f,c);
-				if(t!=null){
-					if(this.moverCelula(f,c,t[0],t[1])){
-						if (this.estasPariendo(t[0], t[1])){
-							this.crearCelula(f, c, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION);
-							this.reiniciarPasosReproduccion(t[0],t[1]);
-						}else
-							this.sumarPaso(t[0],t[1]);
-						tablero[f][c] = true;
-						tablero[t[0]][t[1]] = true;
-
-					}
-					else{
-						this.sumarPasoSinMover(f,c);
-						if (!this.sinActividad(f,c))
-							this.eliminarCelula(f, c);
-						if (this.estasPariendo(t[0], t[1]))
-							this.eliminarCelula(f, c);
-						
-						tablero[f][c] = true;
-						
-					}
-				}
-			}
-		}
-	}
 		
-}
+		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
+		boolean[][] posicionesCelulas = new boolean[this.filas][this.columnas];
+		Direccion d = new Direccion();
+		PuntosCardinales pc = null;
+		
+		// Inicia un tablero auxiliar para saber porque posiciones ha pasado ya
+		for (int f=0; f<this.filas; f++){
+			for (int c=0; c<this.columnas; c++){
+				
+				posicionesPasadas[f][c] = false;
+				
+			} // for (int c=0; c<this.columnas; c++)
+		} // for (int f=0; f<this.filas; f++)
+		
+		// Inicia un tablero auxiliar para saber donde hay celulas
+		for (int f=0; f<this.filas; f++){
+			for (int c=0; c<this.columnas; c++){
+				
+				if(this.superficie[f][c]!=null)
+					posicionesCelulas[f][c] = true;
+				else
+					posicionesCelulas[f][c] = false;
+				
+			} // for (int c=0; c<this.columnas; c++)
+		} // for (int f=0; f<this.filas; f++)
+		
+		for (int f=0; f<this.filas; f++){
+			for (int c=0; c<this.columnas; c++){
+				
+				if(posicionesPasadas[f][c] == false){
+					
+					pc = d.sacarDireccion(f,c,posicionesCelulas);
+					
+					if(pc==PuntosCardinales.SINDIRECCION){
+					
+						this.sumarPasoSinMover(f,c);
+						if (!this.sinActividad(f,c) || this.estasPariendo(f,c)){
+							this.eliminarCelula(f, c);
+							posicionesCelulas[f][c] = false;
+						} // if (!this.sinActividad(f,c) || this.estasPariendo(f,c))
+						posicionesPasadas[f][c] = true;
+					
+					} // if(direccion==Direccion.SINDIRECCION)
+					
+					/*
+			
+						if(this.moverCelula(f,c,t[0],t[1])){
+							if (this.estasPariendo(t[0], t[1])){
+								this.crearCelula(f, c, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION);
+								this.reiniciarPasosReproduccion(t[0],t[1]);
+							}else
+								this.sumarPaso(t[0],t[1]);
+							posicionesPasadas[f][c] = true;
+							posicionesPasadas[t[0]][t[1]] = true;
+	
+						} // if(this.moverCelula(f,c,t[0],t[1]))
+*/
+				} // if(posicionesPasadas[f][c] == false)
+			} // for (int c=0; c<this.columnas; c++)
+		} // for (int f=0; f<this.filas; f++)
+			
+		return true;
+	}
 
 	
 	/**
