@@ -70,7 +70,25 @@ public class Superficie {
 		return this.superficie[f][c].limitePasosSinMover();
 	}
 	
-
+	/**
+	 * Devuelve el numero de filas totales del tablero.
+	 * @return filas.
+	 */
+	public int getFilas(){
+		
+		return this.filas;
+	
+	}
+	
+	/**
+	 * Devuelve el numero de columnas totales del tablero.
+	 * @return columnnas.
+	 */
+	public int getColumnas(){
+		
+		return this.columnas;
+	
+	}
 	
 	/**
 	 * Elimina una celula del tablero.
