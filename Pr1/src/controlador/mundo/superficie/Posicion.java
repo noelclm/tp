@@ -1,24 +1,39 @@
 package controlador.mundo.superficie;
 
+/**
+ * 
+ * 
+ *
+ */
 public class Posicion {
 	
-	int x;
-	int y;
+	private int x;
+	private int y;
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public Posicion(int x, int y){
 		
-		this.x = x;
-		this.y = y;
+		this.x = x; //filas
+		this.y = y; //columnas
 		
 	}
 	
-	
-	public int numPosiciones(int f, int c, int maxf,int maxc){
+	/**
+	 * 
+	 * @param maxFila
+	 * @param maxColumna
+	 * @return
+	 */
+	public int numPosiciones(int maxFila, int maxColumna){
 		
-		if ((f==0 && (c==0 || c==maxc)) || (c==0 && f==maxf) || (c==maxc && f==maxf)){
+		if ((this.x==0 && (this.y==0 || this.y==maxColumna)) || (this.y==0 && this.x==maxFila) || (this.y==maxColumna && this.x==maxFila)){
 			return 3;
 		}
-		else if( ((f==1 || f==maxf )&& c>=1 && c<maxc) || (f>=1 && f<maxf && (c==0 || c==maxc)) )
+		else if( ((this.x==1 || this.x==maxFila )&& this.y>=1 && this.y<maxColumna) || (this.x>=1 && this.x<maxFila && (this.y==0 || this.y==maxColumna)) )
 			return 5;
 		else
 			return 8;
@@ -26,19 +41,20 @@ public class Posicion {
 	}
 
 	/**
-	 * Saca las coordenadas a donde se mueve la celula
-	 * @return enumerado con la direccion de donde se va a mover la celula.
+	 * Saca las posiciones adyacentes de una posicion en un tablero
+	 * @return Posicion[] con las posiciones adyacentes.
 	 */
-	@SuppressWarnings("null")
 	public Posicion[] adyacencia(int maxFila, int maxColumna){
 
-		Posicion[] pos = null;
+		Posicion[] pos = new Posicion[this.numPosiciones(maxFila, maxColumna)];
+		int i = 0;
 		
 		for (int x=this.x-1; x<=this.x+1; x++){
 			for (int y=this.y-1; y<=this.y+1; y++){
 				if(x>=0 && y>=0 && x<maxFila && y<maxColumna){
-					pos[pos.length].x = x;
-					pos[pos.length].y = y;
+					pos[i].x = x;
+					pos[i].y = y;
+					i++;
 				}
 			}
 		}
@@ -47,10 +63,18 @@ public class Posicion {
 			
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getX(){
 		return x;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getY(){
 		return y;
 	}

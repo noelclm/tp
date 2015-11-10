@@ -85,6 +85,8 @@ public class Mundo {
 		
 		this.superficie.vaciar();
 		
+		//Mover todo a superficie
+		
 		for(int i = 0; i < NUM_CELULAS; i++){
 			int f = (int)(Math.random()*this.superficie.getFilas());
 			int c = (int)(Math.random()*this.superficie.getColumnas());

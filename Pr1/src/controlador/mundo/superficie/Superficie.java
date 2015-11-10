@@ -125,23 +125,23 @@ public class Superficie {
 	 * @param c
 	 * @return
 	 */
-	public boolean existeCelula(int f, int c){
+	/*public boolean existeCelula(int f, int c){
 		
 		if (this.superficie[f][c] != null)
 			return true;
 		else
 			return false;
 		
-	}
+	}*/
 	
 	/**
 	 * 
 	 * @param f
-	 *  @param c
+	 * @param c
 	 */
-	public void sumarPaso(int f, int c){
+	/*public void sumarPaso(int f, int c){
 		this.superficie[f][c].sumPasosDados();
-	}
+	}*/
 	
 	/**
 	 * 
@@ -176,7 +176,7 @@ public class Superficie {
 					Posicion posicionInicial = new Posicion(f,c);
 					Posicion[] posicionesAdyacentes = posicionInicial.adyacencia(this.filas, this.columnas);
 					
-					for(int i=0; i<posicionesAdyacentes.length; i++){
+					for(int i=0; i<posicionInicial.numPosiciones(this.filas, this.columnas); i++){
 						int x = posicionesAdyacentes[i].getX();
 						int y = posicionesAdyacentes[i].getY();
 						if(this.superficie[x][y]==null){
@@ -255,29 +255,14 @@ public class Superficie {
 
 	
 	/**
-	 * Mueve una celula.
-	 * @param f fila de la celula que se quiere mover.
-	 * @param c columna de la celula que se quiere mover.
-	 * @return array con las cordenadas de donde se ha movido la celula.
+	 * 
+	 * @param f
+	 * @param c
+	 * @param f2
+	 * @param c2
+	 * @return
 	 */
 	public boolean moverCelula(int f, int c, int f2, int c2){
-		
-		/*
-		if (this.superficie[f][c] != null){
-			int f2 = (int)(Math.random()*this.getFilas()-1);
-			int c2 = (int)(Math.random()*this.getColumnas()-1);
-	
-			if(this.superficie[f2][c2]==null){
-				t[0] = f2;
-				t[1] = c2;
-				this.superficie[f2][c2] = this.superficie[f][c];
-				this.superficie[f][c] = null;
-			}
-			
-		}
-		*/
-		
-	
 		
 		if(this.superficie[f2][c2]==null){
 			this.superficie[f2][c2] = this.superficie[f][c];
@@ -286,8 +271,6 @@ public class Superficie {
 		}
 		else
 			return false;
-		
-		
 		
 	}
 			
