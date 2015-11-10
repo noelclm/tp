@@ -70,25 +70,7 @@ public class Superficie {
 		return this.superficie[f][c].limitePasosSinMover();
 	}
 	
-	/**
-	 * Devuelve el numero de filas totales del tablero.
-	 * @return filas.
-	 */
-	public int getFilas(){
-		
-		return this.filas;
-	
-	}
-	
-	/**
-	 * Devuelve el numero de columnas totales del tablero.
-	 * @return columnnas.
-	 */
-	public int getColumnas(){
-		
-		return this.columnas;
-	
-	}
+
 	
 	/**
 	 * Elimina una celula del tablero.
@@ -157,7 +139,7 @@ public class Superficie {
 		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
 		boolean[][] posicionesCelulas = new boolean[this.filas][this.columnas];
 		Direccion d = new Direccion();
-		PuntosCardinales pc = null;
+		PuntosCardinales[] pc;
 		
 		// Inicia un tablero auxiliar para saber porque posiciones ha pasado ya
 		for (int f=0; f<this.filas; f++){
@@ -180,14 +162,14 @@ public class Superficie {
 			} // for (int c=0; c<this.columnas; c++)
 		} // for (int f=0; f<this.filas; f++)
 		
-		for (int f=0; f<this.filas; f++){
-			for (int c=0; c<this.columnas; c++){
+		for (int f=0; f<this.filas-1; f++){
+			for (int c=0; c<this.columnas-1; c++){
 				
 				if(posicionesPasadas[f][c] == false){
 					
 					pc = d.sacarDireccion(f,c,posicionesCelulas);
 					
-					if(pc==PuntosCardinales.SINDIRECCION){
+					if(pc==null){
 					
 						this.sumarPasoSinMover(f,c);
 						if (!this.sinActividad(f,c) || this.estasPariendo(f,c)){
@@ -196,7 +178,7 @@ public class Superficie {
 						} // if (!this.sinActividad(f,c) || this.estasPariendo(f,c))
 						posicionesPasadas[f][c] = true;
 					
-					} // if(direccion==Direccion.SINDIRECCION)
+					} // if(pc.length==0)
 					
 					/*
 			
