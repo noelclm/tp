@@ -80,8 +80,8 @@ public class Superficie {
 			} // for (int c=0; c<this.columnas; c++)
 		} // for (int f=0; f<this.filas; f++)
 		
-		for (int f=0; f<this.filas-1; f++){
-			for (int c=0; c<this.columnas-1; c++){
+		for (int f=0; f<this.filas; f++){
+			for (int c=0; c<this.columnas; c++){
 				
 				if(posicionesPasadas[f][c]==false){
 					
@@ -89,12 +89,11 @@ public class Superficie {
 					
 						Posicion posicionInicial = new Posicion(f,c);
 						
-						int numPosiciones = posicionInicial.numPosiciones(this.filas, this.columnas);
+						int numPosiciones = posicionInicial.numPosiciones(this.filas-1, this.columnas-1);
 						Posicion[] posicionesAdyacentes = new Posicion[numPosiciones];
 						posicionesAdyacentes = posicionInicial.adyacencia(this.filas, this.columnas);
 						
-						// TODO paso
-						/* prueba que he hecho aun no se si funciona
+						// TODO Elimina cuando quiere
 						int numPosicionesVacias = cantidadPosicionesVacias(posicionesAdyacentes,numPosiciones);
 						
 						if(numPosicionesVacias>0){ // Si se puede mover
@@ -102,9 +101,11 @@ public class Superficie {
 							Posicion[] posicionesVacias = new Posicion[numPosicionesVacias];
 							posicionesVacias = posicionesVacias(posicionesAdyacentes,numPosiciones,numPosicionesVacias);
 							
-							int numAleatorio = (int) Math.floor(Math.random()*numPosicionesVacias-1);
+							int numAleatorio = (int)(Math.random()*numPosicionesVacias-1);
 							int f2 = posicionesVacias[numAleatorio].getX();
 							int c2 = posicionesVacias[numAleatorio].getY();
+							System.out.println("f2"+f2);
+							System.out.println("c2"+c2);
 							
 							this.superficie[f2][c2] = this.superficie[f][c];
 							this.superficie[f][c] = null;
@@ -114,20 +115,18 @@ public class Superficie {
 								this.superficie[f2][c2].setPasosReproduccion();
 							}else
 								this.superficie[f2][c2].sumPasosDados();
-							posicionesPasadas[f][c] = true;
-							posicionesPasadas[f2][c2] = true;
-		
+
+							posicionesPasadas[f2][c2] = true;	
+								
 						} // if(numPosicionesVacias>0)
 						else{ // Si no se puede mover
 							
 							this.superficie[f][c].sumPasosSinMover();
-							if (!this.superficie[f][c].limitePasosSinMover() || this.superficie[f][c].limitePasosDados())
+							if (this.superficie[f][c].limitePasosSinMover() || this.superficie[f][c].limitePasosDados())
 								this.eliminarCelula(f, c);
 							
-							posicionesPasadas[f][c] = true;
-							
 						} // else
-						*/
+						
 					} // if(this.superficie[f][c]!=null)
 					
 					posicionesPasadas[f][c] = true;
@@ -246,7 +245,7 @@ public class Superficie {
 		
 		int num = 0;
 		Posicion[] posicionesVacias = new Posicion[numPosicionesVacias];
-		
+		// TODO devuelve alguna ocupada
 		for(int i=0; i<numPosiciones; i++){
 			int f = posicionesAdyacentes[i].getX();
 			int c = posicionesAdyacentes[i].getY();

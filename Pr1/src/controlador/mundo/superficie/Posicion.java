@@ -30,10 +30,9 @@ public class Posicion {
 	 */
 	public int numPosiciones(int maxFila, int maxColumna){
 		
-		if ((this.x==0 && (this.y==0 || this.y==maxColumna)) || (this.y==0 && this.x==maxFila) || (this.y==maxColumna && this.x==maxFila)){
+		if ((this.x==0 && (this.y==0 || this.y==maxColumna)) || (this.y==0 && this.x==maxFila) || (this.y==maxColumna && this.x==maxFila))
 			return 3;
-		}
-		else if( ((this.x==1 || this.x==maxFila )&& this.y>=1 && this.y<maxColumna) || (this.x>=1 && this.x<maxFila && (this.y==0 || this.y==maxColumna)) )
+		else if((this.x>0 && this.x<maxColumna && (this.y==0 || this.y==maxFila))||(this.y>0 && this.y<maxFila && (this.x==0 || this.x==maxColumna)))
 			return 5;
 		else
 			return 8;
@@ -48,7 +47,6 @@ public class Posicion {
 
 		Posicion[] pos = new Posicion[this.numPosiciones(maxFila, maxColumna)];
 		int i = 0;
-		
 		for (int x=this.x-1; x<=this.x+1; x++){
 			for (int y=this.y-1; y<=this.y+1; y++){
 				if(x>=0 && y>=0 && x<maxFila && y<maxColumna && (x!=this.x || y!=this.y)){

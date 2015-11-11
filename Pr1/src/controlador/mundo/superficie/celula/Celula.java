@@ -90,11 +90,11 @@ public class Celula {
 		
 		if (this.pasosSinMover == this.MAX_PASOS_SIN_MOVER)
 			
-			return false;
+			return true;
 		
 		else 
 			
-			return true;
+			return false;
 		
 	}
 	
