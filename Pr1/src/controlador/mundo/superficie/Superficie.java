@@ -59,12 +59,16 @@ public class Superficie {
 		
 	}
 	
+	/**
+	 * 
+	 * @param maxPasosSinMover
+	 * @param pasosReproduccion
+	 * @return
+	 */
 	public boolean paso(int maxPasosSinMover, int pasosReproduccion){
 		
 		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
-		int f2 = 0;
-		int c2 = 0;
-		
+
 		// Inicia un tablero auxiliar para saber porque posiciones ha pasado ya
 		for (int f=0; f<this.filas; f++){
 			for (int c=0; c<this.columnas; c++){
@@ -77,90 +81,60 @@ public class Superficie {
 		for (int f=0; f<this.filas-1; f++){
 			for (int c=0; c<this.columnas-1; c++){
 				
-				if(posicionesPasadas[f][c]==false && this.superficie[f][c]!=null){
+				if(posicionesPasadas[f][c]==false){
 					
+					if(this.superficie[f][c]!=null){
 					
-					Posicion posicionInicial = new Posicion(f,c);
-					Posicion[] posicionesAdyacentes = new Posicion[posicionInicial.numPosiciones(this.filas, this.columnas)];
-					posicionesAdyacentes = posicionInicial.adyacencia(this.filas, this.columnas);
-					Posicion[] posicionesLibres = new Posicion[posicionInicial.numPosiciones(this.filas, this.columnas)];
-					int[] posiciones = new int[2];
-					
-					for(int i=0; i<posicionInicial.numPosiciones(this.filas, this.columnas); i++){
-						int x = posicionesAdyacentes[i].getX();
-						int y = posicionesAdyacentes[i].getY();
-						if(this.superficie[x][y]==null){
-							posiciones[posiciones.length] = i;
-						}
-					}
-					
-					Posicion posicionFinal = new Posicion(f,c);
-					
-					/*
-					puntosCardinales = p.sacarDireccion(f,c,posicionesCelulas);
-					
-					if(puntosCardinales==null){
-					
-						this.sumarPasoSinMover(f,c);
-						if (!this.sinActividad(f,c) || this.estasPariendo(f,c)){
-							this.eliminarCelula(f, c);
-							posicionesCelulas[f][c] = false;
-						} // if (!this.sinActividad(f,c) || this.estasPariendo(f,c))
-						posicionesPasadas[f][c] = true;
-					
-					} // (puntosCardinales==null)
-					else{
+						Posicion posicionInicial = new Posicion(f,c);
 						
-						if(puntosCardinales.length==0)
-							punto = puntosCardinales[0];
-						else
-							punto = puntosCardinales[(int) (Math.random()*puntosCardinales.length-1)];
+						int numPosiciones = posicionInicial.numPosiciones(this.filas, this.columnas);
+						Posicion[] posicionesAdyacentes = new Posicion[numPosiciones];
+						posicionesAdyacentes = posicionInicial.adyacencia(this.filas, this.columnas);
 						
-						if(punto==PuntosCardinales.NORTE){
-							f2 = f-1;
-							c2 = c;
-						}else if(punto==PuntosCardinales.SUR){
-							f2 = f+1;
-							c2 = c;
-						}else if(punto==PuntosCardinales.ESTE){
-							f2 = f;
-							c2 = c+1;
-						}else if(punto==PuntosCardinales.OESTE){
-							f2 = f;
-							c2 = c-1;
-						}else if(punto==PuntosCardinales.NORESTE){
-							f2 = f-1;
-							c2 = c+1;
-						}else if(punto==PuntosCardinales.NOROESTE){
-							f2 = f-1;
-							c2 = c-1;
-						}else if(punto==PuntosCardinales.SURESTE){
-							f2 = f+1;
-							c2 = c+1;
-						}else if(punto==PuntosCardinales.SUROESTE){
-							f2 = f+1;
-							c2 = c-1;
-						}
+						int numPosicionesVacias = cantidadPosicionesVacias(posicionesAdyacentes,numPosiciones);
 						
-					}
-					/*
-			
-						if(this.moverCelula(f,c,t[0],t[1])){
-							if (this.estasPariendo(t[0], t[1])){
-								this.crearCelula(f, c, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION);
-								this.reiniciarPasosReproduccion(t[0],t[1]);
-							}else
-								this.sumarPaso(t[0],t[1]);
+						if(numPosicionesVacias>0){ // Si se puede mover
+							
+							Posicion[] posicionesVacias = new Posicion[numPosicionesVacias];
+							posicionesVacias = posicionesVacias(posicionesAdyacentes,numPosiciones,numPosicionesVacias);
+							
+							int numAleatorio = (int) Math.floor(Math.random()*numPosicionesVacias-1);
+							int f2 = posicionesVacias[numAleatorio].getX();
+							int c2 = posicionesVacias[numAleatorio].getY();
+							
+							if(this.moverCelula(f,c,f2,c2)){
+								if (this.estasPariendo(f2, c2)){
+									this.crearCelula(f, c, maxPasosSinMover, pasosReproduccion);
+									this.reiniciarPasosReproduccion(t[0],t[1]);
+								}else
+									this.sumarPaso(f2,c2);
+								posicionesPasadas[f][c] = true;
+								posicionesPasadas[f2][c2] = true;
+		
+							} // if(this.moverCelula(f,c,t[0],t[1]))
+							
+						} // if(numPosicionesVacias>0)
+						else{ // Si no se puede mover
+							
+							this.sumarPasoSinMover(f,c);
+							if (!this.sinActividad(f,c) || this.estasPariendo(f,c)){
+								this.eliminarCelula(f, c);
+								posicionesCelulas[f][c] = false;
+							} // if (!this.sinActividad(f,c) || this.estasPariendo(f,c))
 							posicionesPasadas[f][c] = true;
-							posicionesPasadas[t[0]][t[1]] = true;
-	
-						} // if(this.moverCelula(f,c,t[0],t[1]))
-*/
-				} // if(posicionesPasadas[f][c] == false)
+							
+						} // else
+						
+					} // if(this.superficie[f][c]!=null)
+					
+					posicionesPasadas[f][c] = true;
+					
+				} // if(posicionesPasadas[f][c] == false)						
 			} // for (int c=0; c<this.columnas; c++)
 		} // for (int f=0; f<this.filas; f++)
-			
+	
 		return true;
+		
 	}
 	
 	/**
@@ -170,13 +144,11 @@ public class Superficie {
 	public boolean crearCelula (int f, int c, int maxPasosSinMover, int pasosReproduccion){
 		
 		if (this.superficie[f][c]==null){
-			
 			this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
 			return true;
 			
-		}
-		
-		return false;
+		}else
+			return false;
 		
 	}
 	
@@ -190,7 +162,7 @@ public class Superficie {
 		if (this.superficie[f][c]==null)
 			return false;
 	
-		else {
+		else{
 			this.superficie[f][c]=null;
 			return true;
 		}
@@ -208,6 +180,49 @@ public class Superficie {
 		}
 		
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int cantidadPosicionesVacias(Posicion[] posicionesAdyacentes, int numPosiciones){
+		
+		int num = 0;
+		
+		for(int i=0; i<numPosiciones; i++){
+			int f = posicionesAdyacentes[i].getX();
+			int c = posicionesAdyacentes[i].getY();
+			if(this.superficie[f][c]==null)
+				num++;
+		}
+		
+		return num;
+		
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Posicion[] posicionesVacias(Posicion[] posicionesAdyacentes, int numPosiciones, int numPosicionesVacias){
+		
+		int num = 0;
+		Posicion[] posicionesVacias = new Posicion[numPosicionesVacias];
+		
+		for(int i=0; i<numPosiciones; i++){
+			int f = posicionesAdyacentes[i].getX();
+			int c = posicionesAdyacentes[i].getY();
+			if(this.superficie[f][c]==null){
+				posicionesVacias[num] = posicionesAdyacentes[i];
+				num++;
+			}
+		}
+		
+		return posicionesAdyacentes;
+		
+	}
+	
+	
 	
 	/**
 	 * 
