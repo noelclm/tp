@@ -38,17 +38,12 @@ public class Mundo {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Llama a paso y devuelve el resultado de los pasos realizados.
+	 * @return String
 	 */
 	public String evoluciona(){
 		
-		if (this.superficie.paso(MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)){
-			return "ha evolucionado";
-		}
-		else{
-			return "ha fallado"; 
-		}
+		return this.superficie.paso(MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION);
 			
 	}
 	

@@ -46,28 +46,28 @@ public class Superficie {
 		
 		int numCelulasPuestas = 0;
 		
-		// TODO Comprobar que hay suficientes celdas para las celulas
-		
-		while (numCelulasPuestas<numCelulas){
-			int f = (int)(Math.random()*this.filas);
-			int c = (int)(Math.random()*this.columnas);
-			if(this.crearCelula(f, c, maxPasosSinMover, pasosReproduccion)){
-				numCelulasPuestas++;
-				
+		// Comprueba que hay suficientes celdas para las celulas
+		if (numCelulas <= this.filas*this.columnas){
+			
+			while (numCelulasPuestas<numCelulas){
+				int f = (int)(Math.random()*this.filas);
+				int c = (int)(Math.random()*this.columnas);
+				if(this.crearCelula(f, c, maxPasosSinMover, pasosReproduccion))
+					numCelulasPuestas++;	
 			}
-		}
-		
-		return true;
-		
+			return true;
+			
+		}else
+			return false;
 	}
 	
 	/**
 	 * 
 	 * @param maxPasosSinMover
 	 * @param pasosReproduccion
-	 * @return
+	 * @return boolean
 	 */
-	public boolean paso(int maxPasosSinMover, int pasosReproduccion){
+	public String paso(int maxPasosSinMover, int pasosReproduccion){
 		
 		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
 
@@ -92,6 +92,8 @@ public class Superficie {
 						int numPosiciones = posicionInicial.numPosiciones(this.filas, this.columnas);
 						Posicion[] posicionesAdyacentes = new Posicion[numPosiciones];
 						posicionesAdyacentes = posicionInicial.adyacencia(this.filas, this.columnas);
+						
+						// TODO paso
 						/* prueba que he hecho aun no se si funciona
 						int numPosicionesVacias = cantidadPosicionesVacias(posicionesAdyacentes,numPosiciones);
 						
@@ -134,7 +136,7 @@ public class Superficie {
 			} // for (int c=0; c<this.columnas; c++)
 		} // for (int f=0; f<this.filas; f++)
 	
-		return true;
+		return "pasos que ha hecho";
 		
 	}
 	
@@ -143,13 +145,15 @@ public class Superficie {
 	 * @return True si se puede crear y false si no.
 	 */
 	public boolean crearCelula (int f, int c, int maxPasosSinMover, int pasosReproduccion){
-		// TODO Controlar que f y c no se salen de la superficie
-		if (this.superficie[f][c]==null){
-			this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
-			return true;
-			
-		}else
-			return false;
+
+		if (f>=1 && f<=this.filas && c>=1 && c<=this.columnas){
+			if (this.superficie[f][c]==null){
+				this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
+				return true;
+			}
+		}
+		
+		return false;
 		
 	}
 	
@@ -160,14 +164,16 @@ public class Superficie {
 	 * @return false si no puede borrar y true si la borra.
 	 */
 	public boolean eliminarCelula (int f, int c){
-		// TODO Controlar que f y c no se salen de la superficie
-		if (this.superficie[f][c]==null)
-			return false;
-	
-		else{
-			this.superficie[f][c]=null;
-			return true;
+		
+		if (f>=1 && f<=this.filas && c>=1 && c<=this.columnas){
+			if (this.superficie[f][c]!=null){
+				this.superficie[f][c]=null;
+				return true;
+			}
 		}
+		
+		return false;
+		
 	}
 	
 	/**
