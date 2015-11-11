@@ -1,7 +1,5 @@
 import controlador.Controlador;
 
-//import java.util.*;
-
 /**
  * PRACTICA 1 - Simulacion de un Mundo Celular Simple.
  * @author Noel Clemente Montero

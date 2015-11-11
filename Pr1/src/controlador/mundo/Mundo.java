@@ -25,11 +25,25 @@ public class Mundo {
 	}
 	
 	/**
-	 * Recorre la superficie y ejecuta los pasos acorde a las reglas del juego.
+	 * Inicia el tablero.
+	 */
+	public String iniciar (){
+		
+		if(this.superficie.iniciarSuperficie(NUM_CELULAS,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION))
+			return "Iniciando simulación";
+		
+		else
+			return "No se ha podido inicializar la simulación";
+		
+	}
+	
+	/**
+	 * 
+	 * @return
 	 */
 	public String evoluciona(){
 		
-		if (this.superficie.paso()){
+		if (this.superficie.paso(MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)){
 			return "ha evolucionado";
 		}
 		else{
@@ -40,7 +54,10 @@ public class Mundo {
 	
 	
 	/**
-	 * Llama a crear celula he imprime por pantalla si ha podido.
+	 * Llama a crear celula.
+	 * @param f
+	 * @param c
+	 * @return
 	 */
 	public String crearCelula(int f, int c){
 		
@@ -48,14 +65,15 @@ public class Mundo {
 			return "Creamos nueva célula en la posición: ("+f+","+c+")";
 			
 		else
-			return "Imposible crear una nueva célula, posición ocupada";
+			return "Imposible crear una nueva célula en ("+f+","+c+"), posición ocupada";
 
 	}
 	
 	/**
 	 * Elimina una celula.
 	 * @param f fila.
-	 * @param c columna.
+	 * @param c columna
+	 * @return
 	 */
 	public String eliminarCelula (int f,int c){
 		
@@ -70,6 +88,7 @@ public class Mundo {
 	
 	/**
 	 * Vacia la superficie del tablero.
+	 * @return
 	 */
 	public String vaciar(){
 		
@@ -79,28 +98,25 @@ public class Mundo {
 	}
 	
 	/**
-	 * Inicia el tablero.
+	 * Devuelve la ayuda.
+	 * @return String
 	 */
-	public String iniciar (){
+	public String ayuda(){
 		
-		this.superficie.vaciar();
-		
-		//Mover todo a superficie
-		
-		for(int i = 0; i < NUM_CELULAS; i++){
-			int f = (int)(Math.random()*this.superficie.getFilas());
-			int c = (int)(Math.random()*this.superficie.getColumnas());
-			while(!this.superficie.crearCelula(f, c, MAX_PASOS_SIN_MOVER, PASOS_REPRODUCCION)){
-				f = (int)(Math.random()*this.superficie.getFilas());
-				c = (int)(Math.random()*this.superficie.getColumnas());
-			}
-		}
-		return "Iniciando simulación";
+		return  "POSIBLES COMANDOS:" + LINE_SEPARATOR + 
+				" INICIAR: inicia una nueva simulación" + LINE_SEPARATOR +
+				" PASO: realiza un paso en la simulacion" + LINE_SEPARATOR + 
+				" CREARCELULA F C: crea una nueva celula en la posición (f,c) si es posible" + LINE_SEPARATOR +
+				" ELIMINARCELULA F C: elimina una celula de la posición (f,c) si es posible" + LINE_SEPARATOR +
+				" VACIAR: crea un mundo vacío" + LINE_SEPARATOR + 
+				" AYUDA: muestra esta ayuda" + LINE_SEPARATOR + 
+				" SALIR: cierra la aplicación" + LINE_SEPARATOR ;	
 		
 	}
 	
 	/**
-	 * Imprime el tablero.
+	 * Devuelve el tablero.
+	 * @return String
 	 */
 	public String toString(){
 		
@@ -108,18 +124,6 @@ public class Mundo {
 		
 	}
 	
-	/**
-	 * Imprime la ayuda.
-	 */
-	public String ayuda(){
-		return  "POSIBLES COMANDOS:" + LINE_SEPARATOR + 
-				" PASO: realiza un paso en la simulacion" + LINE_SEPARATOR + 
-				" AYUDA: muestra esta ayuda" + LINE_SEPARATOR + 
-				" SALIR: cierra la aplicación" + LINE_SEPARATOR + 
-				" INICIAR: inicia una nueva simulación" + LINE_SEPARATOR + 
-				" VACIAR: crea un mundo vacío" + LINE_SEPARATOR + 
-				" CREARCELULA F C: crea una nueva celula en la posición (f,c) si es posible" + LINE_SEPARATOR + 
-				" ELIMINARCELULA F C: elimina una celula de la posición (f,c) si es posible" + LINE_SEPARATOR ;
-	}
+	
 
 }

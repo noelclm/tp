@@ -34,125 +34,32 @@ public class Superficie {
 	}
 	
 	/**
-	 * Crea una celula en una posicion de la superficie.
-	 * @return True si se puede crear y false si no.
+	 * Inicia la superficie con un numero de celululas que le entra
+	 * @param numCelulas Numero de celulas con el que se inicializa la superficie
+	 * @param maxPasosSinMover Numero de pasos sin mover que tiene la celula
+	 * @param pasosReproduccion Numero de pasos para que la celula se reproduzca 
+	 * @return boolean
 	 */
-	public boolean crearCelula (int f, int c, int maxPasosSinMover, int pasosReproduccion){
+	public boolean iniciarSuperficie (int numCelulas, int maxPasosSinMover, int pasosReproduccion){
 		
-		if (this.superficie[f][c]==null){
-			
-			this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
-			return true;
-			
+		this.vaciar();
+		
+		int numCelulasPuestas = 0;
+		
+		// TODO Comprobar que hay suficientes celdas para las celulas
+		
+		while (numCelulasPuestas<numCelulas){
+			int f = (int)(Math.random()*this.filas);
+			int c = (int)(Math.random()*this.columnas);
+			if(this.crearCelula(f, c, maxPasosSinMover, pasosReproduccion))
+				numCelulasPuestas++;
 		}
 		
-		return false;
+		return true;
 		
 	}
 	
-	/**
-	 * 
-	 * @param f
-	 * @param c
-	 * @return
-	 */
-	public boolean estasPariendo (int f, int c){
-
-		return this.superficie[f][c].limitePasosDados();
-		
-	}
-	
-	public void reiniciarPasosReproduccion(int f, int c){
-		this.superficie[f][c].setPasosReproduccion();
-	}
-	
-	public boolean sinActividad(int f, int c){
-		return this.superficie[f][c].limitePasosSinMover();
-	}
-	
-	/**
-	 * Devuelve el numero de filas totales del tablero.
-	 * @return filas.
-	 */
-	public int getFilas(){
-		
-		return this.filas;
-	
-	}
-	
-	/**
-	 * Devuelve el numero de columnas totales del tablero.
-	 * @return columnnas.
-	 */
-	public int getColumnas(){
-		
-		return this.columnas;
-	
-	}
-	
-	/**
-	 * Elimina una celula del tablero.
-	 * @param f fila.
-	 * @param c columna.
-	 * @return false si no puede borrar y true si la borra.
-	 */
-	public boolean eliminarCelula (int f, int c){
-		if (this.superficie[f][c]==null)
-			return false;
-	
-		else {
-			this.superficie[f][c]=null;
-			return true;
-		}
-	}
-	
-	/**
-	 * Vacia el tablero entero.
-	 */
-	public void vaciar(){
-		
-		for (int i=0; i<this.filas; i++){
-			for (int j=0; j<this.columnas; j++){
-				
-				this.superficie[i][j]= null;
-			}
-		}
-	}
-	
-	/**
-	 * Mira si hay una celula en esa posicion del tablero.
-	 * @param f
-	 * @param c
-	 * @return
-	 */
-	/*public boolean existeCelula(int f, int c){
-		
-		if (this.superficie[f][c] != null)
-			return true;
-		else
-			return false;
-		
-	}*/
-	
-	/**
-	 * 
-	 * @param f
-	 * @param c
-	 */
-	/*public void sumarPaso(int f, int c){
-		this.superficie[f][c].sumPasosDados();
-	}*/
-	
-	/**
-	 * 
-	 * @param f
-	 * @param c
-	 */
-	public void sumarPasoSinMover(int f, int c){
-		this.superficie[f][c].sumPasosSinMover();
-	}
-
-	public boolean paso(){
+	public boolean paso(int maxPasosSinMover, int pasosReproduccion){
 		
 		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
 		int f2 = 0;
@@ -172,9 +79,12 @@ public class Superficie {
 				
 				if(posicionesPasadas[f][c]==false && this.superficie[f][c]!=null){
 					
-					int[] posiciones = null;
+					
 					Posicion posicionInicial = new Posicion(f,c);
-					Posicion[] posicionesAdyacentes = posicionInicial.adyacencia(this.filas, this.columnas);
+					Posicion[] posicionesAdyacentes = new Posicion[posicionInicial.numPosiciones(this.filas, this.columnas)];
+					posicionesAdyacentes = posicionInicial.adyacencia(this.filas, this.columnas);
+					Posicion[] posicionesLibres = new Posicion[posicionInicial.numPosiciones(this.filas, this.columnas)];
+					int[] posiciones = new int[2];
 					
 					for(int i=0; i<posicionInicial.numPosiciones(this.filas, this.columnas); i++){
 						int x = posicionesAdyacentes[i].getX();
@@ -252,7 +162,116 @@ public class Superficie {
 			
 		return true;
 	}
+	
+	/**
+	 * Crea una celula en una posicion de la superficie.
+	 * @return True si se puede crear y false si no.
+	 */
+	public boolean crearCelula (int f, int c, int maxPasosSinMover, int pasosReproduccion){
+		
+		if (this.superficie[f][c]==null){
+			
+			this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
+			return true;
+			
+		}
+		
+		return false;
+		
+	}
+	
+	/**
+	 * Elimina una celula del tablero.
+	 * @param f fila.
+	 * @param c columna.
+	 * @return false si no puede borrar y true si la borra.
+	 */
+	public boolean eliminarCelula (int f, int c){
+		if (this.superficie[f][c]==null)
+			return false;
+	
+		else {
+			this.superficie[f][c]=null;
+			return true;
+		}
+	}
+	
+	/**
+	 * Vacia el tablero entero.
+	 */
+	public void vaciar(){
+		
+		for (int i=0; i<this.filas; i++){
+			for (int j=0; j<this.columnas; j++){
+				this.superficie[i][j]= null;
+			}
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param f
+	 * @param c
+	 * @return
+	 */
+	/*
+	public boolean estasPariendo (int f, int c){
 
+		return this.superficie[f][c].limitePasosDados();
+		
+	}
+	
+	
+	public void reiniciarPasosReproduccion(int f, int c){
+		this.superficie[f][c].setPasosReproduccion();
+	}
+	
+	public boolean sinActividad(int f, int c){
+		return this.superficie[f][c].limitePasosSinMover();
+	}
+	*/
+	
+	
+	
+	
+	
+	
+	/**
+	 * Mira si hay una celula en esa posicion del tablero.
+	 * @param f
+	 * @param c
+	 * @return
+	 */
+	/*public boolean existeCelula(int f, int c){
+		
+		if (this.superficie[f][c] != null)
+			return true;
+		else
+			return false;
+		
+	}*/
+	
+	/**
+	 * 
+	 * @param f
+	 * @param c
+	 */
+	/*public void sumarPaso(int f, int c){
+		this.superficie[f][c].sumPasosDados();
+	}*/
+	
+	/**
+	 * 
+	 * @param f
+	 * @param c
+	 */
+	/*
+	public void sumarPasoSinMover(int f, int c){
+		this.superficie[f][c].sumPasosSinMover();
+	}
+*/
+	
 	
 	/**
 	 * 
@@ -262,6 +281,7 @@ public class Superficie {
 	 * @param c2
 	 * @return
 	 */
+	/*
 	public boolean moverCelula(int f, int c, int f2, int c2){
 		
 		if(this.superficie[f2][c2]==null){
@@ -273,6 +293,7 @@ public class Superficie {
 			return false;
 		
 	}
+	*/
 			
 	/**
 	 * Devuelve un string con la superficie para imprimirla por pantalla.

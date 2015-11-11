@@ -51,7 +51,7 @@ public class Posicion {
 		
 		for (int x=this.x-1; x<=this.x+1; x++){
 			for (int y=this.y-1; y<=this.y+1; y++){
-				if(x>=0 && y>=0 && x<maxFila && y<maxColumna){
+				if(x>=0 && y>=0 && x<maxFila && y<maxColumna && (x!=this.x || y!=this.y)){
 					pos[i].x = x;
 					pos[i].y = y;
 					i++;

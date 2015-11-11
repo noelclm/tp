@@ -9,6 +9,8 @@ import controlador.mundo.Mundo;
  */
 public class Controlador {
 	
+	//Para que el salto de linea salga bien en windows y linux.
+	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private static int filasTablero = 5;
 	private static int columnasTablero = 5;
 	private Mundo mundo =new Mundo(filasTablero,columnasTablero);
@@ -25,9 +27,8 @@ public class Controlador {
 		
 		while(!exit){
 			
-			System.out.println("Introduce un comando\n");
+			System.out.println("Introduce un comando:"+ LINE_SEPARATOR);
 			
-			//String linea = s.next().toLowerCase().trim();
 			//Lee una linea por teclado
 			String linea = s.nextLine().toLowerCase();
 			//Separa la linea en un array identificando los espacios
@@ -35,21 +36,17 @@ public class Controlador {
 			
 			try{
 				
-				if (palabras[0].equals("paso")){
-					
-					System.out.println(mundo.evoluciona());
-					System.out.println(mundo.toString());
-					
-				}
-				
-				else if (palabras[0].equals("iniciar")){
+				if (palabras[0].equals("iniciar")){
 					
 					System.out.println(mundo.iniciar());
 					System.out.println(mundo.toString());
 					
-				}
-				
-				else if (palabras[0].equals("crearcelula") || (palabras[0].equals("crear") && palabras[1].equals("celula"))){
+				}else if (palabras[0].equals("paso")){
+					
+					System.out.println(mundo.evoluciona());
+					System.out.println(mundo.toString());
+					
+				}else if (palabras[0].equals("crearcelula") || (palabras[0].equals("crear") && palabras[1].equals("celula"))){
 					
 					int num1 = 1;
 					int num2 = 2;
@@ -70,9 +67,7 @@ public class Controlador {
 						
 					}
 					
-				}
-				
-				else if (palabras[0].equals("eliminarcelula") || (palabras[0].equals("eliminar") && palabras[1].equals("celula"))){
+				}else if (palabras[0].equals("eliminarcelula") || (palabras[0].equals("eliminar") && palabras[1].equals("celula"))){
 					
 					int num1 = 1;
 					int num2 = 2;
@@ -93,45 +88,28 @@ public class Controlador {
 						
 					}
 					
-				}
-				
-				else if (palabras[0].equals("ayuda")){
-					
-					System.out.println(mundo.ayuda());
-					
-				}
-				
-				else if (palabras[0].equals("vaciar")){
+				}else if (palabras[0].equals("vaciar")){
 					
 					System.out.println(mundo.vaciar());
 					System.out.println(mundo.toString());
 					
-				}
-				
-				else if (palabras[0].equals("salir")){
+				}else if (palabras[0].equals("ayuda")){
+					
+					System.out.println(mundo.ayuda());
+					
+				}else if (palabras[0].equals("salir")){
 					
 					System.out.println("Fin de la simulacion.....");
 					exit = true;
 					
-				}
-				
-				else
-					System.out.println("No has escrito un comando correcto");
+				}else
+					System.out.println("No has escrito un comando correcto.");
 			
 			} catch (NumberFormatException nfe){
 				System.out.println("No ha introducido bien las coordenadas.");
 			}
 			
 		}//fin while
-		
-		
-		/*	try (int s.nextInt());
-					
-		}
-		catch(){
-			System.out.println("error");
-			System.out.println();
-		}*/
 		
 	}
 
