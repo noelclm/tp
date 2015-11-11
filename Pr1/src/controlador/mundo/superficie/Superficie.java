@@ -92,7 +92,7 @@ public class Superficie {
 						int numPosiciones = posicionInicial.numPosiciones(this.filas, this.columnas);
 						Posicion[] posicionesAdyacentes = new Posicion[numPosiciones];
 						posicionesAdyacentes = posicionInicial.adyacencia(this.filas, this.columnas);
-						/*
+						/* prueba que he hecho aun no se si funciona
 						int numPosicionesVacias = cantidadPosicionesVacias(posicionesAdyacentes,numPosiciones);
 						
 						if(numPosicionesVacias>0){ // Si se puede mover
@@ -115,8 +115,6 @@ public class Superficie {
 							posicionesPasadas[f][c] = true;
 							posicionesPasadas[f2][c2] = true;
 		
-							
-							
 						} // if(numPosicionesVacias>0)
 						else{ // Si no se puede mover
 							
