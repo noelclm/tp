@@ -52,8 +52,7 @@ public class Posicion {
 		for (int x=this.x-1; x<=this.x+1; x++){
 			for (int y=this.y-1; y<=this.y+1; y++){
 				if(x>=0 && y>=0 && x<maxFila && y<maxColumna && (x!=this.x || y!=this.y)){
-					pos[i].x = x;
-					pos[i].y = y;
+					pos[i] = new Posicion(x,y);
 					i++;
 				}
 			}
@@ -68,7 +67,7 @@ public class Posicion {
 	 * @return
 	 */
 	public int getX(){
-		return x;
+		return this.x;
 	}
 	
 	/**
@@ -76,7 +75,21 @@ public class Posicion {
 	 * @return
 	 */
 	public int getY(){
-		return y;
+		return this.y;
+	}
+	
+	/**
+	 * 
+	 */
+	public void setX(int x){
+		this.x = x;
+	}
+	
+	/**
+	 * 
+	 */
+	public void setY(int y){
+		this.y = y;
 	}
 	
 }
