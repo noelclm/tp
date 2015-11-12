@@ -3,7 +3,7 @@ package controlador.mundo.superficie;
 import controlador.mundo.superficie.celula.Celula;
 
 /**
- * Representa la zona donde trascurre el juego.
+ * Clase que gestiona el tablero de juego.
  */
 public class Superficie {
 	
@@ -14,7 +14,7 @@ public class Superficie {
 	private Celula[][] superficie;
 	
 	/**
-	 * Crea la superficie.
+	 * Constructor.
 	 * @param nf Numero de filas de la superficie.
 	 * @param nc Numero de columnas de la superficie.
 	 */
@@ -34,10 +34,10 @@ public class Superficie {
 	}
 	
 	/**
-	 * Inicia la superficie con un numero de celululas que le entra
-	 * @param numCelulas Numero de celulas con el que se inicializa la superficie
-	 * @param maxPasosSinMover Numero de pasos sin mover que tiene la celula
-	 * @param pasosReproduccion Numero de pasos para que la celula se reproduzca 
+	 * Inicia la superficie con un numero de celululas que le entra. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param numCelulas Numero de celulas con el que se inicializa la superficie.
+	 * @param maxPasosSinMover Numero de pasos sin mover que tiene la celula.
+	 * @param pasosReproduccion Numero de pasos para que la celula se reproduzca.
 	 * @return boolean
 	 */
 	public boolean iniciarSuperficie (int numCelulas, int maxPasosSinMover, int pasosReproduccion){
@@ -62,10 +62,10 @@ public class Superficie {
 	}
 	
 	/**
-	 * 
-	 * @param maxPasosSinMover
-	 * @param pasosReproduccion
-	 * @return boolean
+	 * Reproduce los movimientos de las celulas sobre el tablero y devuelve en un String los pasos realizados.
+	 * @param maxPasosSinMover Numero de pasos que puede estar sin mover.
+	 * @param pasosReproduccion Numero de pasos para que se reproduzca.
+	 * @return String
 	 */
 	public String paso(int maxPasosSinMover, int pasosReproduccion){
 		
@@ -108,14 +108,14 @@ public class Superficie {
 							int c2 = posicionesVacias[numAleatorio].getY();
 							
 							this.superficie[f2][c2] = this.superficie[f][c];
-							this.superficie[f][c] = null;
+							this.eliminarCelula(f, c);
 							
 							
 							str = str+"->Movimiento de ("+f+","+c+") a ("+f2+","+c2+")"+LINE_SEPARATOR;
 							if (this.superficie[f2][c2].limitePasosDados()){
 								if(this.crearCelula(f, c, maxPasosSinMover, pasosReproduccion))
 									str = str+"->Nace nueva celula en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
-								else // TODO A veces no puede crear la celula
+								else 
 									str = str+"->La celula ("+f2+"-"+c2+") ha dado un error al reproducirse"+LINE_SEPARATOR;
 								this.superficie[f2][c2].reiniciaPasosReproduccion();
 							}else{
@@ -152,12 +152,16 @@ public class Superficie {
 	}
 	
 	/**
-	 * Crea una celula en una posicion de la superficie.
-	 * @return True si se puede crear y false si no.
+	 * Crea una celula en una posicion de la superficie. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param f fila.
+	 * @param c columna.
+	 * @param maxPasosSinMover Numero de pasos que puede estar sin mover.
+	 * @param pasosReproduccion Numero de pasos para que se reproduzca.
+	 * @return boolean
 	 */
 	public boolean crearCelula (int f, int c, int maxPasosSinMover, int pasosReproduccion){
 
-		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
+		if (f>=1 && f<this.filas && c>=1 && c<this.columnas){
 			if (this.superficie[f][c]==null){
 				this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
 				return true;
@@ -169,14 +173,14 @@ public class Superficie {
 	}
 	
 	/**
-	 * Elimina una celula del tablero.
+	 * Elimina una celula del tablero. Devuelve un boolean dependiendo si ha podido o no.
 	 * @param f fila.
 	 * @param c columna.
-	 * @return false si no puede borrar y true si la borra.
+	 * @return boolean
 	 */
 	public boolean eliminarCelula (int f, int c){
 		
-		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
+		if (f>=1 && f<this.filas && c>=1 && c<this.columnas){
 			if (this.superficie[f][c]!=null){
 				this.superficie[f][c]=null;
 				return true;
@@ -201,8 +205,8 @@ public class Superficie {
 	}
 			
 	/**
-	 * Devuelve un string con la superficie para imprimirla por pantalla.
-	 * @return String con la superficie.
+	 * Genera el tablero en un String y lo devuelve imprimirla por pantalla.
+	 * @return String
 	 */
 	public String toString(){
 		
@@ -231,8 +235,8 @@ public class Superficie {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Metodo privado que saca la cantidad de posiciones vacias que tiene una posicion concreta.
+	 * @return int
 	 */
 	private int cantidadPosicionesVacias(Posicion[] posicionesAdyacentes, int numPosiciones){
 		
@@ -250,8 +254,8 @@ public class Superficie {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Metodo privado que saca las posiciones vacias que tiene una posicion concreta.
+	 * @return Posicion[]
 	 */
 	private Posicion[] posicionesVacias(Posicion[] posicionesAdyacentes, int numPosiciones, int numPosicionesVacias){
 		
@@ -266,8 +270,9 @@ public class Superficie {
 			}
 		}
 		
-		return posicionesVacias;
+		return posicionesAdyacentes;
 		
 	}
 	
 }
+
