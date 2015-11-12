@@ -3,20 +3,28 @@ package controlador.mundo;
 import controlador.mundo.superficie.Superficie;
 
 /**
- * Clase encargada de gestionar los movimientos.
+ * Clase encargada de comprobar si se ha realizado la accion y construir los textos que se mostraran.
  */
 public class Mundo {
 	
-	//Para que el salto de linea salga bien en windows y linux.
+	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
+	// Numero de celulas que introduce al iniciar el tablero
 	private final int NUM_CELULAS = 3;
+	// Numero de pasos que puede estar sin mover
 	private final int MAX_PASOS_SIN_MOVER = 4;
+	// Numero de pasos para que se reproduzca
 	private final int PASOS_REPRODUCCION = 4;
 	
 	private Superficie superficie;
 	
 	/**
-	 * Constructor por defecto.
+	 * 
+	 */
+	/**
+	 * Constructor.
+	 * @param nf Numero de filas.
+	 * @param nc Numero de columnas.
 	 */
 	public Mundo(int nf, int nc){
 		
@@ -25,7 +33,8 @@ public class Mundo {
 	}
 	
 	/**
-	 * Inicia el tablero.
+	 * Inicia el tablero. Devuelve si ha podido a no en una cadena de caracteres. 
+	 * @return String
 	 */
 	public String iniciar (){
 		
@@ -49,10 +58,10 @@ public class Mundo {
 	
 	
 	/**
-	 * Llama a crear celula.
-	 * @param f
-	 * @param c
-	 * @return
+	 * Llama a crear celula. Devuelve si ha podido a no en una cadena de caracteres. 
+	 * @param f fila.
+	 * @param c columna.
+	 * @return String
 	 */
 	public String crearCelula(int f, int c){
 		
@@ -65,10 +74,10 @@ public class Mundo {
 	}
 	
 	/**
-	 * Elimina una celula.
+	 * Elimina una celula. Devuelve si ha podido a no en una cadena de caracteres.
 	 * @param f fila.
 	 * @param c columna
-	 * @return
+	 * @return String
 	 */
 	public String eliminarCelula (int f,int c){
 		
@@ -83,7 +92,7 @@ public class Mundo {
 	
 	/**
 	 * Vacia la superficie del tablero.
-	 * @return
+	 * @return String
 	 */
 	public String vaciar(){
 		

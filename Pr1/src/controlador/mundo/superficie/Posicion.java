@@ -1,9 +1,7 @@
 package controlador.mundo.superficie;
 
 /**
- * 
- * 
- *
+ * Clase para sacar las posiciones adyacentes de una posicion.
  */
 public class Posicion {
 	
@@ -11,9 +9,9 @@ public class Posicion {
 	private int y;
 	
 	/**
-	 * 
-	 * @param x
-	 * @param y
+	 * Constructor.
+	 * @param x Coordenada X
+	 * @param y Coordenada Y
 	 */
 	public Posicion(int x, int y){
 		
@@ -23,16 +21,16 @@ public class Posicion {
 	}
 	
 	/**
-	 * 
-	 * @param maxFila
-	 * @param maxColumna
-	 * @return
+	 * Devuelve la cantidad de posiciones adyacentes de una posicion.
+	 * @param maxFila Filas totales del tablero.
+	 * @param maxColumna Columnas totales del tablero.
+	 * @return int
 	 */
 	public int numPosiciones(int maxFila, int maxColumna){
 		
 		if ((this.x==0 && (this.y==0 || this.y==maxColumna)) || (this.y==0 && this.x==maxFila) || (this.y==maxColumna && this.x==maxFila))
 			return 3;
-		else if((this.x>0 && this.x<maxColumna && (this.y==0 || this.y==maxFila))||(this.y>0 && this.y<maxFila && (this.x==0 || this.x==maxColumna)))
+		else if((this.x>0 && this.x<maxFila && (this.y==0 || this.y==maxColumna))||(this.y>0 && this.y<maxColumna && (this.x==0 || this.x==maxFila)))
 			return 5;
 		else
 			return 8;
@@ -40,8 +38,10 @@ public class Posicion {
 	}
 
 	/**
-	 * Saca las posiciones adyacentes de una posicion en un tablero
-	 * @return Posicion[] con las posiciones adyacentes.
+	 * Devuelve una lista de posiciones adyacentes de una posicion.
+	 * @param maxFila Filas totales del tablero.
+	 * @param maxColumna Columnas totales del tablero.
+	 * @return Posicion[]
 	 */
 	public Posicion[] adyacencia(int maxFila, int maxColumna){
 
@@ -61,16 +61,16 @@ public class Posicion {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Devuelve la coordenada X.
+	 * @return int
 	 */
 	public int getX(){
 		return this.x;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Devuelve la coordenada Y.
+	 * @return int
 	 */
 	public int getY(){
 		return this.y;

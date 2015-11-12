@@ -1,7 +1,7 @@
 package controlador.mundo.superficie.celula;
 
 /**
- * Representa una celula.
+ * Clase que gestiona una celula.
  */
 public class Celula {
 
@@ -11,9 +11,9 @@ public class Celula {
 	private final int PASOS_REPRODUCCION;
 	
 	/**
-	 * Constructor por defecto.
-	 * @param pasosSinMover
-	 * @param pasosReproduccion
+	 * Constructor.
+	 * @param pasosSinMover Numero de pasos sin mover que tiene la celula.
+	 * @param pasosReproduccion Numero de pasos para que la celula se reproduzca.
 	 */
 	public Celula(int pasosSinMover, int pasosReproduccion){
 		
@@ -25,7 +25,7 @@ public class Celula {
 	}
 	
 	/**
-	 * Metodo que suma uno al numero de pasos dados.
+	 * Suma uno al numero de pasos dados.
 	 */
 	public void sumPasosDados(){
 		
@@ -34,7 +34,7 @@ public class Celula {
 	}
 	
 	/**
-	 * Metodo que suma uno al numero de pasos sin mover.
+	 * Suma uno al numero de pasos sin mover.
 	 */
 	public void sumPasosSinMover(){
 		
@@ -43,8 +43,8 @@ public class Celula {
 	}
 	
 	/**
-	 * Metodo que devuelve el numero de passos que ha dado la celula.
-	 * @return Numero de pasos dados.
+	 * Devuelve el numero de pasos que ha dado la celula.
+	 * @return int
 	 */
 	public int getPasosDados(){
 		
@@ -53,8 +53,8 @@ public class Celula {
 	}
 	
 	/**
-	 * Metodo que devuelve el numero de pasos que lleva sin moverse la celula.
-	 * @return Numero de pasos sin mover.
+	 * Devuelve el numero de pasos que lleva sin moverse la celula.
+	 * @return int
 	 */
 	public int getPasosSinMover(){
 		
@@ -63,8 +63,8 @@ public class Celula {
 	}
 	
 	/**
-	 * Metodo que devuelve el numero de pasos que queda para que la celula se reproduzca.
-	 * @return Numero de pasos que queda para reproducirse.
+	 * Devuelve el numero de pasos que queda para que la celula se reproduzca.
+	 * @return int
 	 */
 	public int getQuedaParaReproducirse(){
 		
@@ -73,8 +73,8 @@ public class Celula {
 	}
 	
 	/**
-	 * Metodo que devuelve el numero de pasos que queda para que la celula muera.
-	 * @return Numero de pasos que queda para morir.
+	 * Devuelve el numero de pasos que queda para que la celula muera.
+	 * @return int
 	 */
 	public int getPasosParaMorir(){
 		
@@ -84,45 +84,42 @@ public class Celula {
 	
 	/**
 	 * Metodo que devuelve false si ha llegado al limite de pasos sin mover o true si no.
-	 * @return False si ha llegado al limite de pasos sin mover.
+	 * @return boolean
 	 */
 	public boolean limitePasosSinMover(){
 		
 		if (this.pasosSinMover == this.MAX_PASOS_SIN_MOVER)
-			
 			return true;
 		
 		else 
-			
 			return false;
 		
 	}
 	
 	/**
 	 * Metodo que devuelve true si tiene que reproducirse o false si no.
-	 * @return True si tiene que reproducirse.
+	 * @return boolean
 	 */
 	public boolean limitePasosDados(){
 			
 		if (this.pasosDados == this.PASOS_REPRODUCCION)
-			
 			return true;
 		
 		else
-			
 			return false;
 		
 	}
 	
 	/**
-	 * 
+	 * Metodo que reinicia los pasos dados
 	 */
-	public void setPasosReproduccion(){
+	public void reiniciaPasosReproduccion(){
 		this.pasosDados = 0;
 	}
 	
 	/**
 	 * Devuelve un string para pintar la celula en el tablero.
+	 * @return String
 	 */
 	public String toString(){
 		

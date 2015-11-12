@@ -1,7 +1,6 @@
 package controlador;
 
 import java.util.*;
-
 import controlador.mundo.Mundo;
 
 /**
@@ -62,7 +61,7 @@ public class Controlador {
 						
 						int f = Integer.parseInt(palabras[num1]); 
 						int c = Integer.parseInt(palabras[num2]);
-						System.out.println(mundo.crearCelula(f-1,c-1));
+						System.out.println(mundo.crearCelula(f,c));
 						System.out.println(mundo.toString());
 						
 					}
@@ -83,7 +82,7 @@ public class Controlador {
 						
 						int f = Integer.parseInt(palabras[num1]);
 						int c = Integer.parseInt(palabras[num2]);
-						System.out.println(mundo.eliminarCelula(f-1, c-1));
+						System.out.println(mundo.eliminarCelula(f, c));
 						System.out.println(mundo.toString());
 						
 					}
