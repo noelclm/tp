@@ -69,6 +69,7 @@ public class Superficie {
 	 */
 	public String paso(int maxPasosSinMover, int pasosReproduccion){
 		
+		String str = "";
 		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
 
 		// Inicia un tablero auxiliar para saber porque posiciones ha pasado ya
@@ -79,6 +80,7 @@ public class Superficie {
 				
 			} // for (int c=0; c<this.columnas; c++)
 		} // for (int f=0; f<this.filas; f++)
+		
 		
 		for (int f=0; f<this.filas; f++){
 			for (int c=0; c<this.columnas; c++){
@@ -93,7 +95,7 @@ public class Superficie {
 						Posicion[] posicionesAdyacentes = new Posicion[numPosiciones];
 						posicionesAdyacentes = posicionInicial.adyacencia(this.filas, this.columnas);
 						
-						// TODO Elimina cuando quiere
+						
 						int numPosicionesVacias = cantidadPosicionesVacias(posicionesAdyacentes,numPosiciones);
 						
 						if(numPosicionesVacias>0){ // Si se puede mover
@@ -104,26 +106,36 @@ public class Superficie {
 							int numAleatorio = (int)(Math.random()*numPosicionesVacias-1);
 							int f2 = posicionesVacias[numAleatorio].getX();
 							int c2 = posicionesVacias[numAleatorio].getY();
-							System.out.println("f2"+f2);
-							System.out.println("c2"+c2);
 							
 							this.superficie[f2][c2] = this.superficie[f][c];
 							this.superficie[f][c] = null;
 							
+							
+							str = str+"->Movimiento de ("+f+","+c+") a ("+f2+","+c2+")"+LINE_SEPARATOR;
 							if (this.superficie[f2][c2].limitePasosDados()){
-								this.crearCelula(f, c, maxPasosSinMover, pasosReproduccion);
+								if(this.crearCelula(f, c, maxPasosSinMover, pasosReproduccion))
+									str = str+"->Nace nueva celula en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
+								else // TODO A veces no puede crear la celula
+									str = str+"->La celula ("+f2+"-"+c2+") ha dado un error al reproducirse"+LINE_SEPARATOR;
 								this.superficie[f2][c2].setPasosReproduccion();
-							}else
+							}else{
 								this.superficie[f2][c2].sumPasosDados();
-
+							}
+							
 							posicionesPasadas[f2][c2] = true;	
 								
-						} // if(numPosicionesVacias>0)
-						else{ // Si no se puede mover
+						}else{ // Si no se puede mover
 							
 							this.superficie[f][c].sumPasosSinMover();
-							if (this.superficie[f][c].limitePasosSinMover() || this.superficie[f][c].limitePasosDados())
+							if (this.superficie[f][c].limitePasosSinMover() || this.superficie[f][c].limitePasosDados()){
 								this.eliminarCelula(f, c);
+								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por inactividad"+LINE_SEPARATOR;
+							}else if (this.superficie[f][c].limitePasosDados()){
+								this.eliminarCelula(f, c);
+								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por no poder reproducirse"+LINE_SEPARATOR;
+							}
+							else
+								str = str+"->La celula "+f+"-"+c+" no se ha podido mover"+LINE_SEPARATOR;
 							
 						} // else
 						
@@ -135,7 +147,7 @@ public class Superficie {
 			} // for (int c=0; c<this.columnas; c++)
 		} // for (int f=0; f<this.filas; f++)
 	
-		return "pasos que ha hecho";
+		return str;
 		
 	}
 	
@@ -245,17 +257,16 @@ public class Superficie {
 		
 		int num = 0;
 		Posicion[] posicionesVacias = new Posicion[numPosicionesVacias];
-		// TODO devuelve alguna ocupada
 		for(int i=0; i<numPosiciones; i++){
 			int f = posicionesAdyacentes[i].getX();
 			int c = posicionesAdyacentes[i].getY();
 			if(this.superficie[f][c]==null){
-				posicionesVacias[num] = posicionesAdyacentes[i];
+				posicionesVacias[num] = new Posicion(f,c);
 				num++;
 			}
 		}
 		
-		return posicionesAdyacentes;
+		return posicionesVacias;
 		
 	}
 	
