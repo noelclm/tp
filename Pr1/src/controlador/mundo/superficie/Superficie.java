@@ -117,7 +117,7 @@ public class Superficie {
 									str = str+"->Nace nueva celula en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
 								else // TODO A veces no puede crear la celula
 									str = str+"->La celula ("+f2+"-"+c2+") ha dado un error al reproducirse"+LINE_SEPARATOR;
-								this.superficie[f2][c2].setPasosReproduccion();
+								this.superficie[f2][c2].reiniciaPasosReproduccion();
 							}else{
 								this.superficie[f2][c2].sumPasosDados();
 							}
@@ -157,7 +157,7 @@ public class Superficie {
 	 */
 	public boolean crearCelula (int f, int c, int maxPasosSinMover, int pasosReproduccion){
 
-		if (f>=1 && f<=this.filas && c>=1 && c<=this.columnas){
+		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
 			if (this.superficie[f][c]==null){
 				this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
 				return true;
@@ -176,7 +176,7 @@ public class Superficie {
 	 */
 	public boolean eliminarCelula (int f, int c){
 		
-		if (f>=1 && f<=this.filas && c>=1 && c<=this.columnas){
+		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
 			if (this.superficie[f][c]!=null){
 				this.superficie[f][c]=null;
 				return true;
