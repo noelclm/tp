@@ -1,6 +1,5 @@
-package controlador.mundo.superficie;
+package logica;
 
-import controlador.mundo.superficie.celula.Celula;
 
 /**
  * Clase que gestiona el tablero de juego.
@@ -45,7 +44,10 @@ public class Superficie {
 		this.vaciar();
 		
 		int numCelulasPuestas = 0;
-		
+		/*int numCelulas2 = (int)(Math.random()*(this.filas*this.columnas));
+		if (numCelulas2 == 0)
+			numCelulas2 = 1;
+		*/
 		// Comprueba que hay suficientes celdas para las celulas
 		if (numCelulas <= this.filas*this.columnas){
 			
@@ -67,7 +69,7 @@ public class Superficie {
 	 * @param pasosReproduccion Numero de pasos para que se reproduzca.
 	 * @return String
 	 */
-	public String paso(int maxPasosSinMover, int pasosReproduccion){
+	public String evoluciona(int maxPasosSinMover, int pasosReproduccion){
 		
 		String str = "";
 		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
@@ -161,7 +163,7 @@ public class Superficie {
 	 */
 	public boolean crearCelula (int f, int c, int maxPasosSinMover, int pasosReproduccion){
 
-		if (f>=1 && f<=this.filas && c>=1 && c<=this.columnas){
+		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
 			if (this.superficie[f][c]==null){
 				this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
 				return true;
@@ -180,7 +182,7 @@ public class Superficie {
 	 */
 	public boolean eliminarCelula (int f, int c){
 		
-		if (f>=1 && f<=this.filas && c>=1 && c<=this.columnas){
+		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
 			if (this.superficie[f][c]!=null){
 				this.superficie[f][c]=null;
 				return true;
@@ -270,7 +272,7 @@ public class Superficie {
 			}
 		}
 		
-		return posicionesAdyacentes;
+		return posicionesVacias;
 		
 	}
 	

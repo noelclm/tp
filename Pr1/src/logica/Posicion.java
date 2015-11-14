@@ -1,4 +1,4 @@
-package controlador.mundo.superficie;
+package logica;
 
 /**
  * Clase para sacar las posiciones adyacentes de una posicion.

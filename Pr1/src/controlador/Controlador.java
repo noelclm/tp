@@ -1,7 +1,8 @@
 package controlador;
 
 import java.util.*;
-import controlador.mundo.Mundo;
+
+import logica.Mundo;
 
 /**
  * Clase encargada de pedir los comandos al usuario.
@@ -12,7 +13,7 @@ public class Controlador {
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private static int filasTablero = 5;
 	private static int columnasTablero = 5;
-	private Mundo mundo =new Mundo(filasTablero,columnasTablero);
+	private Mundo mundo = new Mundo(filasTablero,columnasTablero);
 	//Clase que nos permite obtener datos desde el teclado (Deriva de java.util)
 	Scanner s= new Scanner(System.in);
 	

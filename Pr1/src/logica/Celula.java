@@ -1,4 +1,4 @@
-package controlador.mundo.superficie.celula;
+package logica;
 
 /**
  * Clase que gestiona una celula.
@@ -111,7 +111,7 @@ public class Celula {
 	}
 	
 	/**
-	 * Metodo que reinicia los pasos dados
+	 * Metodo que reinicia los pasos dados.
 	 */
 	public void reiniciaPasosReproduccion(){
 		this.pasosDados = 0;

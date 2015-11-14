@@ -1,6 +1,5 @@
-package controlador.mundo;
+package logica;
 
-import controlador.mundo.superficie.Superficie;
 
 /**
  * Clase encargada de comprobar si se ha realizado la accion y construir los textos que se mostraran.
@@ -49,7 +48,7 @@ public class Mundo {
 	 */
 	public String evoluciona(){
 		
-		return this.superficie.paso(MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION);
+		return this.superficie.evoluciona(MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION);
 			
 	}
 	
@@ -62,7 +61,7 @@ public class Mundo {
 	 */
 	public String crearCelula(int f, int c){
 		
-		if(this.superficie.crearCelula(f-1,c-1,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
+		if(this.superficie.crearCelula(f,c,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
 			return "Creamos nueva célula en la posición: ("+f+","+c+")";
 			
 		else
@@ -73,12 +72,12 @@ public class Mundo {
 	/**
 	 * Elimina una celula. Devuelve si ha podido a no en una cadena de caracteres.
 	 * @param f fila.
-	 * @param c columna
+	 * @param c columna.
 	 * @return String
 	 */
 	public String eliminarCelula (int f,int c){
 		
-		if (this.superficie.eliminarCelula(f-1,c-1))
+		if (this.superficie.eliminarCelula(f,c))
 			return "Se ha eliminado la célula en la posición: ("+f+","+c+")";
 			
 		else

@@ -1,9 +1,10 @@
+package main;
 import controlador.Controlador;
 
 /**
  * PRACTICA 1 - Simulacion de un Mundo Celular Simple.
  * @author Noel Clemente Montero
- * @author Estefania Ortega Avila
+ * @author Estefanía Ortega Ávila
  */
 
 public class Main {
