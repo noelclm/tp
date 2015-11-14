@@ -19,9 +19,6 @@ public class Mundo {
 	private Superficie superficie;
 	
 	/**
-	 * 
-	 */
-	/**
 	 * Constructor.
 	 * @param nf Numero de filas.
 	 * @param nc Numero de columnas.
@@ -65,7 +62,7 @@ public class Mundo {
 	 */
 	public String crearCelula(int f, int c){
 		
-		if(this.superficie.crearCelula(f,c,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
+		if(this.superficie.crearCelula(f-1,c-1,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
 			return "Creamos nueva célula en la posición: ("+f+","+c+")";
 			
 		else
@@ -81,7 +78,7 @@ public class Mundo {
 	 */
 	public String eliminarCelula (int f,int c){
 		
-		if (this.superficie.eliminarCelula(f,c))
+		if (this.superficie.eliminarCelula(f-1,c-1))
 			return "Se ha eliminado la célula en la posición: ("+f+","+c+")";
 			
 		else

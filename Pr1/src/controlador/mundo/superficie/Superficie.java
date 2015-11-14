@@ -161,7 +161,7 @@ public class Superficie {
 	 */
 	public boolean crearCelula (int f, int c, int maxPasosSinMover, int pasosReproduccion){
 
-		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
+		if (f>=1 && f<=this.filas && c>=1 && c<=this.columnas){
 			if (this.superficie[f][c]==null){
 				this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
 				return true;
@@ -180,7 +180,7 @@ public class Superficie {
 	 */
 	public boolean eliminarCelula (int f, int c){
 		
-		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
+		if (f>=1 && f<=this.filas && c>=1 && c<=this.columnas){
 			if (this.superficie[f][c]!=null){
 				this.superficie[f][c]=null;
 				return true;
@@ -270,7 +270,7 @@ public class Superficie {
 			}
 		}
 		
-		return posicionesVacias;
+		return posicionesAdyacentes;
 		
 	}
 	
