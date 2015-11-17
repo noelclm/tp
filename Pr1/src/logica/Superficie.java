@@ -129,7 +129,7 @@ public class Superficie {
 						}else{ // Si no se puede mover
 							
 							this.superficie[f][c].sumPasosSinMover();
-							if (this.superficie[f][c].limitePasosSinMover() || this.superficie[f][c].limitePasosDados()){
+							if (this.superficie[f][c].limitePasosSinMover()){
 								this.eliminarCelula(f, c);
 								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por inactividad"+LINE_SEPARATOR;
 							}else if (this.superficie[f][c].limitePasosDados()){
