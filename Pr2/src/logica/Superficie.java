@@ -165,7 +165,8 @@ public class Superficie {
 
 		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
 			if (this.superficie[f][c]==null){
-				this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
+				// TODO Crear celula
+				//this.superficie[f][c] = new Celula(maxPasosSinMover,pasosReproduccion);	
 				return true;
 			}
 		}

@@ -95,7 +95,7 @@ public class Controlador {
 					
 				}else if (palabras[0].equals("ayuda")){
 					
-					System.out.println(mundo.ayuda());
+					//System.out.println(mundo.ayuda());
 					
 				}else if (palabras[0].equals("salir")){
 					

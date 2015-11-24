@@ -3,12 +3,16 @@ package logica;
 /**
  * Clase que gestiona una celula.
  */
-public class Celula {
+public abstract class Celula {
 
 	private int pasosSinMover;
 	private int pasosDados;
 	private final int MAX_PASOS_SIN_MOVER;
 	private final int PASOS_REPRODUCCION;
+	protected boolean esComestible;
+	
+	public abstract Posicion ejecutaMovimiento(int f, int c, Superficie superficie);
+	public abstract boolean esComestible();
 	
 	/**
 	 * Constructor.
