@@ -14,6 +14,8 @@ public class Mundo {
 	private final int MAX_PASOS_SIN_MOVER = 4;
 	// Numero de pasos para que se reproduzca
 	private final int PASOS_REPRODUCCION = 4;
+	// Numero de celulas que puede comer una celula compleja
+	private final int MAX_COMER = 4;
 	
 	private Superficie superficie;
 	
@@ -54,14 +56,30 @@ public class Mundo {
 	
 	
 	/**
-	 * Llama a crear celula. Devuelve si ha podido a no en una cadena de caracteres. 
+	 * Llama a crear celula simple. Devuelve si ha podido a no en una cadena de caracteres. 
 	 * @param f fila.
 	 * @param c columna.
 	 * @return String
 	 */
-	public String crearCelula(int f, int c){
+	public String crearCelulaSimple(int f, int c){
 		
-		if(this.superficie.crearCelula(f,c,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
+		if(this.superficie.crearCelulaSimple(f,c,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
+			return "Creamos nueva célula en la posición: ("+f+","+c+")";
+			
+		else
+			return "Imposible crear una nueva célula en ("+f+","+c+"), posición ocupada";
+
+	}
+	
+	/**
+	 * Llama a crear celula compleja. Devuelve si ha podido a no en una cadena de caracteres. 
+	 * @param f fila.
+	 * @param c columna.
+	 * @return String
+	 */
+	public String crearCelulaCompleja(int f, int c){
+		
+		if(this.superficie.crearCelulaCompleja(f,c,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION,MAX_COMER)) 
 			return "Creamos nueva célula en la posición: ("+f+","+c+")";
 			
 		else

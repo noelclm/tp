@@ -62,7 +62,7 @@ public class Controlador {
 						
 						int f = Integer.parseInt(palabras[num1]); 
 						int c = Integer.parseInt(palabras[num2]);
-						System.out.println(mundo.crearCelula(f,c));
+						System.out.println(mundo.crearCelulaSimple(f,c));
 						System.out.println(mundo.toString());
 						
 					}
