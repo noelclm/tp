@@ -101,6 +101,89 @@ public class Superficie {
 	
 		return str;
 		
+		/*
+		 String str = "";
+		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
+
+		// Inicia un tablero auxiliar para saber porque posiciones ha pasado ya
+		for (int f=0; f<this.filas; f++){
+			for (int c=0; c<this.columnas; c++){
+				
+				posicionesPasadas[f][c] = false;
+				
+			} // for (int c=0; c<this.columnas; c++)
+		} // for (int f=0; f<this.filas; f++)
+		
+		
+		for (int f=0; f<this.filas; f++){
+			for (int c=0; c<this.columnas; c++){
+				
+				if(posicionesPasadas[f][c]==false){
+					
+					if(this.superficie[f][c]!=null){
+					
+						Posicion posicionInicial = new Posicion(f,c);
+						
+						int numPosiciones = posicionInicial.numPosiciones(this.filas-1, this.columnas-1);
+						Posicion[] posicionesAdyacentes = new Posicion[numPosiciones];
+						posicionesAdyacentes = posicionInicial.adyacencia(this.filas, this.columnas);
+						
+						
+						int numPosicionesVacias = cantidadPosicionesVacias(posicionesAdyacentes,numPosiciones);
+						
+						if(numPosicionesVacias>0){ // Si se puede mover
+							
+							Posicion[] posicionesVacias = new Posicion[numPosicionesVacias];
+							posicionesVacias = posicionesVacias(posicionesAdyacentes,numPosiciones,numPosicionesVacias);
+							
+							int numAleatorio = (int)(Math.random()*numPosicionesVacias-1);
+							int f2 = posicionesVacias[numAleatorio].getX();
+							int c2 = posicionesVacias[numAleatorio].getY();
+							
+							this.superficie[f2][c2] = this.superficie[f][c];
+							this.eliminarCelula(f, c);
+							
+							
+							str = str+"->Movimiento de ("+f+","+c+") a ("+f2+","+c2+")"+LINE_SEPARATOR;
+							if (this.superficie[f2][c2].limitePasosDados()){
+								if(this.crearCelula(f, c, maxPasosSinMover, pasosReproduccion))
+									str = str+"->Nace nueva celula en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
+								else 
+									str = str+"->La celula ("+f2+"-"+c2+") ha dado un error al reproducirse"+LINE_SEPARATOR;
+								this.superficie[f2][c2].reiniciaPasosReproduccion();
+							}else{
+								this.superficie[f2][c2].sumPasosDados();
+							}
+							
+							posicionesPasadas[f2][c2] = true;	
+								
+						}else{ // Si no se puede mover
+							
+							this.superficie[f][c].sumPasosSinMover();
+							if (this.superficie[f][c].limitePasosSinMover()){
+								this.eliminarCelula(f, c);
+								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por inactividad"+LINE_SEPARATOR;
+							}else if (this.superficie[f][c].limitePasosDados()){
+								this.eliminarCelula(f, c);
+								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por no poder reproducirse"+LINE_SEPARATOR;
+							}
+							else
+								str = str+"->La celula "+f+"-"+c+" no se ha podido mover"+LINE_SEPARATOR;
+							
+						} // else
+						
+					} // if(this.superficie[f][c]!=null)
+					
+					posicionesPasadas[f][c] = true;
+					
+				} // if(posicionesPasadas[f][c] == false)						
+			} // for (int c=0; c<this.columnas; c++)
+		} // for (int f=0; f<this.filas; f++)
+	
+		return str; 
+		 
+		 */
+		
 	}
 	
 	/**
