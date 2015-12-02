@@ -35,9 +35,9 @@ public class ParserComandos {
 		Comando aux = null;
 		
 		for(Comando c:array){
-			aux=c.parsea(cadenas);
-			
+			aux=c.parsea(cadenas);	
 		}
+		
 		return aux;
 		
 	}

@@ -64,13 +64,13 @@ public class Mundo {
 	 * @param c columna.
 	 * @return String
 	 */
-	public String crearCelulaSimple(int f, int c){
+	public String crearCelulaSimple(Casilla casilla){
 		
-		if(this.superficie.crearCelulaSimple(f,c,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
-			return "Creamos nueva célula en la posición: ("+f+","+c+")";
+		if(this.superficie.crearCelulaSimple(casilla.getFila(),casilla.getColumna(),MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
+			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 		else
-			return "Imposible crear una nueva célula en ("+f+","+c+"), posición ocupada";
+			return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
 
 	}
 	

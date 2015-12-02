@@ -4,10 +4,9 @@ import logica.Mundo;
 
 public class CrearCelulaCompleja extends Comando {
 
-	@Override
-	public void ejecuta(Mundo mundo) {
+	public String ejecuta(Mundo mundo) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override

@@ -5,9 +5,9 @@ import logica.Mundo;
 public class Iniciar extends Comando{
 
 	@Override
-	public void ejecuta(Mundo mundo) {
+	public String ejecuta(Mundo mundo) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override

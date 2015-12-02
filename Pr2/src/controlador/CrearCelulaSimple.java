@@ -1,5 +1,6 @@
 package controlador;
 
+import logica.Casilla;
 import logica.Mundo;
 
 public class CrearCelulaSimple extends Comando {
@@ -7,24 +8,23 @@ public class CrearCelulaSimple extends Comando {
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	
+	private Casilla casilla;
+	
 	private int f;
 	private int c;
 
 	public CrearCelulaSimple() {
-		this.f = 0;
-		this.c = 0;
+		this.casilla = null;
 	}
 	
-	public CrearCelulaSimple(int f, int c) {
-		this.f = f;
-		this.c = c;
+	public CrearCelulaSimple(Casilla casilla) {
+		this.casilla = casilla;
 	}
 
 	@Override
-	public void ejecuta(Mundo mundo) {
+	public String ejecuta(Mundo mundo) {
 		
-		System.out.println(mundo.crearCelulaSimple(f,c));
-		System.out.println(mundo.toString());
+		return mundo.crearCelulaSimple(this.casilla);
 		
 	}
 
@@ -42,7 +42,9 @@ public class CrearCelulaSimple extends Comando {
 			int f = Integer.parseInt(cadenaComando[num1]); 
 			int c = Integer.parseInt(cadenaComando[num2]);
 			
-			Comando comando = new CrearCelulaSimple(f,c);
+			Casilla casilla = new Casilla(f,c);
+			
+			Comando comando = new CrearCelulaSimple(casilla);
 				
 			return comando;
 			
