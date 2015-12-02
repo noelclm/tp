@@ -25,7 +25,7 @@ public class Controlador {
 	
 		boolean exit = false;
 		
-		while(!exit){
+		while(!this.mundo.sigueSimulacion()){
 			
 			System.out.println("Introduce un comando:"+ LINE_SEPARATOR);
 			
@@ -34,6 +34,14 @@ public class Controlador {
 			//Separa la linea en un array identificando los espacios
 			String[] palabras = linea.split(" ");
 			
+			ParserComandos parsear = new ParserComandos();
+			
+			Comando comando = parsear.parseaComando(palabras);
+			
+			if(comando != null){
+				comando.ejecuta(mundo);
+			}
+			/*
 			try{
 				
 				if (palabras[0].equals("iniciar")){
@@ -107,7 +115,7 @@ public class Controlador {
 			
 			} catch (NumberFormatException nfe){
 				System.out.println("No ha introducido bien las coordenadas.");
-			}
+			}*/
 			
 		}//fin while
 		

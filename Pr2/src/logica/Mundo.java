@@ -16,6 +16,8 @@ public class Mundo {
 	private final int PASOS_REPRODUCCION = 4;
 	// Numero de celulas que puede comer una celula compleja
 	private final int MAX_COMER = 4;
+	// Marca si hay que cerrar el juego o no
+	private boolean simulacionTerminada; 
 	
 	private Superficie superficie;
 	
@@ -27,6 +29,7 @@ public class Mundo {
 	public Mundo(int nf, int nc){
 		
 		this.superficie =new Superficie(nf,nc);
+		this.simulacionTerminada=true;
 		
 	}
 	
@@ -122,6 +125,16 @@ public class Mundo {
 	public String toString(){
 		
 		return this.superficie.toString();
+		
+	}
+	
+	/**
+	 * 
+	 * @return boolean
+	 */
+	public boolean sigueSimulacion(){
+		
+		return this.simulacionTerminada;
 		
 	}
 	

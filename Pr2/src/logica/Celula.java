@@ -11,7 +11,7 @@ public abstract class Celula {
 	private final int PASOS_REPRODUCCION;
 	protected boolean esComestible;
 	
-	public abstract Posicion ejecutaMovimiento(int f, int c, Superficie superficie);
+	public abstract Casilla ejecutaMovimiento(int f, int c, Superficie superficie);
 	public abstract boolean esComestible();
 	
 	/**
