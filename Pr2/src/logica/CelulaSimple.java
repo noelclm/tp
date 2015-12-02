@@ -8,7 +8,7 @@ public class CelulaSimple extends Celula{
 	}
 
 	@Override
-	public Posicion ejecutaMovimiento(int f, int c, Superficie superficie) {
+	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie) {
 		
 		int filas = superficie.getFilas();
 		int columnas = superficie.getColumnas();
@@ -30,9 +30,9 @@ public class CelulaSimple extends Celula{
 			int f2 = posicionesVacias[numAleatorio].getX();
 			int c2 = posicionesVacias[numAleatorio].getY();
 			
-			Posicion posicionFinal = new Posicion(f2,c2);
+			Casilla casillaMovimiento = new Casilla(f2,c2);
 			
-			return posicionFinal;
+			return casillaMovimiento;
 				
 		}else{ // Si no se puede mover
 			

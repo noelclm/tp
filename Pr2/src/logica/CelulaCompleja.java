@@ -11,7 +11,7 @@ public class CelulaCompleja extends Celula {
 	}
 
 	@Override
-	public Posicion ejecutaMovimiento(int f, int c, Superficie superficie) {
+	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie) {
 		// TODO Auto-generated method stub
 		return null;
 	}
