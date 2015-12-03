@@ -21,7 +21,7 @@ public class CrearCelulaCompleja extends Comando {
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.crearCelulaSimple(this.casilla);
+		return mundo.crearCelulaSimple(this.casilla) + LINE_SEPARATOR + mundo.toString();
 		
 	}
 

@@ -12,7 +12,7 @@ public class Vaciar extends Comando {
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.vaciar();
+		return mundo.vaciar() + LINE_SEPARATOR + mundo.toString();
 		
 	}
 

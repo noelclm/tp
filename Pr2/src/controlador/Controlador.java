@@ -9,8 +9,6 @@ import logica.Mundo;
  */
 public class Controlador {
 	
-	//Para que el salto de linea salga bien en windows y linux.
-	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private static int filasTablero = 5;
 	private static int columnasTablero = 5;
 	private Mundo mundo = new Mundo(filasTablero,columnasTablero);
@@ -24,7 +22,7 @@ public class Controlador {
 	
 		while(!this.mundo.sigueSimulacion()){
 			
-			System.out.println("Introduce un comando:"+ LINE_SEPARATOR);
+			System.out.println("Introduce un comando:");
 			
 			//Lee una linea por teclado
 			String linea = s.nextLine().toLowerCase();
@@ -37,7 +35,6 @@ public class Controlador {
 			
 				if(comando != null){
 					System.out.println(comando.ejecuta(mundo));
-					System.out.println(mundo.toString());
 				}else{
 					System.out.println("No has escrito un comando correcto.");
 				}

@@ -21,7 +21,7 @@ public class EliminarCelula extends Comando {
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.eliminarCelula(this.casilla);
+		return mundo.eliminarCelula(this.casilla) + LINE_SEPARATOR + mundo.toString();
 		
 	}
 

@@ -12,7 +12,7 @@ public class Iniciar extends Comando{
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.iniciar();
+		return mundo.iniciar() + LINE_SEPARATOR + mundo.toString();
 		
 	}
 

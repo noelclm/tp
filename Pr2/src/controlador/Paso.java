@@ -12,7 +12,7 @@ public class Paso extends Comando {
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.evoluciona();
+		return mundo.evoluciona() + LINE_SEPARATOR + mundo.toString();
 		
 	}
 
