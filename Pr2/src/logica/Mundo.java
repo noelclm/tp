@@ -27,7 +27,7 @@ public class Mundo {
 	public Mundo(int nf, int nc){
 		
 		this.superficie =new Superficie(nf,nc);
-		this.simulacionTerminada=true;
+		this.simulacionTerminada=false;
 		
 	}
 	
