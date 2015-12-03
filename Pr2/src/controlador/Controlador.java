@@ -31,11 +31,9 @@ public class Controlador {
 			//Separa la linea en un array identificando los espacios
 			String[] palabras = linea.split(" ");
 			
-			ParserComandos parsear = new ParserComandos();
-			
 			try{
 				
-				Comando comando = parsear.parseaComando(palabras);
+				Comando comando = ParserComandos.parseaComando(palabras);
 			
 				if(comando != null){
 					System.out.println(comando.ejecuta(mundo));

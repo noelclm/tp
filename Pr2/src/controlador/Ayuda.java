@@ -11,8 +11,9 @@ public class Ayuda extends Comando {
 	
 	@Override
 	public String ejecuta(Mundo mundo) {
-		// TODO Ejecutar ayuda
-		return null;
+		
+		return ParserComandos.AyudaComandos();
+		
 	}
 
 	@Override
