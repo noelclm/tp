@@ -2,9 +2,12 @@ package controlador;
 
 public class ParserComandos {
 		
-	static Comando[] array = {new Paso(),new Iniciar(),new CrearCelulaSimple(), 
-								new CrearCelulaCompleja(),new EliminarCelula(),
-								new Ayuda(), new Vaciar(), new Salir()};
+	// Para que el salto de linea salga bien en windows y linux.
+	private static final String LINE_SEPARATOR = System.lineSeparator();
+		
+	static Comando[] array = {new Iniciar(), new Paso(), new CrearCelulaSimple(), 
+							  new CrearCelulaCompleja(), new EliminarCelula(),
+							  new Vaciar(), new Ayuda(), new Salir()};
 	
 
 	/**
@@ -12,21 +15,14 @@ public class ParserComandos {
 	 * @return
 	 */
 	static public String AyudaComandos(){
-		String aux = "";
+		
+		String aux = "POSIBLES COMANDOS:" + LINE_SEPARATOR;
+		
 		for(Comando c:array){
 			aux += c.textoAyuda();
-			
 		}
 		
 		return  aux;
-				/*"POSIBLES COMANDOS:" + LINE_SEPARATOR + 
-				" INICIAR: inicia una nueva simulación" + LINE_SEPARATOR +
-				" PASO: realiza un paso en la simulación" + LINE_SEPARATOR + 
-				" CREARCELULA F C: crea una nueva celula en la posición (f,c) si es posible" + LINE_SEPARATOR +
-				" ELIMINARCELULA F C: elimina una celula de la posición (f,c) si es posible" + LINE_SEPARATOR +
-				" VACIAR: crea un mundo vacío" + LINE_SEPARATOR + 
-				" AYUDA: muestra esta ayuda" + LINE_SEPARATOR + 
-				" SALIR: cierra la aplicación" + LINE_SEPARATOR ;*/
 		
 	}
 	
@@ -35,7 +31,8 @@ public class ParserComandos {
 		Comando aux = null;
 		
 		for(Comando c:array){
-			aux=c.parsea(cadenas);	
+			if(aux == null)
+				aux=c.parsea(cadenas);	
 		}
 		
 		return aux;

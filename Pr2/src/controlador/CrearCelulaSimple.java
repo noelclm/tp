@@ -9,9 +9,6 @@ public class CrearCelulaSimple extends Comando {
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	
 	private Casilla casilla;
-	
-	private int f;
-	private int c;
 
 	public CrearCelulaSimple() {
 		this.casilla = null;

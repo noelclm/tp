@@ -4,22 +4,36 @@ import logica.Mundo;
 
 public class Ayuda extends Comando {
 
+	// Para que el salto de linea salga bien en windows y linux.
+	private static final String LINE_SEPARATOR = System.lineSeparator();
+		
+	public Ayuda(){}
+	
 	@Override
 	public String ejecuta(Mundo mundo) {
-		// TODO Auto-generated method stub
+		// TODO Ejecutar ayuda
 		return null;
 	}
 
 	@Override
 	public Comando parsea(String[] cadenaComando) {
-		// TODO Auto-generated method stub
+		
+		if (cadenaComando[0].equals("ayuda")){
+			
+			Comando comando = new Ayuda();
+				
+			return comando;
+		}
+		
 		return null;
+		
 	}
 
 	@Override
 	public String textoAyuda() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return " AYUDA: muestra esta ayuda" + LINE_SEPARATOR;
+		
 	}
 
 }

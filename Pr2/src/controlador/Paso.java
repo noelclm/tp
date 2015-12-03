@@ -3,23 +3,36 @@ package controlador;
 import logica.Mundo;
 
 public class Paso extends Comando {
-
+	
+	// Para que el salto de linea salga bien en windows y linux.
+	private static final String LINE_SEPARATOR = System.lineSeparator();
+	
+	public Paso(){}
+	
 	@Override
 	public String ejecuta(Mundo mundo) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return mundo.evoluciona();
+		
 	}
 
 	@Override
 	public Comando parsea(String[] cadenaComando) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if (cadenaComando[0].equals("paso")){
+			Comando comando = new Paso();
+			return comando;
+		}else{
+			return null;
+		}
+		
 	}
 
 	@Override
 	public String textoAyuda() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return " PASO: realiza un paso en la simulación" + LINE_SEPARATOR;
+		
 	}
 
 }

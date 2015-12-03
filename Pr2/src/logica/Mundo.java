@@ -5,9 +5,7 @@ package logica;
  * Clase encargada de comprobar si se ha realizado la accion y construir los textos que se mostraran.
  */
 public class Mundo {
-	
-	// Para que el salto de linea salga bien en windows y linux.
-	private static final String LINE_SEPARATOR = System.lineSeparator();
+
 	// Numero de celulas que introduce al iniciar el tablero
 	private final int NUM_CELULAS = 3;
 	// Numero de pasos que puede estar sin mover
@@ -96,13 +94,13 @@ public class Mundo {
 	 * @param c columna.
 	 * @return String
 	 */
-	public String eliminarCelula (int f,int c){
+	public String eliminarCelula (Casilla casilla){
 		
-		if (this.superficie.eliminarCelula(f,c))
-			return "Se ha eliminado la célula en la posición: ("+f+","+c+")";
+		if (this.superficie.eliminarCelula(casilla.getFila(),casilla.getColumna()))
+			return "Se ha eliminado la célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 		else
-			return "No hay ninguna célula en la posición: ("+f+","+c+")";
+			return "No hay ninguna célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 		
 		
 	}
@@ -135,6 +133,16 @@ public class Mundo {
 	public boolean sigueSimulacion(){
 		
 		return this.simulacionTerminada;
+		
+	}
+	
+	/**
+	 * 
+	 */
+	public String salir(){
+		
+		this.simulacionTerminada = true;
+		return "Fin de la simulacion.....";
 		
 	}
 	
