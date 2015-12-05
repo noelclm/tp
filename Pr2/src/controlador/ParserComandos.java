@@ -1,7 +1,7 @@
 package controlador;
 
 /**
- * Clase que comprueba los comandos
+ * Clase que comprueba los comandos.
  */
 public class ParserComandos {
 		
@@ -14,7 +14,7 @@ public class ParserComandos {
 	
 
 	/**
-	 * Recoge todas las ayudas de los comandos y lo devuelve
+	 * Recoge todas las ayudas de los comandos y lo devuelve.
 	 * @return String
 	 */
 	static public String AyudaComandos(){
@@ -30,8 +30,8 @@ public class ParserComandos {
 	}
 	
 	/**
-	 * Comprueba a que comando corresponde la cadena introducida por el usuario y devuelve el comando
-	 * @param cadenas Cadena introducida por el usuario
+	 * Comprueba a que comando corresponde la cadena introducida por el usuario y devuelve el comando.
+	 * @param cadenas Cadena introducida por el usuario.
 	 * @return Comando
 	 */
 	static public Comando parseaComando(String[ ] cadenas){

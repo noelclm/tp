@@ -3,7 +3,7 @@ package controlador;
 import logica.Mundo;
 
 /**
- * Comando Vaciar - Vacia el tablero
+ * Comando Vaciar - Vacia el tablero.
  */
 public class Vaciar extends Comando {
 	
@@ -11,7 +11,7 @@ public class Vaciar extends Comando {
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 		
 	/**
-	 * Constructor por defecto
+	 * Constructor por defecto.
 	 */
 	public Vaciar() {}
 	

@@ -4,7 +4,7 @@ import logica.Casilla;
 import logica.Mundo;
 
 /**
- * Comando CrearCelulaSimple - Crea una celula simple en el tablero
+ * Comando CrearCelulaSimple - Crea una celula simple en el tablero.
  */
 public class CrearCelulaSimple extends Comando {
 	
@@ -14,15 +14,15 @@ public class CrearCelulaSimple extends Comando {
 	private Casilla casilla;
 	
 	/**
-	 * Constructor por defecto
+	 * Constructor por defecto.
 	 */
 	public CrearCelulaSimple() {
 		this.casilla = null;
 	}
 	
 	/**
-	 * Constructor parametrizado
-	 * @param casilla Casilla del tablero donde se quiere crear la celula
+	 * Constructor parametrizado.
+	 * @param casilla Casilla del tablero donde se quiere crear la celula.
 	 */
 	public CrearCelulaSimple(Casilla casilla) {
 		this.casilla = casilla;

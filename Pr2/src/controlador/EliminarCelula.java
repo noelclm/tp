@@ -4,7 +4,7 @@ import logica.Casilla;
 import logica.Mundo;
 
 /**
- * Comando EliminarCelula - Elimina una celula del tablero
+ * Comando EliminarCelula - Elimina una celula del tablero.
  */
 public class EliminarCelula extends Comando {
 
@@ -14,15 +14,15 @@ public class EliminarCelula extends Comando {
 	private Casilla casilla;
 
 	/**
-	 * Constructor por defecto
+	 * Constructor por defecto.
 	 */
 	public EliminarCelula() {
 		this.casilla = null;
 	}
 	
 	/**
-	 * Constructor parametrizado
-	 * @param casilla Casilla del tablero donde esta la celula que se quiere borrar
+	 * Constructor parametrizado.
+	 * @param casilla Casilla del tablero donde esta la celula que se quiere borrar.
 	 */
 	public EliminarCelula(Casilla casilla) {
 		this.casilla = casilla;

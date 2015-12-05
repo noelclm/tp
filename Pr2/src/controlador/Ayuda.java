@@ -3,7 +3,7 @@ package controlador;
 import logica.Mundo;
 
 /**
- * Comando Ayuda - Muestra los posibles comandos
+ * Comando Ayuda - Muestra los posibles comandos.
  */
 public class Ayuda extends Comando {
 
@@ -11,7 +11,7 @@ public class Ayuda extends Comando {
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	
 	/**
-	 * Constructor por defecto
+	 * Constructor por defecto.
 	 */
 	public Ayuda(){}
 	

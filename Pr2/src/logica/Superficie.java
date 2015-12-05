@@ -14,8 +14,8 @@ public class Superficie {
 	
 	/**
 	 * Constructor.
-	 * @param nf Numero de filas de la superficie.
-	 * @param nc Numero de columnas de la superficie.
+	 * @param nf Número de filas de la superficie.
+	 * @param nc Número de columnas de la superficie.
 	 */
 	public Superficie(int nf, int nc){
 		
@@ -39,7 +39,7 @@ public class Superficie {
 	 * @param pasosReproduccion Numero de pasos para que la celula se reproduzca.
 	 * @return boolean
 	 */
-	public boolean iniciarSuperficie (int numCelulas, int maxPasosSinMover, int pasosReproduccion){
+	public boolean iniciarSuperficie (int numCelulas, int maxPasosSinMover, int pasosReproduccion, int maxComer){
 		
 		this.vaciar();
 		
@@ -49,11 +49,25 @@ public class Superficie {
 		if (numCelulas <= this.filas*this.columnas){
 			
 			while (numCelulasPuestas<numCelulas){
+				
 				int f = (int)(Math.random()*this.filas);
 				int c = (int)(Math.random()*this.columnas);
-				if(this.crearCelulaSimple(f, c, maxPasosSinMover, pasosReproduccion))
-					numCelulasPuestas++;	
+				int tipo = (int)(Math.random()*1);
+				
+				Casilla casilla = new Casilla(f,c);
+				
+				switch (tipo) {
+					case 1:
+						if(this.crearCelulaSimple(casilla, maxPasosSinMover, pasosReproduccion))
+							numCelulasPuestas++;
+						break;
+					case 2:
+						if(this.crearCelulaCompleja(casilla, maxPasosSinMover, pasosReproduccion, maxComer))
+							numCelulasPuestas++;
+						break;
+				}
 			}
+				
 			return true;
 			
 		}else
@@ -88,7 +102,8 @@ public class Superficie {
 					
 					if(this.superficie[f][c]!=null){
 						
-						this.superficie[f][c].ejecutaMovimiento(f, c, this); // TODO Devuelve la posicion
+						Casilla casillaInicial = new Casilla(f,c);
+						Casilla casillaFinal = this.superficie[f][c].ejecutaMovimiento(casillaInicial, this); 
 						
 						
 					} // if(this.superficie[f][c]!=null)
@@ -188,14 +203,16 @@ public class Superficie {
 	
 	/**
 	 * Crea una celula simple en una posicion de la superficie. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param f fila.
-	 * @param c columna.
+	 * @param casilla Posicion del tablero.
 	 * @param maxPasosSinMover Numero de pasos que puede estar sin mover.
 	 * @param pasosReproduccion Numero de pasos para que se reproduzca.
 	 * @return boolean
 	 */
-	public boolean crearCelulaSimple (int f, int c, int maxPasosSinMover, int pasosReproduccion){
-
+	public boolean crearCelulaSimple (Casilla casilla, int maxPasosSinMover, int pasosReproduccion){
+		
+		int f = casilla.getFila();
+		int c = casilla.getColumna();
+		
 		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
 			if (this.superficie[f][c]==null){
 				this.superficie[f][c] = new CelulaSimple(maxPasosSinMover,pasosReproduccion);	
@@ -209,15 +226,17 @@ public class Superficie {
 	
 	/**
 	 * Crea una celula compleja en una posicion de la superficie. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param f fila.
-	 * @param c columna.
+	 * @param casilla Posicion del tablero.
 	 * @param maxPasosSinMover Numero de pasos que puede estar sin mover.
 	 * @param pasosReproduccion Numero de pasos para que se reproduzca.
 	 * @param pasosReproduccion Numero de celulas que puede comer.
 	 * @return boolean
 	 */
-	public boolean crearCelulaCompleja (int f, int c, int maxPasosSinMover, int pasosReproduccion, int maxComer){
+	public boolean crearCelulaCompleja (Casilla casilla, int maxPasosSinMover, int pasosReproduccion, int maxComer){
 
+		int f = casilla.getFila();
+		int c = casilla.getColumna();
+		
 		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
 			if (this.superficie[f][c]==null){
 				this.superficie[f][c] = new CelulaCompleja(maxPasosSinMover,pasosReproduccion,maxComer);	
@@ -235,7 +254,10 @@ public class Superficie {
 	 * @param c columna.
 	 * @return boolean
 	 */
-	public boolean eliminarCelula (int f, int c){
+	public boolean eliminarCelula (Casilla casilla){
+		
+		int f = casilla.getFila();
+		int c = casilla.getColumna();
 		
 		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
 			if (this.superficie[f][c]!=null){

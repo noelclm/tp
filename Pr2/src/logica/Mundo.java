@@ -37,7 +37,7 @@ public class Mundo {
 	 */
 	public String iniciar (){
 		
-		if(this.superficie.iniciarSuperficie(NUM_CELULAS,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION))
+		if(this.superficie.iniciarSuperficie(NUM_CELULAS,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION,MAX_COMER))
 			return "Iniciando simulación";
 		
 		else
@@ -58,13 +58,12 @@ public class Mundo {
 	
 	/**
 	 * Llama a crear celula simple. Devuelve si ha podido a no en una cadena de caracteres. 
-	 * @param f fila.
-	 * @param c columna.
+	 * @param casilla Posicion del tablero.
 	 * @return String
 	 */
 	public String crearCelulaSimple(Casilla casilla){
 		
-		if(this.superficie.crearCelulaSimple(casilla.getFila(),casilla.getColumna(),MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
+		if(this.superficie.crearCelulaSimple(casilla ,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
 			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 		else
@@ -74,17 +73,16 @@ public class Mundo {
 	
 	/**
 	 * Llama a crear celula compleja. Devuelve si ha podido a no en una cadena de caracteres. 
-	 * @param f fila.
-	 * @param c columna.
+	 * @param casilla Posicion del tablero.
 	 * @return String
 	 */
-	public String crearCelulaCompleja(int f, int c){
+	public String crearCelulaCompleja(Casilla casilla){
 		
-		if(this.superficie.crearCelulaCompleja(f,c,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION,MAX_COMER)) 
-			return "Creamos nueva célula en la posición: ("+f+","+c+")";
+		if(this.superficie.crearCelulaCompleja(casilla ,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION,MAX_COMER)) 
+			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 		else
-			return "Imposible crear una nueva célula en ("+f+","+c+"), posición ocupada";
+			return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
 
 	}
 	
@@ -96,7 +94,7 @@ public class Mundo {
 	 */
 	public String eliminarCelula (Casilla casilla){
 		
-		if (this.superficie.eliminarCelula(casilla.getFila(),casilla.getColumna()))
+		if (this.superficie.eliminarCelula(casilla))
 			return "Se ha eliminado la célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 		else
@@ -117,17 +115,18 @@ public class Mundo {
 	}
 	
 	/**
-	 * Devuelve el tablero.
+	 * Cambia simulacionTerminada a true para que el juego termine y devuelve un texto.
 	 * @return String
 	 */
-	public String toString(){
+	public String salir(){
 		
-		return this.superficie.toString();
+		this.simulacionTerminada = true;
+		return "Fin de la simulacion.....";
 		
 	}
 	
 	/**
-	 * 
+	 * Comprueba si tiene que seguir la simulación y lo de vuelve false si continúa.
 	 * @return boolean
 	 */
 	public boolean sigueSimulacion(){
@@ -137,12 +136,12 @@ public class Mundo {
 	}
 	
 	/**
-	 * 
+	 * Devuelve el tablero.
+	 * @return String
 	 */
-	public String salir(){
+	public String toString(){
 		
-		this.simulacionTerminada = true;
-		return "Fin de la simulacion.....";
+		return this.superficie.toString();
 		
 	}
 	

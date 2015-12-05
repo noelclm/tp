@@ -1,19 +1,27 @@
 package logica;
 
+/**
+ * 
+ */
 public class CelulaSimple extends Celula{
 
+	/**
+	 * Constructor parametrizado.
+	 * @param pasosSinMover Pasos que puede estar sin moverse.
+	 * @param pasosReproduccion Pasos que tiene que dar para reproducirse.
+	 */
 	public CelulaSimple(int pasosSinMover, int pasosReproduccion) {
 		super(pasosSinMover, pasosReproduccion);
 		this.esComestible = true;
 	}
 
 	@Override
-	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie) {
+	public Casilla ejecutaMovimiento(Casilla casillaInicial, Superficie superficie) {
 		
 		int filas = superficie.getFilas();
 		int columnas = superficie.getColumnas();
 		
-		Posicion posicionInicial = new Posicion(f,c);
+		Posicion posicionInicial = new Posicion(casillaInicial.getFila(),casillaInicial.getColumna());
 		
 		int numPosiciones = posicionInicial.numPosiciones(filas-1, columnas-1);
 		Posicion[] posicionesAdyacentes = new Posicion[numPosiciones];
@@ -30,9 +38,9 @@ public class CelulaSimple extends Celula{
 			int f2 = posicionesVacias[numAleatorio].getX();
 			int c2 = posicionesVacias[numAleatorio].getY();
 			
-			Casilla casillaMovimiento = new Casilla(f2,c2);
+			Casilla casillaFinal = new Casilla(f2,c2);
 			
-			return casillaMovimiento;
+			return casillaFinal;
 				
 		}else{ // Si no se puede mover
 			

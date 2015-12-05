@@ -11,7 +11,18 @@ public abstract class Celula {
 	private final int PASOS_REPRODUCCION;
 	protected boolean esComestible;
 	
-	public abstract Casilla ejecutaMovimiento(int f, int c, Superficie superficie);
+	/**
+	 * 
+	 * @param casillaInicial Posicion del tablero.
+	 * @param superficie 
+	 * @return Casilla
+	 */
+	public abstract Casilla ejecutaMovimiento(Casilla casillaInicial, Superficie superficie);
+	
+	/**
+	 * Comprueva se la celula se puede comer.
+	 * @return boolean
+	 */
 	public abstract boolean esComestible();
 	
 	/**

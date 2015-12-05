@@ -2,7 +2,7 @@ package main;
 import controlador.Controlador;
 
 /**
- * PRACTICA 1 - Simulacion de un Mundo Celular Simple.
+ * PRACTICA 2 - Nuevas Células en Nuestro Mundo.
  * @author Noel Clemente Montero
  * @author Estefanía Ortega Ávila
  */

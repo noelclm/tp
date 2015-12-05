@@ -3,7 +3,7 @@ package controlador;
 import logica.Mundo;
 
 /**
- * Comando Salir - Termina la simulación
+ * Comando Salir - Termina la simulación.
  */
 public class Salir extends Comando {
 
@@ -11,7 +11,7 @@ public class Salir extends Comando {
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	
 	/**
-	 * Constructor por defecto
+	 * Constructor por defecto.
 	 */
 	public Salir() {}
 	

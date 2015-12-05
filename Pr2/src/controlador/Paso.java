@@ -3,7 +3,7 @@ package controlador;
 import logica.Mundo;
 
 /**
- * Comando Paso - Realiza un movimiento en todas las celulas del tablero
+ * Comando Paso - Realiza un movimiento en todas las celulas del tablero.
  */
 public class Paso extends Comando {
 	
@@ -11,7 +11,7 @@ public class Paso extends Comando {
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 
 	/**
-	 * Constructor por defecto
+	 * Constructor por defecto.
 	 */
 	public Paso() {}
 	

@@ -3,7 +3,7 @@ package controlador;
 import logica.Mundo;
 
 /**
- * Comando Iniciar - Inicia el tablero con varias celulas
+ * Comando Iniciar - Inicia el tablero con varias celulas.
  */
 public class Iniciar extends Comando{
 	
@@ -11,7 +11,7 @@ public class Iniciar extends Comando{
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	
 	/**
-	 * Constructor por defecto
+	 * Constructor por defecto.
 	 */
 	public Iniciar() {}
 	
