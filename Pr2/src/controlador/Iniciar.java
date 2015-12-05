@@ -2,13 +2,19 @@ package controlador;
 
 import logica.Mundo;
 
+/**
+ * Comando Iniciar - Inicia el tablero con varias celulas
+ */
 public class Iniciar extends Comando{
 	
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	
-	public Iniciar(){}
-
+	/**
+	 * Constructor por defecto
+	 */
+	public Iniciar() {}
+	
 	@Override
 	public String ejecuta(Mundo mundo) {
 		

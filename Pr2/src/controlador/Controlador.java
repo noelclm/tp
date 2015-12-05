@@ -16,7 +16,7 @@ public class Controlador {
 	Scanner s= new Scanner(System.in);
 	
 	/**
-	 * Pide el comando al usuario y ejecuta la accion.
+	 * Pide el comando al usuario y ejecuta la acción.
 	 */
 	public void simula(){
 	

@@ -3,6 +3,9 @@ package controlador;
 import logica.Casilla;
 import logica.Mundo;
 
+/**
+ * Comando CrearCelulaCompleja - Crea una celula compleja en el tablero
+ */
 public class CrearCelulaCompleja extends Comando {
 
 	// Para que el salto de linea salga bien en windows y linux.
@@ -10,10 +13,17 @@ public class CrearCelulaCompleja extends Comando {
 	
 	private Casilla casilla;
 
+	/**
+	 * Constructor por defecto
+	 */
 	public CrearCelulaCompleja() {
 		this.casilla = null;
 	}
 	
+	/**
+	 * Constructor parametrizado
+	 * @param casilla Casilla del tablero donde se quiere crear la celula
+	 */
 	public CrearCelulaCompleja(Casilla casilla) {
 		this.casilla = casilla;
 	}

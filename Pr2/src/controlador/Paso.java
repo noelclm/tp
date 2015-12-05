@@ -2,12 +2,18 @@ package controlador;
 
 import logica.Mundo;
 
+/**
+ * Comando Paso - Realiza un movimiento en todas las celulas del tablero
+ */
 public class Paso extends Comando {
 	
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
-	
-	public Paso(){}
+
+	/**
+	 * Constructor por defecto
+	 */
+	public Paso() {}
 	
 	@Override
 	public String ejecuta(Mundo mundo) {

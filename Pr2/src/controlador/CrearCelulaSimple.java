@@ -3,17 +3,27 @@ package controlador;
 import logica.Casilla;
 import logica.Mundo;
 
+/**
+ * Comando CrearCelulaSimple - Crea una celula simple en el tablero
+ */
 public class CrearCelulaSimple extends Comando {
 	
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	
 	private Casilla casilla;
-
+	
+	/**
+	 * Constructor por defecto
+	 */
 	public CrearCelulaSimple() {
 		this.casilla = null;
 	}
 	
+	/**
+	 * Constructor parametrizado
+	 * @param casilla Casilla del tablero donde se quiere crear la celula
+	 */
 	public CrearCelulaSimple(Casilla casilla) {
 		this.casilla = casilla;
 	}

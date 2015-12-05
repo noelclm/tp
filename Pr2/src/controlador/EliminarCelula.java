@@ -3,6 +3,9 @@ package controlador;
 import logica.Casilla;
 import logica.Mundo;
 
+/**
+ * Comando EliminarCelula - Elimina una celula del tablero
+ */
 public class EliminarCelula extends Comando {
 
 	// Para que el salto de linea salga bien en windows y linux.
@@ -10,10 +13,17 @@ public class EliminarCelula extends Comando {
 		
 	private Casilla casilla;
 
+	/**
+	 * Constructor por defecto
+	 */
 	public EliminarCelula() {
 		this.casilla = null;
 	}
 	
+	/**
+	 * Constructor parametrizado
+	 * @param casilla Casilla del tablero donde esta la celula que se quiere borrar
+	 */
 	public EliminarCelula(Casilla casilla) {
 		this.casilla = casilla;
 	}

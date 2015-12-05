@@ -2,11 +2,17 @@ package controlador;
 
 import logica.Mundo;
 
+/**
+ * Comando Ayuda - Muestra los posibles comandos
+ */
 public class Ayuda extends Comando {
 
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
-		
+	
+	/**
+	 * Constructor por defecto
+	 */
 	public Ayuda(){}
 	
 	@Override
