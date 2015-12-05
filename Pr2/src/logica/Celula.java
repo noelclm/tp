@@ -13,14 +13,14 @@ public abstract class Celula {
 	
 	/**
 	 * 
-	 * @param casillaInicial Posicion del tablero.
+	 * @param casillaInicial Posición del tablero.
 	 * @param superficie 
 	 * @return Casilla
 	 */
 	public abstract Casilla ejecutaMovimiento(Casilla casillaInicial, Superficie superficie);
 	
 	/**
-	 * Comprueva se la celula se puede comer.
+	 * Comprueva si la celula se puede comer.
 	 * @return boolean
 	 */
 	public abstract boolean esComestible();
