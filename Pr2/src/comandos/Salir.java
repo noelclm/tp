@@ -1,32 +1,32 @@
-package controlador;
+package comandos;
 
+import controlador.Comando;
 import logica.Mundo;
 
 /**
- * Comando Vaciar - Vacia el tablero.
+ * Comando Salir - Termina la simulación.
  */
-public class Vaciar extends Comando {
-	
+public class Salir extends Comando {
+
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
-		
+	
 	/**
 	 * Constructor por defecto.
 	 */
-	public Vaciar() {}
+	public Salir() {}
 	
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.vaciar() + LINE_SEPARATOR + mundo.toString();
-		
+		return mundo.salir();
 	}
 
 	@Override
 	public Comando parsea(String[] cadenaComando) {
 		
-		if (cadenaComando[0].equals("vaciar")){
-			Comando comando = new Vaciar();
+		if (cadenaComando[0].equals("salir")){
+			Comando comando = new Salir();
 			return comando;
 		}else{
 			return null;
@@ -37,7 +37,7 @@ public class Vaciar extends Comando {
 	@Override
 	public String textoAyuda() {
 		
-		return " VACIAR: crea un mundo vacío" + LINE_SEPARATOR;
+		return " SALIR: cierra la aplicación" + LINE_SEPARATOR;
 		
 	}
 

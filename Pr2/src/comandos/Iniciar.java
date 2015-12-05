@@ -1,31 +1,33 @@
-package controlador;
+package comandos;
 
+import controlador.Comando;
 import logica.Mundo;
 
 /**
- * Comando Salir - Termina la simulación.
+ * Comando Iniciar - Inicia el tablero con varias celulas.
  */
-public class Salir extends Comando {
-
+public class Iniciar extends Comando{
+	
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	
 	/**
 	 * Constructor por defecto.
 	 */
-	public Salir() {}
+	public Iniciar() {}
 	
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.salir();
+		return mundo.iniciar() + LINE_SEPARATOR + mundo.toString();
+		
 	}
 
 	@Override
 	public Comando parsea(String[] cadenaComando) {
 		
-		if (cadenaComando[0].equals("salir")){
-			Comando comando = new Salir();
+		if (cadenaComando[0].equals("iniciar")){
+			Comando comando = new Iniciar();
 			return comando;
 		}else{
 			return null;
@@ -36,7 +38,7 @@ public class Salir extends Comando {
 	@Override
 	public String textoAyuda() {
 		
-		return " SALIR: cierra la aplicación" + LINE_SEPARATOR;
+		return " INICIAR: inicia una nueva simulación" + LINE_SEPARATOR ;
 		
 	}
 

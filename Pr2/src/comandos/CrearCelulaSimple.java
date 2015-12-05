@@ -1,22 +1,23 @@
-package controlador;
+package comandos;
 
+import controlador.Comando;
 import logica.Casilla;
 import logica.Mundo;
 
 /**
- * Comando CrearCelulaCompleja - Crea una celula compleja en el tablero.
+ * Comando CrearCelulaSimple - Crea una celula simple en el tablero.
  */
-public class CrearCelulaCompleja extends Comando {
-
+public class CrearCelulaSimple extends Comando {
+	
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	
 	private Casilla casilla;
-
+	
 	/**
 	 * Constructor por defecto.
 	 */
-	public CrearCelulaCompleja() {
+	public CrearCelulaSimple() {
 		this.casilla = null;
 	}
 	
@@ -24,20 +25,20 @@ public class CrearCelulaCompleja extends Comando {
 	 * Constructor parametrizado.
 	 * @param casilla Casilla del tablero donde se quiere crear la celula.
 	 */
-	public CrearCelulaCompleja(Casilla casilla) {
+	public CrearCelulaSimple(Casilla casilla) {
 		this.casilla = casilla;
 	}
 
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.crearCelulaCompleja(this.casilla) + LINE_SEPARATOR + mundo.toString();
+		return mundo.crearCelulaSimple(this.casilla) + LINE_SEPARATOR + mundo.toString();
 		
 	}
 
 	@Override
 	public Comando parsea(String[] cadenaComando) {
-		if (cadenaComando[0].equals("crearcelulacompleja") || (cadenaComando[0].equals("crear") && cadenaComando[1].equals("celula") && cadenaComando[2].equals("compleja") )){
+		if (cadenaComando[0].equals("crearcelulasimple") || (cadenaComando[0].equals("crear") && cadenaComando[1].equals("celula") && cadenaComando[2].equals("simple") )){
 			
 			int num1 = 1;
 			int num2 = 2;
@@ -51,7 +52,7 @@ public class CrearCelulaCompleja extends Comando {
 			
 			Casilla casilla = new Casilla(f,c);
 			
-			Comando comando = new CrearCelulaCompleja(casilla);
+			Comando comando = new CrearCelulaSimple(casilla);
 				
 			return comando;
 			
@@ -62,8 +63,10 @@ public class CrearCelulaCompleja extends Comando {
 	@Override
 	public String textoAyuda() {
 		
-		return " CREARCELULACOMPLEJA F C: crea una nueva celula compleja en la posición (f,c) si es posible" + LINE_SEPARATOR ;
+		return " CREARCELULASIMPLE F C: crea una nueva celula simple en la posición (f,c) si es posible" + LINE_SEPARATOR ;
 		
 	}
+	
+
 
 }

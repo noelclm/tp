@@ -1,5 +1,14 @@
 package controlador;
 
+import comandos.Ayuda;
+import comandos.CrearCelulaCompleja;
+import comandos.CrearCelulaSimple;
+import comandos.EliminarCelula;
+import comandos.Iniciar;
+import comandos.Paso;
+import comandos.Salir;
+import comandos.Vaciar;
+
 /**
  * Clase que comprueba los comandos.
  */

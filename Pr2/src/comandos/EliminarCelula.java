@@ -1,5 +1,6 @@
-package controlador;
+package comandos;
 
+import controlador.Comando;
 import logica.Casilla;
 import logica.Mundo;
 

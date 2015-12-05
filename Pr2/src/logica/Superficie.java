@@ -52,20 +52,24 @@ public class Superficie {
 				
 				int f = (int)(Math.random()*this.filas);
 				int c = (int)(Math.random()*this.columnas);
-				int tipo = (int)(Math.random()*1);
+				int tipo = (int)(Math.random()*2);
 				
 				Casilla casilla = new Casilla(f,c);
 				
-				switch (tipo) {
-					case 1:
+				if (tipo==0){
+				//switch (tipo) {
+					//case 0:
 						if(this.crearCelulaSimple(casilla, maxPasosSinMover, pasosReproduccion))
 							numCelulasPuestas++;
-						break;
-					case 2:
+						//break;
+						}
+						
+				else
+					//case 1:
 						if(this.crearCelulaCompleja(casilla, maxPasosSinMover, pasosReproduccion, maxComer))
 							numCelulasPuestas++;
-						break;
-				}
+						//break;
+				
 			}
 				
 			return true;
@@ -104,6 +108,22 @@ public class Superficie {
 						
 						Casilla casillaInicial = new Casilla(f,c);
 						Casilla casillaFinal = this.superficie[f][c].ejecutaMovimiento(casillaInicial, this); 
+						
+						if (casillaFinal==null){
+							this.superficie[f][c].sumPasosSinMover();
+							if (this.superficie[f][c].limitePasosSinMover()){
+								this.eliminarCelula(casillaInicial);
+								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por inactividad"+LINE_SEPARATOR;
+							}else if (this.superficie[f][c].limitePasosDados()){
+								this.eliminarCelula(casillaInicial);
+								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por no poder reproducirse"+LINE_SEPARATOR;
+							}
+							else if (!this.superficie[f][c].esComestible){
+								if (this.superficie[f][c].muertePorComida()){}
+							}
+							else
+								str = str+"->La celula "+f+"-"+c+" no se ha podido mover"+LINE_SEPARATOR;
+						}
 						
 						
 					} // if(this.superficie[f][c]!=null)
@@ -300,9 +320,9 @@ public class Superficie {
 				}
 				else{
 					if(j==this.columnas-1)
-						str = str+"   -   ";
+						str = str+" - ";
 					else
-						str = str+"   -    ";
+						str = str+" -  ";
 				}
 					
 			}
@@ -327,6 +347,17 @@ public class Superficie {
 	 */
 	public int getColumnas(){
 		return this.columnas;
+	}
+	
+	public boolean comprobarCasilla(int f,int c){
+		
+		if (this.superficie[f][c]==null)
+			return false;
+		else
+			return true;
+	}
+	public boolean esComestible(int f, int c){
+		return this.superficie[f][c].esComestible();
 	}
 
 	/**

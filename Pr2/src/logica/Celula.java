@@ -20,7 +20,7 @@ public abstract class Celula {
 	public abstract Casilla ejecutaMovimiento(Casilla casillaInicial, Superficie superficie);
 	
 	/**
-	 * Comprueva si la celula se puede comer.
+	 * Comprueba si la celula se puede comer.
 	 * @return boolean
 	 */
 	public abstract boolean esComestible();
@@ -132,14 +132,5 @@ public abstract class Celula {
 		this.pasosDados = 0;
 	}
 	
-	/**
-	 * Devuelve un string para pintar la celula en el tablero.
-	 * @return String
-	 */
-	public String toString(){
-		
-		return "["+this.getPasosParaMorir()+"]-["+this.getQuedaParaReproducirse()+"]";
-		
-	}
 
 }

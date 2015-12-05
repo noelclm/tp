@@ -1,43 +1,47 @@
-package controlador;
+package comandos;
 
+import controlador.Comando;
+import controlador.ParserComandos;
 import logica.Mundo;
 
 /**
- * Comando Paso - Realiza un movimiento en todas las celulas del tablero.
+ * Comando Ayuda - Muestra los posibles comandos.
  */
-public class Paso extends Comando {
-	
+public class Ayuda extends Comando {
+
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
-
+	
 	/**
 	 * Constructor por defecto.
 	 */
-	public Paso() {}
+	public Ayuda(){}
 	
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.evoluciona() + LINE_SEPARATOR + mundo.toString();
+		return ParserComandos.AyudaComandos();
 		
 	}
 
 	@Override
 	public Comando parsea(String[] cadenaComando) {
 		
-		if (cadenaComando[0].equals("paso")){
-			Comando comando = new Paso();
+		if (cadenaComando[0].equals("ayuda")){
+			
+			Comando comando = new Ayuda();
+				
 			return comando;
-		}else{
-			return null;
 		}
+		
+		return null;
 		
 	}
 
 	@Override
 	public String textoAyuda() {
 		
-		return " PASO: realiza un paso en la simulación" + LINE_SEPARATOR;
+		return " AYUDA: muestra esta ayuda" + LINE_SEPARATOR;
 		
 	}
 

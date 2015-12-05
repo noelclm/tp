@@ -1,32 +1,33 @@
-package controlador;
+package comandos;
 
+import controlador.Comando;
 import logica.Mundo;
 
 /**
- * Comando Iniciar - Inicia el tablero con varias celulas.
+ * Comando Vaciar - Vacia el tablero.
  */
-public class Iniciar extends Comando{
+public class Vaciar extends Comando {
 	
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
-	
+		
 	/**
 	 * Constructor por defecto.
 	 */
-	public Iniciar() {}
+	public Vaciar() {}
 	
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.iniciar() + LINE_SEPARATOR + mundo.toString();
+		return mundo.vaciar() + LINE_SEPARATOR + mundo.toString();
 		
 	}
 
 	@Override
 	public Comando parsea(String[] cadenaComando) {
 		
-		if (cadenaComando[0].equals("iniciar")){
-			Comando comando = new Iniciar();
+		if (cadenaComando[0].equals("vaciar")){
+			Comando comando = new Vaciar();
 			return comando;
 		}else{
 			return null;
@@ -37,7 +38,7 @@ public class Iniciar extends Comando{
 	@Override
 	public String textoAyuda() {
 		
-		return " INICIAR: inicia una nueva simulación" + LINE_SEPARATOR ;
+		return " VACIAR: crea un mundo vacío" + LINE_SEPARATOR;
 		
 	}
 
