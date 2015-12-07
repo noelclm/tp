@@ -58,46 +58,6 @@ public abstract class Celula {
 	}
 	
 	/**
-	 * Devuelve el numero de pasos que ha dado la celula.
-	 * @return int
-	 */
-	public int getPasosDados(){
-		
-		return this.pasosDados;
-		
-	}
-	
-	/**
-	 * Devuelve el numero de pasos que lleva sin moverse la celula.
-	 * @return int
-	 */
-	public int getPasosSinMover(){
-		
-		return this.pasosSinMover;
-		
-	}
-	
-	/**
-	 * Devuelve el numero de pasos que queda para que la celula se reproduzca.
-	 * @return int
-	 */
-	public int getQuedaParaReproducirse(){
-		
-		return this.PASOS_REPRODUCCION-this.pasosDados;
-		
-	}
-	
-	/**
-	 * Devuelve el numero de pasos que queda para que la celula muera.
-	 * @return int
-	 */
-	public int getPasosParaMorir(){
-		
-		return this.MAX_PASOS_SIN_MOVER-this.pasosSinMover;
-		
-	}
-	
-	/**
 	 * Metodo que devuelve false si ha llegado al limite de pasos sin mover o true si no.
 	 * @return boolean
 	 */
@@ -129,7 +89,9 @@ public abstract class Celula {
 	 * Metodo que reinicia los pasos dados.
 	 */
 	public void reiniciaPasosReproduccion(){
+		
 		this.pasosDados = 0;
+		
 	}
 	
 
