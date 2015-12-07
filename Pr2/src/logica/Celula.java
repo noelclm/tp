@@ -26,6 +26,12 @@ public abstract class Celula {
 	public abstract boolean esComestible();
 	
 	/**
+	 * Comprueba el tipo de celula.
+	 * @return String
+	 */
+	public abstract String tipoCelula();
+	
+	/**
 	 * Constructor.
 	 * @param pasosSinMover Numero de pasos sin mover que tiene la celula.
 	 * @param pasosReproduccion Numero de pasos para que la celula se reproduzca.

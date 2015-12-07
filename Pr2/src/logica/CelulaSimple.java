@@ -1,7 +1,7 @@
 package logica;
 
 /**
- * 
+ * Clase que gestiona una celula simple que hereda de Celula.
  */
 public class CelulaSimple extends Celula{
 
@@ -11,8 +11,10 @@ public class CelulaSimple extends Celula{
 	 * @param pasosReproduccion Pasos que tiene que dar para reproducirse.
 	 */
 	public CelulaSimple(int pasosSinMover, int pasosReproduccion) {
+		
 		super(pasosSinMover, pasosReproduccion);
 		this.esComestible = true;
+		
 	}
 
 	@Override
@@ -52,7 +54,16 @@ public class CelulaSimple extends Celula{
 
 	@Override
 	public boolean esComestible() {
+		
 		return this.esComestible;
+		
+	}
+	
+	@Override
+	public String tipoCelula() {
+
+		return "simple";
+		
 	}
 	
 	/**

@@ -1,7 +1,7 @@
 package logica;
 
 /**
- * 
+ * Clase que gestiona una celula compleja que hereda de Celula.
  */
 public class CelulaCompleja extends Celula {
 	private int comidas;
@@ -14,46 +14,66 @@ public class CelulaCompleja extends Celula {
 	 * @param max_comer Maximas celulas que puede comer.
 	 */
 	public CelulaCompleja(int pasosSinMover, int pasosReproduccion, int max_comer) {
+		
 		super(pasosSinMover, pasosReproduccion);
 		this.esComestible = false;
 		this.MAX_COMER = max_comer;
 		this.comidas=0;
+		
 	}
 
 	@Override
 	public Casilla ejecutaMovimiento(Casilla casillaInicial, Superficie superficie) {
+		
 		int filas = superficie.getFilas();
 		int columnas = superficie.getColumnas();
 		Casilla casilla = null;
 		
-		int f=(int)(Math.random()*filas);
-		int c=(int)(Math.random()*columnas);
+		int f=(int)(Math.random()*filas-1);
+		int c=(int)(Math.random()*columnas-1);
 		
-		if(!superficie.comprobarCasilla(f, c)|| superficie.esComestible(f, c))
+		if(!superficie.comprobarCasilla(f, c) || superficie.esComestible(f, c))
 			casilla  = new Casilla(f,c);
 			
 		return casilla;
 			
 		
 	}
-	public void sumComidas(){
-		this.comidas++;
-	
-	}
-	public boolean muertePorComida(){
-		if(this.MAX_COMER==this.comidas){
-			return true;
-		}
-		else
-			return false;
-		
-		
-			
-	}
 
 	@Override
 	public boolean esComestible() {
+		
 		return this.esComestible;
+		
+	}
+	
+	@Override
+	public String tipoCelula() {
+
+		return "compleja";
+		
+	}
+	
+	/**
+	 * Suma uno a las celulas que se ha comido.
+	 */
+	public void sumComidas(){
+		
+		this.comidas++;
+	
+	}
+	
+	/**
+	 * Comprueba si ya no puede comer más.
+	 * @return boolean
+	 */
+	public boolean muertePorComida(){
+		
+		if(this.MAX_COMER == this.comidas)
+			return true;
+		else
+			return false;
+	
 	}
 	
 	/**

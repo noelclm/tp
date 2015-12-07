@@ -1,7 +1,7 @@
 package logica;
 
 /**
- * 
+ * Clase que guarda las cordeenadas de una casilla del tablero.
  */
 public class Casilla {
 
@@ -9,9 +9,9 @@ public class Casilla {
 	private int c;
 	
 	/**
-	 * 
-	 * @param f
-	 * @param c
+	 * Constructor parametrizado.
+	 * @param f Fila.
+	 * @param c Columna.
 	 */
 	public Casilla (int f, int c){
 		this.f = f;
@@ -19,16 +19,16 @@ public class Casilla {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Devuelve la fila.
+	 * @return int
 	 */
 	public int getFila(){
 		return this.f;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Devuelve la columna.
+	 * @return int
 	 */
 	public int getColumna(){
 		return this.c;

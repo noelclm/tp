@@ -100,9 +100,12 @@ public class Superficie {
 		
 		
 		for (int f=0; f<this.filas; f++){
+			
 			for (int c=0; c<this.columnas; c++){
 				
 				if(posicionesPasadas[f][c]==false){
+					
+					posicionesPasadas[f][c] = true;
 					
 					if(this.superficie[f][c]!=null){
 						
@@ -134,36 +137,43 @@ public class Superficie {
 							int f2 = casillaFinal.getFila();
 							int c2 = casillaFinal.getColumna();
 							
-							if (this.superficie[f2][c2] != null){
-								// TODO Se va a comer una celula
-								//if (this.superficie[f][c].muertePorComida()){}
-							}
+							if (this.superficie[f][c].tipoCelula() == "compleja"){
+								
+								if (this.superficie[f2][c2] != null){
+									str = str+"->Celula Compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
+									// TODO Se va a comer una celula
+									//if (this.superficie[f][c].muertePorComida()){}
+								}
+								else
+									str = str+"->Celula Compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --NO COME--"+LINE_SEPARATOR;
+								
+							}else if (this.superficie[f][c].tipoCelula() == "simple")
+								str = str+"->Celula simple en ("+f+","+c+") se mueve a ("+f2+","+c2+")"+LINE_SEPARATOR;
+								
 							
 							this.superficie[f2][c2] = this.superficie[f][c];
 							this.eliminarCelula(casillaInicial);
 							
-							str = str+"->Movimiento de ("+f+","+c+") a ("+f2+","+c2+")"+LINE_SEPARATOR;
+							
 							if (this.superficie[f2][c2].limitePasosDados()){
 								
 								this.superficie[f2][c2].reiniciaPasosReproduccion();
 								// TODO Crear celula nueva del tipo padre
 								str = str+"->Nace nueva celula en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
 								
-							}else{
+							}else
 								this.superficie[f2][c2].sumPasosDados();
-							}
 							
 							posicionesPasadas[f2][c2] = true;
 							
 						} // else
 						
-						
 					} // if(this.superficie[f][c]!=null)
 					
-					posicionesPasadas[f][c] = true;
-					
-				} // if(posicionesPasadas[f][c] == false)						
+				} // if(posicionesPasadas[f][c] == false)	
+				
 			} // for (int c=0; c<this.columnas; c++)
+			
 		} // for (int f=0; f<this.filas; f++)
 	
 		return str;
@@ -268,12 +278,11 @@ public class Superficie {
 		return this.columnas;
 	}
 	
-	// TODO Pasar metodo a CelulaCompleja
 	/**
-	 * 
-	 * @param f
-	 * @param c
-	 * @return
+	 * Comprueba que la casilla esta vacia
+	 * @param f Fila.
+	 * @param c Columna.
+	 * @return boolean
 	 */
 	public boolean comprobarCasilla(int f,int c){
 		
@@ -281,21 +290,21 @@ public class Superficie {
 			return false;
 		else
 			return true;
+		
 	}
 	
-	// TODO Pasar metodo a CelulaCompleja
 	/**
-	 * 
-	 * @param f
-	 * @param c
-	 * @return
+	 * Devuelve si la celua se puede comer.
+	 * @param f Fila.
+	 * @param c Columna.
+	 * @return boolean
 	 */
 	public boolean esComestible(int f, int c){
+		
 		return this.superficie[f][c].esComestible();
+		
 	}
 
-	
-	// TODO Pasar metodo a CelulaSimple
 	/**
 	 * Saca la cantidad de posiciones vacias que tiene una posicion concreta.
 	 * @return int
@@ -315,7 +324,6 @@ public class Superficie {
 		
 	}
 	
-	// TODO Pasar metodo a CelulaSimple
 	/**
 	 * Saca las posiciones vacias que tiene una posicion concreta.
 	 * @return Posicion[]
@@ -344,20 +352,14 @@ public class Superficie {
 	public String toString(){
 		
 		String str = "";
+		
 		for (int i=0; i<this.filas; i++){
 			for (int j=0; j<this.columnas; j++){
-				if(this.superficie[i][j]!= null){
-					if(j==this.columnas-1)
-						str = str+this.superficie[i][j].toString();
-					else
-						str = str+this.superficie[i][j].toString()+" ";
-				}
-				else{
-					if(j==this.columnas-1)
-						str = str+" - ";
-					else
-						str = str+" -  ";
-				}
+				
+				if(this.superficie[i][j]!= null)
+					str = str+this.superficie[i][j].toString();
+				else
+					str = str+" - ";
 					
 			}
 			str = str+LINE_SEPARATOR;
@@ -368,4 +370,3 @@ public class Superficie {
 	}
 	
 }
-
