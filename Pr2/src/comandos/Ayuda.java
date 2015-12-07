@@ -27,7 +27,7 @@ public class Ayuda extends Comando {
 	@Override
 	public Comando parsea(String[] cadenaComando) {
 		
-		if (cadenaComando[0].equals("ayuda")){
+		if (cadenaComando[0].equals("ayuda") && cadenaComando.length == 1){
 			
 			Comando comando = new Ayuda();
 				

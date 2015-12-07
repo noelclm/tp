@@ -38,17 +38,11 @@ public class CrearCelulaSimple extends Comando {
 
 	@Override
 	public Comando parsea(String[] cadenaComando) {
-		if (cadenaComando[0].equals("crearcelulasimple") || (cadenaComando[0].equals("crear") && cadenaComando[1].equals("celula") && cadenaComando[2].equals("simple") )){
+		
+		if (cadenaComando[0].equals("crearcelulasimple") && cadenaComando.length == 3){
 			
-			int num1 = 1;
-			int num2 = 2;
-			if(cadenaComando[0].equals("crear")){
-				num1 = 3;
-				num2 = 4;
-			}
-			
-			int f = Integer.parseInt(cadenaComando[num1]); 
-			int c = Integer.parseInt(cadenaComando[num2]);
+			int f = Integer.parseInt(cadenaComando[1]); 
+			int c = Integer.parseInt(cadenaComando[2]);
 			
 			Casilla casilla = new Casilla(f,c);
 			
@@ -57,7 +51,9 @@ public class CrearCelulaSimple extends Comando {
 			return comando;
 			
 		}
+		
 		return null;
+		
 	}
 
 	@Override

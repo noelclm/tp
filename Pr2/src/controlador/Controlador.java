@@ -25,10 +25,10 @@ public class Controlador {
 			System.out.println("Introduce un comando:");
 			
 			//Lee una linea por teclado
-			String linea = s.nextLine().toLowerCase();
+			String linea = s.nextLine().toLowerCase().trim();
 			//Separa la linea en un array identificando los espacios
 			String[] palabras = linea.split(" ");
-			
+
 			try{
 				
 				Comando comando = ParserComandos.parseaComando(palabras);

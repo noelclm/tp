@@ -55,6 +55,7 @@ public class CelulaCompleja extends Celula {
 	public boolean esComestible() {
 		return this.esComestible;
 	}
+	
 	/**
 	 * Devuelve un string para pintar la celula compleja en el tablero.
 	 * @return String

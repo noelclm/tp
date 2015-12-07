@@ -26,7 +26,7 @@ public class Vaciar extends Comando {
 	@Override
 	public Comando parsea(String[] cadenaComando) {
 		
-		if (cadenaComando[0].equals("vaciar")){
+		if (cadenaComando[0].equals("vaciar") && cadenaComando.length == 1){
 			Comando comando = new Vaciar();
 			return comando;
 		}else{

@@ -26,7 +26,7 @@ public class Paso extends Comando {
 	@Override
 	public Comando parsea(String[] cadenaComando) {
 		
-		if (cadenaComando[0].equals("paso")){
+		if (cadenaComando[0].equals("paso") && cadenaComando.length == 1){
 			Comando comando = new Paso();
 			return comando;
 		}else{

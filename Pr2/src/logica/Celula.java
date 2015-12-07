@@ -12,7 +12,7 @@ public abstract class Celula {
 	protected boolean esComestible;
 	
 	/**
-	 * 
+	 * Mira donde se puede mover la celula y devuelve la casilla.
 	 * @param casillaInicial Posición del tablero.
 	 * @param superficie 
 	 * @return Casilla

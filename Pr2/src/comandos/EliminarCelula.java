@@ -38,33 +38,22 @@ public class EliminarCelula extends Comando {
 
 	@Override
 	public Comando parsea(String[] cadenaComando) {
-		
-		if (cadenaComando[0].equals("eliminarcelula") || (cadenaComando[0].equals("eliminar") && cadenaComando[1].equals("celula"))){
-			
-			int num1 = 1;
-			int num2 = 2;
-			if(cadenaComando[0].equals("eliminar")){
-				num1 = 2;
-				num2 = 3;
-			}
-			
-			if(cadenaComando.length <= num2)
-				System.out.println("No ha introducido las coordenadas.");
-			
-			else{
-				
-				int f = Integer.parseInt(cadenaComando[num1]); 
-				int c = Integer.parseInt(cadenaComando[num2]);
-				
-				Casilla casilla = new Casilla(f,c);
 
-				Comando comando = new EliminarCelula(casilla);
-				
-				return comando;
-				
-			}
+		if (cadenaComando[0].equals("eliminarcelula") && cadenaComando.length == 3){
+
+			int f = Integer.parseInt(cadenaComando[1]); 
+			int c = Integer.parseInt(cadenaComando[2]);
+			
+			Casilla casilla = new Casilla(f,c);
+
+			Comando comando = new EliminarCelula(casilla);
+			
+			return comando;
+
 		}
+		
 		return null;
+		
 	}
 
 	@Override

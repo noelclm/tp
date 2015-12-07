@@ -26,7 +26,7 @@ public class Iniciar extends Comando{
 	@Override
 	public Comando parsea(String[] cadenaComando) {
 		
-		if (cadenaComando[0].equals("iniciar")){
+		if (cadenaComando[0].equals("iniciar") && cadenaComando.length == 1){
 			Comando comando = new Iniciar();
 			return comando;
 		}else{
