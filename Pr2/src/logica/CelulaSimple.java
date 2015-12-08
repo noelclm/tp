@@ -59,13 +59,6 @@ public class CelulaSimple extends Celula{
 		
 	}
 	
-	@Override
-	public String tipoCelula() {
-
-		return "simple";
-		
-	}
-	
 	/**
 	 * Devuelve un string para pintar la celula simple en el tablero.
 	 * @return String
@@ -74,6 +67,13 @@ public class CelulaSimple extends Celula{
 		
 		return " X ";
 		
+	}
+
+	@Override
+	public boolean muertePorComida() {
+		
+		return false;
+	
 	}
 
 }

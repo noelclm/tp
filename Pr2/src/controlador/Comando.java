@@ -9,7 +9,7 @@ public abstract class Comando {
 	
 	/**
 	 * Ejecuta la acción y devuelve un texto con lo que ha hecho.
-	 * @param mundo
+	 * @param mundo Donde se realiza la acion.
 	 * @return String
 	 */
 	public abstract String ejecuta(Mundo mundo);

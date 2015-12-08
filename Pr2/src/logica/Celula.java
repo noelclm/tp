@@ -14,7 +14,7 @@ public abstract class Celula {
 	/**
 	 * Mira donde se puede mover la celula y devuelve la casilla.
 	 * @param casillaInicial Posición del tablero.
-	 * @param superficie 
+	 * @param superficie Tablero de juego.
 	 * @return Casilla
 	 */
 	public abstract Casilla ejecutaMovimiento(Casilla casillaInicial, Superficie superficie);
@@ -26,10 +26,10 @@ public abstract class Celula {
 	public abstract boolean esComestible();
 	
 	/**
-	 * Comprueba el tipo de celula.
-	 * @return String
+	 * Devuelve si muere por comer el maximo de celulas permitidas.
+	 * @return boolean
 	 */
-	public abstract String tipoCelula();
+	public abstract boolean muertePorComida();
 	
 	/**
 	 * Constructor.
@@ -98,7 +98,6 @@ public abstract class Celula {
 		
 		this.pasosDados = 0;
 		
-	}
-	
+	}	
 
 }

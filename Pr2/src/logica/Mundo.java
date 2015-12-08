@@ -51,7 +51,7 @@ public class Mundo {
 	 */
 	public String evoluciona(){
 		
-		return this.superficie.evoluciona(MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION);
+		return this.superficie.evoluciona(MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION,MAX_COMER);
 			
 	}
 	
@@ -88,8 +88,7 @@ public class Mundo {
 	
 	/**
 	 * Elimina una celula. Devuelve si ha podido a no en una cadena de caracteres.
-	 * @param f fila.
-	 * @param c columna.
+	 * @param casilla Posicion del tablero.
 	 * @return String
 	 */
 	public String eliminarCelula (Casilla casilla){

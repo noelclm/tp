@@ -37,6 +37,7 @@ public class Superficie {
 	 * @param numCelulas Numero de celulas con el que se inicializa la superficie.
 	 * @param maxPasosSinMover Numero de pasos sin mover que tiene la celula.
 	 * @param pasosReproduccion Numero de pasos para que la celula se reproduzca.
+	 * @param maxComer Numero de veces que puede comer una celula compleja.
 	 * @return boolean
 	 */
 	public boolean iniciarSuperficie (int numCelulas, int maxPasosSinMover, int pasosReproduccion, int maxComer){
@@ -82,9 +83,10 @@ public class Superficie {
 	 * Reproduce los movimientos de las celulas sobre el tablero y devuelve en un String los pasos realizados.
 	 * @param maxPasosSinMover Numero de pasos que puede estar sin mover.
 	 * @param pasosReproduccion Numero de pasos para que se reproduzca.
+	 * @param maxComer Numero de veces que puede comer una celula compleja.
 	 * @return String
 	 */
-	public String evoluciona(int maxPasosSinMover, int pasosReproduccion){
+	public String evoluciona(int maxPasosSinMover, int pasosReproduccion, int maxComer){
 		
 		String str = "";
 		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
@@ -137,32 +139,36 @@ public class Superficie {
 							int f2 = casillaFinal.getFila();
 							int c2 = casillaFinal.getColumna();
 							
-							if (this.superficie[f][c].tipoCelula() == "compleja"){
+							if ( this.superficie[f][c] instanceof CelulaCompleja){
 								
-								if (this.superficie[f2][c2] != null){
+								if (this.superficie[f2][c2] != null)
 									str = str+"->Celula Compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
-									// TODO Se va a comer una celula
-									//if (this.superficie[f][c].muertePorComida()){}
-								}
 								else
 									str = str+"->Celula Compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --NO COME--"+LINE_SEPARATOR;
-								
-							}else if (this.superficie[f][c].tipoCelula() == "simple")
+							
+							}else
 								str = str+"->Celula simple en ("+f+","+c+") se mueve a ("+f2+","+c2+")"+LINE_SEPARATOR;
 								
-							
 							this.superficie[f2][c2] = this.superficie[f][c];
 							this.eliminarCelula(casillaInicial);
 							
-							
-							if (this.superficie[f2][c2].limitePasosDados()){
-								
-								this.superficie[f2][c2].reiniciaPasosReproduccion();
-								// TODO Crear celula nueva del tipo padre
-								str = str+"->Nace nueva celula en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
-								
-							}else
-								this.superficie[f2][c2].sumPasosDados();
+							if (this.superficie[f2][c2].muertePorComida()){
+								str = str+"->Explota la celula compleja en ("+f2+","+c2+")"+LINE_SEPARATOR;
+								this.eliminarCelula(casillaFinal);
+							}else{
+								if (this.superficie[f2][c2].limitePasosDados()){
+									
+									this.superficie[f2][c2].reiniciaPasosReproduccion();
+									if ( this.superficie[f2][c2] instanceof CelulaCompleja)
+										this.crearCelulaCompleja(casillaInicial, maxPasosSinMover, pasosReproduccion, maxComer);
+									else
+										this.crearCelulaSimple(casillaInicial, maxPasosSinMover, pasosReproduccion);
+									
+									str = str+"->Nace nueva celula en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
+									
+								}else
+									this.superficie[f2][c2].sumPasosDados();
+							}
 							
 							posicionesPasadas[f2][c2] = true;
 							
@@ -208,7 +214,7 @@ public class Superficie {
 	 * @param casilla Posicion del tablero.
 	 * @param maxPasosSinMover Numero de pasos que puede estar sin mover.
 	 * @param pasosReproduccion Numero de pasos para que se reproduzca.
-	 * @param pasosReproduccion Numero de celulas que puede comer.
+	 * @param maxComer Numero de veces que puede comer una celula compleja.
 	 * @return boolean
 	 */
 	public boolean crearCelulaCompleja (Casilla casilla, int maxPasosSinMover, int pasosReproduccion, int maxComer){
@@ -229,8 +235,7 @@ public class Superficie {
 	
 	/**
 	 * Elimina una celula del tablero. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param f fila.
-	 * @param c columna.
+	 * @param casilla Posicion del tablero.
 	 * @return boolean
 	 */
 	public boolean eliminarCelula (Casilla casilla){
@@ -307,6 +312,8 @@ public class Superficie {
 
 	/**
 	 * Saca la cantidad de posiciones vacias que tiene una posicion concreta.
+	 * @param posicionesAdyacentes Array de posiciones adyacentes.
+	 * @param numPosiciones Numero de posiciones adyancentes
 	 * @return int
 	 */
 	public int cantidadPosicionesAdyacentesVacias(Posicion[] posicionesAdyacentes, int numPosiciones){
@@ -326,6 +333,9 @@ public class Superficie {
 	
 	/**
 	 * Saca las posiciones vacias que tiene una posicion concreta.
+	 * @param posicionesAdyacentes Array de posiciones adyacentes.
+	 * @param numPosiciones Numero de posiciones adyancentes.
+	 * @param numPosicionesVacias Numero de posiciones adyancentes vacias.
 	 * @return Posicion[]
 	 */
 	public Posicion[] posicionesAdyacentesVacias(Posicion[] posicionesAdyacentes, int numPosiciones, int numPosicionesVacias){

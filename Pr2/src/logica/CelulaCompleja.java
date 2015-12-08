@@ -32,11 +32,13 @@ public class CelulaCompleja extends Celula {
 		int f=(int)(Math.random()*filas-1);
 		int c=(int)(Math.random()*columnas-1);
 		
-		if(!superficie.comprobarCasilla(f, c) || superficie.esComestible(f, c))
+		if(!superficie.comprobarCasilla(f, c) || superficie.esComestible(f, c)){
+			if(superficie.comprobarCasilla(f, c) && superficie.esComestible(f, c))
+				this.comidas++;
 			casilla  = new Casilla(f,c);
+		}
 			
-		return casilla;
-			
+		return casilla;	
 		
 	}
 
@@ -48,25 +50,6 @@ public class CelulaCompleja extends Celula {
 	}
 	
 	@Override
-	public String tipoCelula() {
-
-		return "compleja";
-		
-	}
-	
-	/**
-	 * Suma uno a las celulas que se ha comido.
-	 */
-	public void sumComidas(){
-		
-		this.comidas++;
-	
-	}
-	
-	/**
-	 * Comprueba si ya no puede comer más.
-	 * @return boolean
-	 */
 	public boolean muertePorComida(){
 		
 		if(this.MAX_COMER == this.comidas)
