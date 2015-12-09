@@ -114,18 +114,24 @@ public class Superficie {
 						
 						Casilla casillaInicial = new Casilla(f,c);
 						Casilla casillaFinal = this.superficie[f][c].ejecutaMovimiento(casillaInicial, this); 
-						
-						str = str + this.superficie[f][c].pintaMovimientos();
-						int f2 = casillaFinal.getFila();
-						int c2 = casillaFinal.getColumna();
-						posicionesPasadas[f2][c2] = true;
 
 						if (casillaFinal != casillaInicial){
 							if(casillaFinal != null){
-								// Movemos la celula
-								this.superficie[f2][c2] = this.superficie[f][c];
+								
+								int f2 = casillaFinal.getFila();
+								int c2 = casillaFinal.getColumna();
+								str = str + this.superficie[f2][c2].pintaMovimientos();
+								posicionesPasadas[f2][c2] = true;
+								
+							}else{
+								
+								str = str + this.superficie[f][c].pintaMovimientos();
+								this.eliminarCelula(casillaInicial);
+								
 							}
-							this.eliminarCelula(casillaInicial);
+							
+						}else{
+							str = str + this.superficie[f][c].pintaMovimientos();
 						}
 							
 						
@@ -249,6 +255,18 @@ public class Superficie {
 			return false;
 		else
 			return true;
+		
+	}
+	
+	public void moverCelula(Casilla casillaInicial, Casilla casillaFinal){
+		
+		int f = casillaInicial.getFila();
+		int c = casillaInicial.getColumna();
+		int f2 = casillaFinal.getFila();
+		int c2 = casillaFinal.getColumna();
+		
+		this.superficie[f2][c2] = this.superficie[f][c];
+		this.superficie[f][c] = null;
 		
 	}
 	

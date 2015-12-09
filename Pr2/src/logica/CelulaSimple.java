@@ -49,11 +49,12 @@ public class CelulaSimple extends Celula{
 			
 			casillaFinal = new Casilla(f2,c2);
 			this.texto = this.texto + "->Celula simple en ("+f+","+c+") se mueve a ("+f2+","+c2+")"+LINE_SEPARATOR;
+			superficie.moverCelula(casillaInicial, casillaFinal);
 			
 			if (this.reproducirse()){
 				this.reiniciaPasosReproduccion();
 				superficie.crearCelulaSimple(casillaInicial, this.MAX_PASOS_SIN_MOVER, this.PASOS_REPRODUCCION);
-				this.texto = this.texto + "->Nace una nueva celula simple en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
+				this.texto = this.texto + "->Nace una nueva celula simple en ("+f+","+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
 			}else
 				this.sumPasosDados();
 			
@@ -63,14 +64,14 @@ public class CelulaSimple extends Celula{
 			
 			// Comprobamos que si ha llegado al limite de pasos sin moverse
 			if (this.muertePorInactividad())
-				this.texto = this.texto + "->Muere la celula simple de la casilla "+f+"-"+c+" por inactividad"+LINE_SEPARATOR;
+				this.texto = this.texto + "->Muere la celula simple de la casilla en ("+f+","+c+")  por inactividad"+LINE_SEPARATOR;
 				
 			// Comprobamos si ha llegado al limite de pasos que tiene que dar para reproducirse
 			else if (this.reproducirse())
-				this.texto = this.texto + "->Muere la celula simple de la casilla "+f+"-"+c+" por no poder reproducirse"+LINE_SEPARATOR;
+				this.texto = this.texto + "->Muere la celula simple de la casilla en ("+f+","+c+")  por no poder reproducirse"+LINE_SEPARATOR;
 			
 			else{ 
-				this.texto = this.texto + "->La celula simple "+f+"-"+c+" no se ha podido mover"+LINE_SEPARATOR;
+				this.texto = this.texto + "->La celula simple en ("+f+","+c+") no se ha podido mover"+LINE_SEPARATOR;
 				casillaFinal = casillaInicial;
 			}
 

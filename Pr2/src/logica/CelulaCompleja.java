@@ -39,13 +39,16 @@ public class CelulaCompleja extends Celula {
 		
 		if(!superficie.comprobarCasilla(f2, c2) || superficie.esComestible(f2, c2)){
 			
+			casillaFinal = new Casilla(f2,c2);
+			superficie.moverCelula(casillaInicial, casillaFinal);
+			
 			if(superficie.comprobarCasilla(f2, c2) && superficie.esComestible(f2, c2)){
 				
 				this.comidas++;
 				
 				if (this.MAX_COMER == this.comidas){
 					this.texto = this.texto + "->Explota la celula compleja en ("+f2+","+c2+")"+LINE_SEPARATOR;
-					superficie.eliminarCelula(new Casilla(f2,c2));
+					superficie.eliminarCelula(casillaFinal);
 				}else{
 					this.texto = this.texto + "->Celula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
 					casillaFinal = new Casilla(f2,c2);
@@ -60,7 +63,7 @@ public class CelulaCompleja extends Celula {
 			if (this.reproducirse() && this.MAX_COMER != this.comidas){
 				this.reiniciaPasosReproduccion();
 				superficie.crearCelulaCompleja(casillaInicial, this.MAX_PASOS_SIN_MOVER, this.PASOS_REPRODUCCION, this.MAX_COMER);
-				this.texto = this.texto + "->Nace una nueva celula compleja en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
+				this.texto = this.texto + "->Nace una nueva celula compleja en ("+f+","+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
 			}else
 				this.sumPasosDados();
 
@@ -68,14 +71,14 @@ public class CelulaCompleja extends Celula {
 			
 			// Comprobamos que si ha llegado al limite de pasos sin moverse
 			if (this.muertePorInactividad())
-				this.texto = this.texto + "->Muere la celula compleja de la casilla "+f+"-"+c+" por inactividad"+LINE_SEPARATOR;
+				this.texto = this.texto + "->Muere la celula compleja de la casilla en ("+f+","+c+") por inactividad"+LINE_SEPARATOR;
 				
 			// Comprobamos si ha llegado al limite de pasos que tiene que dar para reproducirse
 			else if (this.reproducirse())
-				this.texto = this.texto + "->Muere la celula compleja de la casilla "+f+"-"+c+" por no poder reproducirse"+LINE_SEPARATOR;
+				this.texto = this.texto + "->Muere la celula compleja de la casilla en ("+f+","+c+") por no poder reproducirse"+LINE_SEPARATOR;
 			
 			else{ 
-				this.texto = this.texto + "->La celula compleja "+f+"-"+c+" no se ha podido mover"+LINE_SEPARATOR;
+				this.texto = this.texto + "->La celula compleja en ("+f+","+c+") no se ha podido mover"+LINE_SEPARATOR;
 				casillaFinal = casillaInicial;
 			}
 
