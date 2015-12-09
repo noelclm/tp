@@ -1,6 +1,5 @@
 package logica;
 
-
 /**
  * Clase encargada de comprobar si se ha realizado la accion y construir los textos que se mostraran.
  */
@@ -98,8 +97,7 @@ public class Mundo {
 			
 		else
 			return "No hay ninguna célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
-		
-		
+			
 	}
 	
 	/**
