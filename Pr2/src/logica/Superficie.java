@@ -96,11 +96,9 @@ public class Superficie {
 		// Inicia un tablero auxiliar para saber porque posiciones ha pasado ya
 		for (int f=0; f<this.filas; f++){
 			for (int c=0; c<this.columnas; c++){
-				
 				posicionesPasadas[f][c] = false;
-				
-			} // for (int c=0; c<this.columnas; c++)
-		} // for (int f=0; f<this.filas; f++)
+			} 
+		} 
 		
 		
 		for (int f=0; f<this.filas; f++){
@@ -117,24 +115,17 @@ public class Superficie {
 
 						if (casillaFinal != casillaInicial){
 							if(casillaFinal != null){
-								
 								int f2 = casillaFinal.getFila();
 								int c2 = casillaFinal.getColumna();
 								str = str + this.superficie[f2][c2].pintaMovimientos();
 								posicionesPasadas[f2][c2] = true;
-								
 							}else{
-								
 								str = str + this.superficie[f][c].pintaMovimientos();
 								this.eliminarCelula(casillaInicial);
-								
 							}
-							
-						}else{
+						}else
 							str = str + this.superficie[f][c].pintaMovimientos();
-						}
-							
-						
+
 					} // if(this.superficie[f][c]!=null)
 					
 				} // if(posicionesPasadas[f][c] == false)	
