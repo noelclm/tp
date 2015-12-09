@@ -122,7 +122,8 @@ public class Superficie {
 
 						if (casillaFinal != casillaInicial){
 							if(casillaFinal != null){
-								this.moverCelula(casillaInicial, casillaFinal);
+								// Movemos la celula
+								this.superficie[f2][c2] = this.superficie[f][c];
 							}
 							this.eliminarCelula(casillaInicial);
 						}
@@ -281,23 +282,6 @@ public class Superficie {
 		}
 		
 		return num;
-		
-	}
-	
-	/**
-	 * 
-	 * @param casillaInicial
-	 * @param casillaFinal
-	 */
-	public void moverCelula(Casilla casillaInicial, Casilla casillaFinal){
-		
-		int f = casillaInicial.getFila();
-		int c = casillaInicial.getColumna();
-		int f2 = casillaFinal.getFila();
-		int c2 = casillaFinal.getColumna();
-			
-		// Movemos la celula
-		this.superficie[f2][c2] = this.superficie[f][c];
 		
 	}
 	
