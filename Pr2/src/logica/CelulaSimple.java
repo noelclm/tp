@@ -27,6 +27,7 @@ public class CelulaSimple extends Celula{
 		int columnas = superficie.getColumnas();
 		int f = casillaInicial.getFila();
 		int c = casillaInicial.getColumna();
+		this.texto = "";
 		
 		Posicion posicionInicial = new Posicion(f,c);
 		
@@ -47,7 +48,7 @@ public class CelulaSimple extends Celula{
 			
 			Casilla casillaFinal = new Casilla(f2,c2);
 			
-			this.texto = this.texto + "->Celula simple en ("+f+","+c+") se mueve a ("+f2+","+c2+")"+LINE_SEPARATOR;
+			this.texto = this.texto + "->Celula Simple en ("+f+","+c+") se mueve a ("+f2+","+c2+")"+LINE_SEPARATOR;
 			
 			if (this.reproducirse()){
 				this.reiniciaPasosReproduccion();

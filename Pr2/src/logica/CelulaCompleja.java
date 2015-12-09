@@ -30,11 +30,11 @@ public class CelulaCompleja extends Celula {
 		
 		int filas = superficie.getFilas();
 		int columnas = superficie.getColumnas();
-
 		int f = casillaInicial.getFila();
 		int c = casillaInicial.getColumna();
 		int f2=(int)(Math.random()*filas-1);
 		int c2=(int)(Math.random()*columnas-1);
+		this.texto = "";
 		
 		if(!superficie.comprobarCasilla(f2, c2) || superficie.esComestible(f2, c2)){
 			

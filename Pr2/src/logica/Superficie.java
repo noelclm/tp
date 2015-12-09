@@ -104,7 +104,6 @@ public class Superficie {
 		
 		
 		for (int f=0; f<this.filas; f++){
-			
 			for (int c=0; c<this.columnas; c++){
 				
 				if(posicionesPasadas[f][c]==false){ // Comprobamos si hemos pasado ya por esa casilla
@@ -138,16 +137,16 @@ public class Superficie {
 								this.eliminarCelula(casillaFinal);
 								
 							// Comprobamos si tiene que reproducirse
-							if (this.superficie[f2][c2].reproducirse()){
+							else if (this.superficie[f2][c2].reproducirse()){
 
 								//  TODO Esto no lo quiere aqui
 								// Creamos una celula del mismo tipo del padre
-								if ( this.superficie[f2][c2] instanceof CelulaCompleja)
+								if (!this.superficie[f2][c2].esComestible())
 									this.crearCelulaCompleja(casillaInicial, maxPasosSinMover, pasosReproduccion, maxComer);
 								else
 									this.crearCelulaSimple(casillaInicial, maxPasosSinMover, pasosReproduccion);
 
-							}
+							} // else if(this.superficie[f2][c2].reproducirse())
 
 							posicionesPasadas[f2][c2] = true;
 							
@@ -158,7 +157,6 @@ public class Superficie {
 				} // if(posicionesPasadas[f][c] == false)	
 				
 			} // for (int c=0; c<this.columnas; c++)
-			
 		} // for (int f=0; f<this.filas; f++)
 	
 		return str;
