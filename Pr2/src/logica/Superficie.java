@@ -258,6 +258,11 @@ public class Superficie {
 		
 	}
 	
+	/**
+	 * Mueve una celula de una casilla a otra en el tablero.
+	 * @param casillaInicial Posicion inicial del tablero.
+	 * @param casillaFinal Posicion final del tablero.
+	 */
 	public void moverCelula(Casilla casillaInicial, Casilla casillaFinal){
 		
 		int f = casillaInicial.getFila();
