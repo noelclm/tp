@@ -67,7 +67,7 @@ public abstract class Celula {
 	 * Metodo que devuelve false si ha llegado al limite de pasos sin mover o true si no.
 	 * @return boolean
 	 */
-	public boolean limitePasosSinMover(){
+	public boolean muerteInactividad(){
 		
 		if (this.pasosSinMover == this.MAX_PASOS_SIN_MOVER)
 			return true;
@@ -81,7 +81,7 @@ public abstract class Celula {
 	 * Metodo que devuelve true si tiene que reproducirse o false si no.
 	 * @return boolean
 	 */
-	public boolean limitePasosDados(){
+	public boolean reproducirse(){
 			
 		if (this.pasosDados == this.PASOS_REPRODUCCION)
 			return true;

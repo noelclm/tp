@@ -105,23 +105,25 @@ public class Superficie {
 			
 			for (int c=0; c<this.columnas; c++){
 				
-				if(posicionesPasadas[f][c]==false){
+				if(posicionesPasadas[f][c]==false){ // Comprobamos si hemos pasado ya por esa casilla
 					
 					posicionesPasadas[f][c] = true;
 					
-					if(this.superficie[f][c]!=null){
+					if(this.superficie[f][c]!=null){ // Comprobamos que la casilla no esta vacia
 						
 						Casilla casillaInicial = new Casilla(f,c);
 						Casilla casillaFinal = this.superficie[f][c].ejecutaMovimiento(casillaInicial, this); 
 						
 						if(casillaFinal==null){ // Si la celula no se mueve
 							
-							if (this.superficie[f][c].limitePasosSinMover()){
+							// Comprobamos que no ha llegado al limite de pasos sin moverse
+							if (this.superficie[f][c].muerteInactividad()){ 
 								
 								this.eliminarCelula(casillaInicial);
 								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por inactividad"+LINE_SEPARATOR;
 								
-							}else if (this.superficie[f][c].limitePasosDados()){
+							// Comprobamos si ha llegado al limite de pasos que tiene que dar para reproducirse
+							}else if (this.superficie[f][c].reproducirse()){
 								
 								this.eliminarCelula(casillaInicial);
 								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por no poder reproducirse"+LINE_SEPARATOR;
@@ -133,46 +135,53 @@ public class Superficie {
 								
 							}
 							
-						} // if(casillaFinal==null)
-						else{ // Si la celula se mueve
+						}else{ // Si la celula se mueve
 							
 							int f2 = casillaFinal.getFila();
 							int c2 = casillaFinal.getColumna();
 							
+							// Comprobamos el tipo de celula que es para mostrar los distintos tipos de mensajes
 							if ( this.superficie[f][c] instanceof CelulaCompleja){
 								
-								if (this.superficie[f2][c2] != null)
+								if (this.superficie[f2][c2] != null) // Si es compleja y come
 									str = str+"->Celula Compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
-								else
+								
+								else // Si es compleja y no come
 									str = str+"->Celula Compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --NO COME--"+LINE_SEPARATOR;
 							
-							}else
+							}else // Si es simple
 								str = str+"->Celula simple en ("+f+","+c+") se mueve a ("+f2+","+c2+")"+LINE_SEPARATOR;
 								
+							// Movemos la celula
 							this.superficie[f2][c2] = this.superficie[f][c];
 							this.eliminarCelula(casillaInicial);
 							
+							// Comprobamos si muere al comer la celula
 							if (this.superficie[f2][c2].muertePorComida()){
+								
 								str = str+"->Explota la celula compleja en ("+f2+","+c2+")"+LINE_SEPARATOR;
 								this.eliminarCelula(casillaFinal);
-							}else{
-								if (this.superficie[f2][c2].limitePasosDados()){
+								
+							// Comprobamos si tiene que reproducirse
+							}else if (this.superficie[f2][c2].reproducirse()){
 									
-									this.superficie[f2][c2].reiniciaPasosReproduccion();
-									if ( this.superficie[f2][c2] instanceof CelulaCompleja)
-										this.crearCelulaCompleja(casillaInicial, maxPasosSinMover, pasosReproduccion, maxComer);
-									else
-										this.crearCelulaSimple(casillaInicial, maxPasosSinMover, pasosReproduccion);
-									
-									str = str+"->Nace nueva celula en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
-									
-								}else
-									this.superficie[f2][c2].sumPasosDados();
-							}
+								this.superficie[f2][c2].reiniciaPasosReproduccion();
+								
+								// Creamos una celula del mismo tipo del padre
+								if ( this.superficie[f2][c2] instanceof CelulaCompleja)
+									this.crearCelulaCompleja(casillaInicial, maxPasosSinMover, pasosReproduccion, maxComer);
+								else
+									this.crearCelulaSimple(casillaInicial, maxPasosSinMover, pasosReproduccion);
+								
+								str = str+"->Nace nueva celula en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
+								
+							}else
+								this.superficie[f2][c2].sumPasosDados();
+						
 							
 							posicionesPasadas[f2][c2] = true;
 							
-						} // else
+						} // else Si la celula se mueve
 						
 					} // if(this.superficie[f][c]!=null)
 					
@@ -356,7 +365,7 @@ public class Superficie {
 	}
 	
 	/**
-	 * Genera el tablero en un String y lo devuelve imprimirla por pantalla.
+	 * Genera el tablero en un String y lo devuelve para imprimirlo por pantalla.
 	 * @return String
 	 */
 	public String toString(){
