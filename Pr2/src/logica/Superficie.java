@@ -116,71 +116,39 @@ public class Superficie {
 						Casilla casillaInicial = new Casilla(f,c);
 						Casilla casillaFinal = this.superficie[f][c].ejecutaMovimiento(casillaInicial, this); 
 						
+						str = str + this.superficie[f][c].pintaMovimientos();
+						
 						if(casillaFinal==null){ // Si la celula no se mueve
 							
-							// Comprobamos que no ha llegado al limite de pasos sin moverse
-							if (this.superficie[f][c].muertePorInactividad()){ 
-								
+							// Comprobamos que no ha llegado al limite de pasos sin moverse o si tiene que reproducirse
+							if (this.superficie[f][c].muertePorInactividad() || this.superficie[f][c].reproducirse())
 								this.eliminarCelula(casillaInicial);
-								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por inactividad"+LINE_SEPARATOR;
 								
-							// Comprobamos si ha llegado al limite de pasos que tiene que dar para reproducirse
-							}else if (this.superficie[f][c].reproducirse()){
-								
-								this.eliminarCelula(casillaInicial);
-								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por no poder reproducirse"+LINE_SEPARATOR;
-							
-							}else{
-								
-								this.superficie[f][c].sumPasosSinMover();
-								str = str+"->La celula "+f+"-"+c+" no se ha podido mover"+LINE_SEPARATOR;
-								
-							}
-							
 						}else{ // Si la celula se mueve
 							
 							int f2 = casillaFinal.getFila();
 							int c2 = casillaFinal.getColumna();
-							
-							// Comprobamos el tipo de celula que es para mostrar los distintos tipos de mensajes
-							if ( this.superficie[f][c] instanceof CelulaCompleja){
-								
-								if (this.superficie[f2][c2] != null) // Si es compleja y come
-									str = str+"->Celula Compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
-								
-								else // Si es compleja y no come
-									str = str+"->Celula Compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --NO COME--"+LINE_SEPARATOR;
-							
-							}else // Si es simple
-								str = str+"->Celula simple en ("+f+","+c+") se mueve a ("+f2+","+c2+")"+LINE_SEPARATOR;
 								
 							// Movemos la celula
 							this.superficie[f2][c2] = this.superficie[f][c];
 							this.eliminarCelula(casillaInicial);
 							
 							// Comprobamos si muere al comer la celula
-							if (this.superficie[f2][c2].muertePorComida()){
-								
-								str = str+"->Explota la celula compleja en ("+f2+","+c2+")"+LINE_SEPARATOR;
+							if (this.superficie[f2][c2].muertePorComida())
 								this.eliminarCelula(casillaFinal);
 								
 							// Comprobamos si tiene que reproducirse
-							}else if (this.superficie[f2][c2].reproducirse()){
-									
-								this.superficie[f2][c2].reiniciaPasosReproduccion();
-								
+							if (this.superficie[f2][c2].reproducirse()){
+
+								//  TODO Esto no lo quiere aqui
 								// Creamos una celula del mismo tipo del padre
 								if ( this.superficie[f2][c2] instanceof CelulaCompleja)
 									this.crearCelulaCompleja(casillaInicial, maxPasosSinMover, pasosReproduccion, maxComer);
 								else
 									this.crearCelulaSimple(casillaInicial, maxPasosSinMover, pasosReproduccion);
-								
-								str = str+"->Nace nueva celula en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
-								
-							}else
-								this.superficie[f2][c2].sumPasosDados();
-						
-							
+
+							}
+
 							posicionesPasadas[f2][c2] = true;
 							
 						} // else Si la celula se mueve

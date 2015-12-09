@@ -10,6 +10,7 @@ public abstract class Celula {
 	private final int MAX_PASOS_SIN_MOVER;
 	private final int PASOS_REPRODUCCION;
 	protected boolean esComestible;
+	protected String texto;
 	
 	/**
 	 * Mira donde se puede mover la celula y devuelve la casilla.
@@ -42,6 +43,7 @@ public abstract class Celula {
 		this.PASOS_REPRODUCCION = pasosReproduccion;
 		this.pasosSinMover = 0;
 		this.pasosDados = 0;
+		this.texto = "";
 		
 	}
 	
@@ -78,7 +80,7 @@ public abstract class Celula {
 	 */
 	public boolean muertePorInactividad(){
 		
-		if (this.pasosSinMover == this.MAX_PASOS_SIN_MOVER)
+		if (this.pasosSinMover >= this.MAX_PASOS_SIN_MOVER)
 			return true;
 		
 		else 
@@ -97,6 +99,16 @@ public abstract class Celula {
 		
 		else
 			return false;
+		
+	}
+	
+	/**
+	 * Devuelve los movimientos realizados durante la ejecucion del movimiento
+	 * @return String
+	 */
+	public String pintaMovimientos(){
+		
+		return this.texto;
 		
 	}
 
