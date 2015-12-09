@@ -40,7 +40,6 @@ public class CelulaCompleja extends Celula {
 		if(!superficie.comprobarCasilla(f2, c2) || superficie.esComestible(f2, c2)){
 			
 			casillaFinal = new Casilla(f2,c2);
-			superficie.moverCelula(casillaInicial, casillaFinal);
 			
 			if(superficie.comprobarCasilla(f2, c2) && superficie.esComestible(f2, c2)){
 				
@@ -49,16 +48,15 @@ public class CelulaCompleja extends Celula {
 				if (this.MAX_COMER == this.comidas){
 					this.texto = this.texto + "->Explota la celula compleja en ("+f2+","+c2+")"+LINE_SEPARATOR;
 					superficie.eliminarCelula(casillaFinal);
-				}else{
+					casillaFinal = casillaInicial;
+				}else
 					this.texto = this.texto + "->Celula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
-					casillaFinal = new Casilla(f2,c2);
-				}
-					
-				
-			}else{
+
+			}else
 				this.texto = this.texto + "->Celula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --NO COME--"+LINE_SEPARATOR;
-				casillaFinal = new Casilla(f2,c2);
-			}
+			
+			
+			superficie.moverCelula(casillaInicial, casillaFinal);
 			
 			if (this.reproducirse() && this.MAX_COMER != this.comidas){
 				this.reiniciaPasosReproduccion();
