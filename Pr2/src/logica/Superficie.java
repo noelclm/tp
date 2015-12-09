@@ -116,41 +116,17 @@ public class Superficie {
 						Casilla casillaFinal = this.superficie[f][c].ejecutaMovimiento(casillaInicial, this); 
 						
 						str = str + this.superficie[f][c].pintaMovimientos();
-						
-						if(casillaFinal==null){ // Si la celula no se mueve
-							
-							// Comprobamos que no ha llegado al limite de pasos sin moverse o si tiene que reproducirse
-							if (this.superficie[f][c].muertePorInactividad() || this.superficie[f][c].reproducirse())
-								this.eliminarCelula(casillaInicial);
-								
-						}else{ // Si la celula se mueve
-							
-							int f2 = casillaFinal.getFila();
-							int c2 = casillaFinal.getColumna();
-								
-							// Movemos la celula
-							this.superficie[f2][c2] = this.superficie[f][c];
+						int f2 = casillaFinal.getFila();
+						int c2 = casillaFinal.getColumna();
+						posicionesPasadas[f2][c2] = true;
+
+						if (casillaFinal != casillaInicial){
+							if(casillaFinal != null){
+								this.moverCelula(casillaInicial, casillaFinal);
+							}
 							this.eliminarCelula(casillaInicial);
+						}
 							
-							// Comprobamos si muere al comer la celula
-							if (this.superficie[f2][c2].muertePorComida())
-								this.eliminarCelula(casillaFinal);
-								
-							// Comprobamos si tiene que reproducirse
-							else if (this.superficie[f2][c2].reproducirse()){
-
-								//  TODO Esto no lo quiere aqui
-								// Creamos una celula del mismo tipo del padre
-								if (!this.superficie[f2][c2].esComestible())
-									this.crearCelulaCompleja(casillaInicial, maxPasosSinMover, pasosReproduccion, maxComer);
-								else
-									this.crearCelulaSimple(casillaInicial, maxPasosSinMover, pasosReproduccion);
-
-							} // else if(this.superficie[f2][c2].reproducirse())
-
-							posicionesPasadas[f2][c2] = true;
-							
-						} // else Si la celula se mueve
 						
 					} // if(this.superficie[f][c]!=null)
 					
@@ -305,6 +281,23 @@ public class Superficie {
 		}
 		
 		return num;
+		
+	}
+	
+	/**
+	 * 
+	 * @param casillaInicial
+	 * @param casillaFinal
+	 */
+	public void moverCelula(Casilla casillaInicial, Casilla casillaFinal){
+		
+		int f = casillaInicial.getFila();
+		int c = casillaInicial.getColumna();
+		int f2 = casillaFinal.getFila();
+		int c2 = casillaFinal.getColumna();
+			
+		// Movemos la celula
+		this.superficie[f2][c2] = this.superficie[f][c];
 		
 	}
 	

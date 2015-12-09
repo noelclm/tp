@@ -7,8 +7,8 @@ public abstract class Celula {
 
 	private int pasosSinMover;
 	private int pasosDados;
-	private final int MAX_PASOS_SIN_MOVER;
-	private final int PASOS_REPRODUCCION;
+	protected final int MAX_PASOS_SIN_MOVER;
+	protected final int PASOS_REPRODUCCION;
 	protected boolean esComestible;
 	protected String texto;
 	
@@ -25,12 +25,6 @@ public abstract class Celula {
 	 * @return boolean
 	 */
 	public abstract boolean esComestible();
-	
-	/**
-	 * Devuelve si muere por comer el maximo de celulas permitidas.
-	 * @return boolean
-	 */
-	public abstract boolean muertePorComida();
 	
 	/**
 	 * Constructor.

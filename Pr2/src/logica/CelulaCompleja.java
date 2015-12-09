@@ -28,6 +28,7 @@ public class CelulaCompleja extends Celula {
 	@Override
 	public Casilla ejecutaMovimiento(Casilla casillaInicial, Superficie superficie) {
 		
+		Casilla casillaFinal = null;
 		int filas = superficie.getFilas();
 		int columnas = superficie.getColumnas();
 		int f = casillaInicial.getFila();
@@ -42,44 +43,47 @@ public class CelulaCompleja extends Celula {
 				
 				this.comidas++;
 				
-				if (this.muertePorComida())
+				if (this.MAX_COMER == this.comidas){
 					this.texto = this.texto + "->Explota la celula compleja en ("+f2+","+c2+")"+LINE_SEPARATOR;
-				else
-					this.texto = this.texto + "->Celula Compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
+					superficie.eliminarCelula(new Casilla(f2,c2));
+				}else{
+					this.texto = this.texto + "->Celula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
+					casillaFinal = new Casilla(f2,c2);
+				}
+					
 				
 			}else{
-				this.texto = this.texto + "->Celula Compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --NO COME--"+LINE_SEPARATOR;
+				this.texto = this.texto + "->Celula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --NO COME--"+LINE_SEPARATOR;
+				casillaFinal = new Casilla(f2,c2);
 			}
 			
-			if (this.reproducirse() && !this.muertePorComida()){
+			if (this.reproducirse() && this.MAX_COMER != this.comidas){
 				this.reiniciaPasosReproduccion();
-				this.texto = this.texto + "->Nace nueva celula en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
+				superficie.crearCelulaCompleja(casillaInicial, this.MAX_PASOS_SIN_MOVER, this.PASOS_REPRODUCCION, this.MAX_COMER);
+				this.texto = this.texto + "->Nace una nueva celula compleja en ("+f+"-"+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
 			}else
 				this.sumPasosDados();
-				
-			
-			Casilla casilla = new Casilla(f2,c2);
-			
-			return casilla;
-			
+
 		}else{ // Si no se puede mover
 			
 			// Comprobamos que si ha llegado al limite de pasos sin moverse
 			if (this.muertePorInactividad())
-				this.texto = this.texto + "->Muere la celula de la casilla "+f+"-"+c+" por inactividad"+LINE_SEPARATOR;
+				this.texto = this.texto + "->Muere la celula compleja de la casilla "+f+"-"+c+" por inactividad"+LINE_SEPARATOR;
 				
 			// Comprobamos si ha llegado al limite de pasos que tiene que dar para reproducirse
 			else if (this.reproducirse())
-				this.texto = this.texto + "->Muere la celula de la casilla "+f+"-"+c+" por no poder reproducirse"+LINE_SEPARATOR;
+				this.texto = this.texto + "->Muere la celula compleja de la casilla "+f+"-"+c+" por no poder reproducirse"+LINE_SEPARATOR;
 			
-			else 
-				this.texto = this.texto + "->La celula "+f+"-"+c+" no se ha podido mover"+LINE_SEPARATOR;
-				
+			else{ 
+				this.texto = this.texto + "->La celula compleja "+f+"-"+c+" no se ha podido mover"+LINE_SEPARATOR;
+				casillaFinal = casillaInicial;
+			}
+
 			this.sumPasosSinMover();
-				
-			return null;
 
 		} 
+		
+		return casillaFinal;
 		
 	}
 
@@ -89,17 +93,7 @@ public class CelulaCompleja extends Celula {
 		return this.esComestible;
 		
 	}
-	
-	@Override
-	public boolean muertePorComida(){
-		
-		if(this.MAX_COMER == this.comidas)
-			return true;
-		else
-			return false;
-	
-	}
-	
+
 	/**
 	 * Devuelve un string para pintar la celula compleja en el tablero.
 	 * @return String
