@@ -117,7 +117,7 @@ public class Superficie {
 						if(casillaFinal==null){ // Si la celula no se mueve
 							
 							// Comprobamos que no ha llegado al limite de pasos sin moverse
-							if (this.superficie[f][c].muerteInactividad()){ 
+							if (this.superficie[f][c].muertePorInactividad()){ 
 								
 								this.eliminarCelula(casillaInicial);
 								str = str+"->Muere la celula de la casilla "+f+"-"+c+" por inactividad"+LINE_SEPARATOR;

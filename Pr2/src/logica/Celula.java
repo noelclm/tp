@@ -55,6 +55,15 @@ public abstract class Celula {
 	}
 	
 	/**
+	 * Metodo que reinicia los pasos dados.
+	 */
+	public void reiniciaPasosReproduccion(){
+		
+		this.pasosDados = 0;
+		
+	}	
+	
+	/**
 	 * Suma uno al numero de pasos sin mover.
 	 */
 	public void sumPasosSinMover(){
@@ -64,10 +73,10 @@ public abstract class Celula {
 	}
 	
 	/**
-	 * Metodo que devuelve false si ha llegado al limite de pasos sin mover o true si no.
+	 * Metodo que devuelve true si ha llegado al limite de pasos sin mover o true si no.
 	 * @return boolean
 	 */
-	public boolean muerteInactividad(){
+	public boolean muertePorInactividad(){
 		
 		if (this.pasosSinMover == this.MAX_PASOS_SIN_MOVER)
 			return true;
@@ -90,14 +99,5 @@ public abstract class Celula {
 			return false;
 		
 	}
-	
-	/**
-	 * Metodo que reinicia los pasos dados.
-	 */
-	public void reiniciaPasosReproduccion(){
-		
-		this.pasosDados = 0;
-		
-	}	
 
 }

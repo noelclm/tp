@@ -58,6 +58,13 @@ public class CelulaSimple extends Celula{
 		return this.esComestible;
 		
 	}
+
+	@Override
+	public boolean muertePorComida() {
+		
+		return false;
+	
+	}
 	
 	/**
 	 * Devuelve un string para pintar la celula simple en el tablero.
@@ -67,13 +74,6 @@ public class CelulaSimple extends Celula{
 		
 		return " X ";
 		
-	}
-
-	@Override
-	public boolean muertePorComida() {
-		
-		return false;
-	
 	}
 
 }
