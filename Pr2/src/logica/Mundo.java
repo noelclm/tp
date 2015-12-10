@@ -6,13 +6,13 @@ package logica;
 public class Mundo {
 
 	// Numero de celulas que introduce al iniciar el tablero
-	private final int NUM_CELULAS = 3;
+	private final int NUM_CELULAS = 5;
 	// Numero de pasos que puede estar sin mover
-	private final int MAX_PASOS_SIN_MOVER = 4;
+	private final int MAX_PASOS_SIN_MOVER = 2;
 	// Numero de pasos para que se reproduzca
 	private final int PASOS_REPRODUCCION = 4;
 	// Numero de celulas que puede comer una celula compleja
-	private final int MAX_COMER = 4;
+	private final int MAX_COMER = 2;
 	// Marca si hay que cerrar el juego o no
 	private boolean simulacionTerminada; 
 	

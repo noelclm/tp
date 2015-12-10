@@ -58,13 +58,17 @@ public class Superficie {
 				
 				Casilla casilla = new Casilla(f,c);
 				
-				if (tipo==0)
+				if (tipo==0){
+					
 					if(this.crearCelulaSimple(casilla, maxPasosSinMover, pasosReproduccion))
 						numCelulasPuestas++;
-
-				else
+					
+				}else{
+					
 					if(this.crearCelulaCompleja(casilla, maxPasosSinMover, pasosReproduccion, maxComer))
 						numCelulasPuestas++;
+					
+				}
 				
 			}
 				
