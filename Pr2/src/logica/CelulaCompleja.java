@@ -46,16 +46,15 @@ public class CelulaCompleja extends Celula {
 			if(superficie.comprobarCasilla(f2, c2) && superficie.esComestible(f2, c2)){
 				
 				this.comidas++;
-				
+				this.texto = this.texto + "->Celula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
+
 				// Si muere por comer mucho
 				if (this.MAX_COMER == this.comidas){
 					this.texto = this.texto + "->Explota la celula compleja en ("+f2+","+c2+")"+LINE_SEPARATOR;
-					superficie.eliminarCelula(casillaFinal);
-					casillaFinal = null;
-				}else{
-					this.texto = this.texto + "->Celula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
+					superficie.eliminarCelula(casillaFinal); // Eliminamos la celula que se va a comer
+					casillaFinal = null; // Ponemos como que no puede moverse para que se elimine la celula
+				}else
 					superficie.moverCelula(casillaInicial, casillaFinal);
-				}
 		
 			}else{ // Si no come
 				this.texto = this.texto + "->Celula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --NO COME--"+LINE_SEPARATOR;
