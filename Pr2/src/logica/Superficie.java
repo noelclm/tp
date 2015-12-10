@@ -110,7 +110,7 @@ public class Superficie {
 						Casilla casillaFinal = this.superficie[f][c].ejecutaMovimiento(casillaInicial, this); 
 
 						/*
-						 * - Si la casillaInicial es igual a la casillaFinal la celula no se ha mueve
+						 * - Si la casillaInicial es igual a la casillaFinal la celula no se ha movido
 						 * - Si la casillaFinal esta vacia es porque la celula ha muerto
 						 * - Si la casillaFinal no esta vacia y no es igual a la casilla inicial se ha movido
 						 */
