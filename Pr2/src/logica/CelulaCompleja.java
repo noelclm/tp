@@ -37,27 +37,32 @@ public class CelulaCompleja extends Celula {
 		int c2=(int)(Math.random()*columnas-1);
 		this.texto = "";
 		
+		// Si se puede mover
 		if(!superficie.comprobarCasilla(f2, c2) || superficie.esComestible(f2, c2)){
 			
 			casillaFinal = new Casilla(f2,c2);
 			
+			// Si come
 			if(superficie.comprobarCasilla(f2, c2) && superficie.esComestible(f2, c2)){
 				
 				this.comidas++;
 				
+				// Si muere por comer mucho
 				if (this.MAX_COMER == this.comidas){
 					this.texto = this.texto + "->Explota la celula compleja en ("+f2+","+c2+")"+LINE_SEPARATOR;
 					superficie.eliminarCelula(casillaFinal);
-					casillaFinal = casillaInicial;
-				}else
+					casillaFinal = null;
+				}else{
 					this.texto = this.texto + "->Celula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
-
-			}else
+					superficie.moverCelula(casillaInicial, casillaFinal);
+				}
+		
+			}else{ // Si no come
 				this.texto = this.texto + "->Celula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --NO COME--"+LINE_SEPARATOR;
+				superficie.moverCelula(casillaInicial, casillaFinal);
+			}
 			
-			
-			superficie.moverCelula(casillaInicial, casillaFinal);
-			
+			// Miramos si tiene que reproducirse
 			if (this.reproducirse() && this.MAX_COMER != this.comidas){
 				this.reiniciaPasosReproduccion();
 				superficie.crearCelulaCompleja(casillaInicial, this.MAX_PASOS_SIN_MOVER, this.PASOS_REPRODUCCION, this.MAX_COMER);

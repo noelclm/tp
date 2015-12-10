@@ -32,17 +32,20 @@ public class CelulaSimple extends Celula{
 		
 		Posicion posicionInicial = new Posicion(f,c);
 		
+		// Miramos si tiene posiciones vacias adyacentes
 		int numPosiciones = posicionInicial.numPosiciones(filas-1, columnas-1);
 		Posicion[] posicionesAdyacentes = new Posicion[numPosiciones];
 		posicionesAdyacentes = posicionInicial.adyacencia(filas, columnas);
 		
 		int numPosicionesVacias = superficie.cantidadPosicionesAdyacentesVacias(posicionesAdyacentes,numPosiciones);
 		
-		if(numPosicionesVacias>0){ // Si se puede mover
+		// Si se puede mover
+		if(numPosicionesVacias>0){ 
 			
 			Posicion[] posicionesVacias = new Posicion[numPosicionesVacias];
 			posicionesVacias = superficie.posicionesAdyacentesVacias(posicionesAdyacentes,numPosiciones,numPosicionesVacias);
 			
+			// Cogemos una posicion aleatoria de las posiciones adyacentes vacias
 			int numAleatorio = (int)(Math.random()*numPosicionesVacias-1);
 			int f2 = posicionesVacias[numAleatorio].getX();
 			int c2 = posicionesVacias[numAleatorio].getY();
@@ -51,6 +54,7 @@ public class CelulaSimple extends Celula{
 			this.texto = this.texto + "->Celula simple en ("+f+","+c+") se mueve a ("+f2+","+c2+")"+LINE_SEPARATOR;
 			superficie.moverCelula(casillaInicial, casillaFinal);
 			
+			// Miramos si tiene que reproducirse
 			if (this.reproducirse()){
 				this.reiniciaPasosReproduccion();
 				superficie.crearCelulaSimple(casillaInicial, this.MAX_PASOS_SIN_MOVER, this.PASOS_REPRODUCCION);

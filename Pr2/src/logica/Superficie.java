@@ -58,19 +58,13 @@ public class Superficie {
 				
 				Casilla casilla = new Casilla(f,c);
 				
-				if (tipo==0){
-				//switch (tipo) {
-					//case 0:
-						if(this.crearCelulaSimple(casilla, maxPasosSinMover, pasosReproduccion))
-							numCelulasPuestas++;
-						//break;
-						}
-						
+				if (tipo==0)
+					if(this.crearCelulaSimple(casilla, maxPasosSinMover, pasosReproduccion))
+						numCelulasPuestas++;
+
 				else
-					//case 1:
-						if(this.crearCelulaCompleja(casilla, maxPasosSinMover, pasosReproduccion, maxComer))
-							numCelulasPuestas++;
-						//break;
+					if(this.crearCelulaCompleja(casilla, maxPasosSinMover, pasosReproduccion, maxComer))
+						numCelulasPuestas++;
 				
 			}
 				
@@ -104,15 +98,22 @@ public class Superficie {
 		for (int f=0; f<this.filas; f++){
 			for (int c=0; c<this.columnas; c++){
 				
-				if(posicionesPasadas[f][c]==false){ // Comprobamos si hemos pasado ya por esa casilla
+				// Comprobamos si hemos pasado ya por esa casilla
+				if(posicionesPasadas[f][c]==false){
 					
 					posicionesPasadas[f][c] = true;
 					
-					if(this.superficie[f][c]!=null){ // Comprobamos que la casilla no esta vacia
+					// Comprobamos que la casilla no esta vacia
+					if(this.superficie[f][c]!=null){ 
 						
 						Casilla casillaInicial = new Casilla(f,c);
 						Casilla casillaFinal = this.superficie[f][c].ejecutaMovimiento(casillaInicial, this); 
 
+						/*
+						 * - Si la casillaInicial es igual a la casillaFinal la celula no se ha mueve
+						 * - Si la casillaFinal esta vacia es porque la celula ha muerto
+						 * - Si la casillaFinal no esta vacia y no es igual a la casilla inicial se ha movido
+						 */
 						if (casillaFinal != casillaInicial){
 							if(casillaFinal != null){
 								int f2 = casillaFinal.getFila();
