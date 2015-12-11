@@ -5,7 +5,7 @@ import logica.Casilla;
 import logica.Mundo;
 
 /**
- * Comando EliminarCelula - Elimina una celula del tablero.
+ * Comando EliminarCelula - Elimina una célula del tablero.
  */
 public class EliminarCelula extends Comando {
 
@@ -23,7 +23,7 @@ public class EliminarCelula extends Comando {
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param casilla Casilla del tablero donde esta la celula que se quiere borrar.
+	 * @param casilla Casilla del tablero donde esta la célula que se quiere borrar.
 	 */
 	public EliminarCelula(Casilla casilla) {
 		this.casilla = casilla;
@@ -59,7 +59,7 @@ public class EliminarCelula extends Comando {
 	@Override
 	public String textoAyuda() {
 		
-		return " ELIMINARCELULA F C: elimina una celula de la posici�n (f,c) si es posible" + LINE_SEPARATOR;
+		return " ELIMINARCELULA F C: elimina una célula de la posición (f,c) si es posible" + LINE_SEPARATOR;
 		
 	}
 

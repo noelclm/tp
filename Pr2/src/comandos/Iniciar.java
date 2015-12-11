@@ -4,7 +4,7 @@ import controlador.Comando;
 import logica.Mundo;
 
 /**
- * Comando Iniciar - Inicia el tablero con varias celulas.
+ * Comando Iniciar - Inicia el tablero con varias células.
  */
 public class Iniciar extends Comando{
 	
@@ -38,7 +38,7 @@ public class Iniciar extends Comando{
 	@Override
 	public String textoAyuda() {
 		
-		return " INICIAR: inicia una nueva simulaci�n" + LINE_SEPARATOR ;
+		return " INICIAR: inicia una nueva simulación" + LINE_SEPARATOR ;
 		
 	}
 

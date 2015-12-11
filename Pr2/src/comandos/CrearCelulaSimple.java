@@ -5,7 +5,7 @@ import logica.Casilla;
 import logica.Mundo;
 
 /**
- * Comando CrearCelulaSimple - Crea una celula simple en el tablero.
+ * Comando CrearCelulaSimple - Crea una célula simple en el tablero.
  */
 public class CrearCelulaSimple extends Comando {
 	
@@ -23,7 +23,7 @@ public class CrearCelulaSimple extends Comando {
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param casilla Casilla del tablero donde se quiere crear la celula.
+	 * @param casilla Casilla del tablero donde se quiere crear la célula.
 	 */
 	public CrearCelulaSimple(Casilla casilla) {
 		this.casilla = casilla;
@@ -59,7 +59,7 @@ public class CrearCelulaSimple extends Comando {
 	@Override
 	public String textoAyuda() {
 		
-		return " CREARCELULASIMPLE F C: crea una nueva celula simple en la posici�n (f,c) si es posible" + LINE_SEPARATOR ;
+		return " CREARCELULASIMPLE F C: crea una nueva célula simple en la posición (f,c) si es posible" + LINE_SEPARATOR ;
 		
 	}
 	

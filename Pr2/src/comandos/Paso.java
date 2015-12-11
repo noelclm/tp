@@ -4,7 +4,7 @@ import controlador.Comando;
 import logica.Mundo;
 
 /**
- * Comando Paso - Realiza un movimiento en todas las celulas del tablero.
+ * Comando Paso - Realiza un movimiento en todas las células del tablero.
  */
 public class Paso extends Comando {
 	
@@ -38,7 +38,7 @@ public class Paso extends Comando {
 	@Override
 	public String textoAyuda() {
 		
-		return " PASO: realiza un paso en la simulaci�n" + LINE_SEPARATOR;
+		return " PASO: realiza un paso en la simulación" + LINE_SEPARATOR;
 		
 	}
 

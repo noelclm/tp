@@ -1,7 +1,7 @@
 package logica;
 
 /**
- * Clase para sacar las posiciones adyacentes de una posicion.
+ * Clase para sacar las posiciones adyacentes de una posición.
  */
 public class Posicion {
 	
@@ -21,7 +21,7 @@ public class Posicion {
 	}
 	
 	/**
-	 * Devuelve la cantidad de posiciones adyacentes de una posicion.
+	 * Devuelve la cantidad de posiciones adyacentes de una posición.
 	 * @param maxFila Filas totales del tablero.
 	 * @param maxColumna Columnas totales del tablero.
 	 * @return int
@@ -38,7 +38,7 @@ public class Posicion {
 	}
 
 	/**
-	 * Devuelve una lista de posiciones adyacentes de una posicion.
+	 * Devuelve una lista de posiciones adyacentes de una posición.
 	 * @param maxFila Filas totales del tablero.
 	 * @param maxColumna Columnas totales del tablero.
 	 * @return Posicion[]

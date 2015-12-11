@@ -8,7 +8,7 @@ import logica.Mundo;
 public abstract class Comando {
 	
 	/**
-	 * Ejecuta la acción y devuelve un texto con lo que ha hecho.
+	 * Ejecuta la acciÃ³n y devuelve un texto con lo que ha hecho.
 	 * @param mundo Donde se realiza la acion.
 	 * @return String
 	 */

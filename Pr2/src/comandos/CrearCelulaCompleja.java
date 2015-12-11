@@ -5,7 +5,7 @@ import logica.Casilla;
 import logica.Mundo;
 
 /**
- * Comando CrearCelulaCompleja - Crea una celula compleja en el tablero.
+ * Comando CrearCelulaCompleja - Crea una célula compleja en el tablero.
  */
 public class CrearCelulaCompleja extends Comando {
 
@@ -23,7 +23,7 @@ public class CrearCelulaCompleja extends Comando {
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param casilla Casilla del tablero donde se quiere crear la celula.
+	 * @param casilla Casilla del tablero donde se quiere crear la célula.
 	 */
 	public CrearCelulaCompleja(Casilla casilla) {
 		this.casilla = casilla;
@@ -59,7 +59,7 @@ public class CrearCelulaCompleja extends Comando {
 	@Override
 	public String textoAyuda() {
 		
-		return " CREARCELULACOMPLEJA F C: crea una nueva celula compleja en la posici�n (f,c) si es posible" + LINE_SEPARATOR ;
+		return " CREARCELULACOMPLEJA F C: crea una nueva célula compleja en la posición (f,c) si es posible" + LINE_SEPARATOR ;
 		
 	}
 

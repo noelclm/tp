@@ -4,7 +4,7 @@ import controlador.Comando;
 import logica.Mundo;
 
 /**
- * Comando Vaciar - Vacia el tablero.
+ * Comando Vaciar - Vacía el tablero.
  */
 public class Vaciar extends Comando {
 	
@@ -38,7 +38,7 @@ public class Vaciar extends Comando {
 	@Override
 	public String textoAyuda() {
 		
-		return " VACIAR: crea un mundo vac�o" + LINE_SEPARATOR;
+		return " VACIAR: crea un mundo vacío" + LINE_SEPARATOR;
 		
 	}
 

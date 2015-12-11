@@ -14,7 +14,7 @@ public abstract class Celula {
 	
 	/**
 	 * Mira donde se puede mover la celula y devuelve la casilla.
-	 * @param casillaInicial Posici�n del tablero.
+	 * @param casillaInicial Posición del tablero.
 	 * @param superficie Tablero de juego.
 	 * @return Casilla
 	 */
@@ -28,8 +28,8 @@ public abstract class Celula {
 	
 	/**
 	 * Constructor.
-	 * @param pasosSinMover Numero de pasos sin mover que tiene la celula.
-	 * @param pasosReproduccion Numero de pasos para que la celula se reproduzca.
+	 * @param pasosSinMover Número de pasos sin mover que tiene la celula.
+	 * @param pasosReproduccion Número de pasos para que la celula se reproduzca.
 	 */
 	public Celula(int pasosSinMover, int pasosReproduccion){
 		
@@ -42,7 +42,7 @@ public abstract class Celula {
 	}
 	
 	/**
-	 * Suma uno al numero de pasos dados.
+	 * Suma uno al número de pasos dados.
 	 */
 	public void sumPasosDados(){
 		
@@ -60,7 +60,7 @@ public abstract class Celula {
 	}	
 	
 	/**
-	 * Suma uno al numero de pasos sin mover.
+	 * Suma uno al número de pasos sin mover.
 	 */
 	public void sumPasosSinMover(){
 		
@@ -69,7 +69,7 @@ public abstract class Celula {
 	}
 	
 	/**
-	 * Metodo que devuelve true si ha llegado al limite de pasos sin mover o true si no.
+	 * Metodo que devuelve true si ha llegado al límite de pasos sin mover o false si no.
 	 * @return boolean
 	 */
 	public boolean muertePorInactividad(){
@@ -97,7 +97,7 @@ public abstract class Celula {
 	}
 	
 	/**
-	 * Devuelve los movimientos realizados durante la ejecucion del movimiento
+	 * Devuelve los movimientos realizados durante la ejecución del movimiento
 	 * @return String
 	 */
 	public String pintaMovimientos(){

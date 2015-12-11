@@ -14,8 +14,8 @@ public class Superficie {
 	
 	/**
 	 * Constructor.
-	 * @param nf N�mero de filas de la superficie.
-	 * @param nc N�mero de columnas de la superficie.
+	 * @param nf Número de filas de la superficie.
+	 * @param nc Número de columnas de la superficie.
 	 */
 	public Superficie(int nf, int nc){
 		
@@ -34,11 +34,11 @@ public class Superficie {
 	}
 	
 	/**
-	 * Inicia la superficie con un numero de celululas que le entra. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param numCelulas Numero de celulas con el que se inicializa la superficie.
-	 * @param maxPasosSinMover Numero de pasos sin mover que tiene la celula.
-	 * @param pasosReproduccion Numero de pasos para que la celula se reproduzca.
-	 * @param maxComer Numero de veces que puede comer una celula compleja.
+	 * Inicia la superficie con un numero de células que le entra. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param numCelulas Número de celulas con el que se inicializa la superficie.
+	 * @param maxPasosSinMover Número de pasos sin mover que tiene la célula.
+	 * @param pasosReproduccion Número de pasos para que la célula se reproduzca.
+	 * @param maxComer Número de veces que puede comer una célula compleja.
 	 * @return boolean
 	 */
 	public boolean iniciarSuperficie (int numCelulas, int maxPasosSinMover, int pasosReproduccion, int maxComer){
@@ -80,10 +80,10 @@ public class Superficie {
 	}
 	
 	/**
-	 * Reproduce los movimientos de las celulas sobre el tablero y devuelve en un String los pasos realizados.
-	 * @param maxPasosSinMover Numero de pasos que puede estar sin mover.
-	 * @param pasosReproduccion Numero de pasos para que se reproduzca.
-	 * @param maxComer Numero de veces que puede comer una celula compleja.
+	 * Reproduce los movimientos de las células sobre el tablero y devuelve en un String los pasos realizados.
+	 * @param maxPasosSinMover Número de pasos que puede estar sin mover.
+	 * @param pasosReproduccion Número de pasos para que se reproduzca.
+	 * @param maxComer Número de veces que puede comer una célula compleja.
 	 * @return String
 	 */
 	public String evoluciona(int maxPasosSinMover, int pasosReproduccion, int maxComer){
@@ -143,10 +143,10 @@ public class Superficie {
 	}
 	
 	/**
-	 * Crea una celula simple en una posicion de la superficie. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param casilla Posicion del tablero.
-	 * @param maxPasosSinMover Numero de pasos que puede estar sin mover.
-	 * @param pasosReproduccion Numero de pasos para que se reproduzca.
+	 * Crea una célula simple en una posición de la superficie. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param casilla Posición del tablero.
+	 * @param maxPasosSinMover Número de pasos que puede estar sin mover.
+	 * @param pasosReproduccion Número de pasos para que se reproduzca.
 	 * @return boolean
 	 */
 	public boolean crearCelulaSimple (Casilla casilla, int maxPasosSinMover, int pasosReproduccion){
@@ -166,11 +166,11 @@ public class Superficie {
 	}
 	
 	/**
-	 * Crea una celula compleja en una posicion de la superficie. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param casilla Posicion del tablero.
-	 * @param maxPasosSinMover Numero de pasos que puede estar sin mover.
-	 * @param pasosReproduccion Numero de pasos para que se reproduzca.
-	 * @param maxComer Numero de veces que puede comer una celula compleja.
+	 * Crea una célula compleja en una posición de la superficie. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param casilla Posición del tablero.
+	 * @param maxPasosSinMover Número de pasos que puede estar sin mover.
+	 * @param pasosReproduccion Número de pasos para que se reproduzca.
+	 * @param maxComer Número de veces que puede comer una celula compleja.
 	 * @return boolean
 	 */
 	public boolean crearCelulaCompleja (Casilla casilla, int maxPasosSinMover, int pasosReproduccion, int maxComer){
@@ -190,8 +190,8 @@ public class Superficie {
 	}
 	
 	/**
-	 * Elimina una celula del tablero. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param casilla Posicion del tablero.
+	 * Elimina una célula del tablero. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param casilla Posición del tablero.
 	 * @return boolean
 	 */
 	public boolean eliminarCelula (Casilla casilla){
@@ -240,7 +240,7 @@ public class Superficie {
 	}
 	
 	/**
-	 * Comprueba que la casilla esta vacia
+	 * Comprueba que la casilla esta vacía
 	 * @param f Fila.
 	 * @param c Columna.
 	 * @return boolean
@@ -255,9 +255,9 @@ public class Superficie {
 	}
 	
 	/**
-	 * Mueve una celula de una casilla a otra en el tablero.
-	 * @param casillaInicial Posicion inicial del tablero.
-	 * @param casillaFinal Posicion final del tablero.
+	 * Mueve una célula de una casilla a otra en el tablero.
+	 * @param casillaInicial Posición inicial del tablero.
+	 * @param casillaFinal Posición final del tablero.
 	 */
 	public void moverCelula(Casilla casillaInicial, Casilla casillaFinal){
 		
@@ -272,7 +272,7 @@ public class Superficie {
 	}
 	
 	/**
-	 * Devuelve si la celua se puede comer.
+	 * Devuelve si la célula se puede comer.
 	 * @param f Fila.
 	 * @param c Columna.
 	 * @return boolean
@@ -284,9 +284,9 @@ public class Superficie {
 	}
 
 	/**
-	 * Saca la cantidad de posiciones vacias que tiene una posicion concreta.
+	 * Saca la cantidad de posiciones vacías que tiene una posición concreta.
 	 * @param posicionesAdyacentes Array de posiciones adyacentes.
-	 * @param numPosiciones Numero de posiciones adyancentes
+	 * @param numPosiciones Número de posiciones adyancentes
 	 * @return int
 	 */
 	public int cantidadPosicionesAdyacentesVacias(Posicion[] posicionesAdyacentes, int numPosiciones){
@@ -305,10 +305,10 @@ public class Superficie {
 	}
 	
 	/**
-	 * Saca las posiciones vacias que tiene una posicion concreta.
+	 * Saca las posiciones vacías que tiene una posición concreta.
 	 * @param posicionesAdyacentes Array de posiciones adyacentes.
-	 * @param numPosiciones Numero de posiciones adyancentes.
-	 * @param numPosicionesVacias Numero de posiciones adyancentes vacias.
+	 * @param numPosiciones Número de posiciones adyancentes.
+	 * @param numPosicionesVacias Número de posiciones adyancentes vacías.
 	 * @return Posicion[]
 	 */
 	public Posicion[] posicionesAdyacentesVacias(Posicion[] posicionesAdyacentes, int numPosiciones, int numPosicionesVacias){

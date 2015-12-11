@@ -4,7 +4,7 @@ import controlador.Comando;
 import logica.Mundo;
 
 /**
- * Comando Salir - Termina la simulación.
+ * Comando Salir - Termina la simulaciÃ³n.
  */
 public class Salir extends Comando {
 
@@ -37,7 +37,7 @@ public class Salir extends Comando {
 	@Override
 	public String textoAyuda() {
 		
-		return " SALIR: cierra la aplicación" + LINE_SEPARATOR;
+		return " SALIR: cierra la aplicaciÃ³n" + LINE_SEPARATOR;
 		
 	}
 

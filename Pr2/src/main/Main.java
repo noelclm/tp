@@ -2,9 +2,9 @@ package main;
 import controlador.Controlador;
 
 /**
- * PRACTICA 2 - Nuevas CÈlulas en Nuestro Mundo.
+ * PRACTICA 2 - Nuevas C√©lulas en Nuestro Mundo.
  * @author Noel Clemente Montero
- * @author EstefanÌa Ortega ¡vila
+ * @author Estefan√≠a Ortega √Åvila
  */
 
 public class Main {

@@ -1,27 +1,27 @@
 package logica;
 
 /**
- * Clase encargada de comprobar si se ha realizado la accion y construir los textos que se mostraran.
+ * Clase encargada de comprobar si se ha realizado la acci贸n y construir los textos que se mostraran.
  */
 public class Mundo {
 
-	// Numero de celulas que introduce al iniciar el tablero
+	// N煤mero de c茅lulas que introduce al iniciar el tablero
 	private final int NUM_CELULAS = 5;
-	// Numero de pasos que puede estar sin mover
+	// N煤mero de pasos que puede estar sin mover
 	private final int MAX_PASOS_SIN_MOVER = 2;
-	// Numero de pasos para que se reproduzca
+	// N煤mero de pasos para que se reproduzca
 	private final int PASOS_REPRODUCCION = 4;
-	// Numero de celulas que puede comer una celula compleja
+	// N煤mero de c茅lulas que puede comer una celula compleja
 	private final int MAX_COMER = 2;
-	// Marca si hay que cerrar el juego o no
+	// N煤mero si hay que cerrar el juego o no
 	private boolean simulacionTerminada; 
 	
 	private Superficie superficie;
 	
 	/**
 	 * Constructor.
-	 * @param nf Numero de filas.
-	 * @param nc Numero de columnas.
+	 * @param nf N煤mero de filas.
+	 * @param nc N煤mero de columnas.
 	 */
 	public Mundo(int nf, int nc){
 		
@@ -37,10 +37,10 @@ public class Mundo {
 	public String iniciar (){
 		
 		if(this.superficie.iniciarSuperficie(NUM_CELULAS,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION,MAX_COMER))
-			return "Iniciando simulaci髇";
+			return "Iniciando simulaci贸n";
 		
 		else
-			return "No se ha podido inicializar la simulaci髇";
+			return "No se ha podido inicializar la simulaci贸n";
 		
 	}
 	
@@ -56,52 +56,52 @@ public class Mundo {
 	
 	
 	/**
-	 * Llama a crear celula simple. Devuelve si ha podido a no en una cadena de caracteres. 
-	 * @param casilla Posicion del tablero.
+	 * Llama a crear c茅lula simple. Devuelve si ha podido a no en una cadena de caracteres. 
+	 * @param casilla Posici贸n del tablero.
 	 * @return String
 	 */
 	public String crearCelulaSimple(Casilla casilla){
 		
 		if(this.superficie.crearCelulaSimple(casilla ,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
-			return "Creamos nueva c閘ula en la posici髇: ("+casilla.getFila()+","+casilla.getColumna()+")";
+			return "Creamos nueva c茅lula en la posici贸n: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 		else
-			return "Imposible crear una nueva c閘ula en ("+casilla.getFila()+","+casilla.getColumna()+"), posici髇 ocupada";
+			return "Imposible crear una nueva c茅lula en ("+casilla.getFila()+","+casilla.getColumna()+"), posici贸n ocupada";
 
 	}
 	
 	/**
-	 * Llama a crear celula compleja. Devuelve si ha podido a no en una cadena de caracteres. 
-	 * @param casilla Posicion del tablero.
+	 * Llama a crear c茅lula compleja. Devuelve si ha podido a no en una cadena de caracteres. 
+	 * @param casilla Posici贸n del tablero.
 	 * @return String
 	 */
 	public String crearCelulaCompleja(Casilla casilla){
 		
 		if(this.superficie.crearCelulaCompleja(casilla ,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION,MAX_COMER)) 
-			return "Creamos nueva c閘ula en la posici髇: ("+casilla.getFila()+","+casilla.getColumna()+")";
+			return "Creamos nueva c茅lula en la posici贸n: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 		else
-			return "Imposible crear una nueva c閘ula en ("+casilla.getFila()+","+casilla.getColumna()+"), posici髇 ocupada";
+			return "Imposible crear una nueva c茅lula en ("+casilla.getFila()+","+casilla.getColumna()+"), posici贸n ocupada";
 
 	}
 	
 	/**
-	 * Elimina una celula. Devuelve si ha podido a no en una cadena de caracteres.
-	 * @param casilla Posicion del tablero.
+	 * Elimina una c茅lula. Devuelve si ha podido a no en una cadena de caracteres.
+	 * @param casilla Posici贸n del tablero.
 	 * @return String
 	 */
 	public String eliminarCelula (Casilla casilla){
 		
 		if (this.superficie.eliminarCelula(casilla))
-			return "Se ha eliminado la c閘ula en la posici髇: ("+casilla.getFila()+","+casilla.getColumna()+")";
+			return "Se ha eliminado la c茅lula en la posici贸n: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 		else
-			return "No hay ninguna c閘ula en la posici髇: ("+casilla.getFila()+","+casilla.getColumna()+")";
+			return "No hay ninguna c茅lula en la posici贸n: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 	}
 	
 	/**
-	 * Vacia la superficie del tablero.
+	 * Vac铆a la superficie del tablero.
 	 * @return String
 	 */
 	public String vaciar(){
@@ -118,12 +118,12 @@ public class Mundo {
 	public String salir(){
 		
 		this.simulacionTerminada = true;
-		return "Fin de la simulacion.....";
+		return "Fin de la simulaci贸n.....";
 		
 	}
 	
 	/**
-	 * Comprueba si tiene que seguir la simulaci髇 y lo de vuelve false si contin鷄.
+	 * Comprueba si tiene que seguir la simulaci贸n y lo de vuelve false si contin煤a.
 	 * @return boolean
 	 */
 	public boolean sigueSimulacion(){
