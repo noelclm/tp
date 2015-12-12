@@ -7,7 +7,11 @@ public class CelulaSimple extends Celula{
 
 	//Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
-		
+	private int pasosSinMover;
+	private int pasosDados;
+	private int MAX_PASOS_SIN_MOVER;
+	private int PASOS_REPRODUCCION;
+	
 	/**
 	 * Constructor parametrizado.
 	 * @param pasosSinMover Pasos que puede estar sin moverse.
@@ -15,7 +19,11 @@ public class CelulaSimple extends Celula{
 	 */
 	public CelulaSimple(int pasosSinMover, int pasosReproduccion) {
 		
-		super(pasosSinMover, pasosReproduccion);
+		super();
+		this.MAX_PASOS_SIN_MOVER = pasosSinMover;
+		this.PASOS_REPRODUCCION = pasosReproduccion;
+		this.pasosSinMover = 0;
+		this.pasosDados = 0;
 		this.esComestible = true;
 		
 	}
@@ -101,6 +109,61 @@ public class CelulaSimple extends Celula{
 	public String toString(){
 		
 		return " X ";
+		
+	}
+	
+	/**
+	 * Suma uno al número de pasos dados.
+	 */
+	private void sumPasosDados(){
+		
+		this.pasosDados++;
+		
+	}
+	
+	/**
+	 * Metodo que reinicia los pasos dados.
+	 */
+	private void reiniciaPasosReproduccion(){
+		
+		this.pasosDados = 0;
+		
+	}	
+	
+	/**
+	 * Suma uno al número de pasos sin mover.
+	 */
+	private void sumPasosSinMover(){
+		
+		this.pasosSinMover++;
+		
+	}
+	
+	/**
+	 * Metodo que devuelve true si ha llegado al límite de pasos sin mover o false si no.
+	 * @return boolean
+	 */
+	private boolean muertePorInactividad(){
+		
+		if (this.pasosSinMover >= this.MAX_PASOS_SIN_MOVER)
+			return true;
+		
+		else 
+			return false;
+		
+	}
+	
+	/**
+	 * Metodo que devuelve true si tiene que reproducirse o false si no.
+	 * @return boolean
+	 */
+	private boolean reproducirse(){
+			
+		if (this.pasosDados == this.PASOS_REPRODUCCION)
+			return true;
+		
+		else
+			return false;
 		
 	}
 

@@ -53,8 +53,7 @@ public class Mundo {
 		return this.superficie.evoluciona(MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION,MAX_COMER);
 			
 	}
-	
-	
+		
 	/**
 	 * Llama a crear célula simple. Devuelve si ha podido a no en una cadena de caracteres. 
 	 * @param casilla Posición del tablero.
@@ -77,7 +76,7 @@ public class Mundo {
 	 */
 	public String crearCelulaCompleja(Casilla casilla){
 		
-		if(this.superficie.crearCelulaCompleja(casilla ,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION,MAX_COMER)) 
+		if(this.superficie.crearCelulaCompleja(casilla ,MAX_COMER)) 
 			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 		else
