@@ -9,8 +9,8 @@ public class CelulaSimple extends Celula{
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private int pasosSinMover;
 	private int pasosDados;
-	private int MAX_PASOS_SIN_MOVER;
-	private int PASOS_REPRODUCCION;
+	private final int MAX_PASOS_SIN_MOVER;
+	private final int PASOS_REPRODUCCION;
 	
 	/**
 	 * Constructor parametrizado.
