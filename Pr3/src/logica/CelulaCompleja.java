@@ -26,7 +26,7 @@ public class CelulaCompleja extends Celula {
 	}
 
 	@Override
-	public Casilla ejecutaMovimiento(Casilla casillaInicial, Superficie superficie) {
+	public Casilla ejecutaMovimiento(Casilla casillaInicial, StringBuilder texto, Superficie superficie) {
 		
 		Casilla casillaFinal = null;
 		int filas = superficie.getFilas();
@@ -44,25 +44,24 @@ public class CelulaCompleja extends Celula {
 			// Si come
 			if(superficie.comprobarCasilla(f2, c2) && superficie.esComestible(f2, c2)){
 				
+				superficie.moverCelula(casillaInicial, casillaFinal);
 				this.comidas++;
-				this.texto = "->Célula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR;
+				texto.append("->Célula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --COME--"+LINE_SEPARATOR);
 
 				// Si muere por comer mucho
 				if (this.MAX_COMER == this.comidas){
-					this.texto = this.texto + "->Explota la célula compleja en ("+f2+","+c2+")"+LINE_SEPARATOR;
-					superficie.eliminarCelula(casillaFinal); // Eliminamos la celula que se va a comer
-					casillaFinal = null; // Ponemos como que no puede moverse para que se elimine la celula
-				}else
-					superficie.moverCelula(casillaInicial, casillaFinal);
-		
+					texto.append("->Explota la célula compleja en ("+f2+","+c2+")"+LINE_SEPARATOR);
+					superficie.eliminarCelula(casillaFinal); 
+				}
+					
 			}else{ // Si no come
-				this.texto = "->Célula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --NO COME--"+LINE_SEPARATOR;
+				texto.append("->Célula compleja en ("+f+","+c+") se mueve a ("+f2+","+c2+") --NO COME--"+LINE_SEPARATOR);
 				superficie.moverCelula(casillaInicial, casillaFinal);
 			}
 
 		}else{ // Si no se puede mover
 
-			this.texto = "->La célula compleja en ("+f+","+c+") no se ha podido mover"+LINE_SEPARATOR;
+			texto.append("->La célula compleja en ("+f+","+c+") no se ha podido mover"+LINE_SEPARATOR);
 			casillaFinal = casillaInicial;
 
 		} 

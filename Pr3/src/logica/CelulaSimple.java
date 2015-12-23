@@ -29,14 +29,13 @@ public class CelulaSimple extends Celula{
 	}
 
 	@Override
-	public Casilla ejecutaMovimiento(Casilla casillaInicial, Superficie superficie) {
+	public Casilla ejecutaMovimiento(Casilla casillaInicial, StringBuilder texto, Superficie superficie) {
 		
 		Casilla casillaFinal = null;
 		int filas = superficie.getFilas();
 		int columnas = superficie.getColumnas();
 		int f = casillaInicial.getFila();
 		int c = casillaInicial.getColumna();
-		this.texto = "";
 		
 		Posicion posicionInicial = new Posicion(f,c);
 		
@@ -59,14 +58,14 @@ public class CelulaSimple extends Celula{
 			int c2 = posicionesVacias[numAleatorio].getY();
 			
 			casillaFinal = new Casilla(f2,c2);
-			this.texto = this.texto + "->Célula simple en ("+f+","+c+") se mueve a ("+f2+","+c2+")"+LINE_SEPARATOR;
+			texto.append("->Célula simple en ("+f+","+c+") se mueve a ("+f2+","+c2+")"+LINE_SEPARATOR);
 			superficie.moverCelula(casillaInicial, casillaFinal);
 			
 			// Miramos si tiene que reproducirse
 			if (this.reproducirse()){
 				this.reiniciaPasosReproduccion();
 				superficie.crearCelulaSimple(casillaInicial, this.MAX_PASOS_SIN_MOVER, this.PASOS_REPRODUCCION);
-				this.texto = this.texto + "->Nace una nueva célula simple en ("+f+","+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR;
+				texto.append("->Nace una nueva célula simple en ("+f+","+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR);
 			}else
 				this.sumPasosDados();
 			
@@ -75,19 +74,22 @@ public class CelulaSimple extends Celula{
 		}else{ // Si no se puede mover
 			
 			// Comprobamos que si ha llegado al limite de pasos sin moverse
-			if (this.muertePorInactividad())
-				this.texto = this.texto + "->Muere la célula simple de la casilla en ("+f+","+c+")  por inactividad"+LINE_SEPARATOR;
-				
+			if (this.muertePorInactividad()){
+				texto.append("->Muere la célula simple de la casilla en ("+f+","+c+")  por inactividad"+LINE_SEPARATOR);
+				superficie.eliminarCelula(casillaInicial);
+			}
 			// Comprobamos si ha llegado al limite de pasos que tiene que dar para reproducirse
-			else if (this.reproducirse())
-				this.texto = this.texto + "->Muere la célula simple de la casilla en ("+f+","+c+")  por no poder reproducirse"+LINE_SEPARATOR;
-			
+			else if (this.reproducirse()){
+				texto.append("->Muere la célula simple de la casilla en ("+f+","+c+")  por no poder reproducirse"+LINE_SEPARATOR);
+				superficie.eliminarCelula(casillaInicial);
+			}
 			else{ 
-				this.texto = this.texto + "->La célula simple en ("+f+","+c+") no se ha podido mover"+LINE_SEPARATOR;
+				texto.append("->La célula simple en ("+f+","+c+") no se ha podido mover"+LINE_SEPARATOR);
 				casillaFinal = casillaInicial;
+				this.sumPasosSinMover();
 			}
 
-			this.sumPasosSinMover();
+			
 
 		} 
 		

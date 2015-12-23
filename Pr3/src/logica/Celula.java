@@ -6,7 +6,6 @@ package logica;
 public abstract class Celula {
 
 	protected boolean esComestible;
-	protected String texto;
 	
 	/**
 	 * Mira donde se puede mover la celula y devuelve la casilla.
@@ -14,7 +13,7 @@ public abstract class Celula {
 	 * @param superficie Tablero de juego.
 	 * @return Casilla
 	 */
-	public abstract Casilla ejecutaMovimiento(Casilla casillaInicial, Superficie superficie);
+	public abstract Casilla ejecutaMovimiento(Casilla casillaInicial, StringBuilder texto, Superficie superficie);
 	
 	/**
 	 * Comprueba si la celula se puede comer.
@@ -27,18 +26,6 @@ public abstract class Celula {
 	 */
 	public Celula(){
 		
-		this.texto = "";
-		
 	}
 	
-	/**
-	 * Devuelve los movimientos realizados durante la ejecución del movimiento
-	 * @return String
-	 */
-	public String pintaMovimientos(){
-		
-		return this.texto;
-		
-	}
-
 }

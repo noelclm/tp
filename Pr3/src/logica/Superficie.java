@@ -89,6 +89,8 @@ public class Superficie {
 	public String evoluciona(int maxPasosSinMover, int pasosReproduccion, int maxComer){
 		
 		String str = "";
+		StringBuilder texto = new StringBuilder();
+		
 		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
 
 		// Inicia un tablero auxiliar para saber porque posiciones ha pasado ya
@@ -110,13 +112,13 @@ public class Superficie {
 					if(this.superficie[f][c]!=null){ 
 						
 						Casilla casillaInicial = new Casilla(f,c);
-						Casilla casillaFinal = this.superficie[f][c].ejecutaMovimiento(casillaInicial, this); 
+						Casilla casillaFinal = this.superficie[f][c].ejecutaMovimiento(casillaInicial, texto, this); 
 
 						/*
 						 * - Si la casillaInicial es igual a la casillaFinal la celula no se ha movido
 						 * - Si la casillaFinal esta vacia es porque la celula ha muerto
 						 * - Si la casillaFinal no esta vacia y no es igual a la casilla inicial se ha movido
-						 */
+						
 						if (casillaFinal != casillaInicial){
 							if(casillaFinal != null){
 								int f2 = casillaFinal.getFila();
@@ -129,7 +131,7 @@ public class Superficie {
 							}
 						}else
 							str = str + this.superficie[f][c].pintaMovimientos();
-
+ */
 					} // if(this.superficie[f][c]!=null)
 					
 				} // if(posicionesPasadas[f][c] == false)	
@@ -137,7 +139,7 @@ public class Superficie {
 			} // for (int c=0; c<this.columnas; c++)
 		} // for (int f=0; f<this.filas; f++)
 	
-		return str;
+		return texto.toString();
 
 	}
 	
