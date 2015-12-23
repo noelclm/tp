@@ -88,7 +88,6 @@ public class Superficie {
 	 */
 	public String evoluciona(int maxPasosSinMover, int pasosReproduccion, int maxComer){
 		
-		String str = "";
 		StringBuilder texto = new StringBuilder();
 		
 		boolean[][] posicionesPasadas = new boolean[this.filas][this.columnas];
@@ -113,25 +112,10 @@ public class Superficie {
 						
 						Casilla casillaInicial = new Casilla(f,c);
 						Casilla casillaFinal = this.superficie[f][c].ejecutaMovimiento(casillaInicial, texto, this); 
-
-						/*
-						 * - Si la casillaInicial es igual a la casillaFinal la celula no se ha movido
-						 * - Si la casillaFinal esta vacia es porque la celula ha muerto
-						 * - Si la casillaFinal no esta vacia y no es igual a la casilla inicial se ha movido
 						
-						if (casillaFinal != casillaInicial){
-							if(casillaFinal != null){
-								int f2 = casillaFinal.getFila();
-								int c2 = casillaFinal.getColumna();
-								str = str + this.superficie[f2][c2].pintaMovimientos();
-								posicionesPasadas[f2][c2] = true;
-							}else{
-								str = str + this.superficie[f][c].pintaMovimientos();
-								this.eliminarCelula(casillaInicial);
-							}
-						}else
-							str = str + this.superficie[f][c].pintaMovimientos();
- */
+						if (casillaFinal != casillaInicial && casillaFinal != null)
+							posicionesPasadas[casillaFinal.getFila()][casillaFinal.getColumna()] = true;
+
 					} // if(this.superficie[f][c]!=null)
 					
 				} // if(posicionesPasadas[f][c] == false)	
@@ -152,12 +136,12 @@ public class Superficie {
 	 */
 	public boolean crearCelulaSimple (Casilla casilla, int maxPasosSinMover, int pasosReproduccion){
 		
-		int f = casilla.getFila();
-		int c = casilla.getColumna();
+		int fila = casilla.getFila();
+		int columna = casilla.getColumna();
 		
-		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
-			if (this.superficie[f][c]==null){
-				this.superficie[f][c] = new CelulaSimple(maxPasosSinMover,pasosReproduccion);	
+		if (fila>=0 && fila<this.filas && columna>=0 && columna<this.columnas){
+			if (this.superficie[fila][columna]==null){
+				this.superficie[fila][columna] = new CelulaSimple(maxPasosSinMover,pasosReproduccion);	
 				return true;
 			}
 		}
@@ -176,12 +160,12 @@ public class Superficie {
 	 */
 	public boolean crearCelulaCompleja (Casilla casilla, int maxComer){
 
-		int f = casilla.getFila();
-		int c = casilla.getColumna();
+		int fila = casilla.getFila();
+		int columna = casilla.getColumna();
 		
-		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
-			if (this.superficie[f][c]==null){
-				this.superficie[f][c] = new CelulaCompleja(maxComer);	
+		if (fila>=0 && fila<this.filas && columna>=0 && columna<this.columnas){
+			if (this.superficie[fila][columna]==null){
+				this.superficie[fila][columna] = new CelulaCompleja(maxComer);	
 				return true;
 			}
 		}
@@ -197,12 +181,12 @@ public class Superficie {
 	 */
 	public boolean eliminarCelula (Casilla casilla){
 		
-		int f = casilla.getFila();
-		int c = casilla.getColumna();
+		int fila = casilla.getFila();
+		int columna = casilla.getColumna();
 		
-		if (f>=0 && f<this.filas && c>=0 && c<this.columnas){
-			if (this.superficie[f][c]!=null){
-				this.superficie[f][c]=null;
+		if (fila>=0 && fila<this.filas && columna>=0 && columna<this.columnas){
+			if (this.superficie[fila][columna]!=null){
+				this.superficie[fila][columna]=null;
 				return true;
 			}
 		}
@@ -246,9 +230,11 @@ public class Superficie {
 	 * @param c Columna.
 	 * @return boolean
 	 */
-	public boolean comprobarCasilla(int f,int c){
+	public boolean comprobarCasilla(Casilla casilla){
 		
-		if (this.superficie[f][c]==null)
+		int fila = casilla.getFila();
+		int columna = casilla.getColumna();
+		if (this.superficie[fila][columna]==null)
 			return false;
 		else
 			return true;
@@ -261,14 +247,9 @@ public class Superficie {
 	 * @param casillaFinal Posición final del tablero.
 	 */
 	public void moverCelula(Casilla casillaInicial, Casilla casillaFinal){
-		
-		int f = casillaInicial.getFila();
-		int c = casillaInicial.getColumna();
-		int f2 = casillaFinal.getFila();
-		int c2 = casillaFinal.getColumna();
-		
-		this.superficie[f2][c2] = this.superficie[f][c];
-		this.superficie[f][c] = null;
+
+		this.superficie[casillaFinal.getFila()][casillaFinal.getColumna()] = this.superficie[casillaInicial.getFila()][casillaInicial.getColumna()];
+		this.superficie[casillaInicial.getFila()][casillaInicial.getColumna()] = null;
 		
 	}
 	
@@ -278,9 +259,9 @@ public class Superficie {
 	 * @param c Columna.
 	 * @return boolean
 	 */
-	public boolean esComestible(int f, int c){
-		
-		return this.superficie[f][c].esComestible();
+	public boolean esComestible(Casilla casilla){
+
+		return this.superficie[casilla.getFila()][casilla.getColumna()].esComestible();
 		
 	}
 
@@ -295,9 +276,9 @@ public class Superficie {
 		int num = 0;
 		
 		for(int i=0; i<numPosiciones; i++){
-			int f = posicionesAdyacentes[i].getX();
-			int c = posicionesAdyacentes[i].getY();
-			if(superficie[f][c]==null)
+			int fila = posicionesAdyacentes[i].getX();
+			int columna = posicionesAdyacentes[i].getY();
+			if(superficie[fila][columna]==null)
 				num++;
 		}
 		
@@ -317,10 +298,10 @@ public class Superficie {
 		int num = 0;
 		Posicion[] posicionesVacias = new Posicion[numPosicionesVacias];
 		for(int i=0; i<numPosiciones; i++){
-			int f = posicionesAdyacentes[i].getX();
-			int c = posicionesAdyacentes[i].getY();
-			if(superficie[f][c]==null){
-				posicionesVacias[num] = new Posicion(f,c);
+			int fila = posicionesAdyacentes[i].getX();
+			int columna = posicionesAdyacentes[i].getY();
+			if(superficie[fila][columna]==null){
+				posicionesVacias[num] = new Posicion(fila,columna);
 				num++;
 			}
 		}

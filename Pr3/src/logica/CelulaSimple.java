@@ -19,7 +19,6 @@ public class CelulaSimple extends Celula{
 	 */
 	public CelulaSimple(int pasosSinMover, int pasosReproduccion) {
 		
-		super();
 		this.MAX_PASOS_SIN_MOVER = pasosSinMover;
 		this.PASOS_REPRODUCCION = pasosReproduccion;
 		this.pasosSinMover = 0;
@@ -34,62 +33,59 @@ public class CelulaSimple extends Celula{
 		Casilla casillaFinal = null;
 		int filas = superficie.getFilas();
 		int columnas = superficie.getColumnas();
-		int f = casillaInicial.getFila();
-		int c = casillaInicial.getColumna();
+		int filaCasillaInicial = casillaInicial.getFila();
+		int columnaCasillaInicial = casillaInicial.getColumna();
 		
-		Posicion posicionInicial = new Posicion(f,c);
+		Posicion posicionInicial = new Posicion(filaCasillaInicial,columnaCasillaInicial);
+		
+		// Miramos si tiene posiciones adyacentes y cuales son
+		int numPosiciones = posicionInicial.numPosiciones(filas-1, columnas-1);
+		Posicion[] posicionesAdyacentes = posicionInicial.adyacencia(filas, columnas);
 		
 		// Miramos si tiene posiciones vacias adyacentes
-		int numPosiciones = posicionInicial.numPosiciones(filas-1, columnas-1);
-		Posicion[] posicionesAdyacentes = new Posicion[numPosiciones];
-		posicionesAdyacentes = posicionInicial.adyacencia(filas, columnas);
-		
 		int numPosicionesVacias = superficie.cantidadPosicionesAdyacentesVacias(posicionesAdyacentes,numPosiciones);
 		
 		// Si se puede mover
 		if(numPosicionesVacias>0){ 
 			
-			Posicion[] posicionesVacias = new Posicion[numPosicionesVacias];
-			posicionesVacias = superficie.posicionesAdyacentesVacias(posicionesAdyacentes,numPosiciones,numPosicionesVacias);
+			// Miramos cuales son las posiciones vacias adyacentes
+			Posicion[] posicionesVacias = superficie.posicionesAdyacentesVacias(posicionesAdyacentes,numPosiciones,numPosicionesVacias);
 			
 			// Cogemos una posicion aleatoria de las posiciones adyacentes vacias
 			int numAleatorio = (int)(Math.random()*numPosicionesVacias-1);
-			int f2 = posicionesVacias[numAleatorio].getX();
-			int c2 = posicionesVacias[numAleatorio].getY();
+			int filaCasillaFinal = posicionesVacias[numAleatorio].getX();
+			int columnaCasillaFinal = posicionesVacias[numAleatorio].getY();
 			
-			casillaFinal = new Casilla(f2,c2);
-			texto.append("->Célula simple en ("+f+","+c+") se mueve a ("+f2+","+c2+")"+LINE_SEPARATOR);
+			//Movemos la celula a la casilla seleccionada
+			casillaFinal = new Casilla(filaCasillaFinal,columnaCasillaFinal);
+			texto.append("->Célula simple en ("+filaCasillaInicial+","+columnaCasillaInicial+") se mueve a ("+filaCasillaFinal+","+columnaCasillaFinal+")"+LINE_SEPARATOR);
 			superficie.moverCelula(casillaInicial, casillaFinal);
 			
 			// Miramos si tiene que reproducirse
 			if (this.reproducirse()){
 				this.reiniciaPasosReproduccion();
 				superficie.crearCelulaSimple(casillaInicial, this.MAX_PASOS_SIN_MOVER, this.PASOS_REPRODUCCION);
-				texto.append("->Nace una nueva célula simple en ("+f+","+c+") cuyo padre ha sido ("+f2+","+c2+")"+LINE_SEPARATOR);
+				texto.append("->Nace una nueva célula simple en ("+filaCasillaInicial+","+columnaCasillaInicial+") cuyo padre ha sido ("+filaCasillaFinal+","+columnaCasillaFinal+")"+LINE_SEPARATOR);
 			}else
 				this.sumPasosDados();
 			
-			
-				
 		}else{ // Si no se puede mover
 			
 			// Comprobamos que si ha llegado al limite de pasos sin moverse
 			if (this.muertePorInactividad()){
-				texto.append("->Muere la célula simple de la casilla en ("+f+","+c+")  por inactividad"+LINE_SEPARATOR);
+				texto.append("->Muere la célula simple de la casilla en ("+filaCasillaInicial+","+columnaCasillaInicial+")  por inactividad"+LINE_SEPARATOR);
 				superficie.eliminarCelula(casillaInicial);
 			}
 			// Comprobamos si ha llegado al limite de pasos que tiene que dar para reproducirse
 			else if (this.reproducirse()){
-				texto.append("->Muere la célula simple de la casilla en ("+f+","+c+")  por no poder reproducirse"+LINE_SEPARATOR);
+				texto.append("->Muere la célula simple de la casilla en ("+filaCasillaInicial+","+columnaCasillaInicial+")  por no poder reproducirse"+LINE_SEPARATOR);
 				superficie.eliminarCelula(casillaInicial);
 			}
 			else{ 
-				texto.append("->La célula simple en ("+f+","+c+") no se ha podido mover"+LINE_SEPARATOR);
+				texto.append("->La célula simple en ("+filaCasillaInicial+","+columnaCasillaInicial+") no se ha podido mover"+LINE_SEPARATOR);
 				casillaFinal = casillaInicial;
 				this.sumPasosSinMover();
 			}
-
-			
 
 		} 
 		

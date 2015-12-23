@@ -8,7 +8,7 @@ public abstract class Celula {
 	protected boolean esComestible;
 	
 	/**
-	 * Mira donde se puede mover la celula y devuelve la casilla.
+	 * Ejecuta el movimiento de la celula sobre el tablero y devuelve la casilla.
 	 * @param casillaInicial Posición del tablero.
 	 * @param superficie Tablero de juego.
 	 * @return Casilla
@@ -20,12 +20,5 @@ public abstract class Celula {
 	 * @return boolean
 	 */
 	public abstract boolean esComestible();
-	
-	/**
-	 * Constructor por defecto.
-	 */
-	public Celula(){
-		
-	}
 	
 }

@@ -98,4 +98,3 @@ Celula: ahora pasa a ser una interfaz, que además de los métodos que contenía
 Práctica 2, añade dos nuevos métodos abstractos para guardar y cargar en un fichero.
 Esta interfaz es implementada por las clases CelulaSimple y CelulaCompleja.
 */
-// TODO Poner StringBuilder en ejecutar movimientos
