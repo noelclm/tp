@@ -41,10 +41,10 @@ public class CrearCelulaCompleja extends Comando {
 		
 		if (cadenaComando[0].equals("crearcelulacompleja") && cadenaComando.length == 3){
 			
-			int f = Integer.parseInt(cadenaComando[1]); 
-			int c = Integer.parseInt(cadenaComando[2]);
+			int fila = Integer.parseInt(cadenaComando[1]); 
+			int columna = Integer.parseInt(cadenaComando[2]);
 			
-			Casilla casilla = new Casilla(f,c);
+			Casilla casilla = new Casilla(fila,columna);
 			
 			Comando comando = new CrearCelulaCompleja(casilla);
 				

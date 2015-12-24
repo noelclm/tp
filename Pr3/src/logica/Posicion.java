@@ -5,8 +5,8 @@ package logica;
  */
 public class Posicion {
 	
-	private int x;
-	private int y;
+	private int x; // Filas
+	private int y; // Columnas
 	
 	/**
 	 * Constructor.
@@ -15,8 +15,8 @@ public class Posicion {
 	 */
 	public Posicion(int x, int y){
 		
-		this.x = x; //filas
-		this.y = y; //columnas
+		this.x = x; 
+		this.y = y; 
 		
 	}
 	

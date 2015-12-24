@@ -5,17 +5,17 @@ package logica;
  */
 public class Casilla {
 
-	private int f;
-	private int c;
+	private int fila;
+	private int columna;
 	
 	/**
 	 * Constructor parametrizado.
 	 * @param f Fila.
 	 * @param c Columna.
 	 */
-	public Casilla (int f, int c){
-		this.f = f;
-		this.c = c;
+	public Casilla (int fila, int columna){
+		this.fila = fila;
+		this.columna = columna;
 	}
 	
 	/**
@@ -23,7 +23,7 @@ public class Casilla {
 	 * @return int
 	 */
 	public int getFila(){
-		return this.f;
+		return this.fila;
 	}
 	
 	/**
@@ -31,6 +31,7 @@ public class Casilla {
 	 * @return int
 	 */
 	public int getColumna(){
-		return this.c;
+		return this.columna;
 	}
+	
 }

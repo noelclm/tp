@@ -21,13 +21,13 @@ public class ParserComandos {
 	 */
 	static public String AyudaComandos(){
 		
-		String aux = "POSIBLES COMANDOS:" + LINE_SEPARATOR;
+		String ayuda = "POSIBLES COMANDOS:" + LINE_SEPARATOR;
 		
 		for(Comando c:array){
-			aux += c.textoAyuda();
+			ayuda += c.textoAyuda();
 		}
 		
-		return  aux;
+		return  ayuda;
 		
 	}
 	
@@ -38,14 +38,14 @@ public class ParserComandos {
 	 */
 	static public Comando parseaComando(String[ ] cadenas){
 		
-		Comando aux = null;
+		Comando comando = null;
 		
 		for(Comando c:array){
-			if(aux == null)
-				aux=c.parsea(cadenas);	
+			if(comando == null)
+				comando=c.parsea(cadenas);	
 		}
 		
-		return aux;
+		return comando;
 		
 	}
 

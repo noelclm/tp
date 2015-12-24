@@ -2,7 +2,7 @@ package main;
 import controlador.Controlador;
 
 /**
- * PRACTICA 2 - Nuevas Células en Nuestro Mundo.
+ * PRACTICA 3 - Interfaces, Ficheros y Excepciones.
  * @author Noel Clemente Montero
  * @author Estefanía Ortega Ávila
  */

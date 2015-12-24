@@ -13,7 +13,7 @@ public class Mundo {
 	private final int PASOS_REPRODUCCION = 4;
 	// Número de células que puede comer una celula compleja
 	private final int MAX_COMER = 2;
-	// Número si hay que cerrar el juego o no
+	// Boolean que indica si hay que cerrar el juego o no
 	private boolean simulacionTerminada; 
 	
 	private Superficie superficie;

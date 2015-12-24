@@ -13,20 +13,20 @@ public class Superficie {
 	private Celula[][] superficie;
 	
 	/**
-	 * Constructor.
-	 * @param nf Número de filas de la superficie.
-	 * @param nc Número de columnas de la superficie.
+	 * Constructor parametrizado.
+	 * @param numFilas Número de filas de la superficie.
+	 * @param numColumnas Número de columnas de la superficie.
 	 */
-	public Superficie(int nf, int nc){
+	public Superficie(int numFilas, int numColumnas){
 		
-		this.filas = nf;
-		this.columnas = nc;
-		this.superficie = new Celula[nf][nc];
+		this.filas = numFilas;
+		this.columnas = numColumnas;
+		this.superficie = new Celula[numFilas][numColumnas];
 		
-		for (int i=0; i<nf; i++){
-			for (int j=0; j<nc; j++){
+		for (int f=0; f<numFilas; f++){
+			for (int c=0; c<numColumnas; c++){
 				
-				this.superficie[i][j]= null;
+				this.superficie[f][c]= null;
 				
 			}
 		}
@@ -52,11 +52,11 @@ public class Superficie {
 			
 			while (numCelulasPuestas<numCelulas){
 				
-				int f = (int)(Math.random()*this.filas);
-				int c = (int)(Math.random()*this.columnas);
+				int fila = (int)(Math.random()*this.filas);
+				int columna = (int)(Math.random()*this.columnas);
 				int tipo = (int)(Math.random()*2);
 				
-				Casilla casilla = new Casilla(f,c);
+				Casilla casilla = new Casilla(fila,columna);
 				
 				if (tipo==0){
 					
@@ -200,9 +200,9 @@ public class Superficie {
 	 */
 	public void vaciar(){
 		
-		for (int i=0; i<this.filas; i++){
-			for (int j=0; j<this.columnas; j++){
-				this.superficie[i][j]= null;
+		for (int f=0; f<this.filas; f++){
+			for (int c=0; c<this.columnas; c++){
+				this.superficie[f][c]= null;
 			}
 		}
 		
@@ -318,11 +318,11 @@ public class Superficie {
 		
 		String str = "";
 		
-		for (int i=0; i<this.filas; i++){
-			for (int j=0; j<this.columnas; j++){
+		for (int f=0; f<this.filas; f++){
+			for (int c=0; c<this.columnas; c++){
 				
-				if(this.superficie[i][j]!= null)
-					str = str+this.superficie[i][j].toString();
+				if(this.superficie[f][c]!= null)
+					str = str+this.superficie[f][c].toString();
 				else
 					str = str+" - ";
 					
