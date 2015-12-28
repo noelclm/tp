@@ -9,9 +9,7 @@ import logica.Mundo;
  */
 public class Controlador {
 	
-	private static int filasTablero = 5;
-	private static int columnasTablero = 5;
-	private Mundo mundo = new Mundo(filasTablero,columnasTablero);
+	private Mundo mundo = new Mundo();
 	private boolean simulacionTerminada;
 	//Clase que nos permite obtener datos desde el teclado (Deriva de java.util)
 	Scanner s= new Scanner(System.in);
@@ -21,7 +19,9 @@ public class Controlador {
 	 */
 	public void simula(){
 	
-		while(!this.mundo.sigueSimulacion()){
+		this.simulacionTerminada = false;
+		
+		while(!this.simulacionTerminada){
 			
 			System.out.println("Introduce un comando:");
 			
@@ -36,6 +36,7 @@ public class Controlador {
 			
 				if(comando != null){
 					System.out.println(comando.ejecuta(mundo));
+					// TODO Poner que pueda terminar
 				}else{
 					System.out.println("No has escrito un comando correcto.");
 				}

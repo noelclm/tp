@@ -13,20 +13,26 @@ public class Mundo {
 	private final int PASOS_REPRODUCCION = 4;
 	// Número de células que puede comer una celula compleja
 	private final int MAX_COMER = 2;
-	// Boolean que indica si hay que cerrar el juego o no
-	private boolean simulacionTerminada; 
 	
 	private Superficie superficie;
 	
 	/**
-	 * Constructor.
+	 * Constructor por defecto.
+	 */
+	public Mundo(){
+		
+		this.superficie =new Superficie(5,5);
+		
+	}
+	
+	/**
+	 * Constructor parametrizado.
 	 * @param nf Número de filas.
 	 * @param nc Número de columnas.
 	 */
 	public Mundo(int nf, int nc){
 		
 		this.superficie =new Superficie(nf,nc);
-		this.simulacionTerminada=false;
 		
 	}
 	
@@ -116,31 +122,38 @@ public class Mundo {
 	 */
 	public String salir(){
 		
-		this.simulacionTerminada = true;
 		return "Fin de la simulación.....";
 		
 	}
 	
 	/**
-	 * Comprueba si tiene que seguir la simulación y lo de vuelve false si continúa.
-	 * @return boolean
+	 * 
+	 * @param nombreFichero
+	 * @return
 	 */
-	public boolean sigueSimulacion(){
-		
-		return this.simulacionTerminada;
-		
-	}
-	
 	public String cargar(String nombreFichero){
 		return "fichero cargador";
 		
 	}
 	
+	/**
+	 * 
+	 * @param nombreFichero
+	 * @return
+	 */
 	public String guardar (String nombreFichero){
 		return "fichero guardado";
 	}
 	
-	public String jugar(){
+	/**
+	 * 
+	 * @param filas
+	 * @param columnas
+	 * @param celulasComplejas
+	 * @param celulasSimples
+	 * @return
+	 */
+	public String jugar(int filas, int columnas, int celulasComplejas, int celulasSimples){
 		return "Cambiando de juego";
 	}
 	

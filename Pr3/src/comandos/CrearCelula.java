@@ -5,19 +5,19 @@ import logica.Casilla;
 import logica.Mundo;
 
 /**
- * Comando CrearCelulaCompleja - Crea una célula compleja en el tablero.
+ * Comando CrearCelulaSimple - Crea una célula simple en el tablero.
  */
-public class CrearCelulaCompleja extends Comando {
-
+public class CrearCelula extends Comando {
+	
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	
 	private Casilla casilla;
-
+	
 	/**
 	 * Constructor por defecto.
 	 */
-	public CrearCelulaCompleja() {
+	public CrearCelula() {
 		this.casilla = null;
 	}
 	
@@ -25,28 +25,40 @@ public class CrearCelulaCompleja extends Comando {
 	 * Constructor parametrizado.
 	 * @param casilla Casilla del tablero donde se quiere crear la célula.
 	 */
-	public CrearCelulaCompleja(Casilla casilla) {
+	public CrearCelula(Casilla casilla) {
 		this.casilla = casilla;
 	}
 
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.crearCelulaCompleja(this.casilla) + LINE_SEPARATOR + mundo.toString();
+		return mundo.crearCelulaSimple(this.casilla) + LINE_SEPARATOR + mundo.toString();
 		
 	}
 
 	@Override
 	public Comando parsea(String[] cadenaComando) {
 		
-		if (cadenaComando[0].equals("crearcelulacompleja") && cadenaComando.length == 3){
+		// TODO Cambiar esto
+		if (cadenaComando[0].equals("crearcelulasimple") && cadenaComando.length == 3){
 			
 			int fila = Integer.parseInt(cadenaComando[1]); 
 			int columna = Integer.parseInt(cadenaComando[2]);
 			
 			Casilla casilla = new Casilla(fila,columna);
 			
-			Comando comando = new CrearCelulaCompleja(casilla);
+			Comando comando = new CrearCelula(casilla);
+				
+			return comando;
+			
+		}else if (cadenaComando[0].equals("crearcelulacompleja") && cadenaComando.length == 3){
+			
+			int fila = Integer.parseInt(cadenaComando[1]); 
+			int columna = Integer.parseInt(cadenaComando[2]);
+			
+			Casilla casilla = new Casilla(fila,columna);
+			
+			Comando comando = new CrearCelula(casilla);
 				
 			return comando;
 			
@@ -59,8 +71,10 @@ public class CrearCelulaCompleja extends Comando {
 	@Override
 	public String textoAyuda() {
 		
-		return " CREARCELULACOMPLEJA F C: crea una nueva célula compleja en la posición (f,c) si es posible" + LINE_SEPARATOR ;
+		return " CREARCELULA F C: crea una nueva célula en la posición (f,c) si es posible" + LINE_SEPARATOR ;
 		
 	}
+	
+
 
 }

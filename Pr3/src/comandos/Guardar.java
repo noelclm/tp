@@ -12,7 +12,7 @@ public class Guardar extends Comando {
 	 * Constructor por defecto.
 	 */
 	public Guardar() {
-	this.nombreFichero = null;
+		this.nombreFichero = null;
 	}
 	
 	/**
@@ -23,12 +23,10 @@ public class Guardar extends Comando {
 		this.nombreFichero = nomFichero;
 	}
 	
-
-	
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
-		return mundo.guardar(this.nombreFichero) + LINE_SEPARATOR + mundo.toString();
+		return mundo.guardar(this.nombreFichero) + LINE_SEPARATOR;
 		
 	}
 
@@ -52,6 +50,3 @@ public class Guardar extends Comando {
 	}
 
 }
-
-
-

@@ -1,6 +1,5 @@
 package comandos;
 
-import logica.Casilla;
 import logica.Mundo;
 import controlador.Comando;
 
@@ -51,6 +50,3 @@ public class Cargar extends Comando{
 	}
 
 }
-
-
-
