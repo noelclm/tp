@@ -131,6 +131,19 @@ public class Mundo {
 		
 	}
 	
+	public String cargar(String nombreFichero){
+		return "fichero cargador";
+		
+	}
+	
+	public String guardar (String nombreFichero){
+		return "fichero guardado";
+	}
+	
+	public String jugar(){
+		return "Cambiando de juego";
+	}
+	
 	/**
 	 * Devuelve el tablero.
 	 * @return String

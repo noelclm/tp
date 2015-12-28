@@ -12,7 +12,8 @@ public class ParserComandos {
 		
 	static Comando[] array = {new Iniciar(), new Paso(), new CrearCelulaSimple(), 
 							  new CrearCelulaCompleja(), new EliminarCelula(),
-							  new Vaciar(), new Ayuda(), new Salir()};
+							  new Vaciar(), new Ayuda(), new Salir(), new Cargar(),
+							  new Guardar(), new Jugar()};
 	
 
 	/**
