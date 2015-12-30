@@ -1,7 +1,7 @@
 package comandos;
 
 import controlador.Comando;
-import logica.Mundo;
+import controlador.Controlador;
 
 public class Guardar extends Comando {
 	private String nombreFichero;
@@ -24,9 +24,9 @@ public class Guardar extends Comando {
 	}
 	
 	@Override
-	public String ejecuta(Mundo mundo) {
+	public String ejecuta(Controlador controlador) {
 		
-		return mundo.guardar(this.nombreFichero) + LINE_SEPARATOR;
+		return controlador.guardar(this.nombreFichero) + LINE_SEPARATOR;
 		
 	}
 

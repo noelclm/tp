@@ -1,8 +1,8 @@
 package comandos;
 
 import controlador.Comando;
+import controlador.Controlador;
 import logica.Casilla;
-import logica.Mundo;
 
 /**
  * Comando CrearCelulaSimple - Crea una célula simple en el tablero.
@@ -30,9 +30,9 @@ public class CrearCelula extends Comando {
 	}
 
 	@Override
-	public String ejecuta(Mundo mundo) {
+	public String ejecuta(Controlador controlador) {
 		
-		return mundo.crearCelulaSimple(this.casilla) + LINE_SEPARATOR + mundo.toString();
+		return controlador.crearCelulaSimple(this.casilla) + LINE_SEPARATOR + controlador.toString();
 		
 	}
 

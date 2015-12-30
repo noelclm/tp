@@ -1,7 +1,7 @@
 package comandos;
 
 import controlador.Comando;
-import logica.Mundo;
+import controlador.Controlador;
 
 /**
  * Comando Iniciar - Inicia el tablero con varias células.
@@ -17,9 +17,9 @@ public class Iniciar extends Comando{
 	public Iniciar() {}
 	
 	@Override
-	public String ejecuta(Mundo mundo) {
+	public String ejecuta(Controlador controlador) {
 		
-		return mundo.iniciar() + LINE_SEPARATOR + mundo.toString();
+		return controlador.iniciar() + LINE_SEPARATOR + controlador.toString();
 		
 	}
 

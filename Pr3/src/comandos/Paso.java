@@ -1,7 +1,7 @@
 package comandos;
 
 import controlador.Comando;
-import logica.Mundo;
+import controlador.Controlador;
 
 /**
  * Comando Paso - Realiza un movimiento en todas las células del tablero.
@@ -17,9 +17,9 @@ public class Paso extends Comando {
 	public Paso() {}
 	
 	@Override
-	public String ejecuta(Mundo mundo) {
+	public String ejecuta(Controlador controlador) {
 		
-		return mundo.evoluciona() + LINE_SEPARATOR + mundo.toString();
+		return controlador.evoluciona() + LINE_SEPARATOR + controlador.toString();
 		
 	}
 

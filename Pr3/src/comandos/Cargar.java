@@ -1,7 +1,7 @@
 package comandos;
 
-import logica.Mundo;
 import controlador.Comando;
+import controlador.Controlador;
 
 public class Cargar extends Comando{
 	private String nombreFichero;
@@ -24,9 +24,9 @@ public class Cargar extends Comando{
 	}
 	
 	@Override
-	public String ejecuta(Mundo mundo) {
+	public String ejecuta(Controlador controlador) {
 		
-		return mundo.cargar(this.nombreFichero) + LINE_SEPARATOR + mundo.toString();
+		return controlador.cargar(this.nombreFichero) + LINE_SEPARATOR + controlador.toString();
 		
 	}
 

@@ -1,8 +1,8 @@
 package comandos;
 
 import controlador.Comando;
+import controlador.Controlador;
 import logica.Casilla;
-import logica.Mundo;
 
 /**
  * Comando EliminarCelula - Elimina una célula del tablero.
@@ -30,9 +30,9 @@ public class EliminarCelula extends Comando {
 	}
 		
 	@Override
-	public String ejecuta(Mundo mundo) {
+	public String ejecuta(Controlador controlador) {
 		
-		return mundo.eliminarCelula(this.casilla) + LINE_SEPARATOR + mundo.toString();
+		return controlador.eliminarCelula(this.casilla) + LINE_SEPARATOR + controlador.toString();
 		
 	}
 

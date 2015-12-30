@@ -1,7 +1,7 @@
 package comandos;
 
 import controlador.Comando;
-import logica.Mundo;
+import controlador.Controlador;
 
 /**
  * Comando Salir - Termina la simulación.
@@ -17,9 +17,9 @@ public class Salir extends Comando {
 	public Salir() {}
 	
 	@Override
-	public String ejecuta(Mundo mundo) {
+	public String ejecuta(Controlador controlador) {
 		
-		return mundo.salir();
+		return controlador.salir();
 	}
 
 	@Override

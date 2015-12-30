@@ -1,8 +1,8 @@
 package comandos;
 
 import controlador.Comando;
+import controlador.Controlador;
 import controlador.ParserComandos;
-import logica.Mundo;
 
 /**
  * Comando Ayuda - Muestra los posibles comandos.
@@ -18,7 +18,7 @@ public class Ayuda extends Comando {
 	public Ayuda(){}
 	
 	@Override
-	public String ejecuta(Mundo mundo) {
+	public String ejecuta(Controlador controlador) {
 		
 		return ParserComandos.AyudaComandos();
 		

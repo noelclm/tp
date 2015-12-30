@@ -1,7 +1,7 @@
 package comandos;
 
 import controlador.Comando;
-import logica.Mundo;
+import controlador.Controlador;
 
 /**
  * Comando Vaciar - Vacía el tablero.
@@ -17,9 +17,9 @@ public class Vaciar extends Comando {
 	public Vaciar() {}
 	
 	@Override
-	public String ejecuta(Mundo mundo) {
+	public String ejecuta(Controlador controlador) {
 		
-		return mundo.vaciar() + LINE_SEPARATOR + mundo.toString();
+		return controlador.vaciar() + LINE_SEPARATOR + controlador.toString();
 		
 	}
 

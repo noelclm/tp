@@ -1,7 +1,5 @@
 package controlador;
 
-import logica.Mundo;
-
 /**
  * Clase abstracta pura de la que heredan los comandos.
  */
@@ -12,7 +10,7 @@ public abstract class Comando {
 	 * @param mundo Donde se realiza la acion.
 	 * @return String
 	 */
-	public abstract String ejecuta(Mundo mundo);
+	public abstract String ejecuta(Controlador controlador);
 	
 	/**
 	 * Comprueba el comando y devuelve el comando si es el correcto.
