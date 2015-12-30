@@ -44,6 +44,7 @@ public class MundoSimple extends Comando{
 	@Override
 	public String ejecuta(Mundo mundo) {
 		
+		// TODO Deberia llamar a jugar simple
 		return mundo.jugar(this.filas, this.columnas, this.celulasComplejas, this.celulasSimples) + LINE_SEPARATOR + mundo.toString();
 		
 	}
