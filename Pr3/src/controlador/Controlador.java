@@ -43,9 +43,7 @@ public class Controlador {
 				}
 				
 			} catch (NumberFormatException nfe){
-				
 				System.out.println("No ha introducido bien las coordenadas.");
-				
 			}
 			
 		}//fin while
@@ -58,8 +56,7 @@ public class Controlador {
 	 */
 	public String iniciar (){
 		
-		
-			return mundo.iniciar();
+		return mundo.iniciar();
 		
 	}
 	
@@ -79,7 +76,6 @@ public class Controlador {
 	 * @return String
 	 */
 	public String crearCelulaSimple(Casilla casilla){
-		
 		
 			return mundo.crearCelulaSimple(casilla) ;
 
@@ -102,7 +98,6 @@ public class Controlador {
 	 */
 	public String eliminarCelula (Casilla casilla){
 		
-	
 			return mundo.eliminarCelula(casilla);
 			
 	}
