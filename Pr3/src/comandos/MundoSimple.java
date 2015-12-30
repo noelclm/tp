@@ -1,6 +1,6 @@
 package comandos;
 import controlador.Comando;
-import logica.Casilla;
+import controlador.Controlador;
 import logica.Mundo;
 
 public class MundoSimple extends Comando{
@@ -42,10 +42,9 @@ public class MundoSimple extends Comando{
 	}
 	
 	@Override
-	public String ejecuta(Mundo mundo) {
+	public String ejecuta(Controlador controlador) {
 		
-		// TODO Deberia llamar a jugar simple
-		return mundo.jugar(this.filas, this.columnas, this.celulasComplejas, this.celulasSimples) + LINE_SEPARATOR + mundo.toString();
+		return controlador.jugar(this.filas, this.columnas, this.celulasComplejas, this.celulasSimples) + LINE_SEPARATOR + controlador.toString();
 		
 	}
 
@@ -72,7 +71,3 @@ public class MundoSimple extends Comando{
 	}
 
 }
-
-	
-
-
