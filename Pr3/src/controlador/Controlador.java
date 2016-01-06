@@ -1,7 +1,6 @@
 package controlador;
 
 import java.util.*;
-
 import logica.Casilla;
 import logica.Mundo;
 
@@ -10,7 +9,7 @@ import logica.Mundo;
  */
 public class Controlador {
 	
-	private Mundo mundo = new Mundo();
+	private Mundo mundo = null;
 	private boolean simulacionTerminada;
 	//Clase que nos permite obtener datos desde el teclado (Deriva de java.util)
 	Scanner s= new Scanner(System.in);
@@ -37,7 +36,6 @@ public class Controlador {
 			
 				if(comando != null){
 					System.out.println(comando.ejecuta(this));
-					// TODO Poner que pueda terminar
 				}else{
 					System.out.println("No has escrito un comando correcto.");
 				}
@@ -55,9 +53,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String iniciar (){
-		
 		return mundo.iniciar();
-		
 	}
 	
 	/**
@@ -65,9 +61,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String evoluciona(){
-		
 		return mundo.evoluciona();
-			
 	}
 		
 	/**
@@ -76,9 +70,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String crearCelulaSimple(Casilla casilla){
-		
-			return mundo.crearCelulaSimple(casilla) ;
-
+		return mundo.crearCelulaSimple(casilla) ;
 	}
 	
 	/**
@@ -87,8 +79,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String crearCelulaCompleja(Casilla casilla){
-	
-			return mundo.crearCelulaCompleja(casilla);
+		return mundo.crearCelulaCompleja(casilla);
 	}
 	
 	/**
@@ -97,9 +88,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String eliminarCelula (Casilla casilla){
-		
-			return mundo.eliminarCelula(casilla);
-			
+		return mundo.eliminarCelula(casilla);
 	}
 	
 	/**
@@ -107,9 +96,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String vaciar(){
-		
 		return mundo.vaciar();
-		
 	}
 	
 	/**
@@ -159,9 +146,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String toString(){
-		
 		return mundo.toString();
-		
 	}
 
 
