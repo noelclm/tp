@@ -138,7 +138,11 @@ public class Controlador {
 	 * @return
 	 */
 	public String jugar(int filas, int columnas, int celulasComplejas, int celulasSimples){
-		return mundo.jugar(filas, columnas, celulasComplejas, celulasSimples);
+		
+		this.mundo.inicializaMundo();
+		this.mundo.iniciar();
+		return "jugado";
+		
 	}
 	
 	/**

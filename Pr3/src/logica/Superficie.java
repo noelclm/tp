@@ -86,7 +86,7 @@ public class Superficie {
 	 * @param maxComer Número de veces que puede comer una célula compleja.
 	 * @return String
 	 */
-	public String evoluciona(int maxPasosSinMover, int pasosReproduccion, int maxComer){
+	public String evoluciona(){
 		
 		StringBuilder texto = new StringBuilder();
 		
