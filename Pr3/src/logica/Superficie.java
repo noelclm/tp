@@ -41,7 +41,7 @@ public class Superficie {
 	 * @param maxComer Número de veces que puede comer una célula compleja.
 	 * @return boolean
 	 */
-	public boolean iniciarSuperficie (int numCelulas, int maxPasosSinMover, int pasosReproduccion, int maxComer){
+	public boolean iniciarSuperficie (int numCelulas){
 		
 		this.vaciar();
 		
@@ -60,12 +60,12 @@ public class Superficie {
 				
 				if (tipo==0){
 					
-					if(this.crearCelulaSimple(casilla, maxPasosSinMover, pasosReproduccion))
+					if(this.crearCelulaSimple(casilla))
 						numCelulasPuestas++;
 					
 				}else{
 					
-					if(this.crearCelulaCompleja(casilla, maxComer))
+					if(this.crearCelulaCompleja(casilla))
 						numCelulasPuestas++;
 					
 				}
@@ -134,14 +134,14 @@ public class Superficie {
 	 * @param pasosReproduccion Número de pasos para que se reproduzca.
 	 * @return boolean
 	 */
-	public boolean crearCelulaSimple (Casilla casilla, int maxPasosSinMover, int pasosReproduccion){
+	public boolean crearCelulaSimple (Casilla casilla){
 		
 		int fila = casilla.getFila();
 		int columna = casilla.getColumna();
 		
 		if (fila>=0 && fila<this.filas && columna>=0 && columna<this.columnas){
 			if (this.superficie[fila][columna]==null){
-				this.superficie[fila][columna] = new CelulaSimple(maxPasosSinMover,pasosReproduccion);	
+				this.superficie[fila][columna] = new CelulaSimple();	
 				return true;
 			}
 		}
@@ -158,14 +158,14 @@ public class Superficie {
 	 * @param maxComer Número de veces que puede comer una celula compleja.
 	 * @return boolean
 	 */
-	public boolean crearCelulaCompleja (Casilla casilla, int maxComer){
+	public boolean crearCelulaCompleja (Casilla casilla){
 
 		int fila = casilla.getFila();
 		int columna = casilla.getColumna();
 		
 		if (fila>=0 && fila<this.filas && columna>=0 && columna<this.columnas){
 			if (this.superficie[fila][columna]==null){
-				this.superficie[fila][columna] = new CelulaCompleja(maxComer);	
+				this.superficie[fila][columna] = new CelulaCompleja();	
 				return true;
 			}
 		}

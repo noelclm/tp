@@ -8,18 +8,14 @@ public class CelulaCompleja extends Celula {
 	//Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private int comidas;
-	private final int MAX_COMER;
+	private final int MAX_COMER = 2;
 
 	/**
-	 * Constructor parametrizado
-	 * @param pasosSinMover Pasos que puede estar sin moverse.
-	 * @param pasosReproduccion Pasos que tiene que dar para reproducirse.
-	 * @param max_comer Máximas células que puede comer.
+	 * Constructor por defecto
 	 */
-	public CelulaCompleja(int max_comer) {
+	public CelulaCompleja() {
 
 		this.esComestible = false;
-		this.MAX_COMER = max_comer;
 		this.comidas=0;
 		
 	}

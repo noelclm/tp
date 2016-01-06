@@ -9,18 +9,14 @@ public class CelulaSimple extends Celula{
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private int pasosSinMover;
 	private int pasosDados;
-	private final int MAX_PASOS_SIN_MOVER;
-	private final int PASOS_REPRODUCCION;
+	private final int MAX_PASOS_SIN_MOVER = 2;
+	private final int PASOS_REPRODUCCION = 4;
 	
 	/**
-	 * Constructor parametrizado.
-	 * @param pasosSinMover Pasos que puede estar sin moverse.
-	 * @param pasosReproduccion Pasos que tiene que dar para reproducirse.
+	 * Constructor por defecto.
 	 */
-	public CelulaSimple(int pasosSinMover, int pasosReproduccion) {
+	public CelulaSimple() {
 		
-		this.MAX_PASOS_SIN_MOVER = pasosSinMover;
-		this.PASOS_REPRODUCCION = pasosReproduccion;
 		this.pasosSinMover = 0;
 		this.pasosDados = 0;
 		this.esComestible = true;
@@ -64,7 +60,7 @@ public class CelulaSimple extends Celula{
 			// Miramos si tiene que reproducirse
 			if (this.reproducirse()){
 				this.reiniciaPasosReproduccion();
-				superficie.crearCelulaSimple(casillaInicial, this.MAX_PASOS_SIN_MOVER, this.PASOS_REPRODUCCION);
+				superficie.crearCelulaSimple(casillaInicial);
 				texto.append("->Nace una nueva célula simple en ("+filaCasillaInicial+","+columnaCasillaInicial+") cuyo padre ha sido ("+filaCasillaFinal+","+columnaCasillaFinal+")"+LINE_SEPARATOR);
 			}else
 				this.sumPasosDados();

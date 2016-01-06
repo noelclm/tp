@@ -5,15 +5,6 @@ package logica;
  */
 public abstract class Mundo {
 
-	// Número de células que introduce al iniciar el tablero
-	protected final int NUM_CELULAS = 5;
-	// Número de pasos que puede estar sin mover
-	protected final int MAX_PASOS_SIN_MOVER = 2;
-	// Número de pasos para que se reproduzca
-	protected final int PASOS_REPRODUCCION = 4;
-	// Número de células que puede comer una celula compleja
-	protected final int MAX_COMER = 2;
-	
 	protected int filas;
 	protected int columnas;
 	protected Superficie superficie;
@@ -55,7 +46,7 @@ public abstract class Mundo {
 	 */
 	public String iniciar(){
 		
-		if(this.superficie.iniciarSuperficie(NUM_CELULAS,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION,MAX_COMER))
+		if(this.superficie.iniciarSuperficie(5))
 			return "Iniciando simulación";
 		
 		else
@@ -80,7 +71,7 @@ public abstract class Mundo {
 	 */
 	public String crearCelulaSimple(Casilla casilla){
 		
-		if(this.superficie.crearCelulaSimple(casilla ,MAX_PASOS_SIN_MOVER,PASOS_REPRODUCCION)) 
+		if(this.superficie.crearCelulaSimple(casilla)) 
 			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 		else
@@ -95,7 +86,7 @@ public abstract class Mundo {
 	 */
 	public String crearCelulaCompleja(Casilla casilla){
 		
-		if(this.superficie.crearCelulaCompleja(casilla ,MAX_COMER)) 
+		if(this.superficie.crearCelulaCompleja(casilla)) 
 			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
 		else
