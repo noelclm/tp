@@ -3,7 +3,7 @@ package logica;
 /**
  * Clase que gestiona una célula compleja que hereda de Celula.
  */
-public class CelulaCompleja extends Celula {
+public class CelulaCompleja implements Celula {
 	
 	//Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
@@ -15,7 +15,6 @@ public class CelulaCompleja extends Celula {
 	 */
 	public CelulaCompleja() {
 
-		this.esComestible = false;
 		this.comidas=0;
 		
 	}
@@ -64,7 +63,7 @@ public class CelulaCompleja extends Celula {
 	@Override
 	public boolean esComestible() {
 		
-		return this.esComestible;
+		return false;
 		
 	}
 
