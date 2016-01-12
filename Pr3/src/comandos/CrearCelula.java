@@ -32,26 +32,14 @@ public class CrearCelula extends Comando {
 	@Override
 	public String ejecuta(Controlador controlador) {
 		
-		return controlador.crearCelulaSimple(this.casilla) + LINE_SEPARATOR + controlador.toString();
+		return controlador.crearCelula(this.casilla) + LINE_SEPARATOR + controlador.toString();
 		
 	}
 
 	@Override
 	public Comando parsea(String[] cadenaComando) {
 		
-		// TODO Cambiar esto
-		if (cadenaComando[0].equals("crearcelulasimple") && cadenaComando.length == 3){
-			
-			int fila = Integer.parseInt(cadenaComando[1]); 
-			int columna = Integer.parseInt(cadenaComando[2]);
-			
-			Casilla casilla = new Casilla(fila,columna);
-			
-			Comando comando = new CrearCelula(casilla);
-				
-			return comando;
-			
-		}else if (cadenaComando[0].equals("crearcelulacompleja") && cadenaComando.length == 3){
+		if (cadenaComando[0].equals("crearcelula") && cadenaComando.length == 3){
 			
 			int fila = Integer.parseInt(cadenaComando[1]); 
 			int columna = Integer.parseInt(cadenaComando[2]);

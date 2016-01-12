@@ -2,26 +2,21 @@ package comandos;
 import controlador.Comando;
 import controlador.Controlador;
 import logica.Mundo;
+import logica.MundoSimple;
+import logica.MundoComplejo;
 
-public class MundoSimple extends Comando{
+public class Jugar extends Comando{
 	
 	private Mundo mundo;
-	private int filas;
-	private int columnas;
-	private int celulasSimples;
-	private int celulasComplejas;
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	
 	/**
 	 * Constructor por defecto.
 	 */
-	public MundoSimple() {
+	public Jugar() {
 		
-		this.filas = 0;
-		this.columnas = 0;
-		this.celulasComplejas = 0;
-		this.celulasSimples = 0;
+		this.mundo = null;
 		
 	}
 	
@@ -32,19 +27,15 @@ public class MundoSimple extends Comando{
 	 * @param celulasComplejas Número de celulas complejas para poner en el tablero. 
 	 * @param celulasSimples Número de celulas simples para poner en el tablero. 
 	 */
-	public MundoSimple(int filas, int columnas, int celulasComplejas, int celulasSimples) {
+	public Jugar(Mundo mundo) {
 		
-		this.filas = filas;
-		this.columnas = columnas;
-		this.celulasComplejas = celulasComplejas;
-		this.celulasSimples = celulasSimples;
-		
+		this.mundo = mundo;	
 	}
 	
 	@Override
 	public String ejecuta(Controlador controlador) {
 		
-		return controlador.jugar(this.filas, this.columnas, this.celulasComplejas, this.celulasSimples) + LINE_SEPARATOR + controlador.toString();
+		return controlador.jugar(this.mundo) + LINE_SEPARATOR + controlador.toString();
 		
 	}
 
@@ -55,7 +46,16 @@ public class MundoSimple extends Comando{
 			int filas = Integer.parseInt(cadenaComando[2]); 
 			int columnas = Integer.parseInt(cadenaComando[3]);
 			int celulasSimples = Integer.parseInt(cadenaComando[4]); 
-			Comando comando = new MundoSimple(filas,columnas,celulasSimples,0);
+			Mundo mundo = new MundoSimple(filas,columnas,celulasSimples);
+			Comando comando = new Jugar(mundo);
+			return comando;
+		}else if (cadenaComando[0].equals("jugar") && cadenaComando[1].equals("complejo") && cadenaComando.length == 6){
+			int filas = Integer.parseInt(cadenaComando[2]); 
+			int columnas = Integer.parseInt(cadenaComando[3]);
+			int celulasSimples = Integer.parseInt(cadenaComando[4]); 
+			int celulasComplejas = Integer.parseInt(cadenaComando[5]);
+			Mundo mundo = new MundoComplejo(filas,columnas,celulasSimples,celulasComplejas);
+			Comando comando = new Jugar(mundo);
 			return comando;
 		}else{
 			return null;

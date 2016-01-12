@@ -69,17 +69,8 @@ public class Controlador {
 	 * @param casilla Posición del tablero.
 	 * @return String
 	 */
-	public String crearCelulaSimple(Casilla casilla){
-		return mundo.crearCelulaSimple(casilla) ;
-	}
-	
-	/**
-	 * Llama a crear célula compleja. Devuelve si ha podido a no en una cadena de caracteres. 
-	 * @param casilla Posición del tablero.
-	 * @return String
-	 */
-	public String crearCelulaCompleja(Casilla casilla){
-		return mundo.crearCelulaCompleja(casilla);
+	public String crearCelula(Casilla casilla){
+		return mundo.crearCelula(casilla) ;
 	}
 	
 	/**
@@ -137,12 +128,8 @@ public class Controlador {
 	 * @param celulasSimples
 	 * @return
 	 */
-	public String jugar(int filas, int columnas, int celulasComplejas, int celulasSimples){
-		
-		this.mundo.inicializaMundo();
-		this.mundo.iniciar();
-		return "jugado";
-		
+	public String jugar(Mundo mundo){
+		return this.mundo.inicializaMundo();
 	}
 	
 	/**

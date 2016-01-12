@@ -11,7 +11,7 @@ public class ParserComandos {
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 		
 	static Comando[] array = {new Iniciar(), new Cargar(), new Guardar(), 
-							  new MundoSimple(), new MundoComplejo(),new Paso(), 
+							  new Jugar(), new Paso(), 
 							  new CrearCelula(), new EliminarCelula(), new Vaciar(), 
 							  new Ayuda(), new Salir()};
 	

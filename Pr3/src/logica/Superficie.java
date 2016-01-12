@@ -80,6 +80,55 @@ public class Superficie {
 	}
 	
 	/**
+	 * Inicia la superficie con un numero de células que le entra. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param numCelulas Número de celulas con el que se inicializa la superficie.
+	 * @param maxPasosSinMover Número de pasos sin mover que tiene la célula.
+	 * @param pasosReproduccion Número de pasos para que la célula se reproduzca.
+	 * @param maxComer Número de veces que puede comer una célula compleja.
+	 * @return boolean
+	 */
+	public boolean inicializaSuperficie (int numCelulasSimples, int numCelulasComplejas){
+		
+		this.vaciar();
+		
+		int numCelulasSimplesPuestas = 0;
+		int numCelulasComplejasPuestas = 0;
+		
+		// Comprueba que hay suficientes celdas para las celulas
+		if (numCelulasSimples+numCelulasComplejas <= this.filas*this.columnas){
+			
+			while (numCelulasSimplesPuestas<numCelulasSimples){
+				
+				int fila = (int)(Math.random()*this.filas);
+				int columna = (int)(Math.random()*this.columnas);
+
+				Casilla casilla = new Casilla(fila,columna);
+				
+				this.crearCelulaSimple(casilla);
+				numCelulasSimplesPuestas++;
+
+			}
+			
+			while (numCelulasComplejasPuestas<numCelulasComplejas){
+				
+				int fila = (int)(Math.random()*this.filas);
+				int columna = (int)(Math.random()*this.columnas);
+
+				Casilla casilla = new Casilla(fila,columna);
+				
+				this.crearCelulaCompleja(casilla);
+				numCelulasComplejasPuestas++;
+
+			}
+				
+			return true;
+			
+		}else
+			return false;
+		
+	}
+	
+	/**
 	 * Reproduce los movimientos de las células sobre el tablero y devuelve en un String los pasos realizados.
 	 * @param maxPasosSinMover Número de pasos que puede estar sin mover.
 	 * @param pasosReproduccion Número de pasos para que se reproduzca.

@@ -35,6 +35,13 @@ public abstract class Mundo {
 	}
 	
 	/**
+	 * Llama a crear célula simple. Devuelve si ha podido a no en una cadena de caracteres. 
+	 * @param casilla Posición del tablero.
+	 * @return String
+	 */
+	public abstract String crearCelula(Casilla casilla);
+	
+	/**
 	 * Inicia el tablero. Devuelve si ha podido a no en una cadena de caracteres. 
 	 * @return String
 	 */
@@ -69,7 +76,7 @@ public abstract class Mundo {
 	 * @param casilla Posición del tablero.
 	 * @return String
 	 */
-	public String crearCelulaSimple(Casilla casilla){
+	/*public String crearCelulaSimple(Casilla casilla){
 		
 		if(this.superficie.crearCelulaSimple(casilla)) 
 			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
@@ -78,13 +85,13 @@ public abstract class Mundo {
 			return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
 
 	}
-	
+	*/
 	/**
 	 * Llama a crear célula compleja. Devuelve si ha podido a no en una cadena de caracteres. 
 	 * @param casilla Posición del tablero.
 	 * @return String
 	 */
-	public String crearCelulaCompleja(Casilla casilla){
+	/*public String crearCelulaCompleja(Casilla casilla){
 		
 		if(this.superficie.crearCelulaCompleja(casilla)) 
 			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
@@ -92,7 +99,7 @@ public abstract class Mundo {
 		else
 			return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
 
-	}
+	}*/
 	
 	/**
 	 * Elimina una célula. Devuelve si ha podido a no en una cadena de caracteres.
