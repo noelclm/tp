@@ -35,7 +35,7 @@ public abstract class Mundo {
 	}
 	
 	/**
-	 * Llama a crear célula simple. Devuelve si ha podido a no en una cadena de caracteres. 
+	 * Llama a crear célula de cada mundo. Devuelve si ha podido a no en una cadena de caracteres. 
 	 * @param casilla Posición del tablero.
 	 * @return String
 	 */
@@ -72,36 +72,6 @@ public abstract class Mundo {
 	}
 		
 	/**
-	 * Llama a crear célula simple. Devuelve si ha podido a no en una cadena de caracteres. 
-	 * @param casilla Posición del tablero.
-	 * @return String
-	 */
-	/*public String crearCelulaSimple(Casilla casilla){
-		
-		if(this.superficie.crearCelulaSimple(casilla)) 
-			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
-			
-		else
-			return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
-
-	}
-	*/
-	/**
-	 * Llama a crear célula compleja. Devuelve si ha podido a no en una cadena de caracteres. 
-	 * @param casilla Posición del tablero.
-	 * @return String
-	 */
-	/*public String crearCelulaCompleja(Casilla casilla){
-		
-		if(this.superficie.crearCelulaCompleja(casilla)) 
-			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
-			
-		else
-			return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
-
-	}*/
-	
-	/**
 	 * Elimina una célula. Devuelve si ha podido a no en una cadena de caracteres.
 	 * @param casilla Posición del tablero.
 	 * @return String
@@ -128,7 +98,7 @@ public abstract class Mundo {
 	}
 	
 	/**
-	 * Cambia simulacionTerminada a true para que el juego termine y devuelve un texto.
+	 * Devuelve un texto de finalizar simulación.
 	 * @return String
 	 */
 	public String salir(){

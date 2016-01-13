@@ -22,14 +22,12 @@ public class Jugar extends Comando{
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param filas Número de filas del tablero. 
-	 * @param columnas Número de columnas del tablero. 
-	 * @param celulasComplejas Número de celulas complejas para poner en el tablero. 
-	 * @param celulasSimples Número de celulas simples para poner en el tablero. 
+	 * @param mundo Mundo que se crea.
 	 */
 	public Jugar(Mundo mundo) {
 		
 		this.mundo = mundo;	
+		
 	}
 	
 	@Override
@@ -66,7 +64,7 @@ public class Jugar extends Comando{
 	@Override
 	public String textoAyuda() {
 		
-		return " JUGAR: Permite cambiar de un juego a otro" + LINE_SEPARATOR ;
+		return " JUGAR SIMPLE/COMPLEJO m n s c: Permite cambiar de un juego a otro" + LINE_SEPARATOR ;
 		
 	}
 
