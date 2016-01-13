@@ -17,10 +17,3 @@ public class Main {
 	}
 
 }
-
-// TODO Preguntar al profesor
-/*
- * Para que tiene un mundo el comando JugarSimple y JugarComplejo?
- * Como ponemos el cargar fichero en celula?
- * Como sabe el comando crear celula que tipo de juego se esta ejecutando?
- */

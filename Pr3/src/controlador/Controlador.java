@@ -129,6 +129,7 @@ public class Controlador {
 	 * @return
 	 */
 	public String jugar(Mundo mundo){
+		this.mundo = mundo;
 		return this.mundo.inicializaMundo();
 	}
 	

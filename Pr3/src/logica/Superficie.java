@@ -97,6 +97,7 @@ public class Superficie {
 		// Comprueba que hay suficientes celdas para las celulas
 		if (numCelulasSimples+numCelulasComplejas <= this.filas*this.columnas){
 			
+			//Pone las celulas simples
 			while (numCelulasSimplesPuestas<numCelulasSimples){
 				
 				int fila = (int)(Math.random()*this.filas);
@@ -109,6 +110,7 @@ public class Superficie {
 
 			}
 			
+			// Pone las celulas complejas
 			while (numCelulasComplejasPuestas<numCelulasComplejas){
 				
 				int fila = (int)(Math.random()*this.filas);

@@ -19,6 +19,7 @@ public class MundoSimple extends Mundo{
 		}else{
 			return "No se ha podido inicializar";
 		}
+		
 	}
 	
 	@Override
