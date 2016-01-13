@@ -1,5 +1,8 @@
 package logica;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+
 /**
  * Clase encargada de comprobar si se ha realizado la acción y construir los textos que se mostraran.
  */
@@ -109,10 +112,18 @@ public abstract class Mundo {
 	
 	/**
 	 * 
-	 * @param nombreFichero
+	 * @param buffer
 	 * @return
+	 * @throws IOException 
 	 */
-	public String cargar(String nombreFichero){
+	public String cargar(BufferedReader buffer) throws IOException{
+		
+		String cadena;
+		
+		while((cadena = buffer.readLine())!=null) {
+            System.out.println(cadena);
+        }
+		
 		return "fichero cargador";
 	}
 	

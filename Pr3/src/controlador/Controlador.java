@@ -3,6 +3,7 @@ package controlador;
 import java.util.*;
 import logica.Casilla;
 import logica.Mundo;
+import java.io.*;
 
 /**
  * Clase encargada de pedir los comandos al usuario.
@@ -17,7 +18,7 @@ public class Controlador {
 	/**
 	 * Pide el comando al usuario y ejecuta la acción.
 	 */
-	public void simula(){
+	public void simula() throws IOException{
 	
 		this.simulacionTerminada = false;
 		
@@ -42,6 +43,8 @@ public class Controlador {
 				
 			} catch (NumberFormatException nfe){
 				System.out.println("No ha introducido bien las coordenadas.");
+			} catch (FileNotFoundException fnfe){
+				System.out.println("Ha introducido mal el nombre del archivo.");
 			}
 			
 		}//fin while
@@ -53,7 +56,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String iniciar (){
-		return mundo.iniciar();
+		return this.mundo.iniciar();
 	}
 	
 	/**
@@ -61,7 +64,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String evoluciona(){
-		return mundo.evoluciona();
+		return this.mundo.evoluciona();
 	}
 		
 	/**
@@ -70,7 +73,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String crearCelula(Casilla casilla){
-		return mundo.crearCelula(casilla) ;
+		return this.mundo.crearCelula(casilla) ;
 	}
 	
 	/**
@@ -79,7 +82,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String eliminarCelula (Casilla casilla){
-		return mundo.eliminarCelula(casilla);
+		return this.mundo.eliminarCelula(casilla);
 	}
 	
 	/**
@@ -87,7 +90,7 @@ public class Controlador {
 	 * @return String
 	 */
 	public String vaciar(){
-		return mundo.vaciar();
+		return this.mundo.vaciar();
 	}
 	
 	/**
@@ -95,10 +98,8 @@ public class Controlador {
 	 * @return String
 	 */
 	public String salir(){
-		
 		this.simulacionTerminada = true;
-		return mundo.salir();
-		
+		return this.mundo.salir();
 	}
 	
 	/**
@@ -106,9 +107,17 @@ public class Controlador {
 	 * @param nombreFichero
 	 * @return
 	 */
-	public String cargar(String nombreFichero){
-		return mundo.cargar(nombreFichero);
+	public String cargar(String nombreFichero) throws FileNotFoundException, IOException{
 		
+        FileReader archivo = new FileReader(nombreFichero);
+        BufferedReader buffer = new BufferedReader(archivo);
+        
+        String texto = this.mundo.cargar(buffer);
+        
+        buffer.close();
+        
+        return texto;
+	
 	}
 	
 	/**
