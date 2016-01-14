@@ -1,18 +1,18 @@
 package excepciones;
 
-public class MundoException extends NoelException {
+public class MundoException extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public MundoException(){
-		super("No ha introducido bien las coordenadas.");
+	public MundoException (){
+		super();
 	}
 	
-	public MundoException(String s){
-		super("No ha introducido bien las coordenadas. " + s);
+	public MundoException (String s){
+		super(s);
 	}
 	
 }

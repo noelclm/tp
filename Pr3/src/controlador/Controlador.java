@@ -8,7 +8,7 @@ import logica.MundoSimple;
 
 import java.io.*;
 
-import excepciones.NoelException;
+import excepciones.MundoException;
 
 /**
  * Clase encargada de pedir los comandos al usuario.
@@ -48,7 +48,7 @@ public class Controlador {
 					System.out.println("No has escrito un comando correcto.");
 				}
 
-			} catch (NoelException ne) {
+			} catch (MundoException ne) {
 				System.err.println(ne.getMessage());
 			} catch (FileNotFoundException fnfe) {
 				System.out.println("Ha introducido mal el nombre del archivo.");
@@ -131,15 +131,13 @@ public class Controlador {
 	public String cargar(String nombreFichero) throws FileNotFoundException,
 			IOException {
 
-		File archivo = new File(nombreFichero);
+		FileReader fr = new FileReader("src/"+nombreFichero);
+		
+		BufferedReader b = new BufferedReader(fr);
 
-		FileReader fr = new FileReader(archivo);
+		String texto = this.mundo.cargar(b);
 
-		BufferedReader buffer = new BufferedReader(fr);
-
-		String texto = this.mundo.cargar(buffer);
-
-		buffer.close();
+		b.close();
 		fr.close();
 		return texto;
 

@@ -3,7 +3,7 @@ package controlador;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import excepciones.MundoException;
+import excepciones.CoordenadasException;
 
 /**
  * Clase abstracta pura de la que heredan los comandos.
@@ -23,9 +23,9 @@ public abstract class Comando {
 	 * Comprueba el comando y devuelve el comando si es el correcto.
 	 * @param cadenaComando Texto introducido por el usuario.
 	 * @return Comando
-	 * @throws MundoException 
+	 * @throws CoordenadasException 
 	 */
-	public abstract Comando parsea(String[ ] cadenaComando) throws MundoException;
+	public abstract Comando parsea(String[ ] cadenaComando) throws CoordenadasException;
 	
 	/**
 	 * Devuelve la ayuda del comando.
