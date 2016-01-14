@@ -1,5 +1,4 @@
 package main;
-import java.io.IOException;
 
 import controlador.Controlador;
 
@@ -11,7 +10,7 @@ import controlador.Controlador;
 
 public class Main {
 	
-	public static void main (String[] args) throws IOException{
+	public static void main (String[] args) {
 		
 		Controlador c= new Controlador();
 		c.simula();

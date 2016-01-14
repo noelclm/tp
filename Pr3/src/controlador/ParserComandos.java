@@ -1,6 +1,7 @@
 package controlador;
 
 import comandos.*;
+import excepciones.NoelException;
 
 /**
  * Clase que comprueba los comandos.
@@ -36,8 +37,9 @@ public class ParserComandos {
 	 * Comprueba a que comando corresponde la cadena introducida por el usuario y devuelve el comando.
 	 * @param cadenas Cadena introducida por el usuario.
 	 * @return Comando
+	 * @throws MundoException 
 	 */
-	static public Comando parseaComando(String[ ] cadenas){
+	static public Comando parseaComando(String[ ] cadenas) throws NoelException {
 		
 		Comando comando = null;
 		

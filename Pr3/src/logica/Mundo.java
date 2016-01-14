@@ -79,11 +79,12 @@ public abstract class Mundo {
 	 * @param casilla Posición del tablero.
 	 * @return String
 	 */
-	public String eliminarCelula (Casilla casilla){
+	public String eliminarCelula (Casilla casilla) {
 		
 		if (this.superficie.eliminarCelula(casilla))
 			return "Se ha eliminado la célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
-			
+		
+		//throw new NuevaExcepcion();
 		else
 			return "No hay ninguna célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			

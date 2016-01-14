@@ -1,6 +1,7 @@
 package comandos;
 import controlador.Comando;
 import controlador.Controlador;
+import excepciones.MundoException;
 import logica.Mundo;
 import logica.MundoSimple;
 import logica.MundoComplejo;
@@ -38,12 +39,19 @@ public class Jugar extends Comando{
 	}
 
 	@Override
-	public Comando parsea(String[] cadenaComando) {
+	public Comando parsea(String[] cadenaComando) throws MundoException {
 		
 		if (cadenaComando[0].equals("jugar") && cadenaComando[1].equals("simple") && cadenaComando.length == 5){
-			int filas = Integer.parseInt(cadenaComando[2]); 
-			int columnas = Integer.parseInt(cadenaComando[3]);
-			int celulasSimples = Integer.parseInt(cadenaComando[4]); 
+			int filas;
+			int columnas;
+			int celulasSimples;
+			try{
+				filas = Integer.parseInt(cadenaComando[2]); 
+				columnas = Integer.parseInt(cadenaComando[3]);
+				celulasSimples = Integer.parseInt(cadenaComando[4]); 
+			}catch(NumberFormatException nfe){
+				throw new MundoException();
+			}
 			Mundo mundo = new MundoSimple(filas,columnas,celulasSimples);
 			Comando comando = new Jugar(mundo);
 			return comando;
