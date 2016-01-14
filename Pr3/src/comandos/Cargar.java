@@ -28,7 +28,7 @@ public class Cargar extends Comando{
 	
 	@Override
 	public String ejecuta(Controlador controlador) throws FileNotFoundException, IOException {
-		//System.out.println(this.nombreFichero);
+		
 		return controlador.cargar(this.nombreFichero) + LINE_SEPARATOR + controlador.toString();
 		
 	}
