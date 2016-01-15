@@ -1,10 +1,8 @@
 package comandos;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import controlador.Comando;
 import controlador.Controlador;
+import excepciones.MundoException;
 
 public class Cargar extends Comando{
 	private String nombreFichero;
@@ -27,7 +25,7 @@ public class Cargar extends Comando{
 	}
 	
 	@Override
-	public String ejecuta(Controlador controlador) throws FileNotFoundException, IOException {
+	public String ejecuta(Controlador controlador) throws MundoException {
 		
 		return controlador.cargar(this.nombreFichero) + LINE_SEPARATOR + controlador.toString();
 		
