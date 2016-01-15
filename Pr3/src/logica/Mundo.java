@@ -84,7 +84,6 @@ public abstract class Mundo {
 		if (this.superficie.eliminarCelula(casilla))
 			return "Se ha eliminado la célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 		
-		//throw new NuevaExcepcion();
 		else
 			return "No hay ninguna célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
 			
