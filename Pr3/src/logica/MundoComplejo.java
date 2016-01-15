@@ -8,6 +8,14 @@ public class MundoComplejo extends Mundo{
 	private int celulasComplejas;
 	Scanner s= new Scanner(System.in);
 	
+	public MundoComplejo(){
+		
+		super(5,5);
+		this.celulasSimples = 4;
+		this.celulasComplejas = 2;
+		
+	}
+	
 	public MundoComplejo(int filas,int columnas,int celulasSimples,int celulasComplejas){
 		
 		super(filas,columnas);

@@ -4,6 +4,13 @@ public class MundoSimple extends Mundo{
 	
 	private int celulasSimples;
 	
+	public MundoSimple(){
+		
+		super(5,5);
+		this.celulasSimples = 3;
+		
+	}
+	
 	public MundoSimple(int filas,int columnas,int celulasSimples){
 		
 		super(filas,columnas);

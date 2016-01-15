@@ -2,6 +2,7 @@ package comandos;
 import controlador.Comando;
 import controlador.Controlador;
 import excepciones.CoordenadasException;
+import excepciones.MundoException;
 import logica.Mundo;
 import logica.MundoSimple;
 import logica.MundoComplejo;
@@ -39,34 +40,35 @@ public class Jugar extends Comando{
 	}
 
 	@Override
-	public Comando parsea(String[] cadenaComando) throws CoordenadasException {
-		
-		if (cadenaComando[0].equals("jugar") && cadenaComando[1].equals("simple") && cadenaComando.length == 5){
-			int filas;
-			int columnas;
-			int celulasSimples;
-			try{
-				filas = Integer.parseInt(cadenaComando[2]); 
-				columnas = Integer.parseInt(cadenaComando[3]);
-				celulasSimples = Integer.parseInt(cadenaComando[4]); 
-			}catch(NumberFormatException nfe){
-				throw new CoordenadasException();
+	public Comando parsea(String[] cadenaComando) throws MundoException {
+		try{
+			if (cadenaComando[0].equals("jugar") && cadenaComando[1].equals("simple") && cadenaComando.length == 5){
+
+				int filas = Integer.parseInt(cadenaComando[2]); 
+				int columnas = Integer.parseInt(cadenaComando[3]);
+				int celulasSimples = Integer.parseInt(cadenaComando[4]); 
+				
+				Mundo mundo = new MundoSimple(filas,columnas,celulasSimples);
+				Comando comando = new Jugar(mundo);
+				return comando;
+				
+			}else if (cadenaComando[0].equals("jugar") && cadenaComando[1].equals("complejo") && cadenaComando.length == 6){
+				
+				int filas = Integer.parseInt(cadenaComando[2]); 
+				int columnas = Integer.parseInt(cadenaComando[3]);
+				int celulasSimples = Integer.parseInt(cadenaComando[4]); 
+				int celulasComplejas = Integer.parseInt(cadenaComando[5]);
+				
+				Mundo mundo = new MundoComplejo(filas,columnas,celulasSimples,celulasComplejas);
+				Comando comando = new Jugar(mundo);
+				return comando;
+				
+			}else{
+				return null;
 			}
-			Mundo mundo = new MundoSimple(filas,columnas,celulasSimples);
-			Comando comando = new Jugar(mundo);
-			return comando;
-		}else if (cadenaComando[0].equals("jugar") && cadenaComando[1].equals("complejo") && cadenaComando.length == 6){
-			int filas = Integer.parseInt(cadenaComando[2]); 
-			int columnas = Integer.parseInt(cadenaComando[3]);
-			int celulasSimples = Integer.parseInt(cadenaComando[4]); 
-			int celulasComplejas = Integer.parseInt(cadenaComando[5]);
-			Mundo mundo = new MundoComplejo(filas,columnas,celulasSimples,celulasComplejas);
-			Comando comando = new Jugar(mundo);
-			return comando;
-		}else{
-			return null;
+		}catch(NumberFormatException nfe){
+			throw new CoordenadasException();
 		}
-		
 	}
 
 	@Override

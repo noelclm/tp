@@ -8,6 +8,8 @@ import logica.MundoSimple;
 
 import java.io.*;
 
+import excepciones.ArchivoNoEncontradoException;
+import excepciones.FalloIOException;
 import excepciones.MundoException;
 
 /**
@@ -17,8 +19,7 @@ public class Controlador {
 
 	private Mundo mundo = null;
 	private boolean simulacionTerminada;
-	// Clase que nos permite obtener datos desde el teclado (Deriva de
-	// java.util)
+	// Clase que nos permite obtener datos desde el teclado (Deriva de java.util)
 	Scanner s = new Scanner(System.in);
 
 	/**
@@ -26,7 +27,7 @@ public class Controlador {
 	 */
 	public void simula() {
 
-		this.mundo = new MundoSimple(5, 5, 2);
+		this.mundo = new MundoSimple();
 		this.simulacionTerminada = false;
 
 		while (!this.simulacionTerminada) {
@@ -50,11 +51,7 @@ public class Controlador {
 
 			} catch (MundoException ne) {
 				System.err.println(ne.getMessage());
-			} catch (FileNotFoundException fnfe) {
-				System.out.println("Ha introducido mal el nombre del archivo.");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			} 
 
 		}// fin while
 
@@ -128,18 +125,26 @@ public class Controlador {
 	 * @param nombreFichero
 	 * @return
 	 */
-	public String cargar(String nombreFichero) throws FileNotFoundException,
-			IOException {
+	public String cargar(String nombreFichero) throws MundoException {
 
+		try{
 		FileReader fr = new FileReader("src/"+nombreFichero);
 		
 		BufferedReader b = new BufferedReader(fr);
 
 		String texto = this.mundo.cargar(b);
-
+		
 		b.close();
 		fr.close();
+		
 		return texto;
+		
+		}catch (FileNotFoundException fnfe) {
+			throw new ArchivoNoEncontradoException();
+		} catch (IOException e) {
+			throw new FalloIOException();
+		}
+		
 
 	}
 

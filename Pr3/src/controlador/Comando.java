@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import excepciones.CoordenadasException;
+import excepciones.MundoException;
 
 /**
  * Clase abstracta pura de la que heredan los comandos.
@@ -17,7 +18,7 @@ public abstract class Comando {
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
 	 */
-	public abstract String ejecuta(Controlador controlador) throws FileNotFoundException, IOException;
+	public abstract String ejecuta(Controlador controlador) throws MundoException;
 	
 	/**
 	 * Comprueba el comando y devuelve el comando si es el correcto.
@@ -25,7 +26,7 @@ public abstract class Comando {
 	 * @return Comando
 	 * @throws CoordenadasException 
 	 */
-	public abstract Comando parsea(String[ ] cadenaComando) throws CoordenadasException;
+	public abstract Comando parsea(String[ ] cadenaComando) throws MundoException;
 	
 	/**
 	 * Devuelve la ayuda del comando.
