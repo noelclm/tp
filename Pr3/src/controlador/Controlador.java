@@ -128,6 +128,7 @@ public class Controlador {
 
 		try{
 			Mundo auxMundo = null;
+			String texto;
 			FileReader fr = new FileReader("src/"+nombreFichero);
 			BufferedReader b = new BufferedReader(fr);
 			String linea = b.readLine();
@@ -144,16 +145,14 @@ public class Controlador {
 	
 			if(auxMundo.cargar(b)){
 				this.mundo = auxMundo;
-				b.close();
-				fr.close();
-				return "Fichero cargado correctamente";
+				texto = "Fichero cargado correctamente";
 			}else{
-				b.close();
-				fr.close();
-				
-				return "No se ha podido cargar el fichero";
+				texto = "No se ha podido cargar el fichero";
 			}
 			
+			b.close();
+			fr.close();
+			return texto;
 			
 		
 		}catch (FileNotFoundException fnfe) {
