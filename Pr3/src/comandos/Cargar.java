@@ -21,7 +21,7 @@ public class Cargar extends Comando{
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param String Nombre del fichero.
+	 * @param nomFichero Nombre del fichero.
 	 */
 	public Cargar(String nomFichero) {
 		this.nombreFichero = nomFichero;

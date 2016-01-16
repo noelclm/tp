@@ -115,7 +115,7 @@ public class Controlador {
 	 * Carga un mundo de un fichero.
 	 * @param nombreFichero Nombre del fichero dado por el usuario.
 	 * @return String
-	 * @throws MundoException
+	 * @throws MundoException Excepción de la que heredan las demás excepciones.
 	 */
 	public String cargar(String nombreFichero) throws MundoException {
 		
@@ -176,7 +176,7 @@ public class Controlador {
 	 * Guarda un mundo en un fichero.
 	 * @param nombreFichero Nombre del fichero dado por el usuario.
 	 * @return String
-	 * @throws MundoException
+	 * @throws MundoException Excepción de la que heredan las demás excepciones.
 	 */
 	public String guardar(String nombreFichero) throws MundoException {
 		

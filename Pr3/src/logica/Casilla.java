@@ -10,8 +10,8 @@ public class Casilla {
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param f Fila.
-	 * @param c Columna.
+	 * @param fila Fila.
+	 * @param columna Columna.
 	 */
 	public Casilla (int fila, int columna){
 		this.fila = fila;

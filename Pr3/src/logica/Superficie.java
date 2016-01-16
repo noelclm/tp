@@ -358,7 +358,7 @@ public class Superficie {
 	 * @param pasosSinMover Pasos sin mover de la célula.
 	 * @param numLinea Número de linea del fichero.
 	 * @return boolean
-	 * @throws MundoException
+	 * @throws MundoException Excepción de la que heredan las demás excepciones.
 	 */
 	public boolean cargarCelulaSimple(Casilla casilla, int pasosDados, int pasosSinMover, int numLinea) throws MundoException{
 		
@@ -382,7 +382,7 @@ public class Superficie {
 	 * @param vecesComido Número de veces que ha comido la célula.
 	 * @param numLinea Número de linea del fichero.
 	 * @return boolean
-	 * @throws MundoException
+	 * @throws MundoException Excepción de la que heredan las demás excepciones.
 	 */
 	public boolean cargarCelulaCompleja(Casilla casilla, int vecesComido, int numLinea) throws MundoException{
 		

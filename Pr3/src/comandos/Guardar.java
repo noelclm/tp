@@ -20,7 +20,7 @@ public class Guardar extends Comando {
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param String Nombre del fichero.
+	 * @param nomFichero Nombre del fichero.
 	 */
 	public Guardar(String nomFichero) {
 		this.nombreFichero = nomFichero;

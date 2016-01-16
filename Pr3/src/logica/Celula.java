@@ -10,6 +10,7 @@ interface Celula {
 	/**
 	 * Ejecuta el movimiento de la celula sobre el tablero y devuelve la casilla.
 	 * @param casillaInicial Posición del tablero.
+	 * @param texto Texto que se muestra por pantalla al realizar la acción.
 	 * @param superficie Tablero de juego.
 	 * @return Casilla
 	 */

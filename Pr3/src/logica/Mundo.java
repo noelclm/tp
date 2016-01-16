@@ -55,7 +55,7 @@ public abstract class Mundo {
 	 * Carga un mundo de un fichero.
 	 * @param b Es un BufferedReader de donde lee.
 	 * @return boolean
-	 * @throws MundoException
+	 * @throws MundoException Excepción de la que heredan las demás excepciones.
 	 */
 	public abstract boolean cargar(BufferedReader b) throws MundoException;
 	
