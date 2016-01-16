@@ -2,6 +2,7 @@ package comandos;
 import controlador.Comando;
 import controlador.Controlador;
 import excepciones.CoordenadasException;
+import excepciones.ErrorDeInicializacionException;
 import excepciones.MundoException;
 import logica.Mundo;
 import logica.MundoSimple;
@@ -48,6 +49,10 @@ public class Jugar extends Comando{
 				int columnas = Integer.parseInt(cadenaComando[3]);
 				int celulasSimples = Integer.parseInt(cadenaComando[4]); 
 				
+				if(filas*columnas < celulasSimples){
+					throw new ErrorDeInicializacionException();
+				}
+				
 				Mundo mundo = new MundoSimple(filas,columnas,celulasSimples);
 				Comando comando = new Jugar(mundo);
 				return comando;
@@ -58,6 +63,10 @@ public class Jugar extends Comando{
 				int columnas = Integer.parseInt(cadenaComando[3]);
 				int celulasSimples = Integer.parseInt(cadenaComando[4]); 
 				int celulasComplejas = Integer.parseInt(cadenaComando[5]);
+				
+				if(filas*columnas < celulasSimples+celulasComplejas){
+					throw new ErrorDeInicializacionException();
+				}
 				
 				Mundo mundo = new MundoComplejo(filas,columnas,celulasSimples,celulasComplejas);
 				Comando comando = new Jugar(mundo);

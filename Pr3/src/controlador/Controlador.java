@@ -1,14 +1,18 @@
 package controlador;
 
 import java.util.*;
+
 import logica.Casilla;
 import logica.Mundo;
 import logica.MundoComplejo;
 import logica.MundoSimple;
+
 import java.io.*;
+
 import excepciones.ArchivoNoEncontradoException;
 import excepciones.FalloIOException;
 import excepciones.FicheroErroneoException;
+import excepciones.FormatoNoValidoException;
 import excepciones.MundoException;
 
 /**
@@ -48,8 +52,8 @@ public class Controlador {
 					System.out.println("No has escrito un comando correcto.");
 				}
 
-			} catch (MundoException ne) {
-				System.err.println(ne.getMessage());
+			} catch (MundoException me) {
+				System.err.println(me.getMessage());
 			} 
 
 		}// fin while
@@ -123,20 +127,30 @@ public class Controlador {
 	 * 
 	 * @param nombreFichero
 	 * @return
+	 * @throws IOException 
 	 */
 	public String cargar(String nombreFichero) throws MundoException {
-
+		
+		FileReader fr = null;
+		BufferedReader b = null;
+		String texto;
+		
 		try{
-			Mundo auxMundo = null;
-			String texto;
-			FileReader fr = new FileReader("src/"+nombreFichero);
-			BufferedReader b = new BufferedReader(fr);
-			String linea = b.readLine();
 			
-			if(linea == "simple"){
-				auxMundo = new MundoSimple();
-			}else if(linea == "complejo"){
-				auxMundo = new MundoComplejo();
+			Mundo auxMundo = null;
+			fr = new FileReader("src/"+nombreFichero);
+			b = new BufferedReader(fr);
+			String linea1 = b.readLine();
+			String linea2 = b.readLine();
+			String linea3 = b.readLine();
+			
+			int filas = Integer.parseInt(linea2);
+			int columnas = Integer.parseInt(linea3);
+			
+			if(linea1.equals("simple")){
+				auxMundo = new MundoSimple(filas,columnas);
+			}else if(linea1.equals("complejo")){
+				auxMundo = new MundoComplejo(filas,columnas);
 			}else{
 				b.close();
 				fr.close();
@@ -149,28 +163,64 @@ public class Controlador {
 			}else{
 				texto = "No se ha podido cargar el fichero";
 			}
-			
-			b.close();
-			fr.close();
-			return texto;
-			
 		
 		}catch (FileNotFoundException fnfe) {
 			throw new ArchivoNoEncontradoException();
-		} catch (IOException e) {
+		}catch (IOException e) {
 			throw new FalloIOException("En Controlador");
+		}catch(NumberFormatException nfe){
+			throw new FormatoNoValidoException("en la linea 2 o 3.");
+		}finally{
+		
+			try {
+				b.close();
+				fr.close();
+			} catch (IOException e) {
+				throw new FalloIOException("Al cerrar el fichero");
+			}
 		}
 		
-
+		return texto;
+		
 	}
 
 	/**
 	 * 
 	 * @param nombreFichero
 	 * @return
+	 * @throws MundoException 
 	 */
-	public String guardar(String nombreFichero) {
-		return mundo.guardar(nombreFichero);
+	public String guardar(String nombreFichero) throws MundoException {
+		
+		FileWriter fw = null;
+        PrintWriter pw = null;
+		String texto;
+		
+        try
+        {
+        	fw = new FileWriter("src/" + nombreFichero);
+            pw = new PrintWriter(fw);
+ 
+            if(this.mundo.guardar(pw)){
+				texto = "Fichero guardado correctamente";
+			}else{
+				texto = "No se ha podido guardar el fichero";
+			}
+ 
+        }catch (FileNotFoundException fnfe) {
+			throw new ArchivoNoEncontradoException();
+		}catch (IOException e) {
+			throw new FalloIOException("En Controlador");
+		}finally {
+			try {
+				pw.close();
+				fw.close();
+			} catch (IOException e) {
+				throw new FalloIOException("Al cerrar el fichero");
+			}
+        }
+		
+		return texto;
 	}
 
 	/**

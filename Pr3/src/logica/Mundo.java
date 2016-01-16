@@ -1,6 +1,8 @@
 package logica;
 
 import java.io.BufferedReader;
+import java.io.PrintWriter;
+
 import excepciones.MundoException;
 
 /**
@@ -30,10 +32,9 @@ public abstract class Mundo {
 	 */
 	public Mundo(int nf, int nc){
 		
-		this.columnas = nf;
+		this.filas = nf;
 		this.columnas = nc;
 		this.superficie =new Superficie(nf,nc);
-		this.inicializaMundo();
 		
 	}
 	
@@ -57,6 +58,14 @@ public abstract class Mundo {
 	 * @throws IOException 
 	 */
 	public abstract boolean cargar(BufferedReader b) throws MundoException;
+	
+	/**
+	 * 
+	 * @param nombreFichero
+	 * @return
+	 * @throws MundoException 
+	 */
+	public abstract boolean guardar (PrintWriter pw);
 	
 	/**
 	 * Inicia el tablero. Devuelve si ha podido a no en una cadena de caracteres. 
@@ -118,17 +127,6 @@ public abstract class Mundo {
 
 	}
 	
-	
-	
-	/**
-	 * 
-	 * @param nombreFichero
-	 * @return
-	 */
-	public String guardar (String nombreFichero){
-		return "fichero guardado";
-	}
-
 	/**
 	 * Devuelve el tablero.
 	 * @return String

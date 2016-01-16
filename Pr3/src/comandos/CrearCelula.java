@@ -2,6 +2,8 @@ package comandos;
 
 import controlador.Comando;
 import controlador.Controlador;
+import excepciones.FormatoNoValidoException;
+import excepciones.MundoException;
 import logica.Casilla;
 
 /**
@@ -37,19 +39,22 @@ public class CrearCelula extends Comando {
 	}
 
 	@Override
-	public Comando parsea(String[] cadenaComando) {
+	public Comando parsea(String[] cadenaComando) throws MundoException {
 		
 		if (cadenaComando[0].equals("crearcelula") && cadenaComando.length == 3){
-			
-			int fila = Integer.parseInt(cadenaComando[1]); 
-			int columna = Integer.parseInt(cadenaComando[2]);
-			
-			Casilla casilla = new Casilla(fila,columna);
-			
-			Comando comando = new CrearCelula(casilla);
+			try{
+				int fila = Integer.parseInt(cadenaComando[1]); 
+				int columna = Integer.parseInt(cadenaComando[2]);
 				
-			return comando;
-			
+				Casilla casilla = new Casilla(fila,columna);
+				
+				Comando comando = new CrearCelula(casilla);
+					
+				return comando;
+			}catch(NumberFormatException nfe){
+				throw new FormatoNoValidoException("en las coordenadas.");
+			}
+
 		}
 		
 		return null;

@@ -1,5 +1,7 @@
 package logica;
 
+import java.io.PrintWriter;
+
 /**
  * Clase que gestiona una célula compleja que hereda de Celula.
  */
@@ -18,7 +20,11 @@ public class CelulaCompleja implements Celula {
 		this.comidas=0;
 		
 	}
+	public CelulaCompleja(int vecesComido) {
 
+		this.comidas=vecesComido;
+		
+	}
 	@Override
 	public Casilla ejecutaMovimiento(Casilla casillaInicial, StringBuilder texto, Superficie superficie) {
 
@@ -64,6 +70,11 @@ public class CelulaCompleja implements Celula {
 	public boolean esComestible() {
 		
 		return false;
+		
+	}
+	
+	public void guardar (PrintWriter pw){
+		pw.println("compleja " + this.comidas);
 		
 	}
 

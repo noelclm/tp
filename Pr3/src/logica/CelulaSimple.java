@@ -1,5 +1,7 @@
 package logica;
 
+import java.io.PrintWriter;
+
 /**
  * Clase que gestiona una celula simple que hereda de Celula.
  */
@@ -19,6 +21,13 @@ public class CelulaSimple implements Celula{
 		
 		this.pasosSinMover = 0;
 		this.pasosDados = 0;
+		
+	}
+	
+	public CelulaSimple(int pasosDados, int pasosSinMover) {
+		
+		this.pasosSinMover = pasosSinMover;
+		this.pasosDados = pasosDados;
 		
 	}
 
@@ -157,6 +166,10 @@ public class CelulaSimple implements Celula{
 		
 		else
 			return false;
+		
+	}
+	public void guardar (PrintWriter pw){
+		pw.println("simple " + this.pasosDados + " " + this.pasosSinMover);
 		
 	}
 

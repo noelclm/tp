@@ -1,5 +1,10 @@
 package logica;
 
+import java.io.PrintWriter;
+
+import excepciones.FicheroErroneoException;
+import excepciones.MundoException;
+
 
 /**
  * Clase que gestiona el tablero de juego.
@@ -105,8 +110,8 @@ public class Superficie {
 
 				Casilla casilla = new Casilla(fila,columna);
 				
-				this.crearCelulaSimple(casilla);
-				numCelulasSimplesPuestas++;
+				if(this.crearCelulaSimple(casilla))
+					numCelulasSimplesPuestas++;
 
 			}
 			
@@ -118,8 +123,8 @@ public class Superficie {
 
 				Casilla casilla = new Casilla(fila,columna);
 				
-				this.crearCelulaCompleja(casilla);
-				numCelulasComplejasPuestas++;
+				if(this.crearCelulaCompleja(casilla))
+					numCelulasComplejasPuestas++;
 
 			}
 				
@@ -358,6 +363,52 @@ public class Superficie {
 		}
 		
 		return posicionesVacias;
+		
+	}
+	
+	public boolean cargarCelulaSimple(Casilla casilla, int pasosDados, int pasosSinMover, int numLinea) throws MundoException{
+		
+		int fila = casilla.getFila();
+		int columna = casilla.getColumna();
+		
+		if (fila>=0 && fila<this.filas && columna>=0 && columna<this.columnas){
+			if(this.comprobarCasilla(casilla)){
+				throw new FicheroErroneoException("Hay una célula repetida en la linea " + numLinea);
+			}
+			this.superficie[fila][columna] = new CelulaSimple(pasosDados, pasosSinMover);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean cargarCelulaCompleja(Casilla casilla, int vecesComido, int numLinea) throws MundoException{
+		
+		int fila = casilla.getFila();
+		int columna = casilla.getColumna();
+		
+		if (fila>=0 && fila<this.filas && columna>=0 && columna<this.columnas){
+			if(this.comprobarCasilla(casilla)){
+				throw new FicheroErroneoException("Hay una célula repetida en la linea " + numLinea);
+			}
+			this.superficie[fila][columna] = new CelulaCompleja(vecesComido);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public void guardar(PrintWriter pw) {
+		
+		for (int f=0; f<this.filas; f++){
+			for (int c=0; c<this.columnas; c++){
+				if (this.superficie[f][c]!= null){
+					pw.print(f + " " + c + " ");
+					this.superficie[f][c].guardar(pw);
+				}
+			}
+		}
+		
 		
 	}
 	

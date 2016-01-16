@@ -2,6 +2,7 @@ package comandos;
 
 import controlador.Comando;
 import controlador.Controlador;
+import excepciones.MundoException;
 
 public class Guardar extends Comando {
 	private String nombreFichero;
@@ -24,7 +25,7 @@ public class Guardar extends Comando {
 	}
 	
 	@Override
-	public String ejecuta(Controlador controlador) {
+	public String ejecuta(Controlador controlador) throws MundoException {
 		
 		return controlador.guardar(this.nombreFichero) + LINE_SEPARATOR;
 		

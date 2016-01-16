@@ -2,6 +2,8 @@ package comandos;
 
 import controlador.Comando;
 import controlador.Controlador;
+import excepciones.FormatoNoValidoException;
+import excepciones.MundoException;
 import logica.Casilla;
 
 /**
@@ -37,18 +39,23 @@ public class EliminarCelula extends Comando {
 	}
 
 	@Override
-	public Comando parsea(String[] cadenaComando) {
+	public Comando parsea(String[] cadenaComando) throws MundoException {
 
 		if (cadenaComando[0].equals("eliminarcelula") && cadenaComando.length == 3){
+			try{
+				int fila = Integer.parseInt(cadenaComando[1]); 
+				int columna = Integer.parseInt(cadenaComando[2]);
+				
+				Casilla casilla = new Casilla(fila,columna);
 
-			int fila = Integer.parseInt(cadenaComando[1]); 
-			int columna = Integer.parseInt(cadenaComando[2]);
+				Comando comando = new EliminarCelula(casilla);
+				
+				return comando;
+				
+			}catch(NumberFormatException nfe){
+				throw new FormatoNoValidoException("en las coordenadas.");
+			}
 			
-			Casilla casilla = new Casilla(fila,columna);
-
-			Comando comando = new EliminarCelula(casilla);
-			
-			return comando;
 
 		}
 		

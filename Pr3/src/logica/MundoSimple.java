@@ -2,8 +2,12 @@ package logica;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import excepciones.FalloIOException;
+import excepciones.FicheroErroneoException;
+import excepciones.FormatoNoValidoException;
+import excepciones.IndicesFueraDeRango;
 import excepciones.MundoException;
 
 public class MundoSimple extends Mundo{
@@ -14,6 +18,7 @@ public class MundoSimple extends Mundo{
 		
 		super(5,5);
 		this.celulasSimples = 3;
+		this.inicializaMundo();
 		
 	}
 	
@@ -21,9 +26,18 @@ public class MundoSimple extends Mundo{
 		
 		super(filas,columnas);
 		this.celulasSimples = celulasSimples;
+		this.inicializaMundo();
 		
 	}
+	
+	public MundoSimple(int filas,int columnas){
 		
+		super(filas,columnas);
+		this.celulasSimples = 0;
+		this.inicializaMundo();
+		
+	}
+
 	@Override
 	public String inicializaMundo() {
 		
@@ -50,16 +64,54 @@ public class MundoSimple extends Mundo{
 	public boolean cargar(BufferedReader b) throws MundoException{
 		
 		String cadena;
+		int numLinea = 4;
+		int numCelulas = 0;
 		
 		try {
 			while((cadena = b.readLine())!=null) {
-			    System.out.println(cadena);
+				String[] palabras = cadena.split(" ");
+				
+				if(palabras.length == 5 && palabras[2].equals("simple")){
+					
+					int f = Integer.parseInt(palabras[0]);
+					int c = Integer.parseInt(palabras[1]);
+					Casilla casilla = new Casilla (f,c);
+					int pasosDados = Integer.parseInt(palabras[3]);
+					int pasosSinMover = Integer.parseInt(palabras[4]);
+					
+					if(numCelulas <= this.filas*this.columnas){
+						if(this.superficie.cargarCelulaSimple(casilla,pasosDados,pasosSinMover,numLinea)){
+							numCelulas++;
+						}else{
+							throw new IndicesFueraDeRango("Posición de la celula fuera del tablero, en la linea " + numLinea);
+						}
+					}else{
+						throw new IndicesFueraDeRango("Hay más células que casillas ");
+					}
+					
+				}else{
+					throw new FicheroErroneoException("En la linea " + numLinea);
+				}
+				numLinea++;
 			}
-		} catch (IOException e) {
+		}catch (IOException e) {
 			throw new FalloIOException("En MundoSimple");
+		}catch (NumberFormatException nfe){
+			throw new FormatoNoValidoException("En la linea " + numLinea);
 		}
 		
 		return true;
+	}
+	
+	public boolean guardar (PrintWriter pw){
+		
+		pw.println("simple");
+		pw.println(this.filas);
+		pw.println(this.columnas);
+		this.superficie.guardar(pw);
+
+		return true;
+		
 	}
 
 }

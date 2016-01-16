@@ -1,5 +1,7 @@
 package logica;
 
+import java.io.PrintWriter;
+
 /**
  * Clase que gestiona una celula.
  */
@@ -18,5 +20,7 @@ interface Celula {
 	 * @return boolean
 	 */
 	public boolean esComestible();
+	
+	public void guardar(PrintWriter pw);
 	
 }
