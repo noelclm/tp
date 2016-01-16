@@ -3,7 +3,9 @@ package comandos;
 import controlador.Comando;
 import controlador.Controlador;
 import excepciones.MundoException;
-
+/**
+ * Comando Guardar - Guarda el mundo en un fichero.
+ */
 public class Guardar extends Comando {
 	private String nombreFichero;
 	// Para que el salto de linea salga bien en windows y linux.

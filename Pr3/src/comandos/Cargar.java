@@ -4,6 +4,9 @@ import controlador.Comando;
 import controlador.Controlador;
 import excepciones.MundoException;
 
+/**
+ * Comando Cargar - Carga un fichero.
+ */
 public class Cargar extends Comando{
 	private String nombreFichero;
 	// Para que el salto de linea salga bien en windows y linux.

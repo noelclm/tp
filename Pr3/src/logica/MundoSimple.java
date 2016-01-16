@@ -10,10 +10,16 @@ import excepciones.FormatoNoValidoException;
 import excepciones.IndicesFueraDeRango;
 import excepciones.MundoException;
 
+/**
+ * Clase que hereda de Mundo que crea un mundo con células simples.
+ */
 public class MundoSimple extends Mundo{
 	
 	private int celulasSimples;
 	
+	/**
+	 * Constructor por defecto.
+	 */
 	public MundoSimple(){
 		
 		super(5,5);
@@ -22,6 +28,12 @@ public class MundoSimple extends Mundo{
 		
 	}
 	
+	/**
+	 * Constructor parametrizado
+	 * @param filas Filas totales del tablero.
+	 * @param columnas Columnas totales del tablero.
+	 * @param celulasSimples Células simples totales del tablero.
+	 */
 	public MundoSimple(int filas,int columnas,int celulasSimples){
 		
 		super(filas,columnas);
@@ -30,6 +42,11 @@ public class MundoSimple extends Mundo{
 		
 	}
 	
+	/**
+	 * Constructor parametrizado
+	 * @param filas Filas totales del tablero.
+	 * @param columnas Columnas totales del tablero.
+	 */
 	public MundoSimple(int filas,int columnas){
 		
 		super(filas,columnas);
@@ -103,6 +120,7 @@ public class MundoSimple extends Mundo{
 		return true;
 	}
 	
+	@Override
 	public boolean guardar (PrintWriter pw){
 		
 		pw.println("simple");

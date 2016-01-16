@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import excepciones.MundoException;
 
 /**
- * Clase encargada de comprobar si se ha realizado la acción y construir los textos que se mostraran.
+ * Clase abstracta encargada de comprobar si se ha realizado la acción y construir los textos que se mostraran.
  */
 public abstract class Mundo {
 
@@ -52,18 +52,17 @@ public abstract class Mundo {
 	public abstract String inicializaMundo ();
 	
 	/**
-	 * 
-	 * @param buffer
-	 * @return
-	 * @throws IOException 
+	 * Carga un mundo de un fichero.
+	 * @param b Es un BufferedReader de donde lee.
+	 * @return boolean
+	 * @throws MundoException
 	 */
 	public abstract boolean cargar(BufferedReader b) throws MundoException;
 	
 	/**
-	 * 
-	 * @param nombreFichero
-	 * @return
-	 * @throws MundoException 
+	 * Guarda un mundo en un fichero.
+	 * @param pw Es un PrintWriter en donde escribe.
+	 * @return boolean
 	 */
 	public abstract boolean guardar (PrintWriter pw);
 	

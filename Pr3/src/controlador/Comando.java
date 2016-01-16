@@ -1,9 +1,5 @@
 package controlador;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import excepciones.CoordenadasException;
 import excepciones.MundoException;
 
 /**
@@ -15,8 +11,7 @@ public abstract class Comando {
 	 * Ejecuta la acción y devuelve un texto con lo que ha hecho.
 	 * @param mundo Donde se realiza la acion.
 	 * @return String
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
+	 * @throws MundoException 
 	 */
 	public abstract String ejecuta(Controlador controlador) throws MundoException;
 	
@@ -24,7 +19,7 @@ public abstract class Comando {
 	 * Comprueba el comando y devuelve el comando si es el correcto.
 	 * @param cadenaComando Texto introducido por el usuario.
 	 * @return Comando
-	 * @throws CoordenadasException 
+	 * @throws MundoException 
 	 */
 	public abstract Comando parsea(String[ ] cadenaComando) throws MundoException;
 	

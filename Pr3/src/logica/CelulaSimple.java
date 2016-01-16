@@ -24,6 +24,11 @@ public class CelulaSimple implements Celula{
 		
 	}
 	
+	/**
+	 * Constructor parametrizado.
+	 * @param pasosDados Pasos dados por la célula.
+	 * @param pasosSinMover Pasos sin mover por la célula.
+	 */
 	public CelulaSimple(int pasosDados, int pasosSinMover) {
 		
 		this.pasosSinMover = pasosSinMover;
@@ -168,6 +173,8 @@ public class CelulaSimple implements Celula{
 			return false;
 		
 	}
+	
+	@Override
 	public void guardar (PrintWriter pw){
 		pw.println("simple " + this.pasosDados + " " + this.pasosSinMover);
 		

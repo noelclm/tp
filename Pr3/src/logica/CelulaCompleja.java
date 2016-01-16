@@ -20,6 +20,11 @@ public class CelulaCompleja implements Celula {
 		this.comidas=0;
 		
 	}
+	
+	/**
+	 * Constructor parametrizado
+	 * @param vecesComido Número de veces que ha comido la célula.
+	 */
 	public CelulaCompleja(int vecesComido) {
 
 		this.comidas=vecesComido;
@@ -73,6 +78,7 @@ public class CelulaCompleja implements Celula {
 		
 	}
 	
+	@Override
 	public void guardar (PrintWriter pw){
 		pw.println("compleja " + this.comidas);
 		

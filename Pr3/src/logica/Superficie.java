@@ -41,9 +41,6 @@ public class Superficie {
 	/**
 	 * Inicia la superficie con un numero de células que le entra. Devuelve un boolean dependiendo si ha podido o no.
 	 * @param numCelulas Número de celulas con el que se inicializa la superficie.
-	 * @param maxPasosSinMover Número de pasos sin mover que tiene la célula.
-	 * @param pasosReproduccion Número de pasos para que la célula se reproduzca.
-	 * @param maxComer Número de veces que puede comer una célula compleja.
 	 * @return boolean
 	 */
 	public boolean iniciarSuperficie (int numCelulas){
@@ -86,10 +83,8 @@ public class Superficie {
 	
 	/**
 	 * Inicia la superficie con un numero de células que le entra. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param numCelulas Número de celulas con el que se inicializa la superficie.
-	 * @param maxPasosSinMover Número de pasos sin mover que tiene la célula.
-	 * @param pasosReproduccion Número de pasos para que la célula se reproduzca.
-	 * @param maxComer Número de veces que puede comer una célula compleja.
+	 * @param numCelulasSimples Número de células simples con el que se inicializa la superficie.
+	 * @param numCelulasComplejas Número de células complejas con el que se inicializa la superficie.
 	 * @return boolean
 	 */
 	public boolean inicializaSuperficie (int numCelulasSimples, int numCelulasComplejas){
@@ -137,9 +132,6 @@ public class Superficie {
 	
 	/**
 	 * Reproduce los movimientos de las células sobre el tablero y devuelve en un String los pasos realizados.
-	 * @param maxPasosSinMover Número de pasos que puede estar sin mover.
-	 * @param pasosReproduccion Número de pasos para que se reproduzca.
-	 * @param maxComer Número de veces que puede comer una célula compleja.
 	 * @return String
 	 */
 	public String evoluciona(){
@@ -186,8 +178,6 @@ public class Superficie {
 	/**
 	 * Crea una célula simple en una posición de la superficie. Devuelve un boolean dependiendo si ha podido o no.
 	 * @param casilla Posición del tablero.
-	 * @param maxPasosSinMover Número de pasos que puede estar sin mover.
-	 * @param pasosReproduccion Número de pasos para que se reproduzca.
 	 * @return boolean
 	 */
 	public boolean crearCelulaSimple (Casilla casilla){
@@ -209,9 +199,6 @@ public class Superficie {
 	/**
 	 * Crea una célula compleja en una posición de la superficie. Devuelve un boolean dependiendo si ha podido o no.
 	 * @param casilla Posición del tablero.
-	 * @param maxPasosSinMover Número de pasos que puede estar sin mover.
-	 * @param pasosReproduccion Número de pasos para que se reproduzca.
-	 * @param maxComer Número de veces que puede comer una celula compleja.
 	 * @return boolean
 	 */
 	public boolean crearCelulaCompleja (Casilla casilla){
@@ -281,9 +268,8 @@ public class Superficie {
 	}
 	
 	/**
-	 * Comprueba que la casilla esta vacía
-	 * @param f Fila.
-	 * @param c Columna.
+	 * Comprueba que la casilla esta vacía.
+	 * @param casilla Posición del tablero.
 	 * @return boolean
 	 */
 	public boolean comprobarCasilla(Casilla casilla){
@@ -311,8 +297,7 @@ public class Superficie {
 	
 	/**
 	 * Devuelve si la célula se puede comer.
-	 * @param f Fila.
-	 * @param c Columna.
+	 * @param casilla Posición del tablero.
 	 * @return boolean
 	 */
 	public boolean esComestible(Casilla casilla){
@@ -366,6 +351,15 @@ public class Superficie {
 		
 	}
 	
+	/**
+	 * Carga una célula simple de un fichero.
+	 * @param casilla Posición del tablero.
+	 * @param pasosDados Pasos que lleva dados la célula.
+	 * @param pasosSinMover Pasos sin mover de la célula.
+	 * @param numLinea Número de linea del fichero.
+	 * @return boolean
+	 * @throws MundoException
+	 */
 	public boolean cargarCelulaSimple(Casilla casilla, int pasosDados, int pasosSinMover, int numLinea) throws MundoException{
 		
 		int fila = casilla.getFila();
@@ -382,6 +376,14 @@ public class Superficie {
 		return false;
 	}
 	
+	/**
+	 * Carga una célula compleja de un fichero.
+	 * @param casilla Posición del tablero.
+	 * @param vecesComido Número de veces que ha comido la célula.
+	 * @param numLinea Número de linea del fichero.
+	 * @return boolean
+	 * @throws MundoException
+	 */
 	public boolean cargarCelulaCompleja(Casilla casilla, int vecesComido, int numLinea) throws MundoException{
 		
 		int fila = casilla.getFila();
@@ -398,6 +400,10 @@ public class Superficie {
 		return false;
 	}
 	
+	/**
+	 * Guarda en un PrintWriter los datos de la superficie.
+	 * @param pw Entra un PrintWrite para escribir en el fichero.
+	 */
 	public void guardar(PrintWriter pw) {
 		
 		for (int f=0; f<this.filas; f++){

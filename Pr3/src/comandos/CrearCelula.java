@@ -7,7 +7,7 @@ import excepciones.MundoException;
 import logica.Casilla;
 
 /**
- * Comando CrearCelulaSimple - Crea una célula simple en el tablero.
+ * Comando CrearCelula - Crea una célula en el tablero.
  */
 public class CrearCelula extends Comando {
 	

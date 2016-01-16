@@ -7,7 +7,9 @@ import excepciones.MundoException;
 import logica.Mundo;
 import logica.MundoSimple;
 import logica.MundoComplejo;
-
+/**
+ * Comando Jugar - Te permite jugar en un mundo simple o en un mundo complejo.
+ */
 public class Jugar extends Comando{
 	
 	private Mundo mundo;

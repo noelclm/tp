@@ -3,7 +3,7 @@ package logica;
 import java.io.PrintWriter;
 
 /**
- * Clase que gestiona una celula.
+ * Interfaz que gestiona una celula.
  */
 interface Celula {
 	
@@ -21,6 +21,10 @@ interface Celula {
 	 */
 	public boolean esComestible();
 	
+	/**
+	 * Guarda en un PrintWriter los datos de la célula.
+	 * @param pw Entra un PrintWrite para escribir en el fichero.
+	 */
 	public void guardar(PrintWriter pw);
 	
 }

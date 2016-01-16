@@ -61,9 +61,7 @@ public class Controlador {
 	}
 
 	/**
-	 * Inicia el tablero. Devuelve si ha podido a no en una cadena de
-	 * caracteres.
-	 * 
+	 * Inicia el tablero. Devuelve si ha podido a no en una cadena de caracteres.
 	 * @return String
 	 */
 	public String iniciar() {
@@ -72,7 +70,6 @@ public class Controlador {
 
 	/**
 	 * Llama a paso y devuelve el resultado de los pasos realizados.
-	 * 
 	 * @return String
 	 */
 	public String evoluciona() {
@@ -80,11 +77,8 @@ public class Controlador {
 	}
 
 	/**
-	 * Llama a crear célula simple. Devuelve si ha podido a no en una cadena de
-	 * caracteres.
-	 * 
-	 * @param casilla
-	 *            Posición del tablero.
+	 * Llama a crear célula. Devuelve si ha podido a no en una cadena de caracteres.
+	 * @param casilla Posición del tablero.
 	 * @return String
 	 */
 	public String crearCelula(Casilla casilla) {
@@ -92,11 +86,8 @@ public class Controlador {
 	}
 
 	/**
-	 * Elimina una célula. Devuelve si ha podido a no en una cadena de
-	 * caracteres.
-	 * 
-	 * @param casilla
-	 *            Posición del tablero.
+	 * Elimina una célula. Devuelve si ha podido a no en una cadena de caracteres.
+	 * @param casilla Posición del tablero.
 	 * @return String
 	 */
 	public String eliminarCelula(Casilla casilla) {
@@ -105,7 +96,6 @@ public class Controlador {
 
 	/**
 	 * Vacía la superficie del tablero.
-	 * 
 	 * @return String
 	 */
 	public String vaciar() {
@@ -113,9 +103,7 @@ public class Controlador {
 	}
 
 	/**
-	 * Cambia simulacionTerminada a true para que el juego termine y devuelve un
-	 * texto.
-	 * 
+	 * Cambia simulacionTerminada a true para que el juego termine y devuelve un texto.
 	 * @return String
 	 */
 	public String salir() {
@@ -124,10 +112,10 @@ public class Controlador {
 	}
 
 	/**
-	 * 
-	 * @param nombreFichero
-	 * @return
-	 * @throws IOException 
+	 * Carga un mundo de un fichero.
+	 * @param nombreFichero Nombre del fichero dado por el usuario.
+	 * @return String
+	 * @throws MundoException
 	 */
 	public String cargar(String nombreFichero) throws MundoException {
 		
@@ -185,10 +173,10 @@ public class Controlador {
 	}
 
 	/**
-	 * 
-	 * @param nombreFichero
-	 * @return
-	 * @throws MundoException 
+	 * Guarda un mundo en un fichero.
+	 * @param nombreFichero Nombre del fichero dado por el usuario.
+	 * @return String
+	 * @throws MundoException
 	 */
 	public String guardar(String nombreFichero) throws MundoException {
 		
@@ -224,12 +212,9 @@ public class Controlador {
 	}
 
 	/**
-	 * 
-	 * @param filas
-	 * @param columnas
-	 * @param celulasComplejas
-	 * @param celulasSimples
-	 * @return
+	 * Te permite jugar en un mundo simple o en un mundo complejo.
+	 * @param mundo Mundo que va a cargar.
+	 * @return String
 	 */
 	public String jugar(Mundo mundo) {
 		this.mundo = mundo;
@@ -238,7 +223,6 @@ public class Controlador {
 
 	/**
 	 * Devuelve el tablero.
-	 * 
 	 * @return String
 	 */
 	public String toString() {

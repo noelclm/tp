@@ -10,12 +10,18 @@ import excepciones.FicheroErroneoException;
 import excepciones.IndicesFueraDeRango;
 import excepciones.MundoException;
 
+/**
+ * Clase que hereda de Mundo que crea un mundo con células complejas y simples.
+ */
 public class MundoComplejo extends Mundo{
 	
 	private int celulasSimples;
 	private int celulasComplejas;
 	Scanner s= new Scanner(System.in);
 	
+	/**
+	 * Constructor por defecto.
+	 */
 	public MundoComplejo(){
 		
 		super(5,5);
@@ -25,6 +31,13 @@ public class MundoComplejo extends Mundo{
 		
 	}
 	
+	/**
+	 * Constructor parametrizado.
+	 * @param filas Filas totales del tablero.
+	 * @param columnas Columnas totales del tablero. 
+	 * @param celulasSimples Células simples totales del tablero.
+	 * @param celulasComplejas Células complejas totales del tablero.
+	 */
 	public MundoComplejo(int filas,int columnas,int celulasSimples,int celulasComplejas){
 		
 		super(filas,columnas);
@@ -34,6 +47,11 @@ public class MundoComplejo extends Mundo{
 		
 	}
 	
+	/**
+	 * Constructor parametrizado.
+	 * @param filas Filas totales del tablero.
+	 * @param columnas Columnas totales del tablero.
+	 */
 	public MundoComplejo(int filas,int columnas){
 		
 		super(filas,columnas);
@@ -151,6 +169,7 @@ public class MundoComplejo extends Mundo{
 		return true;
 	}
 	
+	@Override
 	public boolean guardar (PrintWriter pw){
 			
 		pw.println("compleja");
