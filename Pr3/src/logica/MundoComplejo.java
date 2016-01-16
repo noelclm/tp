@@ -1,6 +1,11 @@
 package logica;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Scanner;
+
+import excepciones.FalloIOException;
+import excepciones.MundoException;
 
 public class MundoComplejo extends Mundo{
 	
@@ -68,6 +73,22 @@ public class MundoComplejo extends Mundo{
 		}
 
 
+	}
+	
+	@Override
+	public boolean cargar(BufferedReader b) throws MundoException{
+		
+		String cadena;
+		
+		try {
+			while((cadena = b.readLine())!=null) {
+			    System.out.println(cadena);
+			}
+		} catch (IOException e) {
+			throw new FalloIOException("En MundoComplejo");
+		}
+		
+		return true;
 	}
 	
 }

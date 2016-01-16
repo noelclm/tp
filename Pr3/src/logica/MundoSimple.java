@@ -1,5 +1,11 @@
 package logica;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+
+import excepciones.FalloIOException;
+import excepciones.MundoException;
+
 public class MundoSimple extends Mundo{
 	
 	private int celulasSimples;
@@ -38,6 +44,22 @@ public class MundoSimple extends Mundo{
 		else
 			return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
 
+	}
+	
+	@Override
+	public boolean cargar(BufferedReader b) throws MundoException{
+		
+		String cadena;
+		
+		try {
+			while((cadena = b.readLine())!=null) {
+			    System.out.println(cadena);
+			}
+		} catch (IOException e) {
+			throw new FalloIOException("En MundoSimple");
+		}
+		
+		return true;
 	}
 
 }

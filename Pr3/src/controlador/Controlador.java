@@ -1,15 +1,14 @@
 package controlador;
 
 import java.util.*;
-
 import logica.Casilla;
 import logica.Mundo;
+import logica.MundoComplejo;
 import logica.MundoSimple;
-
 import java.io.*;
-
 import excepciones.ArchivoNoEncontradoException;
 import excepciones.FalloIOException;
+import excepciones.FicheroErroneoException;
 import excepciones.MundoException;
 
 /**
@@ -128,21 +127,39 @@ public class Controlador {
 	public String cargar(String nombreFichero) throws MundoException {
 
 		try{
-		FileReader fr = new FileReader("src/"+nombreFichero);
-		
-		BufferedReader b = new BufferedReader(fr);
-
-		String texto = this.mundo.cargar(b);
-		
-		b.close();
-		fr.close();
-		
-		return texto;
+			Mundo auxMundo = null;
+			FileReader fr = new FileReader("src/"+nombreFichero);
+			BufferedReader b = new BufferedReader(fr);
+			String linea = b.readLine();
+			
+			if(linea == "simple"){
+				auxMundo = new MundoSimple();
+			}else if(linea == "complejo"){
+				auxMundo = new MundoComplejo();
+			}else{
+				b.close();
+				fr.close();
+				throw new FicheroErroneoException("En la linea 1.");
+			}
+	
+			if(auxMundo.cargar(b)){
+				this.mundo = auxMundo;
+				b.close();
+				fr.close();
+				return "Fichero cargado correctamente";
+			}else{
+				b.close();
+				fr.close();
+				
+				return "No se ha podido cargar el fichero";
+			}
+			
+			
 		
 		}catch (FileNotFoundException fnfe) {
 			throw new ArchivoNoEncontradoException();
 		} catch (IOException e) {
-			throw new FalloIOException();
+			throw new FalloIOException("En Controlador");
 		}
 		
 
