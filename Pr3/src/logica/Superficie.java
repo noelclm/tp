@@ -2,6 +2,8 @@ package logica;
 
 import java.io.PrintWriter;
 
+import celulas.CelulaCompleja;
+import celulas.CelulaSimple;
 import excepciones.FicheroErroneoException;
 import excepciones.MundoException;
 

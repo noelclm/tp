@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 /**
  * Interfaz que gestiona una celula.
  */
-interface Celula {
+public interface Celula {
 	
 	/**
 	 * Ejecuta el movimiento de la celula sobre el tablero y devuelve la casilla.

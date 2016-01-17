@@ -5,8 +5,8 @@ import excepciones.CoordenadasException;
 import excepciones.ErrorDeInicializacionException;
 import excepciones.MundoException;
 import logica.Mundo;
-import logica.MundoSimple;
-import logica.MundoComplejo;
+import mundos.MundoComplejo;
+import mundos.MundoSimple;
 /**
  * Comando Jugar - Te permite jugar en un mundo simple o en un mundo complejo.
  */

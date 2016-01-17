@@ -1,9 +1,11 @@
-package logica;
+package mundos;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import logica.Casilla;
+import logica.Mundo;
 import excepciones.FalloIOException;
 import excepciones.FicheroErroneoException;
 import excepciones.FormatoNoValidoException;

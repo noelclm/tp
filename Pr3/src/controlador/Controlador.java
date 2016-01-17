@@ -4,8 +4,8 @@ import java.util.*;
 
 import logica.Casilla;
 import logica.Mundo;
-import logica.MundoComplejo;
-import logica.MundoSimple;
+import mundos.MundoComplejo;
+import mundos.MundoSimple;
 
 import java.io.*;
 

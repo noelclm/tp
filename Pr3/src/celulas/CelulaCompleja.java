@@ -1,6 +1,10 @@
-package logica;
+package celulas;
 
 import java.io.PrintWriter;
+
+import logica.Casilla;
+import logica.Celula;
+import logica.Superficie;
 
 /**
  * Clase que gestiona una célula compleja que hereda de Celula.
