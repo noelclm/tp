@@ -1,7 +1,7 @@
 package excepciones;
 
 /**
- * Excepción para cuando sale algún error de escritura o lectura en disco.
+ * Excepcion para cuando sale algun error de escritura o lectura en disco.
  */
 public class FalloIOException extends MundoException {
 

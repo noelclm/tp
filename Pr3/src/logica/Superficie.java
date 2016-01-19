@@ -21,8 +21,8 @@ public class Superficie {
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param numFilas Número de filas de la superficie.
-	 * @param numColumnas Número de columnas de la superficie.
+	 * @param numFilas Numero de filas de la superficie.
+	 * @param numColumnas Numero de columnas de la superficie.
 	 */
 	public Superficie(int numFilas, int numColumnas){
 		
@@ -41,8 +41,8 @@ public class Superficie {
 	}
 	
 	/**
-	 * Inicia la superficie con un numero de células que le entra. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param numCelulas Número de celulas con el que se inicializa la superficie.
+	 * Inicia la superficie con un numero de celulas que le entra. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param numCelulas Numero de celulas con el que se inicializa la superficie.
 	 * @return boolean
 	 */
 	public boolean iniciarSuperficie (int numCelulas){
@@ -84,9 +84,9 @@ public class Superficie {
 	}
 	
 	/**
-	 * Inicia la superficie con un numero de células que le entra. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param numCelulasSimples Número de células simples con el que se inicializa la superficie.
-	 * @param numCelulasComplejas Número de células complejas con el que se inicializa la superficie.
+	 * Inicia la superficie con un numero de celulas que le entra. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param numCelulasSimples Numero de celulas simples con el que se inicializa la superficie.
+	 * @param numCelulasComplejas Numero de celulas complejas con el que se inicializa la superficie.
 	 * @return boolean
 	 */
 	public boolean inicializaSuperficie (int numCelulasSimples, int numCelulasComplejas){
@@ -133,7 +133,7 @@ public class Superficie {
 	}
 	
 	/**
-	 * Reproduce los movimientos de las células sobre el tablero y devuelve en un String los pasos realizados.
+	 * Reproduce los movimientos de las celulas sobre el tablero y devuelve en un String los pasos realizados.
 	 * @return String
 	 */
 	public String evoluciona(){
@@ -178,8 +178,8 @@ public class Superficie {
 	}
 	
 	/**
-	 * Crea una célula simple en una posición de la superficie. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param casilla Posición del tablero.
+	 * Crea una celula simple en una posicion de la superficie. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param casilla Posicion del tablero.
 	 * @return boolean
 	 */
 	public boolean crearCelulaSimple (Casilla casilla){
@@ -199,8 +199,8 @@ public class Superficie {
 	}
 	
 	/**
-	 * Crea una célula compleja en una posición de la superficie. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param casilla Posición del tablero.
+	 * Crea una celula compleja en una posicion de la superficie. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param casilla Posicion del tablero.
 	 * @return boolean
 	 */
 	public boolean crearCelulaCompleja (Casilla casilla){
@@ -220,8 +220,8 @@ public class Superficie {
 	}
 	
 	/**
-	 * Elimina una célula del tablero. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param casilla Posición del tablero.
+	 * Elimina una celula del tablero. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param casilla Posicion del tablero.
 	 * @return boolean
 	 */
 	public boolean eliminarCelula (Casilla casilla){
@@ -270,8 +270,8 @@ public class Superficie {
 	}
 	
 	/**
-	 * Comprueba que la casilla esta vacía.
-	 * @param casilla Posición del tablero.
+	 * Comprueba que la casilla esta vacia.
+	 * @param casilla Posicion del tablero.
 	 * @return boolean
 	 */
 	public boolean comprobarCasilla(Casilla casilla){
@@ -286,9 +286,9 @@ public class Superficie {
 	}
 	
 	/**
-	 * Mueve una célula de una casilla a otra en el tablero.
-	 * @param casillaInicial Posición inicial del tablero.
-	 * @param casillaFinal Posición final del tablero.
+	 * Mueve una celula de una casilla a otra en el tablero.
+	 * @param casillaInicial Posicion inicial del tablero.
+	 * @param casillaFinal Posicion final del tablero.
 	 */
 	public void moverCelula(Casilla casillaInicial, Casilla casillaFinal){
 
@@ -298,8 +298,8 @@ public class Superficie {
 	}
 	
 	/**
-	 * Devuelve si la célula se puede comer.
-	 * @param casilla Posición del tablero.
+	 * Devuelve si la celula se puede comer.
+	 * @param casilla Posicion del tablero.
 	 * @return boolean
 	 */
 	public boolean esComestible(Casilla casilla){
@@ -309,9 +309,9 @@ public class Superficie {
 	}
 
 	/**
-	 * Saca la cantidad de posiciones vacías que tiene una posición concreta.
+	 * Saca la cantidad de posiciones vacias que tiene una posicion concreta.
 	 * @param posicionesAdyacentes Array de posiciones adyacentes.
-	 * @param numPosiciones Número de posiciones adyancentes
+	 * @param numPosiciones Numero de posiciones adyancentes
 	 * @return int
 	 */
 	public int cantidadPosicionesAdyacentesVacias(Posicion[] posicionesAdyacentes, int numPosiciones){
@@ -330,10 +330,10 @@ public class Superficie {
 	}
 	
 	/**
-	 * Saca las posiciones vacías que tiene una posición concreta.
+	 * Saca las posiciones vacias que tiene una posicion concreta.
 	 * @param posicionesAdyacentes Array de posiciones adyacentes.
-	 * @param numPosiciones Número de posiciones adyancentes.
-	 * @param numPosicionesVacias Número de posiciones adyancentes vacías.
+	 * @param numPosiciones Numero de posiciones adyancentes.
+	 * @param numPosicionesVacias Numero de posiciones adyancentes vacias.
 	 * @return Posicion[]
 	 */
 	public Posicion[] posicionesAdyacentesVacias(Posicion[] posicionesAdyacentes, int numPosiciones, int numPosicionesVacias){
@@ -354,13 +354,13 @@ public class Superficie {
 	}
 	
 	/**
-	 * Carga una célula simple de un fichero.
-	 * @param casilla Posición del tablero.
-	 * @param pasosDados Pasos que lleva dados la célula.
-	 * @param pasosSinMover Pasos sin mover de la célula.
+	 * Carga una celula simple de un fichero.
+	 * @param casilla Posicion del tablero.
+	 * @param pasosDados Pasos que lleva dados la celula.
+	 * @param pasosSinMover Pasos sin mover de la celula.
 	 * @param numLinea Número de linea del fichero.
 	 * @return boolean
-	 * @throws MundoException Excepción de la que heredan las demás excepciones.
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
 	 */
 	public boolean cargarCelulaSimple(Casilla casilla, int pasosDados, int pasosSinMover, int numLinea) throws MundoException{
 		
@@ -379,12 +379,12 @@ public class Superficie {
 	}
 	
 	/**
-	 * Carga una célula compleja de un fichero.
-	 * @param casilla Posición del tablero.
-	 * @param vecesComido Número de veces que ha comido la célula.
-	 * @param numLinea Número de linea del fichero.
+	 * Carga una celula compleja de un fichero.
+	 * @param casilla Posicion del tablero.
+	 * @param vecesComido Numero de veces que ha comido la celula.
+	 * @param numLinea Numero de linea del fichero.
 	 * @return boolean
-	 * @throws MundoException Excepción de la que heredan las demás excepciones.
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
 	 */
 	public boolean cargarCelulaCompleja(Casilla casilla, int vecesComido, int numLinea) throws MundoException{
 		

@@ -7,7 +7,7 @@ import excepciones.MundoException;
 import logica.Casilla;
 
 /**
- * Comando EliminarCelula - Elimina una célula del tablero.
+ * Comando EliminarCelula - Elimina una celula del tablero.
  */
 public class EliminarCelula extends Comando {
 
@@ -25,7 +25,7 @@ public class EliminarCelula extends Comando {
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param casilla Casilla del tablero donde esta la célula que se quiere borrar.
+	 * @param casilla Casilla del tablero donde esta la celula que se quiere borrar.
 	 */
 	public EliminarCelula(Casilla casilla) {
 		this.casilla = casilla;

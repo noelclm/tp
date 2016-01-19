@@ -1,7 +1,7 @@
 package excepciones;
 
 /**
- * Excepcíón para cuando hay algún error de sintaxis en el fichero.
+ * Excepcion para cuando hay algun error de sintaxis en el fichero.
  */
 public class FicheroErroneoException extends MundoException {
 

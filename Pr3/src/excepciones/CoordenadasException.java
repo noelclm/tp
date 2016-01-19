@@ -1,7 +1,7 @@
 package excepciones;
 
 /**
- * Excepción para cuando no se introducen las coordenadas correctamente.
+ * Excepcion para cuando no se introducen las coordenadas correctamente.
  */
 public class CoordenadasException extends MundoException {
 

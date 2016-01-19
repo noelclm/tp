@@ -13,7 +13,7 @@ import excepciones.IndicesFueraDeRango;
 import excepciones.MundoException;
 
 /**
- * Clase que hereda de Mundo que crea un mundo con células complejas y simples.
+ * Clase que hereda de Mundo que crea un mundo con celulas complejas y simples.
  */
 public class MundoComplejo extends Mundo{
 	
@@ -37,8 +37,8 @@ public class MundoComplejo extends Mundo{
 	 * Constructor parametrizado.
 	 * @param filas Filas totales del tablero.
 	 * @param columnas Columnas totales del tablero. 
-	 * @param celulasSimples Células simples totales del tablero.
-	 * @param celulasComplejas Células complejas totales del tablero.
+	 * @param celulasSimples Celulas simples totales del tablero.
+	 * @param celulasComplejas Celulas complejas totales del tablero.
 	 */
 	public MundoComplejo(int filas,int columnas,int celulasSimples,int celulasComplejas){
 		

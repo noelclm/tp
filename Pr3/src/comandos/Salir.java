@@ -4,7 +4,7 @@ import controlador.Comando;
 import controlador.Controlador;
 
 /**
- * Comando Salir - Termina la simulación.
+ * Comando Salir - Termina la simulacion.
  */
 public class Salir extends Comando {
 

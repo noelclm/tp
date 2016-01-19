@@ -7,7 +7,7 @@ import excepciones.MundoException;
 import logica.Casilla;
 
 /**
- * Comando CrearCelula - Crea una célula en el tablero.
+ * Comando CrearCelula - Crea una celula en el tablero.
  */
 public class CrearCelula extends Comando {
 	
@@ -25,7 +25,7 @@ public class CrearCelula extends Comando {
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param casilla Casilla del tablero donde se quiere crear la célula.
+	 * @param casilla Casilla del tablero donde se quiere crear la celula.
 	 */
 	public CrearCelula(Casilla casilla) {
 		this.casilla = casilla;

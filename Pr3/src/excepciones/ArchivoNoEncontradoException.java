@@ -1,7 +1,7 @@
 package excepciones;
 
 /**
- * Excepción para cuando no encuentra un fichero.
+ * Excepcion para cuando no encuentra un fichero.
  */
 public class ArchivoNoEncontradoException extends MundoException {
 

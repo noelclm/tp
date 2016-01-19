@@ -7,7 +7,7 @@ import logica.Celula;
 import logica.Superficie;
 
 /**
- * Clase que gestiona una célula compleja que hereda de Celula.
+ * Clase que gestiona una celula compleja que hereda de Celula.
  */
 public class CelulaCompleja implements Celula {
 	
@@ -27,7 +27,7 @@ public class CelulaCompleja implements Celula {
 	
 	/**
 	 * Constructor parametrizado
-	 * @param vecesComido Número de veces que ha comido la célula.
+	 * @param vecesComido Numero de veces que ha comido la celula.
 	 */
 	public CelulaCompleja(int vecesComido) {
 
@@ -89,7 +89,7 @@ public class CelulaCompleja implements Celula {
 	}
 
 	/**
-	 * Devuelve un string para pintar la célula compleja en el tablero.
+	 * Devuelve un string para pintar la celula compleja en el tablero.
 	 * @return String
 	 */
 	public String toString(){

@@ -26,7 +26,7 @@ public class Controlador {
 	Scanner s = new Scanner(System.in);
 
 	/**
-	 * Pide el comando al usuario y ejecuta la acción.
+	 * Pide el comando al usuario y ejecuta la accion.
 	 */
 	public void simula() {
 
@@ -77,8 +77,8 @@ public class Controlador {
 	}
 
 	/**
-	 * Llama a crear célula. Devuelve si ha podido a no en una cadena de caracteres.
-	 * @param casilla Posición del tablero.
+	 * Llama a crear celula. Devuelve si ha podido a no en una cadena de caracteres.
+	 * @param casilla Posicion del tablero.
 	 * @return String
 	 */
 	public String crearCelula(Casilla casilla) {
@@ -86,8 +86,8 @@ public class Controlador {
 	}
 
 	/**
-	 * Elimina una célula. Devuelve si ha podido a no en una cadena de caracteres.
-	 * @param casilla Posición del tablero.
+	 * Elimina una celula. Devuelve si ha podido a no en una cadena de caracteres.
+	 * @param casilla Posicion del tablero.
 	 * @return String
 	 */
 	public String eliminarCelula(Casilla casilla) {
@@ -95,7 +95,7 @@ public class Controlador {
 	}
 
 	/**
-	 * Vacía la superficie del tablero.
+	 * Vacia la superficie del tablero.
 	 * @return String
 	 */
 	public String vaciar() {
@@ -115,7 +115,7 @@ public class Controlador {
 	 * Carga un mundo de un fichero.
 	 * @param nombreFichero Nombre del fichero dado por el usuario.
 	 * @return String
-	 * @throws MundoException Excepción de la que heredan las demás excepciones.
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
 	 */
 	public String cargar(String nombreFichero) throws MundoException {
 		
@@ -176,7 +176,7 @@ public class Controlador {
 	 * Guarda un mundo en un fichero.
 	 * @param nombreFichero Nombre del fichero dado por el usuario.
 	 * @return String
-	 * @throws MundoException Excepción de la que heredan las demás excepciones.
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
 	 */
 	public String guardar(String nombreFichero) throws MundoException {
 		

@@ -1,7 +1,7 @@
 package excepciones;
 
 /**
- * Excepción para cuando el formato numérico no es válido.
+ * Excepcion para cuando el formato numerico no es valido.
  */
 public class FormatoNoValidoException extends MundoException {
 

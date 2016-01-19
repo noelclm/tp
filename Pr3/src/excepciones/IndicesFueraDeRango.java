@@ -1,7 +1,7 @@
 package excepciones;
 
 /**
- * Excepción para cuando los índices se salen fuera del tablero.
+ * Excepcion para cuando los indices se salen fuera del tablero.
  */
 public class IndicesFueraDeRango extends MundoException{
 

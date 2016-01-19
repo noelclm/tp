@@ -5,7 +5,7 @@ import controlador.Controlador;
 /**
  * PRACTICA 3 - Interfaces, Ficheros y Excepciones.
  * @author Noel Clemente Montero
- * @author Estefanía Ortega Ávila
+ * @author Estefania Ortega Avila
  */
 
 public class Main {

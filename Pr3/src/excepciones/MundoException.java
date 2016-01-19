@@ -1,7 +1,7 @@
 package excepciones;
 
 /**
- * Excepción de la que heredan las demás excepciones.
+ * Excepcion de la que heredan las demas excepciones.
  */
 public class MundoException extends Exception {
 

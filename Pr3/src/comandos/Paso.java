@@ -4,7 +4,7 @@ import controlador.Comando;
 import controlador.Controlador;
 
 /**
- * Comando Paso - Realiza un movimiento en todas las células del tablero.
+ * Comando Paso - Realiza un movimiento en todas las celulas del tablero.
  */
 public class Paso extends Comando {
 	

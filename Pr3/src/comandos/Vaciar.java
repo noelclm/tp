@@ -4,7 +4,7 @@ import controlador.Comando;
 import controlador.Controlador;
 
 /**
- * Comando Vaciar - Vacía el tablero.
+ * Comando Vaciar - Vacia el tablero.
  */
 public class Vaciar extends Comando {
 	

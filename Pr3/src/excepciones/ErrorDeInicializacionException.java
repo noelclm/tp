@@ -1,7 +1,7 @@
 package excepciones;
 
 /**
- * Excepción para cuando se inicializa un tipo de mundo.
+ * Excepcion para cuando se inicializa un tipo de mundo.
  */
 public class ErrorDeInicializacionException extends MundoException {
 

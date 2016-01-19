@@ -4,7 +4,7 @@ import controlador.Comando;
 import controlador.Controlador;
 
 /**
- * Comando Iniciar - Inicia el tablero con varias células.
+ * Comando Iniciar - Inicia el tablero con varias celulas.
  */
 public class Iniciar extends Comando{
 	

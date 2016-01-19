@@ -31,8 +31,8 @@ public class CelulaSimple implements Celula{
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param pasosDados Pasos dados por la célula.
-	 * @param pasosSinMover Pasos sin mover por la célula.
+	 * @param pasosDados Pasos dados por la celula.
+	 * @param pasosSinMover Pasos sin mover por la celula.
 	 */
 	public CelulaSimple(int pasosDados, int pasosSinMover) {
 		
@@ -115,7 +115,7 @@ public class CelulaSimple implements Celula{
 	}
 	
 	/**
-	 * Devuelve un string para pintar la célula simple en el tablero.
+	 * Devuelve un string para pintar la celula simple en el tablero.
 	 * @return String
 	 */
 	public String toString(){
@@ -125,7 +125,7 @@ public class CelulaSimple implements Celula{
 	}
 	
 	/**
-	 * Suma uno al número de pasos dados.
+	 * Suma uno al numero de pasos dados.
 	 */
 	private void sumPasosDados(){
 		
@@ -143,7 +143,7 @@ public class CelulaSimple implements Celula{
 	}	
 	
 	/**
-	 * Suma uno al número de pasos sin mover.
+	 * Suma uno al numero de pasos sin mover.
 	 */
 	private void sumPasosSinMover(){
 		
@@ -152,7 +152,7 @@ public class CelulaSimple implements Celula{
 	}
 	
 	/**
-	 * Metodo que devuelve true si ha llegado al límite de pasos sin mover o false si no.
+	 * Metodo que devuelve true si ha llegado al limite de pasos sin mover o false si no.
 	 * @return boolean
 	 */
 	private boolean muertePorInactividad(){

@@ -37,7 +37,7 @@ public class ParserComandos {
 	 * Comprueba a que comando corresponde la cadena introducida por el usuario y devuelve el comando.
 	 * @param cadenas Cadena introducida por el usuario.
 	 * @return Comando
-	 * @throws MundoException Excepción de la que heredan las demás excepciones.
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
 	 */
 	static public Comando parseaComando(String[ ] cadenas) throws MundoException {
 		

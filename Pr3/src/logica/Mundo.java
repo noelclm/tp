@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import excepciones.MundoException;
 
 /**
- * Clase abstracta encargada de comprobar si se ha realizado la acción y construir los textos que se mostraran.
+ * Clase abstracta encargada de comprobar si se ha realizado la accion y construir los textos que se mostraran.
  */
 public abstract class Mundo {
 
@@ -27,8 +27,8 @@ public abstract class Mundo {
 	
 	/**
 	 * Constructor parametrizado.
-	 * @param nf Número de filas.
-	 * @param nc Número de columnas.
+	 * @param nf Numero de filas.
+	 * @param nc Numero de columnas.
 	 */
 	public Mundo(int nf, int nc){
 		
@@ -39,8 +39,8 @@ public abstract class Mundo {
 	}
 	
 	/**
-	 * Llama a crear célula de cada mundo. Devuelve si ha podido a no en una cadena de caracteres. 
-	 * @param casilla Posición del tablero.
+	 * Llama a crear celula de cada mundo. Devuelve si ha podido a no en una cadena de caracteres. 
+	 * @param casilla Posicion del tablero.
 	 * @return String
 	 */
 	public abstract String crearCelula(Casilla casilla);
@@ -55,7 +55,7 @@ public abstract class Mundo {
 	 * Carga un mundo de un fichero.
 	 * @param b Es un BufferedReader de donde lee.
 	 * @return boolean
-	 * @throws MundoException Excepción de la que heredan las demás excepciones.
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
 	 */
 	public abstract boolean cargar(BufferedReader b) throws MundoException;
 	
@@ -91,8 +91,8 @@ public abstract class Mundo {
 	}
 		
 	/**
-	 * Elimina una célula. Devuelve si ha podido a no en una cadena de caracteres.
-	 * @param casilla Posición del tablero.
+	 * Elimina una celula. Devuelve si ha podido a no en una cadena de caracteres.
+	 * @param casilla Posicion del tablero.
 	 * @return String
 	 */
 	public String eliminarCelula (Casilla casilla) {
@@ -117,7 +117,7 @@ public abstract class Mundo {
 	}
 	
 	/**
-	 * Devuelve un texto de finalizar simulación.
+	 * Devuelve un texto de finalizar simulacion.
 	 * @return String
 	 */
 	public String salir(){

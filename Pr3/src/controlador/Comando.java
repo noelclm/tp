@@ -8,10 +8,10 @@ import excepciones.MundoException;
 public abstract class Comando {
 	
 	/**
-	 * Ejecuta la acción y devuelve un texto con lo que ha hecho.
-	 * @param controlador Donde se realiza la acción.
+	 * Ejecuta la accion y devuelve un texto con lo que ha hecho.
+	 * @param controlador Donde se realiza la accion.
 	 * @return String
-	 * @throws MundoException Excepción de la que heredan las demás excepciones.
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
 	 */
 	public abstract String ejecuta(Controlador controlador) throws MundoException;
 	
@@ -19,7 +19,7 @@ public abstract class Comando {
 	 * Comprueba el comando y devuelve el comando si es el correcto.
 	 * @param cadenaComando Texto introducido por el usuario.
 	 * @return Comando
-	 * @throws MundoException Excepción de la que heredan las demás excepciones.
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
 	 */
 	public abstract Comando parsea(String[ ] cadenaComando) throws MundoException;
 	
