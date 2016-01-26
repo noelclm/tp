@@ -39,7 +39,7 @@ public class Iniciar extends Comando{
 	@Override
 	public String textoAyuda() {
 		
-		return " INICIAR: inicia una nueva simulación" + LINE_SEPARATOR ;
+		return " INICIAR: reinicia la simulacion simulación con un numero aleatoreo de celulas" + LINE_SEPARATOR ;
 		
 	}
 

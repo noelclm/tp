@@ -8,6 +8,12 @@ import java.io.PrintWriter;
 public interface Celula {
 	
 	/**
+	 * Guarda en un PrintWriter los datos de la celula.
+	 * @param pw Entra un PrintWrite para escribir en el fichero.
+	 */
+	public void guardar(PrintWriter pw);
+	
+	/**
 	 * Ejecuta el movimiento de la celula sobre el tablero y devuelve la casilla.
 	 * @param casillaInicial Posicion del tablero.
 	 * @param texto Texto que se muestra por pantalla al realizar la accion.
@@ -21,11 +27,5 @@ public interface Celula {
 	 * @return boolean
 	 */
 	public boolean esComestible();
-	
-	/**
-	 * Guarda en un PrintWriter los datos de la celula.
-	 * @param pw Entra un PrintWrite para escribir en el fichero.
-	 */
-	public void guardar(PrintWriter pw);
-	
+
 }

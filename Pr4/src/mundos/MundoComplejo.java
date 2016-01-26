@@ -64,63 +64,6 @@ public class MundoComplejo extends Mundo{
 	}
 	
 	@Override
-	public String iniciar(){
-		
-		if(this.superficie.iniciarSuperficie(5,"complejo"))
-			return "Iniciando simulación";
-		
-		else
-			return "No se ha podido inicializar la simulación";
-		
-	}
-
-	@Override
-	public String inicializaMundo() {
-		
-		if(this.superficie.inicializaSuperficie(this.celulasSimples, this.celulasComplejas)){
-			return "Mundo complejo inicializado";
-		}else{
-			return "No se ha podido inicializar";
-		}
-		
-	}
-	
-	@Override
-	public String crearCelula(Casilla casilla){
-
-		System.out.println("Indica el tipo de celula (simple/compleja):");
-		
-		//Lee una linea por teclado
-		String linea = s.nextLine().toLowerCase().trim();
-		//Separa la linea en un array identificando los espacios
-		String[] palabra = linea.split(" ");
-		
-		if(palabra.length == 1 && palabra[0].equals("simple")){
-			
-			if(this.superficie.crearCelulaSimple(casilla)) 
-				return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
-				
-			else
-				return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
-			
-		}else if(palabra.length == 1 && palabra[0].equals("compleja")){
-			
-			if(this.superficie.crearCelulaCompleja(casilla)) 
-				return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
-				
-			else
-				return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
-			
-		}else{
-			
-			return "No se reconoce el comando";
-			
-		}
-
-
-	}
-	
-	@Override
 	public boolean cargar(BufferedReader b) throws MundoException{
 		
 		String cadena;
@@ -194,5 +137,61 @@ public class MundoComplejo extends Mundo{
 			
 	}
 	
+	@Override
+	public String inicializaMundo() {
+		
+		if(this.superficie.inicializaSuperficie(this.celulasSimples, this.celulasComplejas)){
+			return "Mundo complejo inicializado";
+		}else{
+			return "No se ha podido inicializar";
+		}
+		
+	}
+	
+	@Override
+	public String iniciar(){
+		
+		if(this.superficie.iniciarSuperficie(5,"complejo"))
+			return "Iniciando simulación";
+		
+		else
+			return "No se ha podido inicializar la simulación";
+		
+	}
+	
+	@Override
+	public String crearCelula(Casilla casilla){
+
+		System.out.println("Indica el tipo de celula (simple/compleja):");
+		
+		//Lee una linea por teclado
+		String linea = s.nextLine().toLowerCase().trim();
+		//Separa la linea en un array identificando los espacios
+		String[] palabra = linea.split(" ");
+		
+		if(palabra.length == 1 && palabra[0].equals("simple")){
+			
+			if(this.superficie.crearCelulaSimple(casilla)) 
+				return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
+				
+			else
+				return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
+			
+		}else if(palabra.length == 1 && palabra[0].equals("compleja")){
+			
+			if(this.superficie.crearCelulaCompleja(casilla)) 
+				return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
+				
+			else
+				return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
+			
+		}else{
+			
+			return "No se reconoce el comando";
+			
+		}
+
+
+	}
 	
 }

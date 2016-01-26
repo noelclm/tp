@@ -34,6 +34,13 @@ public class CelulaCompleja implements Celula {
 		this.comidas=vecesComido;
 		
 	}
+	
+	@Override
+	public void guardar (PrintWriter pw){
+		pw.println("compleja " + this.comidas);
+		
+	}
+	
 	@Override
 	public Casilla ejecutaMovimiento(Casilla casillaInicial, StringBuilder texto, Superficie superficie) {
 
@@ -77,15 +84,7 @@ public class CelulaCompleja implements Celula {
 
 	@Override
 	public boolean esComestible() {
-		
 		return false;
-		
-	}
-	
-	@Override
-	public void guardar (PrintWriter pw){
-		pw.println("compleja " + this.comidas);
-		
 	}
 
 	/**
@@ -93,9 +92,7 @@ public class CelulaCompleja implements Celula {
 	 * @return String
 	 */
 	public String toString(){
-		
 		return " * ";
-		
 	}
 
 }

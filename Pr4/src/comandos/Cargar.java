@@ -49,7 +49,7 @@ public class Cargar extends Comando{
 	@Override
 	public String textoAyuda() {
 		
-		return " CARGAR NOMFICH: Carga un fichero con la partida actual " + LINE_SEPARATOR ;
+		return " CARGAR NOMFICH: Carga un fichero con una partida " + LINE_SEPARATOR ;
 		
 	}
 

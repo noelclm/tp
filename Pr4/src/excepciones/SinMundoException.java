@@ -11,7 +11,7 @@ public class SinMundoException extends MundoException{
 	 * Constructor por defecto
 	 */
 	public SinMundoException(){
-		super("Mundo no creado.");
+		super("No ha iniciado ningun mundo.");
 	}
 	
 	/**
@@ -19,7 +19,7 @@ public class SinMundoException extends MundoException{
 	 * @param s String para añadir al texto.
 	 */
 	public SinMundoException(String s){
-		super("Mundo no creado. " + s);
+		super("No ha iniciado ningun mundo. " + s);
 	}
 	
 }

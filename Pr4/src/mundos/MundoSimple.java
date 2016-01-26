@@ -58,39 +58,6 @@ public class MundoSimple extends Mundo{
 	}
 
 	@Override
-	public String iniciar(){
-		
-		if(this.superficie.iniciarSuperficie(5,"simple"))
-			return "Iniciando simulación";
-		
-		else
-			return "No se ha podido inicializar la simulación";
-		
-	}
-
-	@Override
-	public String inicializaMundo() {
-		
-		if(this.superficie.inicializaSuperficie(this.celulasSimples, 0)){
-			return "Mundo simple inicializado";
-		}else{
-			return "No se ha podido inicializar";
-		}
-		
-	}
-	
-	@Override
-	public String crearCelula(Casilla casilla){
-		
-		if(this.superficie.crearCelulaSimple(casilla)) 
-			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
-			
-		else
-			return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
-
-	}
-	
-	@Override
 	public boolean cargar(BufferedReader b) throws MundoException{
 		
 		String cadena;
@@ -145,4 +112,37 @@ public class MundoSimple extends Mundo{
 		
 	}
 
+	@Override
+	public String inicializaMundo() {
+		
+		if(this.superficie.inicializaSuperficie(this.celulasSimples, 0)){
+			return "Mundo simple inicializado";
+		}else{
+			return "No se ha podido inicializar";
+		}
+		
+	}
+	
+	@Override
+	public String iniciar(){
+		
+		if(this.superficie.iniciarSuperficie(5,"simple"))
+			return "Iniciando simulación";
+		
+		else
+			return "No se ha podido inicializar la simulación";
+		
+	}
+	
+	@Override
+	public String crearCelula(Casilla casilla){
+		
+		if(this.superficie.crearCelulaSimple(casilla)) 
+			return "Creamos nueva célula en la posición: ("+casilla.getFila()+","+casilla.getColumna()+")";
+			
+		else
+			return "Imposible crear una nueva célula en ("+casilla.getFila()+","+casilla.getColumna()+"), posición ocupada";
+
+	}
+	
 }

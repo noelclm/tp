@@ -85,7 +85,8 @@ public class Jugar extends Comando{
 	@Override
 	public String textoAyuda() {
 		
-		return " JUGAR SIMPLE/COMPLEJO m n s c: Permite cambiar de un juego a otro" + LINE_SEPARATOR ;
+		return " JUGAR SIMPLE/COMPLEJO m n s c: Permite cambiar de un juego a otro" + LINE_SEPARATOR +
+			   "    (m = numFilas, n = numColumnas, s = celSimples, c = celComplejas)" + LINE_SEPARATOR ;
 		
 	}
 

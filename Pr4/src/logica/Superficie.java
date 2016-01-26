@@ -41,47 +41,69 @@ public class Superficie {
 	}
 	
 	/**
-	 * Inicia la superficie con un numero de celulas que le entra. Devuelve un boolean dependiendo si ha podido o no.
-	 * @param numCelulas Numero de celulas con el que se inicializa la superficie.
+	 * Carga una celula simple de un fichero.
+	 * @param casilla Posicion del tablero.
+	 * @param pasosDados Pasos que lleva dados la celula.
+	 * @param pasosSinMover Pasos sin mover de la celula.
+	 * @param numLinea Número de linea del fichero.
 	 * @return boolean
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
 	 */
-	public boolean iniciarSuperficie (int numCelulas, String tipoMundo){
+	public boolean cargarCelulaSimple(Casilla casilla, int pasosDados, int pasosSinMover, int numLinea) throws MundoException{
 		
-		this.vaciar();
+		int fila = casilla.getFila();
+		int columna = casilla.getColumna();
 		
-		int numCelulasPuestas = 0;
-		
-		// Comprueba que hay suficientes celdas para las celulas
-		if (numCelulas <= this.filas*this.columnas){
-			
-			while (numCelulasPuestas<numCelulas){
-				
-				int tipo = 0;
-				int fila = (int)(Math.random()*this.filas);
-				int columna = (int)(Math.random()*this.columnas);
-				if(tipoMundo.equals("complejo"))
-					tipo = (int)(Math.random()*2);
-				
-				Casilla casilla = new Casilla(fila,columna);
-				
-				if (tipo==0){
-					
-					if(this.crearCelulaSimple(casilla))
-						numCelulasPuestas++;
-					
-				}else{
-					
-					if(this.crearCelulaCompleja(casilla))
-						numCelulasPuestas++;
-					
-				}
-				
+		if (fila>=0 && fila<this.filas && columna>=0 && columna<this.columnas){
+			if(this.comprobarCasilla(casilla)){
+				throw new FicheroErroneoException("Hay una célula repetida en la linea " + numLinea);
 			}
-				
+			this.superficie[fila][columna] = new CelulaSimple(pasosDados, pasosSinMover);
 			return true;
-			
-		}else
-			return false;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Carga una celula compleja de un fichero.
+	 * @param casilla Posicion del tablero.
+	 * @param vecesComido Numero de veces que ha comido la celula.
+	 * @param numLinea Numero de linea del fichero.
+	 * @return boolean
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
+	 */
+	public boolean cargarCelulaCompleja(Casilla casilla, int vecesComido, int numLinea) throws MundoException{
+		
+		int fila = casilla.getFila();
+		int columna = casilla.getColumna();
+		
+		if (fila>=0 && fila<this.filas && columna>=0 && columna<this.columnas){
+			if(this.comprobarCasilla(casilla)){
+				throw new FicheroErroneoException("Hay una célula repetida en la linea " + numLinea);
+			}
+			this.superficie[fila][columna] = new CelulaCompleja(vecesComido);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Guarda en un PrintWriter los datos de la superficie.
+	 * @param pw Entra un PrintWrite para escribir en el fichero.
+	 */
+	public void guardar(PrintWriter pw) {
+		
+		for (int f=0; f<this.filas; f++){
+			for (int c=0; c<this.columnas; c++){
+				if (this.superficie[f][c]!= null){
+					pw.print(f + " " + c + " ");
+					this.superficie[f][c].guardar(pw);
+				}
+			}
+		}
+		
 		
 	}
 	
@@ -134,6 +156,51 @@ public class Superficie {
 		
 	}
 	
+	/**
+	 * Reinicia la superficie con un numero de celulas que le entra. Devuelve un boolean dependiendo si ha podido o no.
+	 * @param numCelulas Numero de celulas con el que se inicializa la superficie.
+	 * @return boolean
+	 */
+	public boolean iniciarSuperficie (int numCelulas, String tipoMundo){
+		
+		this.vaciar();
+		
+		int numCelulasPuestas = 0;
+		
+		// Comprueba que hay suficientes celdas para las celulas
+		if (numCelulas <= this.filas*this.columnas){
+			
+			while (numCelulasPuestas<numCelulas){
+				
+				int tipo = 0;
+				int fila = (int)(Math.random()*this.filas);
+				int columna = (int)(Math.random()*this.columnas);
+				if(tipoMundo.equals("complejo"))
+					tipo = (int)(Math.random()*2);
+				
+				Casilla casilla = new Casilla(fila,columna);
+				
+				if (tipo==0){
+					
+					if(this.crearCelulaSimple(casilla))
+						numCelulasPuestas++;
+					
+				}else{
+					
+					if(this.crearCelulaCompleja(casilla))
+						numCelulasPuestas++;
+					
+				}
+				
+			}
+				
+			return true;
+			
+		}else
+			return false;
+		
+	}
+
 	/**
 	 * Reproduce los movimientos de las celulas sobre el tablero y devuelve en un String los pasos realizados.
 	 * @return String
@@ -352,73 +419,6 @@ public class Superficie {
 		}
 		
 		return posicionesVacias;
-		
-	}
-	
-	/**
-	 * Carga una celula simple de un fichero.
-	 * @param casilla Posicion del tablero.
-	 * @param pasosDados Pasos que lleva dados la celula.
-	 * @param pasosSinMover Pasos sin mover de la celula.
-	 * @param numLinea Número de linea del fichero.
-	 * @return boolean
-	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
-	 */
-	public boolean cargarCelulaSimple(Casilla casilla, int pasosDados, int pasosSinMover, int numLinea) throws MundoException{
-		
-		int fila = casilla.getFila();
-		int columna = casilla.getColumna();
-		
-		if (fila>=0 && fila<this.filas && columna>=0 && columna<this.columnas){
-			if(this.comprobarCasilla(casilla)){
-				throw new FicheroErroneoException("Hay una célula repetida en la linea " + numLinea);
-			}
-			this.superficie[fila][columna] = new CelulaSimple(pasosDados, pasosSinMover);
-			return true;
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * Carga una celula compleja de un fichero.
-	 * @param casilla Posicion del tablero.
-	 * @param vecesComido Numero de veces que ha comido la celula.
-	 * @param numLinea Numero de linea del fichero.
-	 * @return boolean
-	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
-	 */
-	public boolean cargarCelulaCompleja(Casilla casilla, int vecesComido, int numLinea) throws MundoException{
-		
-		int fila = casilla.getFila();
-		int columna = casilla.getColumna();
-		
-		if (fila>=0 && fila<this.filas && columna>=0 && columna<this.columnas){
-			if(this.comprobarCasilla(casilla)){
-				throw new FicheroErroneoException("Hay una célula repetida en la linea " + numLinea);
-			}
-			this.superficie[fila][columna] = new CelulaCompleja(vecesComido);
-			return true;
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * Guarda en un PrintWriter los datos de la superficie.
-	 * @param pw Entra un PrintWrite para escribir en el fichero.
-	 */
-	public void guardar(PrintWriter pw) {
-		
-		for (int f=0; f<this.filas; f++){
-			for (int c=0; c<this.columnas; c++){
-				if (this.superficie[f][c]!= null){
-					pw.print(f + " " + c + " ");
-					this.superficie[f][c].guardar(pw);
-				}
-			}
-		}
-		
 		
 	}
 	

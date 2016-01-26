@@ -17,7 +17,7 @@ public class CelulaSimple implements Celula{
 	private int pasosSinMover;
 	private int pasosDados;
 	private final int MAX_PASOS_SIN_MOVER = 2;
-	private final int PASOS_REPRODUCCION = 4;
+	private final int PASOS_REPRODUCCION = 3;
 	
 	/**
 	 * Constructor por defecto.
@@ -41,6 +41,13 @@ public class CelulaSimple implements Celula{
 		
 	}
 
+	@Override
+	public void guardar (PrintWriter pw){
+		pw.println("simple " + this.pasosDados + " " + this.pasosSinMover);
+		
+	}
+
+	
 	@Override
 	public Casilla ejecutaMovimiento(Casilla casillaInicial, StringBuilder texto, Superficie superficie) {
 		
@@ -109,9 +116,7 @@ public class CelulaSimple implements Celula{
 
 	@Override
 	public boolean esComestible() {
-		
 		return true;
-		
 	}
 	
 	/**
@@ -119,36 +124,28 @@ public class CelulaSimple implements Celula{
 	 * @return String
 	 */
 	public String toString(){
-		
 		return " X ";
-		
 	}
 	
 	/**
 	 * Suma uno al numero de pasos dados.
 	 */
 	private void sumPasosDados(){
-		
 		this.pasosDados++;
-		
 	}
 	
 	/**
 	 * Metodo que reinicia los pasos dados.
 	 */
 	private void reiniciaPasosReproduccion(){
-		
 		this.pasosDados = 0;
-		
 	}	
 	
 	/**
 	 * Suma uno al numero de pasos sin mover.
 	 */
 	private void sumPasosSinMover(){
-		
 		this.pasosSinMover++;
-		
 	}
 	
 	/**
@@ -179,10 +176,4 @@ public class CelulaSimple implements Celula{
 		
 	}
 	
-	@Override
-	public void guardar (PrintWriter pw){
-		pw.println("simple " + this.pasosDados + " " + this.pasosSinMover);
-		
-	}
-
 }

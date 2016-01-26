@@ -11,8 +11,8 @@ public class ParserComandos {
 	// Para que el salto de linea salga bien en windows y linux.
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 		
-	static Comando[] array = {new Iniciar(), new Cargar(), new Guardar(), 
-							  new Jugar(), new Paso(), new CrearCelula(), 
+	static Comando[] array = {new Cargar(), new Guardar(), new Jugar(),
+							  new Iniciar(),  new Paso(), new CrearCelula(), 
 							  new EliminarCelula(), new Vaciar(), 
 							  new Ayuda(), new Salir()};
 	

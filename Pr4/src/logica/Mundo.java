@@ -39,13 +39,6 @@ public abstract class Mundo {
 	}
 	
 	/**
-	 * Llama a crear celula de cada mundo. Devuelve si ha podido a no en una cadena de caracteres. 
-	 * @param casilla Posicion del tablero.
-	 * @return String
-	 */
-	public abstract String crearCelula(Casilla casilla);
-	
-	/**
 	 * Inicia el tablero. Devuelve si ha podido a no en una cadena de caracteres. 
 	 * @return String
 	 */
@@ -73,7 +66,14 @@ public abstract class Mundo {
 	public abstract String iniciar();
 	
 	/**
-	 * Llama a paso y devuelve el resultado de los pasos realizados.
+	 * Llama a crear celula de cada mundo. Devuelve si ha podido a no en una cadena de caracteres. 
+	 * @param casilla Posicion del tablero.
+	 * @return String
+	 */
+	public abstract String crearCelula(Casilla casilla);
+	
+	/**
+	 * Llama a evoluciona y devuelve el resultado de los pasos realizados.
 	 * @return String
 	 */
 	public String evoluciona(){

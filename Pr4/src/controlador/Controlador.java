@@ -1,14 +1,11 @@
 package controlador;
 
 import java.util.*;
-
 import logica.Casilla;
 import logica.Mundo;
 import mundos.MundoComplejo;
 import mundos.MundoSimple;
-
 import java.io.*;
-
 import excepciones.ArchivoNoEncontradoException;
 import excepciones.FalloIOException;
 import excepciones.FicheroErroneoException;
@@ -56,81 +53,10 @@ public class Controlador {
 			} 	
 	
 		}// fin while
-			
 		
 	}
 
-	/**
-	 * Reinicia el tablero. Devuelve si ha podido a no en una cadena de caracteres.
-	 * @return String
-	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
-	 */
-	public String iniciar() throws MundoException {
-		if(this.mundo == null){
-			throw new SinMundoException();
-		}
-		return this.mundo.iniciar();
-	}
-
-	/**
-	 * Llama a paso y devuelve el resultado de los pasos realizados.
-	 * @return String
-	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
-	 */
-	public String evoluciona() throws MundoException {
-		if(this.mundo == null){
-			throw new SinMundoException();
-		}
-		return this.mundo.evoluciona();
-	}
-
-	/**
-	 * Llama a crear celula. Devuelve si ha podido a no en una cadena de caracteres.
-	 * @param casilla Posicion del tablero.
-	 * @return String
-	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
-	 */
-	public String crearCelula(Casilla casilla) throws MundoException {
-		if(this.mundo == null){
-			throw new SinMundoException();
-		}
-		return this.mundo.crearCelula(casilla);
-	}
-
-	/**
-	 * Elimina una celula. Devuelve si ha podido a no en una cadena de caracteres.
-	 * @param casilla Posicion del tablero.
-	 * @return String
-	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
-	 */
-	public String eliminarCelula(Casilla casilla) throws MundoException {
-		if(this.mundo == null){
-			throw new SinMundoException();
-		}
-		return this.mundo.eliminarCelula(casilla);
-	}
-
-	/**
-	 * Vacia la superficie del tablero.
-	 * @return String
-	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
-	 */
-	public String vaciar() throws MundoException {
-		if(this.mundo == null){
-			throw new SinMundoException();
-		}
-		return this.mundo.vaciar();
-	}
-
-	/**
-	 * Cambia simulacionTerminada a true para que el juego termine y devuelve un texto.
-	 * @return String
-	 */
-	public String salir() {
-		this.simulacionTerminada = true;
-		return "Fin de la simulación.....";
-	}
-
+	
 	/**
 	 * Carga un mundo de un fichero.
 	 * @param nombreFichero Nombre del fichero dado por el usuario.
@@ -235,6 +161,7 @@ public class Controlador {
 		return texto;
 	}
 
+	
 	/**
 	 * Te permite jugar en un mundo simple o en un mundo complejo.
 	 * @param mundo Mundo que va a cargar.
@@ -243,6 +170,77 @@ public class Controlador {
 	public String jugar(Mundo mundo) {
 		this.mundo = mundo;
 		return this.mundo.inicializaMundo();
+	}
+	
+	/**
+	 * Reinicia el tablero. Devuelve si ha podido a no en una cadena de caracteres.
+	 * @return String
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
+	 */
+	public String iniciar() throws MundoException {
+		if(this.mundo == null){
+			throw new SinMundoException();
+		}
+		return this.mundo.iniciar();
+	}
+
+	/**
+	 * Llama a paso y devuelve el resultado de los pasos realizados.
+	 * @return String
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
+	 */
+	public String evoluciona() throws MundoException {
+		if(this.mundo == null){
+			throw new SinMundoException();
+		}
+		return this.mundo.evoluciona();
+	}
+
+	/**
+	 * Llama a crear celula. Devuelve si ha podido a no en una cadena de caracteres.
+	 * @param casilla Posicion del tablero.
+	 * @return String
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
+	 */
+	public String crearCelula(Casilla casilla) throws MundoException {
+		if(this.mundo == null){
+			throw new SinMundoException();
+		}
+		return this.mundo.crearCelula(casilla);
+	}
+
+	/**
+	 * Elimina una celula. Devuelve si ha podido a no en una cadena de caracteres.
+	 * @param casilla Posicion del tablero.
+	 * @return String
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
+	 */
+	public String eliminarCelula(Casilla casilla) throws MundoException {
+		if(this.mundo == null){
+			throw new SinMundoException();
+		}
+		return this.mundo.eliminarCelula(casilla);
+	}
+
+	/**
+	 * Vacia la superficie del tablero.
+	 * @return String
+	 * @throws MundoException Excepcion de la que heredan las demas excepciones.
+	 */
+	public String vaciar() throws MundoException {
+		if(this.mundo == null){
+			throw new SinMundoException();
+		}
+		return this.mundo.vaciar();
+	}
+
+	/**
+	 * Cambia simulacionTerminada a true para que el juego termine y devuelve un texto.
+	 * @return String
+	 */
+	public String salir() {
+		this.simulacionTerminada = true;
+		return "Fin de la simulación.....";
 	}
 
 	/**

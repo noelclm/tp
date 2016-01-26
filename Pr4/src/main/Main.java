@@ -3,7 +3,7 @@ package main;
 import controlador.Controlador;
 
 /**
- * PRACTICA 3 - Interfaces, Ficheros y Excepciones.
+ * PRACTICA 4 - .
  * @author Noel Clemente Montero
  * @author Estefania Ortega Avila
  */
