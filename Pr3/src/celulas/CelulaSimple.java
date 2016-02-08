@@ -1,6 +1,6 @@
 /*
 	Practica 3: Interfaces, Ficheros y Excepciones
-    Copyright (C) 2015  Noel Clemente / Estefania Ortega
+    Copyright (C) 2016  Noel Clemente / Estefania Ortega
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
