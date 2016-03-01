@@ -42,12 +42,21 @@ public class AtaxxRules implements GameRules {
 	protected final Pair<State, Piece> gameInPlayResult = new Pair<State, Piece>(State.InPlay, null);
 
 	private int dim;
+	private int numeroJugadores;
 
-	public AtaxxRules(int dim) {
+	public AtaxxRules(int dim,int n) {
+		if (n<2 || n>4){
+			throw new GameError("El n�mero de jugadores es 2,3 o 4");
+		}
 		if (dim < 5) {
 			throw new GameError("Dimension must be at least 5: " + dim);
-		} else {
+		} 
+		else if (dim%2==0){
+			throw new GameError("La dimensi�n debe ser impar");	
+			
+		}else {
 			this.dim = dim;
+			this.numeroJugadores=n;
 		}
 	}
 
@@ -58,7 +67,11 @@ public class AtaxxRules implements GameRules {
 
 	@Override
 	public Board createBoard(List<Piece> pieces) {
-		return new FiniteRectBoard(dim, dim);
+		
+		FiniteRectBoard f = new FiniteRectBoard(dim, dim);
+		
+		return dameTablero(f,pieces);
+				
 	}
 
 	@Override
@@ -160,7 +173,38 @@ public class AtaxxRules implements GameRules {
 		}
 		return moves;
 	}
+	/**
+	 * Crea el tablero inicial
+	 */
+	public Board dameTablero(Board board, List<Piece> piece){
 
+		for (int i = 0; i < board.getRows(); i++) {
+			for (int j = 0; j < board.getCols(); j++) {
+				if (this.numeroJugadores==2 || this.numeroJugadores==3 || this.numeroJugadores==4){
+					if ( i== 0 && j==0 || i==board.getRows()-1 && j==board.getCols()-1){
+						// TODO crear pieza posicion i,j
+						Piece x= new Piece ("X");
+						board.setPosition(i, j, x);
+					}
+
+					if (i==0 && j==board.getCols()-1 || i==board.getRows()-1 && j==0){
+						// TODO crear pieza posicion i,j
+					}
+					if(this.numeroJugadores==3){
+						
+						
+					}
+					if(this.numeroJugadores==4){
+						
+					}
+				}
+				else if (this.numeroJugadores==3){
+					
+				}
+			}
+		}
+		return board;
+	}
 }
 
 

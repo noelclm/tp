@@ -30,22 +30,32 @@ import es.ucm.fdi.tp.basecode.bgame.views.GenericConsoleView;
 public class AtaxxFactory implements GameFactory {
 
 	private int dim;
+	private int numeroJugadores;
 
 	public AtaxxFactory() {
-		this(7);
+		this.dim=7;
+		this.numeroJugadores=2;
 	}
 
-	public AtaxxFactory(int dim) {
+	public AtaxxFactory(int dim, int n) {
+		if (n<2 || n>4){
+			throw new GameError("El número de jugadores es 2,3 o 4");
+		}
 		if (dim < 5) {
 			throw new GameError("Dimension must be at least 5: " + dim);
-		} else {
+		} else if (dim%2==0) {
+			throw new GameError("La dimensión tiene que ser impar");
+			
+		}
+		else {
 			this.dim = dim;
+			this.numeroJugadores=n;
 		}
 	}
 
 	@Override
 	public GameRules gameRules() {
-		return new AtaxxRules(dim);
+		return new AtaxxRules(dim,numeroJugadores);
 	}
 
 	@Override
@@ -75,8 +85,10 @@ public class AtaxxFactory implements GameFactory {
 		List<Piece> pieces = new ArrayList<Piece>();
 		pieces.add(new Piece("X"));
 		pieces.add(new Piece("O"));
-		pieces.add(new Piece("R"));
-		pieces.add(new Piece("B"));
+		if (this.numeroJugadores>2)
+			pieces.add(new Piece("R"));
+		if (this.numeroJugadores ==4)
+			pieces.add(new Piece("B"));
 		return pieces;
 	}
 
