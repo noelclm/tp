@@ -138,7 +138,7 @@ public class Main {
 	 * <p>
 	 * Juego por defecto.
 	 */
-	final private static GameInfo DEFAULT_GAME = GameInfo.Ajaxx;
+	final private static GameInfo DEFAULT_GAME = GameInfo.CONNECTN;
 
 	/**
 	 * default view to use.
@@ -264,11 +264,12 @@ public class Main {
 		//
 		Options cmdLineOptions = new Options();
 		cmdLineOptions.addOption(constructHelpOption()); // -h or --help
+		cmdLineOptions.addOption(constructPlayersOption()); // -p or --players
 		cmdLineOptions.addOption(constructGameOption()); // -g or --game
 		cmdLineOptions.addOption(constructViewOption()); // -v or --view
 		cmdLineOptions.addOption(constructMlutiViewOption()); // -m or
 																// --multiviews
-		cmdLineOptions.addOption(constructPlayersOption()); // -p or --players
+		
 		cmdLineOptions.addOption(constructDimensionOption()); // -d or --dim
 
 		// parse the command line as provided in args
@@ -278,10 +279,11 @@ public class Main {
 			CommandLine line = parser.parse(cmdLineOptions, args);
 			parseHelpOption(line, cmdLineOptions);
 			parseDimOptionn(line);
+			parsePlayersOptions(line);
 			parseGameOption(line);
 			parseViewOption(line);
 			parseMultiViewOption(line);
-			parsePlayersOptions(line);
+			
 
 			// if there are some remaining arguments, then something wrong is
 			// provided in the command line!
@@ -534,7 +536,7 @@ public class Main {
 			gameFactory = new TicTacToeFactory();
 			break;
 		case Ajaxx:
-			gameFactory =new AtaxxFactory();
+			gameFactory =new AtaxxFactory(dimRows, pieces.size());
 			break;
 		default:
 			throw new UnsupportedOperationException("Something went wrong! This program point should be unreachable!");

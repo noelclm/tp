@@ -39,12 +39,12 @@ public class AtaxxFactory implements GameFactory {
 
 	public AtaxxFactory(int dim, int n) {
 		if (n<2 || n>4){
-			throw new GameError("El número de jugadores es 2,3 o 4");
+			throw new GameError("El nï¿½mero de jugadores es 2,3 o 4");
 		}
 		if (dim < 5) {
 			throw new GameError("Dimension must be at least 5: " + dim);
 		} else if (dim%2==0) {
-			throw new GameError("La dimensión tiene que ser impar");
+			throw new GameError("La dimensiï¿½n tiene que ser impar");
 			
 		}
 		else {

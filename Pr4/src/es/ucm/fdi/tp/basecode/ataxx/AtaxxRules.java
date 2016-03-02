@@ -189,22 +189,32 @@ public class AtaxxRules implements GameRules {
 
 					if (i==0 && j==board.getCols()-1 || i==board.getRows()-1 && j==0){
 						// TODO crear pieza posicion i,j
+						Piece x= new Piece ("O");
+						board.setPosition(i, j, x);
 					}
-					if(this.numeroJugadores==3){
+					if(this.numeroJugadores==3 || this.numeroJugadores==4){
+						if (i==(board.getRows()-1)/2 && (j==0 || j==board.getCols()-1)) {
+							Piece x= new Piece ("R");
+							board.setPosition(i, j, x);
+							
+						}
 						
 						
 					}
 					if(this.numeroJugadores==4){
+						if (j==(board.getCols()-1)/2 && (i==0 || i==board.getRows()-1)) {
+							Piece x= new Piece ("B");
+							board.setPosition(i, j, x);
 						
 					}
 				}
-				else if (this.numeroJugadores==3){
-					
-				}
+				
+				}	
+				
 			}
 		}
 		return board;
 	}
-}
+	}
 
 
