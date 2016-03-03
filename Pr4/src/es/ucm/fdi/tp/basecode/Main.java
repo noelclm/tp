@@ -78,7 +78,7 @@ public class Main {
 	 * Juegos disponibles.
 	 */
 	enum GameInfo {
-		CONNECTN("cn", "ConnectN"), TicTacToe("ttt", "Tic-Tac-Toe"), AdvancedTicTacToe("attt", "Advanced Tic-Tac-Toe"),Ajaxx("aj","Ajaxx");
+		CONNECTN("cn", "ConnectN"), TicTacToe("ttt", "Tic-Tac-Toe"), AdvancedTicTacToe("attt", "Advanced Tic-Tac-Toe"),Ataxx("at","Ataxx");
 
 		private String id;
 		private String desc;
@@ -535,7 +535,7 @@ public class Main {
 		case TicTacToe:
 			gameFactory = new TicTacToeFactory();
 			break;
-		case Ajaxx:
+		case Ataxx:
 			gameFactory =new AtaxxFactory(dimRows, pieces.size());
 			break;
 		default:
