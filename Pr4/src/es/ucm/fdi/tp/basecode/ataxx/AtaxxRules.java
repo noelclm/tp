@@ -178,43 +178,27 @@ public class AtaxxRules implements GameRules {
 	 */
 	public Board dameTablero(Board board, List<Piece> piece){
 
-		for (int i = 0; i < board.getRows(); i++) {
-			for (int j = 0; j < board.getCols(); j++) {
-				if (this.numeroJugadores==2 || this.numeroJugadores==3 || this.numeroJugadores==4){
-					if ( i== 0 && j==0 || i==board.getRows()-1 && j==board.getCols()-1){
-						// TODO crear pieza posicion i,j
-						Piece x= new Piece ("X");
-						board.setPosition(i, j, x);
-					}
-
-					if (i==0 && j==board.getCols()-1 || i==board.getRows()-1 && j==0){
-						// TODO crear pieza posicion i,j
-						Piece x= new Piece ("O");
-						board.setPosition(i, j, x);
-					}
-					if(this.numeroJugadores==3 || this.numeroJugadores==4){
-						if (i==(board.getRows()-1)/2 && (j==0 || j==board.getCols()-1)) {
-							Piece x= new Piece ("R");
-							board.setPosition(i, j, x);
-							
-						}
-						
-						
-					}
-					if(this.numeroJugadores==4){
-						if (j==(board.getCols()-1)/2 && (i==0 || i==board.getRows()-1)) {
-							Piece x= new Piece ("B");
-							board.setPosition(i, j, x);
-						
-					}
-				}
-				
-				}	
-				
+		for (int i = 0; i < piece.size(); i++) {
+			if(i==0){
+				board.setPosition(0, 0, piece.get(i));
+				board.setPosition(board.getRows()-1, board.getCols()-1, piece.get(i));
+			}
+			if(i==1){
+				board.setPosition(0, board.getCols()-1, piece.get(i));
+				board.setPosition(board.getRows()-1, 0, piece.get(i));
+			}
+			if(i==2){
+				board.setPosition((board.getRows()-1)/2, 0, piece.get(i));
+				board.setPosition((board.getRows()-1)/2, board.getCols()-1, piece.get(i));
+			}
+			if(i==3){
+				board.setPosition(0, (board.getCols()-1)/2, piece.get(i));
+				board.setPosition(board.getRows()-1, (board.getCols()-1)/2, piece.get(i));
 			}
 		}
+		
 		return board;
 	}
-	}
+}
 
 
