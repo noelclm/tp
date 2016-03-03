@@ -62,7 +62,7 @@ public class AtaxxRules implements GameRules {
 
 	@Override
 	public String gameDesc() {
-		return "Ajaxx " + dim + "x" + dim;
+		return "Ataxx " + dim + "x" + dim;
 	}
 
 	@Override
