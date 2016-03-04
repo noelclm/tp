@@ -42,21 +42,19 @@ public class AtaxxRules implements GameRules {
 	protected final Pair<State, Piece> gameInPlayResult = new Pair<State, Piece>(State.InPlay, null);
 
 	private int dim;
-	private int numeroJugadores;
 
 	public AtaxxRules(int dim,int n) {
 		if (n<2 || n>4){
-			throw new GameError("El n�mero de jugadores es 2,3 o 4");
+			throw new GameError("El número de jugadores es 2,3 o 4");
 		}
 		if (dim < 5) {
-			throw new GameError("Dimension must be at least 5: " + dim);
+			throw new GameError("Dimensión must be at least 5: " + dim);
 		} 
 		else if (dim%2==0){
-			throw new GameError("La dimensi�n debe ser impar");	
+			throw new GameError("La dimensión debe ser impar");	
 			
 		}else {
 			this.dim = dim;
-			this.numeroJugadores=n;
 		}
 	}
 
