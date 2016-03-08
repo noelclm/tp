@@ -537,7 +537,11 @@ public class Main {
 			gameFactory = new TicTacToeFactory();
 			break;
 		case Ataxx:
-			gameFactory =new AtaxxFactory(dimRows, pieces.size());
+			if (dimRows != null && dimCols != null && dimRows == dimCols) {
+				gameFactory =new AtaxxFactory(dimRows, pieces.size());
+			} else {
+				gameFactory =new AtaxxFactory();
+			}
 			break;
 		default:
 			throw new UnsupportedOperationException("Something went wrong! This program point should be unreachable!");
