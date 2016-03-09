@@ -37,7 +37,18 @@ public class AtaxxFactory implements GameFactory {
 		this.numeroJugadores=2;
 	}
 
+	public AtaxxFactory(int dim) {
+		
+		if (dim%2==0) {
+			throw new GameError("La dimensión tiene que ser impar");
+		}else {
+			this.dim = dim;
+			this.numeroJugadores=2;
+		}
+	}
+
 	public AtaxxFactory(int dim, int n ) {
+		
 		if (n<2 || n>4){
 			throw new GameError("El número de jugadores es 2,3 o 4");
 		}
@@ -52,6 +63,8 @@ public class AtaxxFactory implements GameFactory {
 			this.numeroJugadores=n;
 		}
 	}
+	
+	
 
 	@Override
 	public GameRules gameRules() {

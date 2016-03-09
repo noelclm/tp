@@ -26,8 +26,6 @@ import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.connectN.ConnectNFactory;
 import es.ucm.fdi.tp.basecode.ttt.TicTacToeFactory;
 
-//-g at -d 7x7 -p X:m,O:m
-
 /**
  * This is the class with the main method for the board games application.
  * 
@@ -538,7 +536,7 @@ public class Main {
 			break;
 		case Ataxx:
 			if (dimRows != null && dimCols != null && dimRows == dimCols) {
-				gameFactory =new AtaxxFactory(dimRows, pieces.size());
+				gameFactory =new AtaxxFactory(dimRows);
 			} else {
 				gameFactory =new AtaxxFactory();
 			}
