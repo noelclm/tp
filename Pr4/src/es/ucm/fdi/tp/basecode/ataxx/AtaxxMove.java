@@ -89,7 +89,30 @@ public class AtaxxMove extends GameMove {
 			throw new GameError("position (" + row + "," + col + ") is already occupied!");
 		}
 	}
+	
+	/**
+	 * Devuelve una lista de posiciones adyacentes de una posicion.
+	 * @param maxFila Filas totales del tablero.
+	 * @param maxColumna Columnas totales del tablero.
+	 * @return Posicion[]
+	 */
+/*	public Posicion[] adyacencia(int maxFila, int maxColumna){
 
+		Posicion[] pos = new Posicion[this.numPosiciones(maxFila, maxColumna)];
+		int i = 0;
+		for (int x=this.x-1; x<=this.x+1; x++){
+			for (int y=this.y-1; y<=this.y+1; y++){
+				if(x>=0 && y>=0 && x<maxFila && y<maxColumna && (x!=this.x || y!=this.y)){
+					pos[i] = new Posicion(x,y);
+					i++;
+				}
+			}
+		}
+		
+		return pos;
+			
+	}
+*/
 	/**
 	 * This move can be constructed from a string of the form "row SPACE col"
 	 * where row and col are integers representing a position.
