@@ -39,11 +39,13 @@ public class AtaxxFactory implements GameFactory {
 
 	public AtaxxFactory(int dim) {
 		
-		if (dim%2==0) {
+		if (dim < 5) {
+			throw new GameError("Dimension must be at least 5: " + dim);
+		} else if (dim%2==0) {
 			throw new GameError("La dimensión tiene que ser impar");
 		}else {
 			this.dim = dim;
-			this.numeroJugadores=2;
+			//this.numeroJugadores=0;
 		}
 	}
 
@@ -68,7 +70,8 @@ public class AtaxxFactory implements GameFactory {
 
 	@Override
 	public GameRules gameRules() {
-		return new AtaxxRules(dim,numeroJugadores);
+		//return new AtaxxRules(dim,numeroJugadores);
+		return new AtaxxRules(dim);
 	}
 
 	@Override
