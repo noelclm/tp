@@ -271,6 +271,8 @@ public class Main {
 		cmdLineOptions.addOption(constructPlayersOption()); // -p or --players
 		cmdLineOptions.addOption(constructDimensionOption()); // -d or --dim
 
+		cmdLineOptions.addOption(constructObstaclesOptions()); // -o or --obstacles
+
 		// parse the command line as provided in args
 		//
 		CommandLineParser parser = new DefaultParser();
@@ -282,6 +284,7 @@ public class Main {
 			parseViewOption(line);
 			parseMultiViewOption(line);
 			parsePlayersOptions(line);
+			parseObstaclesOptions(line);
 			
 
 			// if there are some remaining arguments, then something wrong is
@@ -595,6 +598,20 @@ public class Main {
 			}
 		}
 
+	}
+	
+	private static Option constructObstaclesOptions() {
+		return new Option("o", "obstacles", true,
+				"The board obstacle que se ponen");
+	}
+	
+	private static void parseObstaclesOptions(CommandLine line) throws ParseException {
+		String obstaclesVal = line.getOptionValue("o");
+		
+		if (obstaclesVal != null) {
+			System.out.println(obstaclesVal);
+		}
+		
 	}
 
 	/**

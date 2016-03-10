@@ -102,9 +102,8 @@ public class AtaxxMove extends GameMove {
 
 	@Override
 	public void execute(Board board, List<Piece> pieces) {
-		
 		if (board.getPosition(rowI, colI) != null) {
-			if(board.getPosition(rowI, rowI).equals(getPiece())){
+			if(board.getPosition(rowI, colI).equals(getPiece())){
 				if (board.getPosition(rowF, colF) == null) {
 					int d = distance();
 					if(d==1){
@@ -112,6 +111,8 @@ public class AtaxxMove extends GameMove {
 					}else if(d==2){
 						board.setPosition(rowI, colI, null);
 						board.setPosition(rowF, colF, getPiece());
+					}else {
+						throw new GameError("position (" + rowF + "," + colF + ") is lejos!");
 					}
 					
 				} else {
