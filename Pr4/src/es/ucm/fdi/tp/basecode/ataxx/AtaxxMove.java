@@ -28,7 +28,7 @@ public class AtaxxMove extends GameMove {
 	 * Fila en la que se coloca la ficha devuelta por
 	 * {@link GameMove#getPiece()}.
 	 */
-	protected int row;
+	protected int rowI;
 
 	/**
 	 * The column where to place the piece return by {@link GameMove#getPiece()}
@@ -37,7 +37,24 @@ public class AtaxxMove extends GameMove {
 	 * Columna en la que se coloca la ficha devuelta por
 	 * {@link GameMove#getPiece()}.
 	 */
-	protected int col;
+	protected int colI;
+	
+	/**
+	 * The row where to place the piece return by {@link GameMove#getPiece()}.
+	 * <p>
+	 * Fila en la que se coloca la ficha devuelta por
+	 * {@link GameMove#getPiece()}.
+	 */
+	protected int rowF;
+
+	/**
+	 * The column where to place the piece return by {@link GameMove#getPiece()}
+	 * .
+	 * <p>
+	 * Columna en la que se coloca la ficha devuelta por
+	 * {@link GameMove#getPiece()}.
+	 */
+	protected int colF;
 
 	/**
 	 * This constructor should be used ONLY to get an instance of
@@ -75,44 +92,50 @@ public class AtaxxMove extends GameMove {
 	 *            <p>
 	 *            Ficha a colocar en ({@code row},{@code col}).
 	 */
-	public AtaxxMove(int row, int col, Piece p) {
+	public AtaxxMove(int rowI, int colI, int rowF, int colF, Piece p) {
 		super(p);
-		this.row = row;
-		this.col = col;
+		this.rowI = rowI;
+		this.colI = colI;
+		this.rowF = rowF;
+		this.colF = colF;
 	}
 
 	@Override
 	public void execute(Board board, List<Piece> pieces) {
-		if (board.getPosition(row, col) == null) {
-			board.setPosition(row, col, getPiece());
-		} else {
-			throw new GameError("position (" + row + "," + col + ") is already occupied!");
+		
+		if (board.getPosition(rowI, colI) != null) {
+			if(board.getPosition(rowI, rowI).equals(getPiece())){
+				if (board.getPosition(rowF, colF) == null) {
+					int d = distance();
+					if(d==1){
+						board.setPosition(rowF, colF, getPiece());
+					}else if(d==2){
+						board.setPosition(rowI, colI, null);
+						board.setPosition(rowF, colF, getPiece());
+					}
+					
+				} else {
+					throw new GameError("position (" + rowF + "," + colF + ") is already occupied!");
+				}
+			}else {
+				throw new GameError("position (" + rowI + "," + colI + ") is de otro jugador!");
+			}	
+		}else {
+			throw new GameError("position (" + rowI + "," + colI + ") is empty!");
 		}
+		
 	}
 	
 	/**
-	 * Devuelve una lista de posiciones adyacentes de una posicion.
-	 * @param maxFila Filas totales del tablero.
-	 * @param maxColumna Columnas totales del tablero.
-	 * @return Posicion[]
+	 * 
 	 */
-/*	public Posicion[] adyacencia(int maxFila, int maxColumna){
-
-		Posicion[] pos = new Posicion[this.numPosiciones(maxFila, maxColumna)];
-		int i = 0;
-		for (int x=this.x-1; x<=this.x+1; x++){
-			for (int y=this.y-1; y<=this.y+1; y++){
-				if(x>=0 && y>=0 && x<maxFila && y<maxColumna && (x!=this.x || y!=this.y)){
-					pos[i] = new Posicion(x,y);
-					i++;
-				}
-			}
-		}
-		
-		return pos;
-			
+	private int distance(){
+		int d1 = Math.abs(this.rowI-this.rowF);
+		int d2 = Math.abs(this.colI-this.colF);
+		return Math.max(d1, d2);
 	}
-*/
+	
+	
 	/**
 	 * This move can be constructed from a string of the form "row SPACE col"
 	 * where row and col are integers representing a position.
@@ -124,15 +147,17 @@ public class AtaxxMove extends GameMove {
 	@Override
 	public GameMove fromString(Piece p, String str) {
 		String[] words = str.split(" ");
-		if (words.length != 2) {
+		if (words.length != 4) {
 			return null;
 		}
 
 		try {
-			int row, col;
-			row = Integer.parseInt(words[0]);
-			col = Integer.parseInt(words[1]);
-			return createMove(row, col, p);
+			int rowI, colI, rowF, colF;
+			rowI = Integer.parseInt(words[0]);
+			colI = Integer.parseInt(words[1]);
+			rowF = Integer.parseInt(words[2]);
+			colF = Integer.parseInt(words[3]);
+			return createMove(rowI, colI, rowF, colF, p);
 		} catch (NumberFormatException e) {
 			return null;
 		}
@@ -160,13 +185,13 @@ public class AtaxxMove extends GameMove {
 	 *            <p>
 	 *            Columna del nuevo movimiento.
 	 */
-	protected GameMove createMove(int row, int col, Piece p) {
-		return new AtaxxMove(row, col, p);
+	protected GameMove createMove(int rowI, int colI, int rowF, int colF, Piece p) {
+		return new AtaxxMove(rowI, colI, rowF, colF, p);
 	}
 
 	@Override
 	public String help() {
-		return "'row column', to place a piece at the corresponding position.";
+		return "Row and column for origin and for destination, separated by spaces (four numbers).";
 	}
 
 	@Override
@@ -174,7 +199,7 @@ public class AtaxxMove extends GameMove {
 		if (getPiece() == null) {
 			return help();
 		} else {
-			return "Place a piece '" + getPiece() + "' at (" + row + "," + col + ")";
+			return "Place a piece '" + getPiece() + "' at (" + rowI + "," + colI + ")";
 		}
 	}
 }

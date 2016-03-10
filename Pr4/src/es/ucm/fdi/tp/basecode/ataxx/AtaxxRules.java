@@ -178,7 +178,9 @@ public class AtaxxRules implements GameRules {
 		for (int i = 0; i < board.getRows(); i++) {
 			for (int j = 0; j < board.getCols(); j++) {
 				if (board.getPosition(i, j) == null) {
-					moves.add(new AtaxxMove(i, j, turn));
+					
+					System.out.println("AtaxxRules:182");
+					//moves.add(new AtaxxMove(i, j, turn));
 				}
 			}
 		}
@@ -190,6 +192,7 @@ public class AtaxxRules implements GameRules {
 	public Board dameTablero(Board board, List<Piece> piece){
 
 		for (int i = 0; i < piece.size(); i++) {
+			
 			if(i==0){
 				board.setPosition(0, 0, piece.get(i));
 				board.setPosition(board.getRows()-1, board.getCols()-1, piece.get(i));

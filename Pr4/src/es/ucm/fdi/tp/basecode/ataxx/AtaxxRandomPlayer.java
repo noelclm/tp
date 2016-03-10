@@ -40,7 +40,7 @@ public class AtaxxRandomPlayer extends Player {
 		// start at (currRow,currColl) and look for the first empty position.
 		while (true) {
 			if (board.getPosition(currRow, currCol) == null) {
-				return createMove(currRow, currCol, p);
+				//return createMove(currRow, currCol, p);
 			}
 			currCol = (currCol + 1) % cols;
 			if (currCol == 0) {
@@ -69,8 +69,8 @@ public class AtaxxRandomPlayer extends Player {
 	 *            Piece to place at ({@code row},{@code col}).
 	 * @return
 	 */
-	protected GameMove createMove(int row, int col, Piece p) {
-		return new AtaxxMove(row, col, p);
+	protected GameMove createMove(int rowI, int colI, int rowF, int colF,Piece p) {
+		return new AtaxxMove(rowI, colI,rowF,colF, p);
 	}
 
 }
