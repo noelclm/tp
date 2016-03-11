@@ -229,6 +229,10 @@ public class Main {
 	 * 
 	 */
 	private static Integer dimCols;
+	
+	
+
+	private static Integer obstacles = 0;
 
 	/**
 	 * The algorithm to be used by the automatic player. Not used so far, it is
@@ -280,11 +284,11 @@ public class Main {
 			CommandLine line = parser.parse(cmdLineOptions, args);
 			parseHelpOption(line, cmdLineOptions);
 			parseDimOptionn(line);
+			parseObstaclesOptions(line);
 			parseGameOption(line);
 			parseViewOption(line);
 			parseMultiViewOption(line);
 			parsePlayersOptions(line);
-			parseObstaclesOptions(line);
 			
 
 			// if there are some remaining arguments, then something wrong is
@@ -539,9 +543,14 @@ public class Main {
 			break;
 		case Ataxx:
 			if (dimRows != null && dimCols != null && dimRows == dimCols) {
-				gameFactory =new AtaxxFactory(dimRows);
+				if(obstacles == 0){
+					gameFactory = new AtaxxFactory(dimRows);
+				}else{
+					gameFactory = new AtaxxFactory(dimRows,obstacles);
+				}
+				
 			} else {
-				gameFactory =new AtaxxFactory();
+				gameFactory = new AtaxxFactory();
 			}
 			break;
 		default:
@@ -609,7 +618,8 @@ public class Main {
 		String obstaclesVal = line.getOptionValue("o");
 		
 		if (obstaclesVal != null) {
-			System.out.println(obstaclesVal);
+			
+			obstacles = Integer.parseInt(obstaclesVal);
 		}
 		
 	}

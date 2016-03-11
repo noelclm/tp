@@ -125,11 +125,12 @@ public class AtaxxMove extends GameMove {
 				
 					if(d==1){
 						board.setPosition(rowF, colF, getPiece());
-						adyacencia(rowF, colF,board, pieces);
+						adyacencia(rowF, colF, board, pieces);
 					}else if(d==2){
+						
 						board.setPosition(rowI, colI, null);
 						board.setPosition(rowF, colF, getPiece());
-						adyacencia(rowF, colF,board, pieces);
+						adyacencia(rowF, colF, board, pieces);
 
 					}else {
 						throw new GameError("position (" + rowF + "," + colF + ") is lejos!");

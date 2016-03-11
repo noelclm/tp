@@ -42,6 +42,7 @@ public class AtaxxRules implements GameRules {
 	protected final Pair<State, Piece> gameInPlayResult = new Pair<State, Piece>(State.InPlay, null);
 
 	private int dim;
+	private int obstacle;
 	
 	public AtaxxRules(int dim) {
 		
@@ -53,12 +54,14 @@ public class AtaxxRules implements GameRules {
 			
 		}else {
 			this.dim = dim;
+			this.obstacle = 0;
 		}
 	}
 
-	public AtaxxRules(int dim,int n) {
-		if (n<2 || n>4){
-			throw new GameError("El número de jugadores es 2,3 o 4");
+	public AtaxxRules(int dim,int o) {
+		
+		if(o>dim*2){
+			throw new GameError("Demasiados obstaculos: " + dim);
 		}
 		if (dim < 5) {
 			throw new GameError("Dimensión must be at least 5: " + dim);
@@ -67,6 +70,7 @@ public class AtaxxRules implements GameRules {
 			throw new GameError("La dimensión debe ser impar");	
 			
 		}else {
+			this.obstacle = o;
 			this.dim = dim;
 		}
 	}
@@ -208,6 +212,20 @@ public class AtaxxRules implements GameRules {
 			if(i==3){
 				board.setPosition(0, (board.getCols()-1)/2, piece.get(i));
 				board.setPosition(board.getRows()-1, (board.getCols()-1)/2, piece.get(i));
+			}
+		}
+		
+		if(obstacle>0){
+			
+			Piece obs = new Piece("*");
+			int j = 0;
+			while (j < obstacle ) {
+				int x = (int)(Math.random()*board.getRows()-1);
+				int y = (int)(Math.random()*board.getCols()-1);
+				if(board.getPosition(x, y) == null){
+					board.setPosition(x, y, obs);
+					j++;
+				}
 			}
 		}
 		
