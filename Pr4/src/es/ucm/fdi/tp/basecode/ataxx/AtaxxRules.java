@@ -177,18 +177,39 @@ public class AtaxxRules implements GameRules {
 
 	@Override
 	public List<GameMove> validMoves(Board board, List<Piece> playersPieces, Piece turn) {
+		
 		List<GameMove> moves = new ArrayList<GameMove>();
 
-		for (int i = 0; i < board.getRows(); i++) {
-			for (int j = 0; j < board.getCols(); j++) {
-				if (board.getPosition(i, j) == null) {
+		// Recorremos las filas del tablero
+		for (int rowI = 0; rowI < board.getRows(); rowI++) {
+			//Recorremos las columnas del tablero
+			for (int colI = 0; colI < board.getCols(); colI++) {
+				// Si hay una pieza del tipo de jugador del turno	
+				if(board.getPosition(rowI, colI) != null && board.getPosition(rowI, colI).equals(turn)) {
 					
-					System.out.println("AtaxxRules:182");
-					//moves.add(new AtaxxMove(i, j, turn));
+					// Recorremos las casillas adyacentes en busca de casillas vacias
+					for (int rowF=rowI-2; rowF<=rowI+2; rowF++){
+						for (int colF=colI-2; colF<=colI+2; colF++){
+							
+							// Comprobamos que este dentro del tablero y que no sea la propia casilla inicial
+							if(rowF>=0 && colF>=0 && rowF<board.getRows() && colF<board.getCols() && (rowF!=rowI || colF!=colI)){
+								
+								// Si hay una casilla vacia guarda el movimiento
+								if ((board.getPosition(rowF, colF) == null)){	
+									moves.add(new AtaxxMove(rowI, colI, rowF, colF, turn));
+								}	
+								
+							}
+							
+						}
+					}
+					
 				}
 			}
 		}
+		
 		return moves;
+		
 	}
 	/**
 	 * Crea el tablero inicial
