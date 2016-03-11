@@ -101,10 +101,13 @@ public class AtaxxMove extends GameMove {
 	
 	private void adyacencia(int rowF, int colF,Board board,List<Piece> pieces){
 		
+		Piece obs = new Piece("*");
+		
 		for (int x=this.rowF-1; x<=this.rowF+1; x++){
 			for (int y=this.colF-1; y<=this.colF+1; y++){
 				if(x>=0 && y>=0 && x<board.getRows() && y<board.getCols() && (x!=this.rowF || y!=this.colF)){
-					if ((board.getPosition(x, y) != null)&&(!board.getPosition(x, y).equals(getPiece()))){	
+					if ((board.getPosition(x, y) != null)&&(!board.getPosition(x, y).equals(getPiece()))&&(!board.getPosition(x, y).equals(obs))){	
+						
 						board.setPosition(x, y, getPiece());
 					}
 						
