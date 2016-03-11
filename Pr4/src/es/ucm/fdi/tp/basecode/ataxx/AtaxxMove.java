@@ -2,7 +2,6 @@ package es.ucm.fdi.tp.basecode.ataxx;
 
 
 import java.util.List;
-
 import es.ucm.fdi.tp.basecode.bgame.model.Board;
 import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.GameMove;
@@ -99,6 +98,23 @@ public class AtaxxMove extends GameMove {
 		this.rowF = rowF;
 		this.colF = colF;
 	}
+	
+	private void adyacencia(int rowF, int colF,Board board,List<Piece> pieces){
+		
+		for (int x=this.rowF-1; x<=this.rowF+1; x++){
+			for (int y=this.colF-1; y<=this.colF+1; y++){
+				if(x>=0 && y>=0 && x<board.getRows() && y<board.getCols() && (x!=this.rowF || y!=this.colF)){
+					if ((board.getPosition(x, y) != null)&&(!board.getPosition(x, y).equals(getPiece()))){	
+						board.setPosition(x, y, getPiece());
+					}
+						
+				}
+			}
+		}
+			
+		
+	}
+	
 
 	@Override
 	public void execute(Board board, List<Piece> pieces) {
@@ -106,11 +122,15 @@ public class AtaxxMove extends GameMove {
 			if(board.getPosition(rowI, colI).equals(getPiece())){
 				if (board.getPosition(rowF, colF) == null) {
 					int d = distance();
+				
 					if(d==1){
 						board.setPosition(rowF, colF, getPiece());
+						adyacencia(rowF, colF,board, pieces);
 					}else if(d==2){
 						board.setPosition(rowI, colI, null);
 						board.setPosition(rowF, colF, getPiece());
+						adyacencia(rowF, colF,board, pieces);
+
 					}else {
 						throw new GameError("position (" + rowF + "," + colF + ") is lejos!");
 					}
