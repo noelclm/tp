@@ -70,28 +70,6 @@ public class AtaxxMove extends GameMove {
 	public AtaxxMove() {
 	}
 	
-	/**
-	 * Constructs a move for placing a piece of the type referenced by {@code p}
-	 * at position ({@code rowI},{@code colI},{@code rowF},{@code colF}).
-	 * 
-	 * <p>
-	 * Construye un movimiento para colocar una ficha del tipo referenciado por
-	 * {@code p} en la posicion ({@code rowI},{@code colI},{@code rowF},{@code colF}).
-	 * 
-	 * @param p
-	 * 			  A piece to be place at ({@code rowF},{@code colF}).
-	 *            <p>
-	 *            Ficha a colocar en ({@code rowF},{@code colF}).
-	 */
-	
-	public AtaxxMove(Piece p) {
-		super(p);
-		this.rowI = -1;
-		this.colI = -1;
-		this.rowF = -1;
-		this.colF = -1;
-	}
-
 	
 	/**
 	 * Constructs a move for placing a piece of the type referenced by {@code p}
@@ -167,7 +145,7 @@ public class AtaxxMove extends GameMove {
 
 	@Override
 	public void execute(Board board, List<Piece> pieces) {
-		if(rowI >= 0 && colI >= 0 && rowF >= 0 && colF >= 0){
+		
 			if (board.getPosition(rowI, colI) != null) {
 				if(board.getPosition(rowI, colI).equals(getPiece())){
 					if (board.getPosition(rowF, colF) == null) {
@@ -196,7 +174,7 @@ public class AtaxxMove extends GameMove {
 			}else {
 				throw new GameError("position (" + rowI + "," + colI + ") is empty!");
 			}
-		}
+			
 	}
 	
 	/**

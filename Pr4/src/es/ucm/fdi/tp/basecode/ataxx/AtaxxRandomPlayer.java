@@ -31,11 +31,8 @@ public class AtaxxRandomPlayer extends Player {
 		}
 		
 		List<GameMove> moves = rules.validMoves(board, pieces, p);
-	
-		int move = Utils.randomInt(moves.size());
 		
-		if(moves.isEmpty())
-			return new AtaxxMove(p);
+		int move = Utils.randomInt(moves.size());
 		
 		return moves.get(move);
 	

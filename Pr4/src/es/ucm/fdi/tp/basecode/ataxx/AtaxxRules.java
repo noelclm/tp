@@ -1,8 +1,6 @@
 package es.ucm.fdi.tp.basecode.ataxx;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import es.ucm.fdi.tp.basecode.bgame.model.Board;
@@ -116,12 +114,10 @@ public class AtaxxRules implements GameRules {
 	@Override
 	public Pair<State, Piece> updateState(Board board, List<Piece> playersPieces, Piece lastPlayer) {
 		
-		
 		List<GameMove> moves = validMoves(board, playersPieces, lastPlayer);
+		Pair<State, Piece> s = gameInPlayResult;
 		
-		
-		
-		//if (board.isFull()){
+		if (board.isFull()||moves.isEmpty()){
 			
 			ArrayList<Integer> totalPiezas = new ArrayList<Integer>();
 			
@@ -131,128 +127,46 @@ public class AtaxxRules implements GameRules {
 			}
 			
 			int pos = 0;
-			double valorMax=0;
+			int max =Integer.MIN_VALUE;
 
-			//int max =Integer.MIN_VALUE;
-			//System.out.println(max);
+			Piece p = null;
+			
+			
 			for (int j=0; j < totalPiezas.size(); j++){
-				//if (totalPiezas.get(j)>max){
-					//pos = j;
-					//max=totalPiezas.get(j);
-				if(totalPiezas.get(j)>valorMax){
-
+		
+				if (totalPiezas.get(j) > max){
 					pos = j;
-					valorMax = totalPiezas.get(j);
+					max=totalPiezas.get(j);
+					p = playersPieces.get(pos);
+					s = new Pair<State, Piece>(State.Won, p);
+			
+				}else if (totalPiezas.get(j) == max){
+					s = new Pair<State, Piece>(State.Draw, null);
 				}
-			    //System.out.println(Collections.max(totalPiezas));
-				//Integer m = Collections.max(totalPiezas);
-				System.out.println( totalPiezas.size());
-				System.out.println(valorMax);
-				
-				
+					
 			}
 	
-			
-			Piece p = playersPieces.get(pos);
-			//return new Pair<State, Piece>(State.Won, p);
-		//}
-		
-		
-		
-		
-		return gameInPlayResult;
-		
-		
-		/*
-		//int totalPiezas[] = new int[playersPieces.size()];
-		ArrayList<Integer> totalPiezas = new ArrayList<Integer>();
-		
-		List<GameMove> moves = validMoves(board, playersPieces, lastPlayer);
-		
-		if (board.isFull()){
-			for (int i=0; i < playersPieces.size(); i++){
-				totalPiezas.add(board.getPieceCount(playersPieces.get(i)));
-			}
-			
-
-			for (int j=0; j < totalPiezas.length; j++){
-				totalPiezas[j]=board.getPieceCount(playersPieces.get(i));
-			}
-			
 		}
-		
-		
-		
-		if (moves.isEmpty())
-		if (board.isFull()||moves.isEmpty()){
-			for (int i=0; i < playersPieces.size(); i++){
-				totalPiezas[j]=board.getPieceCount(playersPieces.get(i));
-				return new Pair<State, Piece>(State.Won, playersPieces.get(i));
-			}
-			
-		}
-
-		// check rows & cols
-		for (int i = 0; i < dim; i++) {
-			// row i
-			p = board.getPosition(i, 0);
-			if (p != null) {
-				j = 1;
-				while (j < dim && board.getPosition(i, j) == p)
-					j++;
-				if (j == dim)
-					return new Pair<State, Piece>(State.Won, p);
-			}
-
-			// col i
-			p = board.getPosition(0, i);
-			if (p != null) {
-				j = 1;
-				while (j < dim && board.getPosition(j, i) == p)
-					j++;
-				if (j == dim)
-					return new Pair<State, Piece>(State.Won, p);
-			}
-		}
-
-		// diagonal 1 - left-up to right-bottom
-		p = board.getPosition(0, 0);
-		if (p != null) {
-			j = 1;
-			while (j < dim && board.getPosition(j, j) == p) {
-				j++;
-			}
-			if (j == dim) {
-				return new Pair<State, Piece>(State.Won, p);
-			}
-		}
-
-		// diagonal 2 - left-bottom to right-up
-		p = board.getPosition(dim - 1, 0);
-		if (p != null) {
-			j = 1;
-			while (j < dim && board.getPosition(dim - j - 1, j) == p) {
-				j++;
-			}
-			if (j == dim) {
-				return new Pair<State, Piece>(State.Won, p);
-			}
-		}
-
-		if (board.isFull()) {
-			return new Pair<State, Piece>(State.Draw, null);
-		}
-		
-		return gameInPlayResult;
-*/
-
+	
+		return s;
 	}
 
 	@Override
 	public Piece nextPlayer(Board board, List<Piece> playersPieces, Piece lastPlayer) {
 		List<Piece> pieces = playersPieces;
 		int i = pieces.indexOf(lastPlayer);
-		return pieces.get((i + 1) % pieces.size());
+		
+		Piece p = pieces.get((i + 1) % pieces.size());
+		
+		List<GameMove> moves = validMoves(board, playersPieces, p);
+		
+		if(moves.isEmpty()){
+			return nextPlayer(board, playersPieces, p);
+		}
+		else{
+			return p;
+		}
+		
 	}
 
 	@Override
