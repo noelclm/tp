@@ -1,6 +1,8 @@
 package es.ucm.fdi.tp.basecode.ataxx;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import es.ucm.fdi.tp.basecode.bgame.model.Board;
@@ -116,16 +118,51 @@ public class AtaxxRules implements GameRules {
 		
 		
 		List<GameMove> moves = validMoves(board, playersPieces, lastPlayer);
-		if(playersPieces.size()>2){
-			if(moves.isEmpty()){
-				return gameInPlayResult;
+		
+		
+		
+		//if (board.isFull()){
+			
+			ArrayList<Integer> totalPiezas = new ArrayList<Integer>();
+			
+			for (int i=0; i < playersPieces.size(); i++){
+				
+				System.out.println(playersPieces.get(i));
+				System.out.println(board.getPieceCount(playersPieces.get(i)));
+				//totalPiezas.add(board.getPieceCount(playersPieces.get(i)));
 			}
-		}
+			
+			int pos = 0;
+			double valorMax=0;
+
+			//int max =Integer.MIN_VALUE;
+			//System.out.println(max);
+			for (int j=0; j < totalPiezas.size(); j++){
+				//if (totalPiezas.get(j)>max){
+					//pos = j;
+					//max=totalPiezas.get(j);
+				if(totalPiezas.get(j)>valorMax){
+
+					pos = j;
+					valorMax = totalPiezas.get(j);
+				}
+			    //System.out.println(Collections.max(totalPiezas));
+				//Integer m = Collections.max(totalPiezas);
+				System.out.println( totalPiezas.size());
+				System.out.println(valorMax);
+				
+				
+			}
+	
+			
+			Piece p = playersPieces.get(pos);
+			return new Pair<State, Piece>(State.Won, p);
+		//}
 		
 		
 		
 		
-		return gameInPlayResult;
+		//return gameInPlayResult;
 		
 		
 		/*
