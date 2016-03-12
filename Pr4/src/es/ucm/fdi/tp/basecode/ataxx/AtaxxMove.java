@@ -69,15 +69,37 @@ public class AtaxxMove extends GameMove {
 
 	public AtaxxMove() {
 	}
+	
+	/**
+	 * Constructs a move for placing a piece of the type referenced by {@code p}
+	 * at position ({@code rowI},{@code colI},{@code rowF},{@code colF}).
+	 * 
+	 * <p>
+	 * Construye un movimiento para colocar una ficha del tipo referenciado por
+	 * {@code p} en la posicion ({@code rowI},{@code colI},{@code rowF},{@code colF}).
+	 * 
+	 * @param p
+	 * 			  A piece to be place at ({@code rowF},{@code colF}).
+	 *            <p>
+	 *            Ficha a colocar en ({@code rowF},{@code colF}).
+	 */
+	
+	public AtaxxMove(Piece p) {
+		super(p);
+		this.rowI = -1;
+		this.colI = -1;
+		this.rowF = -1;
+		this.colF = -1;
+	}
 
 	
 	/**
 	 * Constructs a move for placing a piece of the type referenced by {@code p}
-	 * at position ({@code row},{@code col}).
+	 * at position ({@code rowI},{@code colI},{@code rowF},{@code colF}).
 	 * 
 	 * <p>
 	 * Construye un movimiento para colocar una ficha del tipo referenciado por
-	 * {@code p} en la posicion ({@code row},{@code col}).
+	 * {@code p} en la posicion ({@code rowI},{@code colI},{@code rowF},{@code colF}).
 	 * 
 	 * @param rowI
 	 *            Number of initial row .
@@ -96,9 +118,9 @@ public class AtaxxMove extends GameMove {
 	 *            <p>
 	 *            Numero de columna final.
 	 * @param p
-	 * 			  A piece to be place at ({@code row},{@code col}).
+	 * 			  A piece to be place at ({@code rowF},{@code colF}).
 	 *            <p>
-	 *            Ficha a colocar en ({@code row},{@code col}).
+	 *            Ficha a colocar en ({@code rowF},{@code colF}).
 	 */
 	
 	public AtaxxMove(int rowI, int colI, int rowF, int colF, Piece p) {
@@ -144,34 +166,35 @@ public class AtaxxMove extends GameMove {
 
 	@Override
 	public void execute(Board board, List<Piece> pieces) {
-		if (board.getPosition(rowI, colI) != null) {
-			if(board.getPosition(rowI, colI).equals(getPiece())){
-				if (board.getPosition(rowF, colF) == null) {
-					int d = distance();
-				
-					if(d==1){
-						board.setPosition(rowF, colF, getPiece());
-						adyacencia(rowF, colF, board, pieces);
-					}else if(d==2){
-						
-						board.setPosition(rowI, colI, null);
-						board.setPosition(rowF, colF, getPiece());
-						adyacencia(rowF, colF, board, pieces);
-
-					}else {
-						throw new GameError("position (" + rowF + "," + colF + ") is lejos!");
-					}
+		if(rowI >= 0 && colI >= 0 && rowF >= 0 && colF >= 0){
+			if (board.getPosition(rowI, colI) != null) {
+				if(board.getPosition(rowI, colI).equals(getPiece())){
+					if (board.getPosition(rowF, colF) == null) {
+						int d = distance();
 					
-				} else {
-					throw new GameError("position (" + rowF + "," + colF + ") is already occupied!");
-				}
+						if(d==1){
+							board.setPosition(rowF, colF, getPiece());
+							adyacencia(rowF, colF, board, pieces);
+						}else if(d==2){
+							
+							board.setPosition(rowI, colI, null);
+							board.setPosition(rowF, colF, getPiece());
+							adyacencia(rowF, colF, board, pieces);
+	
+						}else {
+							throw new GameError("position (" + rowF + "," + colF + ") is far!");
+						}
+						
+					} else {
+						throw new GameError("position (" + rowF + "," + colF + ") is already occupied!");
+					}
+				}else {
+					throw new GameError("position (" + rowI + "," + colI + ") is another player!");
+				}	
 			}else {
-				throw new GameError("position (" + rowI + "," + colI + ") is de otro jugador!");
-			}	
-		}else {
-			throw new GameError("position (" + rowI + "," + colI + ") is empty!");
+				throw new GameError("position (" + rowI + "," + colI + ") is empty!");
+			}
 		}
-		
 	}
 	
 	/**

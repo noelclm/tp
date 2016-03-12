@@ -48,7 +48,7 @@ public class AtaxxFactory implements GameFactory {
 		if (dim < 5) {
 			throw new GameError("Dimension must be at least 5: " + dim);
 		} else if (dim%2==0) {
-			throw new GameError("La dimensión tiene que ser impar");
+			throw new GameError("The dimension has to be odd");
 		}else {
 			this.dim = dim;
 			this.obstacles = 0;
@@ -61,13 +61,13 @@ public class AtaxxFactory implements GameFactory {
  */
 	public AtaxxFactory(int dim, int o ) {
 		
-		if(o>dim*2){
-			throw new GameError("Demasiados obstaculos: " + dim);
+		if(o>dim*dim){
+			throw new GameError("Too many obstacles");
 		}
 		if (dim < 5) {
 			throw new GameError("Dimension must be at least 5: " + dim);
 		} else if (dim%2==0) {
-			throw new GameError("La dimensión tiene que ser impar");	
+			throw new GameError("The dimension has to be odd");	
 		}
 		else {
 			this.obstacles = o;

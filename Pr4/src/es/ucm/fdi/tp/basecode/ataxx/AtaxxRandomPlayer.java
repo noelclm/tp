@@ -31,13 +31,14 @@ public class AtaxxRandomPlayer extends Player {
 		}
 		
 		List<GameMove> moves = rules.validMoves(board, pieces, p);
-		
+	
 		int move = Utils.randomInt(moves.size());
-
+		
+		if(moves.isEmpty())
+			return new AtaxxMove(p);
 		
 		return moves.get(move);
-
-
+	
 	}
 
 	/**
@@ -57,8 +58,8 @@ public class AtaxxRandomPlayer extends Player {
 	 * @param p Turno actual.
 	 * @return Devuelve un movimiento aleatorio.
 	 */
-	protected GameMove createMove(int rowI, int colI, int rowF, int colF,Piece p) {
-		return new AtaxxMove(rowI, colI,rowF,colF, p);
+	protected GameMove createMove(int rowI, int colI, int rowF, int colF, Piece p) {
+		return new AtaxxMove(rowI, colI, rowF, colF, p);
 	}
 
 }

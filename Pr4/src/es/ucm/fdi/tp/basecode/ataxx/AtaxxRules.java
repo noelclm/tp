@@ -67,8 +67,8 @@ public class AtaxxRules implements GameRules {
  */
 	public AtaxxRules(int dim,int o) {
 		
-		if(o>dim*2){
-			throw new GameError("too many obstacles: " + dim);
+		if(o>dim*dim){
+			throw new GameError("Too many obstacles");
 		}
 		if (dim < 5) {
 			throw new GameError("Dimensión must be at least 5: " + dim);
@@ -114,6 +114,21 @@ public class AtaxxRules implements GameRules {
 	@Override
 	public Pair<State, Piece> updateState(Board board, List<Piece> playersPieces, Piece lastPlayer) {
 		
+		
+		List<GameMove> moves = validMoves(board, playersPieces, lastPlayer);
+		if(playersPieces.size()>2){
+			if(moves.isEmpty()){
+				return gameInPlayResult;
+			}
+		}
+		
+		
+		
+		
+		return gameInPlayResult;
+		
+		
+		/*
 		//int totalPiezas[] = new int[playersPieces.size()];
 		ArrayList<Integer> totalPiezas = new ArrayList<Integer>();
 		
@@ -192,8 +207,10 @@ public class AtaxxRules implements GameRules {
 		if (board.isFull()) {
 			return new Pair<State, Piece>(State.Draw, null);
 		}
-
+		
 		return gameInPlayResult;
+*/
+
 	}
 
 	@Override
