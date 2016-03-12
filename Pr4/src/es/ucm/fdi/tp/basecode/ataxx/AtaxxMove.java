@@ -8,10 +8,10 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameMove;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 
 /**
- * A Class representing a move for ConnectN.
+ * A Class representing a move for Ataxx.
  * 
  * <p>
- * Clase para representar un movimiento del juego conecta-n.
+ * Clase para representar un movimiento del juego ataxx.
  * 
  */
 public class AtaxxMove extends GameMove {
@@ -57,12 +57,12 @@ public class AtaxxMove extends GameMove {
 
 	/**
 	 * This constructor should be used ONLY to get an instance of
-	 * {@link ConnectNMove} to generate game moves from strings by calling
+	 * {@link AtaxxMove} to generate game moves from strings by calling
 	 * {@link #fromString(String)}
 	 * 
 	 * <p>
 	 * Solo se debe usar este constructor para obtener objetos de
-	 * {@link ConnectNMove} para generar movimientos a partir de strings usando
+	 * {@link AtaxxMove} para generar movimientos a partir de strings usando
 	 * el metodo {@link #fromString(String)}
 	 * 
 	 */
@@ -70,6 +70,7 @@ public class AtaxxMove extends GameMove {
 	public AtaxxMove() {
 	}
 
+	
 	/**
 	 * Constructs a move for placing a piece of the type referenced by {@code p}
 	 * at position ({@code row},{@code col}).
@@ -78,19 +79,28 @@ public class AtaxxMove extends GameMove {
 	 * Construye un movimiento para colocar una ficha del tipo referenciado por
 	 * {@code p} en la posicion ({@code row},{@code col}).
 	 * 
-	 * @param row
-	 *            Number of row.
+	 * @param rowI
+	 *            Number of initial row .
 	 *            <p>
-	 *            Numero de fila.
-	 * @param col
-	 *            Number of column.
+	 *            Numero de fila inicial.
+	 * @param colI
+	 * 			  Number of initial column .
 	 *            <p>
-	 *            Numero de columna.
+	 *            Numero de columna inicial.
+	 * @param rowF
+	 * 			  Number of final row .
+	 *            <p>
+	 *            Numero de fila final.
+	 * @param colF
+	 *  		  Number of final column .
+	 *            <p>
+	 *            Numero de columna final.
 	 * @param p
-	 *            A piece to be place at ({@code row},{@code col}).
+	 * 			  A piece to be place at ({@code row},{@code col}).
 	 *            <p>
 	 *            Ficha a colocar en ({@code row},{@code col}).
 	 */
+	
 	public AtaxxMove(int rowI, int colI, int rowF, int colF, Piece p) {
 		super(p);
 		this.rowI = rowI;
@@ -99,6 +109,19 @@ public class AtaxxMove extends GameMove {
 		this.colF = colF;
 	}
 	
+	/**
+	 * Transforma las piezas de alrededor al tipo de pieza que es movido
+	 * @param rowF
+	 *           Number of final row .
+	 *            <p>
+	 *            Numero de fila final.
+	 * @param colF
+	 * 	          Number of final column .
+	 *            <p>
+	 *            Numero de columna final.
+	 * @param board tablero.
+	 * @param pieces Piezas del tablero.
+	 */
 	private void adyacencia(int rowF, int colF,Board board,List<Piece> pieces){
 		
 		Piece obs = new Piece("*");
@@ -152,7 +175,8 @@ public class AtaxxMove extends GameMove {
 	}
 	
 	/**
-	 * 
+	 * Clacula la distancia que hay entre la casilla de origen y la casilla de destino del tablero.
+	 * @return distancia.
 	 */
 	private int distance(){
 		int d1 = Math.abs(this.rowI-this.rowF);
@@ -169,6 +193,7 @@ public class AtaxxMove extends GameMove {
 	 * Se puede construir un movimiento desde un string de la forma
 	 * "row SPACE col" donde row y col son enteros que representan una casilla.
 	 */
+	
 	@Override
 	public GameMove fromString(Piece p, String str) {
 		String[] words = str.split(" ");
@@ -209,6 +234,23 @@ public class AtaxxMove extends GameMove {
 	 *            Column of the move being created.
 	 *            <p>
 	 *            Columna del nuevo movimiento.
+	 */
+	/**
+	 * Creates a move that is called from {@link #fromString(Piece, String)}.
+	 * Separating it from that method allows us to use this class for other
+	 * similar games by overriding this method.
+	 * 
+	 * <p>
+	 * Crea un nuevo movimiento con la misma ficha utilizada en el movimiento
+	 * actual. Llamado desde {@link #fromString(Piece, String)}; se separa este
+	 * metodo del anterior para permitir utilizar esta clase para otros juegos
+	 * similares sobrescribiendo este metodo.
+	 * @param rowI Numero de fila inicial.
+	 * @param colI Numero de columna inicial.
+	 * @param rowF Numero de fila final.
+	 * @param colF Numero de columna final.
+	 * @param p Turno actual.
+	 * @return Devuelve el movimiento que has metido por teclado.
 	 */
 	protected GameMove createMove(int rowI, int colI, int rowF, int colF, Piece p) {
 		return new AtaxxMove(rowI, colI, rowF, colF, p);

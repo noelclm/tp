@@ -19,24 +19,30 @@ import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.bgame.views.GenericConsoleView;
 
 /**
- * A factory for creating connect-N games. See {@link ConnectNRules} for the
+ * A factory for creating ataxx games. See {@link AtaxxRules} for the
  * description of the game.
  * 
  * 
  * <p>
- * Factoria para la creacion de juegos Connect-n. Vease {@link ConnectNRules}
+ * Factoria para la creacion de juegos Ataxx. Vease {@link AtaxxRules}
  * para la descripcion del juego.
  */
 public class AtaxxFactory implements GameFactory {
 
 	private int dim;
 	private int obstacles;
-
+	
+/**
+ * Constructor por defecto.
+ */
 	public AtaxxFactory() {
 		this.dim=7;
 		this.obstacles = 0;
 	}
-
+/**
+ * Constructor parametrizado.
+ * @param dim Dimensión del tablero.
+ */
 	public AtaxxFactory(int dim) {
 		
 		if (dim < 5) {
@@ -48,7 +54,11 @@ public class AtaxxFactory implements GameFactory {
 			this.obstacles = 0;
 		}
 	}
-
+/**
+ * Constructor parametrizado.
+ * @param dim Dimensión del tablero.
+ * @param o Obstaculos del tablero.
+ */
 	public AtaxxFactory(int dim, int o ) {
 		
 		if(o>dim*2){

@@ -231,7 +231,10 @@ public class Main {
 	private static Integer dimCols;
 	
 	
-
+/**
+ * Numero de obstaculos proporcionados con la opcion -o, o {@code null} si no
+ * se incluye la opcion -o.
+ */
 	private static Integer obstacles = 0;
 
 	/**
@@ -608,12 +611,20 @@ public class Main {
 		}
 
 	}
+	/**
+	 * Construye la opcion -o.
+	 * @return Objeto de esta opcion.
+	 */
 	
 	private static Option constructObstaclesOptions() {
 		return new Option("o", "obstacles", true,
 				"The board obstacle que se ponen");
 	}
-	
+	/**
+	 * Extrae la opcion obstaculos (-o).
+	 * @param line  CLI {@link CommandLine} object.
+	 * @throws ParseException  Si se proporciona un valor invalido.
+	 */
 	private static void parseObstaclesOptions(CommandLine line) throws ParseException {
 		String obstaclesVal = line.getOptionValue("o");
 		

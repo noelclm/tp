@@ -11,10 +11,10 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameRules;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 
 /**
- * A random player for ConnectN.
+ * A random player for Ataxx.
  * 
  * <p>
- * Un jugador aleatorio para ConnectN.
+ * Un jugador aleatorio para Ataxx.
  *
  */
 public class AtaxxRandomPlayer extends Player {
@@ -50,14 +50,12 @@ public class AtaxxRandomPlayer extends Player {
 	 * este metodo de {@link #requestMove(Piece, Board, List, GameRules)} para
 	 * permitir la reutilizacion de esta clase en otros juegos similares,
 	 * sobrescribiendo este metodo.
-	 * 
-	 * @param row
-	 *            row number.
-	 * @param col
-	 *            column number..
-	 * @param p
-	 *            Piece to place at ({@code row},{@code col}).
-	 * @return
+	 * @param rowI Numero de fila inicial.
+	 * @param colI Numero de columna inicial.
+	 * @param rowF Numero de fila final.
+	 * @param colF Numero de columna final.
+	 * @param p Turno actual.
+	 * @return Devuelve un movimiento aleatorio.
 	 */
 	protected GameMove createMove(int rowI, int colI, int rowF, int colF,Piece p) {
 		return new AtaxxMove(rowI, colI,rowF,colF, p);

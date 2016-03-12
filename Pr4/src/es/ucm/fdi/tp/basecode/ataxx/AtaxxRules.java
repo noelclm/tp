@@ -13,9 +13,9 @@ import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.bgame.model.Game.State;
 
 /**
- * Rules for ConnectN game.
+ * Rules for Ataxx game.
  * <ul>
- * <li>The game is played on an NxN board (with N>=3).</li>
+ * <li>The game is played on an NxN board (with N>=5).</li>
  * <li>The number of players is between 2 and 4.</li>
  * <li>The player turn in the given order, each placing a piece on an empty
  * cell. The winner is the one who construct a line (horizontal, vertical or
@@ -23,7 +23,7 @@ import es.ucm.fdi.tp.basecode.bgame.model.Game.State;
  * </ul>
  * 
  * <p>
- * Reglas del juego ConnectN.
+ * Reglas del juego Ataxx.
  * <ul>
  * <li>El juego se juega en un tablero NxN (con N>=3).</li>
  * <li>El numero de jugadores esta entre 2 y 4.</li>
@@ -43,31 +43,38 @@ public class AtaxxRules implements GameRules {
 
 	private int dim;
 	private int obstacle;
-	
+	/**
+	 * Constructor parametrizado.
+	 * @param dim Dimensión del tablero.
+	 */
 	public AtaxxRules(int dim) {
 		
 		if (dim < 5) {
 			throw new GameError("Dimensión must be at least 5: " + dim);
 		} 
 		else if (dim%2==0){
-			throw new GameError("La dimensión debe ser impar");	
+			throw new GameError("The dimension must be odd");	
 			
 		}else {
 			this.dim = dim;
 			this.obstacle = 0;
 		}
 	}
-
+/**
+ * Constructor parametrizado.
+ * @param dim Dimensión del tablero.
+ * @param o Obstaculos del tablero.
+ */
 	public AtaxxRules(int dim,int o) {
 		
 		if(o>dim*2){
-			throw new GameError("Demasiados obstaculos: " + dim);
+			throw new GameError("too many obstacles: " + dim);
 		}
 		if (dim < 5) {
 			throw new GameError("Dimensión must be at least 5: " + dim);
 		} 
 		else if (dim%2==0){
-			throw new GameError("La dimensión debe ser impar");	
+			throw new GameError("The dimension must be odd");	
 			
 		}else {
 			this.obstacle = o;
@@ -106,8 +113,34 @@ public class AtaxxRules implements GameRules {
 
 	@Override
 	public Pair<State, Piece> updateState(Board board, List<Piece> playersPieces, Piece lastPlayer) {
-		int j;
-		Piece p;
+		
+		//int totalPiezas[] = new int[playersPieces.size()];
+		ArrayList<Integer> totalPiezas = new ArrayList<Integer>();
+		
+		List<GameMove> moves = validMoves(board, playersPieces, lastPlayer);
+		
+		if (board.isFull()){
+			for (int i=0; i < playersPieces.size(); i++){
+				totalPiezas.add(board.getPieceCount(playersPieces.get(i)));
+			}
+			
+
+			for (int j=0; j < totalPiezas.length; j++){
+				totalPiezas[j]=board.getPieceCount(playersPieces.get(i));
+			}
+			
+		}
+		
+		
+		
+		if (moves.isEmpty())
+		if (board.isFull()||moves.isEmpty()){
+			for (int i=0; i < playersPieces.size(); i++){
+				totalPiezas[j]=board.getPieceCount(playersPieces.get(i));
+				return new Pair<State, Piece>(State.Won, playersPieces.get(i));
+			}
+			
+		}
 
 		// check rows & cols
 		for (int i = 0; i < dim; i++) {
