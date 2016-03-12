@@ -126,10 +126,8 @@ public class AtaxxRules implements GameRules {
 			ArrayList<Integer> totalPiezas = new ArrayList<Integer>();
 			
 			for (int i=0; i < playersPieces.size(); i++){
-				
-				System.out.println(playersPieces.get(i));
-				System.out.println(board.getPieceCount(playersPieces.get(i)));
-				//totalPiezas.add(board.getPieceCount(playersPieces.get(i)));
+
+				totalPiezas.add(board.getPieceCount(playersPieces.get(i)));
 			}
 			
 			int pos = 0;
@@ -156,13 +154,13 @@ public class AtaxxRules implements GameRules {
 	
 			
 			Piece p = playersPieces.get(pos);
-			return new Pair<State, Piece>(State.Won, p);
+			//return new Pair<State, Piece>(State.Won, p);
 		//}
 		
 		
 		
 		
-		//return gameInPlayResult;
+		return gameInPlayResult;
 		
 		
 		/*
@@ -308,18 +306,22 @@ public class AtaxxRules implements GameRules {
 			if(i==0){
 				board.setPosition(0, 0, piece.get(i));
 				board.setPosition(board.getRows()-1, board.getCols()-1, piece.get(i));
+				board.setPieceCount(piece.get(i), 2);
 			}
 			if(i==1){
 				board.setPosition(0, board.getCols()-1, piece.get(i));
 				board.setPosition(board.getRows()-1, 0, piece.get(i));
+				board.setPieceCount(piece.get(i), 2);
 			}
 			if(i==2){
 				board.setPosition((board.getRows()-1)/2, 0, piece.get(i));
 				board.setPosition((board.getRows()-1)/2, board.getCols()-1, piece.get(i));
+				board.setPieceCount(piece.get(i), 2);
 			}
 			if(i==3){
 				board.setPosition(0, (board.getCols()-1)/2, piece.get(i));
 				board.setPosition(board.getRows()-1, (board.getCols()-1)/2, piece.get(i));
+				board.setPieceCount(piece.get(i), 2);
 			}
 		}
 		

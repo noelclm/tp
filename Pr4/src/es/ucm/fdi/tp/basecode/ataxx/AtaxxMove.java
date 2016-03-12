@@ -152,8 +152,9 @@ public class AtaxxMove extends GameMove {
 			for (int y=this.colF-1; y<=this.colF+1; y++){
 				if(x>=0 && y>=0 && x<board.getRows() && y<board.getCols() && (x!=this.rowF || y!=this.colF)){
 					if ((board.getPosition(x, y) != null)&&(!board.getPosition(x, y).equals(getPiece()))&&(!board.getPosition(x, y).equals(obs))){	
-						
+						board.setPieceCount(board.getPosition(x, y), board.getPieceCount(board.getPosition(x, y))-1);
 						board.setPosition(x, y, getPiece());
+						board.setPieceCount(getPiece(), board.getPieceCount(getPiece())+1);
 					}
 						
 				}
@@ -175,6 +176,7 @@ public class AtaxxMove extends GameMove {
 						if(d==1){
 							board.setPosition(rowF, colF, getPiece());
 							adyacencia(rowF, colF, board, pieces);
+							board.setPieceCount(getPiece(), board.getPieceCount(getPiece())+1);
 						}else if(d==2){
 							
 							board.setPosition(rowI, colI, null);
