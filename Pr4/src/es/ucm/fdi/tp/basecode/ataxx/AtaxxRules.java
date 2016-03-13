@@ -43,9 +43,15 @@ public class AtaxxRules implements GameRules {
 
 	private int dim;
 	private int obstacle;
+	
 	/**
 	 * Constructor parametrizado.
-	 * @param dim Dimensión del tablero.
+	 * <p>
+	 * Parameterized constructor
+	 * @param dim 
+	 * 			  Dimensión del tablero.
+	 * 			  <p>
+	 * 			  Board dimension.
 	 */
 	public AtaxxRules(int dim) {
 		
@@ -60,11 +66,20 @@ public class AtaxxRules implements GameRules {
 			this.obstacle = 0;
 		}
 	}
-/**
- * Constructor parametrizado.
- * @param dim Dimensión del tablero.
- * @param o Obstaculos del tablero.
- */
+	
+	/**
+	 * Constructor parametrizado.
+	 * <p>
+	 * Parameterized constructor
+	 * @param dim 
+	 * 			  Dimensión del tablero.
+	 * 			  <p>
+	 * 			  Board dimension.
+	 * @param o 
+	 * 			  Obstaculos del tablero.
+	 * 			  <p>
+	 * 			  Board obstacles
+	 */
 	public AtaxxRules(int dim,int o) {
 		
 		if(o>dim*dim){
@@ -89,11 +104,8 @@ public class AtaxxRules implements GameRules {
 
 	@Override
 	public Board createBoard(List<Piece> pieces) {
-		
 		FiniteRectBoard f = new FiniteRectBoard(dim, dim);
-		
-		return dameTablero(f,pieces);
-				
+		return fillBoard(f,pieces);
 	}
 
 	@Override
@@ -114,7 +126,13 @@ public class AtaxxRules implements GameRules {
 	@Override
 	public Pair<State, Piece> updateState(Board board, List<Piece> playersPieces, Piece lastPlayer) {
 		
-		List<GameMove> moves = validMoves(board, playersPieces, lastPlayer);
+		List<GameMove> moves = new List<GameMove>();
+		
+		for (int j=0; j < playersPieces.size(); j++){
+			 moves.addAll(validMoves(board, playersPieces, playersPieces.get(j)));
+		}
+		
+		
 		Pair<State, Piece> s = gameInPlayResult;
 		
 		if (board.isFull()||moves.isEmpty()){
@@ -210,10 +228,14 @@ public class AtaxxRules implements GameRules {
 		return moves;
 		
 	}
+	
 	/**
-	 * Crea el tablero inicial
+	 * Rellena el tablero.
+	 * 
+	 * <p>
+	 * Fill the board.
 	 */
-	public Board dameTablero(Board board, List<Piece> piece){
+	private Board fillBoard(Board board, List<Piece> piece){
 
 		for (int i = 0; i < piece.size(); i++) {
 			
@@ -244,8 +266,8 @@ public class AtaxxRules implements GameRules {
 			Piece obs = new Piece("*");
 			int j = 0;
 			while (j < obstacle ) {
-				int x = (int)(Math.random()*board.getRows()-1);
-				int y = (int)(Math.random()*board.getCols()-1);
+				int x = (int)(Math.random()*board.getRows());
+				int y = (int)(Math.random()*board.getCols());
 				if(board.getPosition(x, y) == null){
 					board.setPosition(x, y, obs);
 					j++;

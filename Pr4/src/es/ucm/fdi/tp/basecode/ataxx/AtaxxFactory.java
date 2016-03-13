@@ -31,18 +31,19 @@ public class AtaxxFactory implements GameFactory {
 
 	private int dim;
 	private int obstacles;
-	
-/**
- * Constructor por defecto.
- */
+		
+	/**
+	 * Constructor por defecto.
+	 */
 	public AtaxxFactory() {
 		this.dim=7;
 		this.obstacles = 0;
 	}
-/**
- * Constructor parametrizado.
- * @param dim Dimensión del tablero.
- */
+	
+	/**
+	 * Constructor parametrizado.
+	 * @param dim Dimensión del tablero.
+	 */
 	public AtaxxFactory(int dim) {
 		
 		if (dim < 5) {
@@ -54,14 +55,15 @@ public class AtaxxFactory implements GameFactory {
 			this.obstacles = 0;
 		}
 	}
-/**
- * Constructor parametrizado.
- * @param dim Dimensión del tablero.
- * @param o Obstaculos del tablero.
- */
+	
+	/**
+	 * Constructor parametrizado.
+	 * @param dim Dimensión del tablero.
+	 * @param o Obstaculos del tablero.
+	 */
 	public AtaxxFactory(int dim, int o ) {
 		
-		if(o>dim*dim){
+		if(o>dim*dim-8){
 			throw new GameError("Too many obstacles");
 		}
 		if (dim < 5) {

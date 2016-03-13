@@ -122,7 +122,7 @@ public class AtaxxMove extends GameMove {
 	 * @param board tablero.
 	 * @param pieces Piezas del tablero.
 	 */
-	private void adyacencia(int rowF, int colF,Board board,List<Piece> pieces){
+	private void adjacency(int rowF, int colF, Board board, List<Piece> pieces){
 		
 		Piece obs = new Piece("*");
 		
@@ -153,14 +153,12 @@ public class AtaxxMove extends GameMove {
 					
 						if(d==1){
 							board.setPosition(rowF, colF, getPiece());
-							adyacencia(rowF, colF, board, pieces);
+							adjacency(rowF, colF, board, pieces);
 							board.setPieceCount(getPiece(), board.getPieceCount(getPiece())+1);
 						}else if(d==2){
-							
 							board.setPosition(rowI, colI, null);
 							board.setPosition(rowF, colF, getPiece());
-							adyacencia(rowF, colF, board, pieces);
-	
+							adjacency(rowF, colF, board, pieces);
 						}else {
 							throw new GameError("position (" + rowF + "," + colF + ") is far!");
 						}

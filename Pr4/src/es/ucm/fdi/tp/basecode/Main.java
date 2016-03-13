@@ -226,15 +226,16 @@ public class Main {
 	 * <p>
 	 * Numero de columnas proporcionadas con la opcion -d, o {@code null} si no
 	 * se incluye la opcion -d.
-	 * 
 	 */
 	private static Integer dimCols;
-	
-	
-/**
- * Numero de obstaculos proporcionados con la opcion -o, o {@code null} si no
- * se incluye la opcion -o.
- */
+	/**
+	 * Number of obstacles provided with the option -o ({@code null} if not
+	 * provided).
+	 * 
+	 * <p>
+	 * Numero de obstaculos proporcionados con la opcion -o, o {@code null} si no
+	 * se incluye la opcion -o.
+	 */
 	private static Integer obstacles = 0;
 
 	/**
@@ -611,26 +612,48 @@ public class Main {
 		}
 
 	}
-	/**
-	 * Construye la opcion -o.
-	 * @return Objeto de esta opcion.
-	 */
 	
+	/**
+	 * Builds the obstacles (-o or --obstacles) CLI option.
+	 * 
+	 * <p>
+	 * Construye la opcion CLI -o.
+	 * 
+	 * @return CLI {@link {@link Option} for the obstacles.
+	 *         <p>
+	 *         Objeto {@link Option} de esta opcion.
+	 */
 	private static Option constructObstaclesOptions() {
 		return new Option("o", "obstacles", true,
-				"The board obstacle que se ponen");
+				"Obstacles board");
 	}
+	
 	/**
-	 * Extrae la opcion obstaculos (-o).
-	 * @param line  CLI {@link CommandLine} object.
-	 * @throws ParseException  Si se proporciona un valor invalido.
+	 * Parses the obstacles option (-o or --obstacles). It sets the value of
+	 * {@link #obstacles} accordingly. 
+	 * 
+	 * <p>
+	 * Extrae la opcion dimension (-d). Asigna el valor de los atributos
+	 * {@link #obstacles}. 
+	 * 
+	 * @param line
+	 *            CLI {@link CommandLine} object.
+	 * @throws ParseException
+	 *             If an invalid value is provided.
+	 *             <p>
+	 *             Si se proporciona un valor invalido.
 	 */
 	private static void parseObstaclesOptions(CommandLine line) throws ParseException {
 		String obstaclesVal = line.getOptionValue("o");
 		
 		if (obstaclesVal != null) {
 			
-			obstacles = Integer.parseInt(obstaclesVal);
+			try{
+				obstacles = Integer.parseInt(obstaclesVal);
+			}catch (NumberFormatException e) {
+				throw new ParseException("Invalid obstacles: " + obstaclesVal);
+			}
+			
 		}
 		
 	}

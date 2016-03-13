@@ -48,12 +48,27 @@ public class AtaxxRandomPlayer extends Player {
 	 * este metodo de {@link #requestMove(Piece, Board, List, GameRules)} para
 	 * permitir la reutilizacion de esta clase en otros juegos similares,
 	 * sobrescribiendo este metodo.
-	 * @param rowI Numero de fila inicial.
-	 * @param colI Numero de columna inicial.
-	 * @param rowF Numero de fila final.
-	 * @param colF Numero de columna final.
-	 * @param p Turno actual.
-	 * @return Devuelve un movimiento aleatorio.
+	 * @param rowI
+	 *            Number of initial row .
+	 *            <p>
+	 *            Numero de fila inicial.
+	 * @param colI
+	 * 			  Number of initial column .
+	 *            <p>
+	 *            Numero de columna inicial.
+	 * @param rowF
+	 * 			  Number of final row .
+	 *            <p>
+	 *            Numero de fila final.
+	 * @param colF
+	 *  		  Number of final column .
+	 *            <p>
+	 *            Numero de columna final.
+	 * @param p 
+	 * 			  Turno actual.
+	 * 			  <p>
+	 *            Current turn.	
+	 * @return GameMove
 	 */
 	protected GameMove createMove(int rowI, int colI, int rowF, int colF, Piece p) {
 		return new AtaxxMove(rowI, colI, rowF, colF, p);
