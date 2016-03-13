@@ -126,13 +126,16 @@ public class AtaxxRules implements GameRules {
 	@Override
 	public Pair<State, Piece> updateState(Board board, List<Piece> playersPieces, Piece lastPlayer) {
 		
-		List<GameMove> moves = new List<GameMove>();
+		ArrayList<GameMove> moves = new ArrayList<GameMove>();
+		int jugando = 0;
 		
 		for (int j=0; j < playersPieces.size(); j++){
 			 moves.addAll(validMoves(board, playersPieces, playersPieces.get(j)));
+			 if(validMoves(board, playersPieces, playersPieces.get(j)).size() > 0){
+				 
+			 }
 		}
-		
-		
+				
 		Pair<State, Piece> s = gameInPlayResult;
 		
 		if (board.isFull()||moves.isEmpty()){
