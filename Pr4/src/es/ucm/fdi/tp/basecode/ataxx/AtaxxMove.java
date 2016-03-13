@@ -58,15 +58,14 @@ public class AtaxxMove extends GameMove {
 	/**
 	 * This constructor should be used ONLY to get an instance of
 	 * {@link AtaxxMove} to generate game moves from strings by calling
-	 * {@link #fromString(String)}
+	 * {@link #fromString(Piece, String)}
 	 * 
 	 * <p>
 	 * Solo se debe usar este constructor para obtener objetos de
 	 * {@link AtaxxMove} para generar movimientos a partir de strings usando
-	 * el metodo {@link #fromString(String)}
+	 * el metodo {@link #fromString(Piece, String)}
 	 * 
 	 */
-
 	public AtaxxMove() {
 	}
 	
