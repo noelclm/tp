@@ -269,6 +269,12 @@ public class AtaxxRules implements GameRules {
 		
 		if(obstacle>0){
 			
+			// Si hay mas obstaculos que espacios libres despues de poner las piezas iniciales
+			// ponemos que todos los huecos estan libres para que no se quede en un bucle infinito
+			if(obstacle+(piece.size()*2)>board.getCols()*board.getRows()){
+				obstacle = board.getCols()*board.getRows() - (piece.size()*2);
+			}
+			
 			Piece obs = new Piece("*");
 			int j = 0;
 			while (j < obstacle ) {
