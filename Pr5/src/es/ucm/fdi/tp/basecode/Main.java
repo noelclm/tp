@@ -12,8 +12,8 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import es.ucm.fdi.tp.basecode.ataxx.AtaxxFactory;
-import es.ucm.fdi.tp.basecode.attt.AdvancedTTTFactory;
+import es.ucm.fdi.tp.basecode.practica5.ataxx.AtaxxFactoryExt;
+import es.ucm.fdi.tp.basecode.practica5.attt.AdvancedTTTFactoryExt;
 import es.ucm.fdi.tp.basecode.bgame.control.ConsoleCtrl;
 import es.ucm.fdi.tp.basecode.bgame.control.ConsoleCtrlMVC;
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
@@ -23,8 +23,8 @@ import es.ucm.fdi.tp.basecode.bgame.model.AIAlgorithm;
 import es.ucm.fdi.tp.basecode.bgame.model.Game;
 import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
-import es.ucm.fdi.tp.basecode.connectn.ConnectNFactory;
-import es.ucm.fdi.tp.basecode.ttt.TicTacToeFactory;
+import es.ucm.fdi.tp.basecode.practica5.connectn.ConnectNFactoryExt;
+import es.ucm.fdi.tp.basecode.practica5.ttt.TicTacToeFactoryExt;
 
 /**
  * This is the class with the main method for the board games application.
@@ -533,28 +533,28 @@ public class Main {
 	
 		switch ( selectedGame ) {
 		case AdvancedTicTacToe:
-			gameFactory = new AdvancedTTTFactory();
+			gameFactory = new AdvancedTTTFactoryExt();
 			break;
 		case CONNECTN:
 			if (dimRows != null && dimCols != null && dimRows == dimCols) {
-				gameFactory = new ConnectNFactory(dimRows);
+				gameFactory = new ConnectNFactoryExt(dimRows);
 			} else {
-				gameFactory = new ConnectNFactory();
+				gameFactory = new ConnectNFactoryExt();
 			}
 			break;
 		case TicTacToe:
-			gameFactory = new TicTacToeFactory();
+			gameFactory = new TicTacToeFactoryExt();
 			break;
 		case Ataxx:
 			if (dimRows != null && dimCols != null && dimRows == dimCols) {
 				if(obstacles == 0){
-					gameFactory = new AtaxxFactory(dimRows);
+					gameFactory = new AtaxxFactoryExt(dimRows);
 				}else{
-					gameFactory = new AtaxxFactory(dimRows,obstacles);
+					gameFactory = new AtaxxFactoryExt(dimRows,obstacles);
 				}
 				
 			} else {
-				gameFactory = new AtaxxFactory();
+				gameFactory = new AtaxxFactoryExt();
 			}
 			break;
 		default:
@@ -776,8 +776,19 @@ public class Main {
 			gameFactory.createConsoleView(g, c);
 			break;
 		case WINDOW:
-			throw new UnsupportedOperationException(
-					"Swing " + (multiviews ? "Multiviews" : "Views") + " are not supported yet! ");
+			if(multiviews){
+				for (Piece p : pieces) {
+					gameFactory.createSwingView(g, c, p,
+					gameFactory.createRandomPlayer(),
+					gameFactory.createAIPlayer(aiPlayerAlg));
+				}
+			}else{
+				gameFactory.createSwingView(g, c, null,
+						gameFactory.createRandomPlayer(),
+						gameFactory.createAIPlayer(aiPlayerAlg));
+			}
+			
+			break;
 		default:
 			throw new UnsupportedOperationException("Something went wrong! This program point should be unreachable!");
 		}
