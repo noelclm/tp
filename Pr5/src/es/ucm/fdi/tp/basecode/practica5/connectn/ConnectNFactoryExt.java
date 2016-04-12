@@ -1,5 +1,7 @@
 package es.ucm.fdi.tp.basecode.practica5.connectn;
 
+import javax.swing.SwingUtilities;
+
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
 import es.ucm.fdi.tp.basecode.bgame.control.Player;
 import es.ucm.fdi.tp.basecode.bgame.model.GameError;
@@ -21,7 +23,17 @@ public class ConnectNFactoryExt extends ConnectNFactory{
 	@Override
 	public void createSwingView(final Observable<GameObserver> g, final Controller c, final Piece viewPiece,
 			Player random, Player ai) {
-		throw new UnsupportedOperationException("There is no swing view");
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				new ConnectNSwingView(g, c, viewPiece, random, ai);
+			}
+			
+		});
+
+		//throw new UnsupportedOperationException("There is no swing view");
 	}
 	
 }
