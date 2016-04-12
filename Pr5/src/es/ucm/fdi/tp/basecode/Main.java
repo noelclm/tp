@@ -779,8 +779,8 @@ public class Main {
 			if(multiviews){
 				for (Piece p : pieces) {
 					gameFactory.createSwingView(g, c, p,
-					gameFactory.createRandomPlayer(),
-					gameFactory.createAIPlayer(aiPlayerAlg));
+							gameFactory.createRandomPlayer(),
+							gameFactory.createAIPlayer(aiPlayerAlg));
 				}
 			}else{
 				gameFactory.createSwingView(g, c, null,
