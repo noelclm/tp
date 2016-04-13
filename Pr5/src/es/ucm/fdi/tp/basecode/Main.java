@@ -752,30 +752,34 @@ public class Main {
 	public static void startGame() {
 		Game g = new Game(gameFactory.gameRules());
 		Controller c = null;
-
+		ArrayList<Player> players = new ArrayList<Player>();
+		
+		for (int i = 0; i < pieces.size(); i++) {
+			switch (playerModes.get(i)) {
+			case AI:
+				players.add(gameFactory.createAIPlayer(aiPlayerAlg));
+				break;
+			case MANUAL:
+				players.add(gameFactory.createConsolePlayer());
+				break;
+			case RANDOM:
+				players.add(gameFactory.createRandomPlayer());
+				break;
+			default:
+				throw new UnsupportedOperationException(
+						"Something went wrong! This program point should be unreachable!");
+			}
+		}
+		
+		c = new ConsoleCtrlMVC(g, pieces, players, new Scanner(System.in));
+		
 		switch (view) {
 		case CONSOLE:
-			ArrayList<Player> players = new ArrayList<Player>();
-			for (int i = 0; i < pieces.size(); i++) {
-				switch (playerModes.get(i)) {
-				case AI:
-					players.add(gameFactory.createAIPlayer(aiPlayerAlg));
-					break;
-				case MANUAL:
-					players.add(gameFactory.createConsolePlayer());
-					break;
-				case RANDOM:
-					players.add(gameFactory.createRandomPlayer());
-					break;
-				default:
-					throw new UnsupportedOperationException(
-							"Something went wrong! This program point should be unreachable!");
-				}
-			}
-			c = new ConsoleCtrlMVC(g, pieces, players, new Scanner(System.in));
+			
 			gameFactory.createConsoleView(g, c);
 			break;
 		case WINDOW:
+			
 			if(multiviews){
 				for (Piece p : pieces) {
 					gameFactory.createSwingView(g, c, p,
