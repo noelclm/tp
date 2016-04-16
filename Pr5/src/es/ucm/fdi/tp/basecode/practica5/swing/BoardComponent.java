@@ -2,6 +2,8 @@ package es.ucm.fdi.tp.basecode.practica5.swing;
 
 import javax.swing.JComponent;
 
+import es.ucm.fdi.tp.basecode.bgame.model.Piece;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -109,5 +111,21 @@ public class BoardComponent extends JComponent {
 		initBoard(rows, cols);
 		repaint();
 	}
+
+	protected boolean isPlayerPiece(Piece p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	protected Color getPieceColor(Piece p) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	protected void mouseClicked(int row, int col, int mouseButton) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

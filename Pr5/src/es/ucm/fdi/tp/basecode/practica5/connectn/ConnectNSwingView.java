@@ -8,9 +8,13 @@ import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.practica5.swing.RectBoardSwingView;
 
 
-@SuppressWarnings("serial")
+
 public class ConnectNSwingView extends RectBoardSwingView {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ConnectNSwingPlayer player;
 
 	public ConnectNSwingView(Observable<GameObserver> g, Controller c, Piece localPiece, Player randomPlayer,
@@ -25,7 +29,12 @@ public class ConnectNSwingView extends RectBoardSwingView {
 	protected void handleMouseClick(int row, int col, int clickCount, int mouseButton) {
 	 // do nothing if the board is not active	
 		player.setMoveValue(row, col);
-	 // decideMakeManualMove(player);
+	    decideMakeManualMove(player);
+	}
+
+	private void decideMakeManualMove(ConnectNSwingPlayer player2) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
