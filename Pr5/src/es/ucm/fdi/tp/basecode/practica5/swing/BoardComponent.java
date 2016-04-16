@@ -11,9 +11,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
-@SuppressWarnings("serial")
+
 public class BoardComponent extends JComponent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int _CELL_HEIGHT = 50;
 	private int _CELL_WIDTH = 50;
 
