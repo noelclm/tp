@@ -7,7 +7,9 @@ import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 
 @SuppressWarnings("serial")
-public class RectBoardSwingView extends SwingView {
+public abstract class RectBoardSwingView extends SwingView {
+	
+	private BoardComponent boardComp;
 
 	public RectBoardSwingView(Observable<GameObserver> g, Controller c,
 			Piece localPiece, Player randomPlayer, Player aiPlayer) {
@@ -17,7 +19,10 @@ public class RectBoardSwingView extends SwingView {
 
 	@Override
 	protected void initBoardGui() {
-		
+		boardComp = new BoardComponent(7,7){
+			
+		};
+		setBoardArea(boardComp); // Pone el tablero en la vista
 	}
 
 	@Override
@@ -31,5 +36,7 @@ public class RectBoardSwingView extends SwingView {
 		// TODO Auto-generated method stub
 
 	}
+	
+	protected abstract void handleMouseClick(int row, int col, int clickCount, int mouseButton);
 
 }

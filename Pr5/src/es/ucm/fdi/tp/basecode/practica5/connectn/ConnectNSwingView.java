@@ -5,11 +5,11 @@ import es.ucm.fdi.tp.basecode.bgame.control.Player;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
-import es.ucm.fdi.tp.basecode.practica5.swing.FiniteRectBoardSwingView;
+import es.ucm.fdi.tp.basecode.practica5.swing.RectBoardSwingView;
 
 
 @SuppressWarnings("serial")
-public class ConnectNSwingView extends FiniteRectBoardSwingView {
+public class ConnectNSwingView extends RectBoardSwingView {
 
 	private ConnectNSwingPlayer player;
 

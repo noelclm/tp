@@ -38,7 +38,6 @@ public class ConnectNFactoryExt extends ConnectNFactory{
 			
 		});
 
-		//throw new UnsupportedOperationException("There is no swing view");
 	}
 	
 }
