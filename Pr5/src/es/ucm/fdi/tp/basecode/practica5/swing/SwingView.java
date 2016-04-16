@@ -114,22 +114,24 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		
 		this.setTitle("Board Games");
 		
-			JPanel mainPanel = new JPanel(new BorderLayout());
+		JPanel mainPanel = new JPanel(new BorderLayout());
+
+		this.setMinimumSize(new Dimension(780, 600));
 		
 		this.setContentPane(mainPanel);
 
-			 // board panel
-				boardPanel = new JPanel(new BorderLayout());
+		// board panel
+		boardPanel = new JPanel(new BorderLayout());
 			
-			mainPanel.add(boardPanel, BorderLayout.CENTER);
+		mainPanel.add(boardPanel, BorderLayout.CENTER);
 			
 		initBoardGui();
 
-			 // tool bar panel
-				toolBarPanel = new JPanel();
-				toolBarPanel.setLayout(new BoxLayout(toolBarPanel, BoxLayout.Y_AXIS));
+		// tool bar panel
+		toolBarPanel = new JPanel();
+		toolBarPanel.setLayout(new BoxLayout(toolBarPanel, BoxLayout.Y_AXIS));
 			
-			mainPanel.add(toolBarPanel, BorderLayout.LINE_END);
+		mainPanel.add(toolBarPanel, BorderLayout.LINE_END);
 			
 		initCtrlPanel();
 
@@ -166,7 +168,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 			
 		});
 
-		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);
 		
@@ -175,16 +177,16 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	
 	protected void initCtrlPanel() {
 		
-			JPanel p = new JPanel(new BorderLayout());
-			p.setPreferredSize(new Dimension(100, 150));
-			p.setBorder(BorderFactory.createTitledBorder("Status Messages"));
-	
-					statusArea = new JTextArea(5, 10);
-					statusArea.setEditable(true);
-	
-				JScrollPane statusAreaScroll = new JScrollPane(statusArea);
-			
-			p.add(statusAreaScroll, BorderLayout.CENTER);
+		JPanel p = new JPanel(new BorderLayout());
+		p.setPreferredSize(new Dimension(100, 150));
+		p.setBorder(BorderFactory.createTitledBorder("Status Messages"));
+
+		statusArea = new JTextArea(5, 10);
+		statusArea.setEditable(true);
+
+		JScrollPane statusAreaScroll = new JScrollPane(statusArea);
+		
+		p.add(statusAreaScroll, BorderLayout.CENTER);
 			
 		addToCtrlArea(p);
 
@@ -192,7 +194,8 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		addQuitButton(buttons);
 		addRestartButton(buttons);
 		addToCtrlArea(buttons);
-		}
+	}
+	
 	final protected void addPlayers(){
 		JComboBox players = new JComboBox();
 		
