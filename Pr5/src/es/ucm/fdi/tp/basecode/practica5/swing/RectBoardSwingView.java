@@ -25,7 +25,7 @@ public abstract class RectBoardSwingView extends SwingView {
 
 	@Override
 	protected void initBoardGui() {
-		boardComp = new BoardComponent(7,7){
+		boardComp = new BoardComponent(this.game,7,7){
 
 			/**
 			 * 

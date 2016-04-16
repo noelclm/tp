@@ -1,7 +1,12 @@
 package es.ucm.fdi.tp.basecode.practica5.swing;
 
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 
+import es.ucm.fdi.tp.basecode.bgame.model.Board;
+import es.ucm.fdi.tp.basecode.bgame.model.Game.State;
+import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
+import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 
 import java.awt.Color;
@@ -9,10 +14,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
 
 
-public class BoardComponent extends JComponent {
+public class BoardComponent extends JComponent implements GameObserver  {
 
 	/**
 	 * 
@@ -20,12 +26,24 @@ public class BoardComponent extends JComponent {
 	private static final long serialVersionUID = 1L;
 	private int _CELL_HEIGHT = 50;
 	private int _CELL_WIDTH = 50;
+	protected Observable<GameObserver> game;
 
 	private int rows;
 	private int cols;
 	private Color[][] board;
 
-	public BoardComponent(int rows, int cols) {
+	public BoardComponent(Observable<GameObserver> g, int rows, int cols) {
+		this.game=g;
+		
+		SwingUtilities.invokeLater(new Runnable() {
+				
+			@Override
+			public void run() {
+				game.addObserver(BoardComponent.this);
+			}
+			
+		});
+
 		initBoard(rows, cols);
 		initGUI();
 	}
@@ -127,6 +145,43 @@ public class BoardComponent extends JComponent {
 	}
 
 	protected void mouseClicked(int row, int col, int mouseButton) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameStart(Board board, String gameDesc, List<Piece> pieces,
+			Piece turn) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onGameOver(Board board, State state, Piece winner) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMoveStart(Board board, Piece turn) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMoveEnd(Board board, Piece turn, boolean success) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onChangeTurn(Board board, Piece turn) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onError(String msg) {
 		// TODO Auto-generated method stub
 		
 	}
