@@ -7,7 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -21,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
+import es.ucm.fdi.tp.basecode.bgame.Utils;
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
 import es.ucm.fdi.tp.basecode.bgame.control.Player;
 import es.ucm.fdi.tp.basecode.bgame.model.Board;
@@ -37,11 +43,37 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	protected Controller ctrl;
 	protected Observable<GameObserver> game;
 	
-	//private Piece localPiece;
+	private Piece localPiece;
 	private Piece turn;
 	private List<Piece> pieces;
 
 	private Board board;
+	private Map<Piece, Color> pieceColors;
+	
+	enum PlayerMode {
+		MANUAL("m", "Manual"), RANDOM("r", "Random"), AI("a", "Automatics");
+
+		private String id;
+		private String desc;
+
+		PlayerMode(String id, String desc) {
+			this.id = id;
+			this.desc = desc;
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public String getDesc() {
+			return desc;
+		}
+
+		@Override
+		public String toString() {
+			return id;
+		}
+	}
 
 	/*
 	 * private Player randomPlayer;
@@ -49,7 +81,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	 * */
 	
 	/*
-	 * private Map<Piece, Color> pieceColors;
+	 * 
 	 * private Map<>
 	 * */
 	
@@ -112,7 +144,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	
 	private void initGUI() {
 		
-		this.setTitle("Board Games");
+		
 		
 		JPanel mainPanel = new JPanel(new BorderLayout());
 
@@ -259,8 +291,32 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	/** GAME OBSERVER CALLBACKS **/
 
 	@Override
-	public void onGameStart(final Board board, final String gameDesc, final List<Piece> pieces, final Piece turn) {
+	public void onGameStart(Board roBoard, String gameDesc, List<Piece> roPieces,Piece turn) {
+		handGameStart(gameDesc,roPieces);
+	}
 
+	private void handGameStart(String gameDesc, List<Piece> roPieces) {
+		
+		this.setTitle(gameDesc);
+	
+		this.pieceColors = new HashMap<>();
+		Iterator<Piece> it = roPieces.iterator();
+		while(it.hasNext()) {
+			Piece p = it.next();
+			Color c = Utils.randomColor();
+			System.out.println(c);
+			this.pieceColors.put(p,c);
+		// TODO Preguntar
+		/*
+		 * ArrayList<Player> players = new ArrayList<Player>();
+			for (int i = 0; i < pieces.size(); i++) {
+				players.add();
+			}
+		*/
+			//turn.equals(this.localPiece)?:
+		}		
+		
+		
 	}
 
 	@Override

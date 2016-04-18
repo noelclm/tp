@@ -152,7 +152,7 @@ public class BoardComponent extends JComponent implements GameObserver  {
 	@Override
 	public void onGameStart(Board board, String gameDesc, List<Piece> pieces,
 			Piece turn) {
-		// TODO Auto-generated method stub
+		chageBoard(board);
 		
 	}
 
