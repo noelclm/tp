@@ -52,14 +52,16 @@ public class BoardComponent extends JComponent implements GameObserver  {
 		this.rows = rows;
 		this.cols = cols;
 		board = new Color[rows][cols];
-		for (int i = 0; i < rows; i++)
+		PanelIzquierda piz=new PanelIzquierda(rows);
+		this.add(piz);
+		/*for (int i = 0; i < rows; i++)
 			for (int j = 0; j < cols; j++)
 				if (Math.random() > 0.5)
 				 // board[i][j] = Color.BLUE;
 					board[i][j] = new Color(138, 43, 226);
 				else
 				 // board[i][j] = Color.RED;
-		            board[i][j] = Color.WHITE;
+		            board[i][j] = Color.WHITE;*/
 	}
 
 	
@@ -108,8 +110,8 @@ public class BoardComponent extends JComponent implements GameObserver  {
 		_CELL_HEIGHT = this.getHeight() / rows;
 
 		for (int i = 0; i < rows; i++)
-			for (int j = 0; j < cols; j++)
-				drawCell(i, j, g);
+			for (int j = 0; j < cols; j++);
+				//drawCell(i, j, g);
 		
 	}
 
@@ -152,7 +154,7 @@ public class BoardComponent extends JComponent implements GameObserver  {
 	@Override
 	public void onGameStart(Board board, String gameDesc, List<Piece> pieces,
 			Piece turn) {
-		chageBoard(board);
+	//	chageBoard(board);
 		
 	}
 

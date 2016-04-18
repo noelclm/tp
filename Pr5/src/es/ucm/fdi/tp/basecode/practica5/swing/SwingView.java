@@ -49,6 +49,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 
 	private Board board;
 	private Map<Piece, Color> pieceColors;
+	private Map<Piece, PlayerMode> playerTypes;
 	
 	enum PlayerMode {
 		MANUAL("m", "Manual"), RANDOM("r", "Random"), AI("a", "Automatics");
@@ -104,11 +105,11 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	
 
 	final protected void setBoardArea(JComponent c) {
-		boardPanel.add(c, BorderLayout.CENTER);
+		//boardPanel.add(c, BorderLayout.CENTER);
 	}
 	
 	final protected void addToCtrlArea(JComponent c) {
-		toolBarPanel.add(c);
+		//toolBarPanel.add(c);
 	}
 
 	final protected void addContentToStatusArea(String msg) {
@@ -153,17 +154,20 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		this.setContentPane(mainPanel);
 
 		// board panel
-		boardPanel = new JPanel(new BorderLayout());
-			
-		mainPanel.add(boardPanel, BorderLayout.CENTER);
+		//boardPanel = new JPanel(new BorderLayout());
+		PanelIzquierda pi = new PanelIzquierda(5);
+		PanelDerecha pd = new PanelDerecha();
+		mainPanel.add(pi, BorderLayout.CENTER);
+		mainPanel.add(pd, BorderLayout.EAST);
+		//mainPanel.add(boardPanel, BorderLayout.CENTER);
 			
 		initBoardGui();
 
 		// tool bar panel
-		toolBarPanel = new JPanel();
-		toolBarPanel.setLayout(new BoxLayout(toolBarPanel, BoxLayout.Y_AXIS));
+		//toolBarPanel = new JPanel();
+		//toolBarPanel.setLayout(new BoxLayout(toolBarPanel, BoxLayout.Y_AXIS));
 			
-		mainPanel.add(toolBarPanel, BorderLayout.LINE_END);
+		//mainPanel.add(toolBarPanel, BorderLayout.LINE_END);
 			
 		initCtrlPanel();
 
@@ -300,12 +304,14 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		this.setTitle(gameDesc);
 	
 		this.pieceColors = new HashMap<>();
+		this.playerTypes = new HashMap<>();
 		Iterator<Piece> it = roPieces.iterator();
 		while(it.hasNext()) {
 			Piece p = it.next();
 			Color c = Utils.randomColor();
 			System.out.println(c);
 			this.pieceColors.put(p,c);
+			this.playerTypes.put(p, null);
 		// TODO Preguntar
 		/*
 		 * ArrayList<Player> players = new ArrayList<Player>();
@@ -314,6 +320,9 @@ public abstract class SwingView extends JFrame implements GameObserver {
 			}
 		*/
 			//turn.equals(this.localPiece)?:
+			
+		
+		
 		}		
 		
 		
