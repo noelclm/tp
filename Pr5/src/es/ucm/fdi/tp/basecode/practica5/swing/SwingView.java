@@ -51,6 +51,9 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	private Board board;
 	private Map<Piece, Color> pieceColors;
 	private Map<Piece, PlayerMode> playerTypes;
+	private PanelDerecha pd;
+
+	Iterator<Color> colorsIter;
 	
 	enum PlayerMode {
 		MANUAL("m", "Manual"), RANDOM("r", "Random"), AI("a", "Automatics");
@@ -129,6 +132,19 @@ public abstract class SwingView extends JFrame implements GameObserver {
 
 		this.ctrl = c;
 		this.game = g;
+		
+		colorsIter = new Iterator<Color>() {
+
+			@Override
+			public boolean hasNext() {
+				return false;
+			}
+
+			@Override
+			public Color next() {
+				return null;
+			}
+		};
 
 		SwingUtilities.invokeLater(new Runnable() {
 			
@@ -157,7 +173,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		// board panel
 		//boardPanel = new JPanel(new BorderLayout());
 		PanelIzquierda pi = new PanelIzquierda(5);
-		PanelDerecha pd = new PanelDerecha(roPieces);
+		this.pd = new PanelDerecha();
 		mainPanel.add(pi, BorderLayout.CENTER);
 		mainPanel.add(pd, BorderLayout.EAST);
 		//mainPanel.add(boardPanel, BorderLayout.CENTER);
@@ -297,34 +313,37 @@ public abstract class SwingView extends JFrame implements GameObserver {
 
 	@Override
 	public void onGameStart(Board roBoard, String gameDesc, List<Piece> roPieces,Piece turn) {
-		handGameStart(gameDesc,roPieces);
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run(){handGameStart(roBoard,gameDesc,roPieces,turn);}
+			});
 	}
 
-	private void handGameStart(String gameDesc, List<Piece> roPieces) {
+	private void handGameStart(Board roBoard, String gameDesc, List<Piece> roPieces,Piece turn) {
 		
 		this.setTitle(gameDesc);
 	
 		this.pieceColors = new HashMap<>();
 		this.playerTypes = new HashMap<>();
-		Iterator<Piece> it = roPieces.iterator();
-		while(it.hasNext()) {
-			Piece p = it.next();
-			Color c = Utils.randomColor();
-			System.out.println(c);
-			this.pieceColors.put(p,c);
-			this.playerTypes.put(p, null);
-		// TODO Preguntar
-		/*
-		 * ArrayList<Player> players = new ArrayList<Player>();
-			for (int i = 0; i < pieces.size(); i++) {
-				players.add();
+		this.board = roBoard;
+		this.pieces = roPieces;
+		this.turn = turn;
+		
+		for(Piece p : pieces) {
+			if(pieceColors.get(p) == null) {
+				this.pieceColors.put(p, colorsIter.next());
+				this.playerTypes.put(p, PlayerMode.MANUAL);
 			}
-		*/
+			//this.pieceColorComboBox.addItem(p);
+		}
+		
+		this.pd.ponerPiezas(this.pieces);
+		// TODO Preguntar
+		
 			//turn.equals(this.localPiece)?:
 			
 		
 		
-		}		
+			
 		
 		
 	}

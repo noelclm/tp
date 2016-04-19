@@ -35,6 +35,7 @@ public class PanelDerecha extends JPanel{
 	private JButton restart;
 	private JComboBox combo1;
 	private JComboBox combo2;
+	private JComboBox combo3;
 	private List<Piece> pieces;
 	
 	public enum PlayerMode {
@@ -55,19 +56,20 @@ public class PanelDerecha extends JPanel{
 	}
 
 	
-	public PanelDerecha(List<Piece> roPieces){
+	public PanelDerecha(){
 		
-		this.pieces=roPieces;
 		this.setLayout(new GridLayout(6, 1));
 		this.status=new JTextArea("status");
 		this.statusPanel=new JPanel();
 		statusPanel.setBorder(BorderFactory.createTitledBorder("Status Messages"));
 		statusPanel.add(status);
+		
 		this.playerPanel=new JPanel();
 		playerPanel.setBorder(BorderFactory.createTitledBorder("Player Information"));
 		this.tabla =new Tabla();
 		this.information=new JTable (tabla);
 		playerPanel.add(information);
+		
 		this.piecePanel=new JPanel();
 		piecePanel.setBorder(BorderFactory.createTitledBorder("Piece Colors"));
 		piecePanel.setLayout(new FlowLayout());
@@ -80,12 +82,10 @@ public class PanelDerecha extends JPanel{
 		this.abajoPanel=new JPanel();
 		abajoPanel.setLayout(new FlowLayout());
 		this.combo1=new JComboBox();
-		//	for (Piece p: pieces){
-			//	combo1.addItem(p.toString());
-			//}
+			
 		piecePanel.add(combo1);
-		this.combo1=new JComboBox();
-		playerModePanel.add(combo1);
+		this.combo3=new JComboBox();
+		playerModePanel.add(combo3);
 		this.combo2=new JComboBox(PlayerMode.values());
 		playerModePanel.add(combo2);
 		this.color=new JButton("Choose Color");
@@ -118,8 +118,9 @@ public class PanelDerecha extends JPanel{
 private class Tabla extends AbstractTableModel{
 	private String[]columnas={"Player","Mode", "#Pieces"};
 	
+	@Override
 	public String getColumnName(int index){
-		return columnas[index];
+		return columnas[1];
 		
 	}
 
@@ -141,5 +142,15 @@ private class Tabla extends AbstractTableModel{
 		return null;
 	}
 	
+	
+	
+}
+
+public void ponerPiezas (List<Piece> pieces){
+	this.pieces = pieces;
+	for (Piece p: this.pieces){
+		combo1.addItem(p);
+		combo3.addItem(p);
+	}
 }
 }
