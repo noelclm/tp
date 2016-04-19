@@ -2,15 +2,21 @@ package es.ucm.fdi.tp.basecode.practica5.swing;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.AbstractTableModel;
 
+import es.ucm.fdi.tp.basecode.bgame.model.Piece;
+
 public class PanelDerecha extends JPanel{
+	
+	//private List<Piece> pieces;
 	
 	private JTextArea status;
 	private JTable information;
@@ -20,9 +26,38 @@ public class PanelDerecha extends JPanel{
 	private JPanel piecePanel;
 	private JPanel playerModePanel;
 	private JPanel automaticPanel;
+	private JPanel abajoPanel;
+	private JButton color;
+	private JButton set;
+	private JButton random;
+	private JButton inteligente;
+	private JButton quit;
+	private JButton restart;
 	private JComboBox combo1;
+	private JComboBox combo2;
+	private List<Piece> pieces;
 	
-	public PanelDerecha(){
+	public enum PlayerMode {
+		MANUAL("Manual"), RANDOM("Random"), AI("Automatics");
+
+		//private String id;
+		private String desc;
+
+		PlayerMode(String desc) {
+			//this.id = id;
+			this.desc = desc;
+		}
+
+		@Override
+		public String toString() {
+			return desc;
+		}
+	}
+
+	
+	public PanelDerecha(List<Piece> roPieces){
+		
+		this.pieces=roPieces;
 		this.setLayout(new GridLayout(6, 1));
 		this.status=new JTextArea("status");
 		this.statusPanel=new JPanel();
@@ -42,6 +77,32 @@ public class PanelDerecha extends JPanel{
 		this.automaticPanel=new JPanel();
 		automaticPanel.setBorder(BorderFactory.createTitledBorder("Automatic Moves"));
 		automaticPanel.setLayout(new FlowLayout());
+		this.abajoPanel=new JPanel();
+		abajoPanel.setLayout(new FlowLayout());
+		this.combo1=new JComboBox();
+		//	for (Piece p: pieces){
+			//	combo1.addItem(p.toString());
+			//}
+		piecePanel.add(combo1);
+		this.combo1=new JComboBox();
+		playerModePanel.add(combo1);
+		this.combo2=new JComboBox(PlayerMode.values());
+		playerModePanel.add(combo2);
+		this.color=new JButton("Choose Color");
+		piecePanel.add(color);
+		this.set=new JButton("Set");
+		playerModePanel.add(set);
+		this.random=new JButton("Random");
+		automaticPanel.add(random);
+		this.inteligente=new JButton("Intelligent");
+		automaticPanel.add(inteligente);
+		this.quit=new JButton("Quit");
+		abajoPanel.add(quit);
+		this.restart=new JButton("Restart");
+		abajoPanel.add(restart);
+		
+
+		
 	//	for (Pieces p:pieces){
 		//	pieceColor.put(p.colorsItem.next());
 			//playerColor(B.addItem(p));
@@ -52,6 +113,7 @@ public class PanelDerecha extends JPanel{
 		this.add(piecePanel);
 		this.add(playerModePanel);
 		this.add(automaticPanel);
+		this.add(abajoPanel);
 	}
 private class Tabla extends AbstractTableModel{
 	private String[]columnas={"Player","Mode", "#Pieces"};

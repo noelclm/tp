@@ -46,6 +46,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	private Piece localPiece;
 	private Piece turn;
 	private List<Piece> pieces;
+	private List<Piece> roPieces;
 
 	private Board board;
 	private Map<Piece, Color> pieceColors;
@@ -156,7 +157,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		// board panel
 		//boardPanel = new JPanel(new BorderLayout());
 		PanelIzquierda pi = new PanelIzquierda(5);
-		PanelDerecha pd = new PanelDerecha();
+		PanelDerecha pd = new PanelDerecha(roPieces);
 		mainPanel.add(pi, BorderLayout.CENTER);
 		mainPanel.add(pd, BorderLayout.EAST);
 		//mainPanel.add(boardPanel, BorderLayout.CENTER);
