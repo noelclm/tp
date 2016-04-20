@@ -16,26 +16,28 @@ public class AtaxxSwingPlayer extends Player {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private int rowI;
+	private int colI;
 	private int row;
 	private int col;
-	private int row2;
-	private int col2;
 
 	public AtaxxSwingPlayer() {
 	}
 
 	@Override
 	public GameMove requestMove(Piece p, Board board, List<Piece> pieces, GameRules rules) {
-		return createMove(row, col, row2, col2, p);
+		return createMove(rowI, colI, row, col, p);
 	}
 
-	public void setMoveValue(int row, int col) {
+	public void setMoveValue(int rowI, int colI , int row, int col) {
+		this.rowI = rowI;
+		this.colI = colI;
 		this.row = row;
 		this.col = col;
 	}
 	
-	protected GameMove createMove(int row, int col,int row2, int col2, Piece p) {
-		return new AtaxxMove(row, col, row2, col2, p);
+	protected GameMove createMove(int rowI, int colI,int row, int col, Piece p) {
+		return new AtaxxMove(rowI, colI, row, col, p);
 	}
 	
 }

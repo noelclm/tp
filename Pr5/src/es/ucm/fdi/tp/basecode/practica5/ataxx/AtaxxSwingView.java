@@ -30,23 +30,22 @@ public class AtaxxSwingView extends RectBoardSwingView {
 	@Override
 	protected void handleMouseClick(int mouseButton, int row, int col) {
 	 // do nothing if the board is not active	
-		System.out.println(mouseButton +" " +row +" " + col);
 		if(count == 0){
 			rowI = row;
 			colI = col;
 			count++;
 		}else{
-			player.setMoveValue(row, col);
+	    	count = 0;
+			player.setMoveValue(rowI, colI, row, col);
 		    decideMakeManualMove(player);
 		    this.redrawBoard();
-			count = 0;
+			
 		}
 		
 	}
 
 	private void decideMakeManualMove(AtaxxSwingPlayer player2) {
-		// TODO Auto-generated method stub
-		
+		this.move(player2);
 	}
 
 	@Override
@@ -54,12 +53,14 @@ public class AtaxxSwingView extends RectBoardSwingView {
 		// - declare the board active, so handleMouseClick accepts moves
 		// - add corresponding message to the status messages indicating
 		//   what to do for making a move, etc.
+    	count = 0;
 		this.enableView();
 	}
 
 	@Override
 	protected void deActivateBoard() {
 		// declare the board inactive, so handleMouseClick rejects moves
+    	count = 0;
 		this.disableView();
 	}
 }

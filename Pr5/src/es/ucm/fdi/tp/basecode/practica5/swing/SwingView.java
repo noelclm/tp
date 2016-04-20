@@ -338,8 +338,9 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		statusMessages.append(msg + '\n');
 	}
 	
-	protected void move(ConnectNSwingPlayer player) {
+	protected void move(Player player) {
 		ctrl.makeMove(player);
+		playerInformationTable.refresh();
 	}
 	
 	// --------------------------------------------------------------------------------
