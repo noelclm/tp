@@ -1,10 +1,12 @@
 package es.ucm.fdi.tp.basecode.practica5.swing;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -23,8 +25,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import es.ucm.fdi.tp.basecode.bgame.Utils;
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
@@ -40,26 +45,13 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 @SuppressWarnings("serial")
 public abstract class SwingView extends JFrame implements GameObserver {
 
-	protected Controller ctrl;
-	protected Observable<GameObserver> game;
-	
-	private Piece localPiece;
-	private Piece turn;
-	private List<Piece> pieces;
-
-	private Board board;
-	private Map<Piece, Color> pieceColors;
-	private Map<Piece, PlayerMode> playerTypes;
-	private PanelDerecha pd;
-
-	Iterator<Color> colorsIter;
-	
 	public enum PlayerMode {
 		MANUAL("Manual"), RANDOM("Random"), AI("Automatics");
 
 		private String desc;
 
-		PlayerMode(String desc) {
+		PlayerMode( String desc) {
+		
 			this.desc = desc;
 		}
 
@@ -68,73 +60,62 @@ public abstract class SwingView extends JFrame implements GameObserver {
 			return desc;
 		}
 	}
-
-	/*
-	 * private Player randomPlayer;
-	 * private Player aiPlayer;
-	 * */
 	
-	/*
-	 * 
-	 * private Map<>
-	 * */
+	private Observable<GameObserver> game;
+	private Controller ctrl;
+	private Piece localPiece;
+	private Player ramdomPlayer;
+	private Player aiPlayer;
+	private Map<Piece, Color> pieceColors;
+	private Map<Piece, PlayerMode> playerTypes;
+	private Board board;
+	private List<Piece> pieces;
+	private Piece turn;
+	boolean inPlay;
+	Iterator<Color> colorsIter;
 	
-	private JPanel boardPanel;
-	private JPanel toolBarPanel;
-	private JTextArea statusArea;
+	private JPanel mainPanel;
+	private JPanel leftPanel;
+	private JPanel rigthPanel;
 	
+	private JPanel statusPanel;
+	private JTextArea statusMessages;
+
+	private JPanel playerPanel;
+	private TableModel playerInformationTable;
+	private JTable table;
 	
-	protected Piece getTurn() {
-		return turn;
-	}
-
-	final protected List<Piece> getPieces() {
-		return pieces;
-	}
+	private JPanel pieceColorPanel;
+	private JComboBox<Piece> pieceColorCombo;
+	private JButton pieceColorButton;
 	
-	protected Board getBoard() {
-		return board;
-	}
+	private JPanel playerModesPanel;
+	private JComboBox<Piece> playerModesCombo;
+	private JComboBox<PlayerMode> typeModesCombo;
+	private JButton playerModesButton;
+	
+	private JPanel automaticMovesPanel;
+	private JButton randomAutomaticMovesButton;
+	private JButton inteligenteAutomaticMovesButton;
+	
+	private JPanel quitRestarPanel;
+	private JButton quitButton;
+	private JButton restartButton;
 	
 
-	final protected void setBoardArea(JComponent c) {
-		//boardPanel.add(c, BorderLayout.CENTER);
-	}
-	
-	final protected void addToCtrlArea(JComponent c) {
-		//toolBarPanel.add(c);
-	}
-
-	final protected void addContentToStatusArea(String msg) {
-		statusArea.append("* " + msg + "\n");
-	}
-
-	
-	protected abstract void initBoardGui();
-
-	protected abstract void activateBoard();
-
-	protected abstract void deActivateBoard();
-
-
-	public SwingView(Observable<GameObserver> g, Controller c, Piece localPiece, Player randomPlayer, Player aiPlayer) {
-
-		this.ctrl = c;
-		this.game = g;
+	public SwingView(Observable<GameObserver> g, Controller c, Piece localPiece, Player randPlayer, Player aiPlayer) {
 		
-		colorsIter = new Iterator<Color>() {
-
-			@Override
-			public boolean hasNext() {
-				return false;
-			}
-
-			@Override
-			public Color next() {
-				return null;
-			}
-		};
-
+		this.game = g;
+		this.ctrl = c;
+		this.localPiece = localPiece;
+		this.ramdomPlayer = randPlayer;
+		this.aiPlayer = aiPlayer;
+		this.pieceColors = new HashMap<Piece, Color>();
+		this.playerTypes = new HashMap<Piece, PlayerMode>();
+		this.inPlay = false;
+		
+		this.colorsIter = Utils.colorsGenerator();
+		
 		SwingUtilities.invokeLater(new Runnable() {
 			
 			@Override
@@ -145,136 +126,39 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		});
 
 		initGUI();
-		
+
 	}
-
 	
-	private void initGUI() {
+	private void initGUI() { 
 		
-		
-		
-		JPanel mainPanel = new JPanel(new BorderLayout());
-
-		this.setMinimumSize(new Dimension(780, 600));
-		
-		this.setContentPane(mainPanel);
-
-		// board panel
-		//boardPanel = new JPanel(new BorderLayout());
-		PanelIzquierda pi = new PanelIzquierda(5);
-		this.pd = new PanelDerecha();
-		mainPanel.add(pi, BorderLayout.CENTER);
-		mainPanel.add(pd, BorderLayout.EAST);
-		//mainPanel.add(boardPanel, BorderLayout.CENTER);
-			
-		initBoardGui();
-
-		// tool bar panel
-		//toolBarPanel = new JPanel();
-		//toolBarPanel.setLayout(new BoxLayout(toolBarPanel, BoxLayout.Y_AXIS));
-			
-		//mainPanel.add(toolBarPanel, BorderLayout.LINE_END);
-			
-		initCtrlPanel();
-
-		this.addWindowListener(new WindowListener() {
-
-			@Override
-			public void windowClosing(WindowEvent e) {
-				quit();
-			}
-
-			@Override
-			public void windowOpened(WindowEvent e) {
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e) {
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-			}
-
-			@Override
-			public void windowClosed(WindowEvent e) {
-			}
-
-			@Override
-			public void windowActivated(WindowEvent e) {
-			}
-			
-		});
-
+		mainPanel = new JPanel( new BorderLayout());
+		leftPanel = new JPanel(new BorderLayout());
+		rigthPanel = new JPanel();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.pack();
+		rigthPanel.setLayout( new BoxLayout(rigthPanel, BoxLayout.Y_AXIS));
+		
+		statusMessagesPanel();
+		playerInformationPanel();
+		pieceColorPanel();
+		playerModesPanel();
+		AutomaticMovesPanel();
+		quitRestartPanel();
+		
+		addStatusMessages("Welcome");
+		
+		mainPanel.add(leftPanel, BorderLayout.CENTER);
+		mainPanel.add(rigthPanel, BorderLayout.LINE_END);
+		this.getContentPane().add(mainPanel);
+		initBoardGui(); 
+		this.setMinimumSize(new Dimension(800, 600));
 		this.setVisible(true);
+		this.pack();
 		
-	}
-
-	
-	protected void initCtrlPanel() {
-		
-		JPanel p = new JPanel(new BorderLayout());
-		p.setPreferredSize(new Dimension(100, 150));
-		p.setBorder(BorderFactory.createTitledBorder("Status Messages"));
-
-		statusArea = new JTextArea(5, 10);
-		statusArea.setEditable(true);
-
-		JScrollPane statusAreaScroll = new JScrollPane(statusArea);
-		
-		p.add(statusAreaScroll, BorderLayout.CENTER);
-			
-		addToCtrlArea(p);
-
-		JPanel buttons = new JPanel(new FlowLayout());
-		addQuitButton(buttons);
-		addRestartButton(buttons);
-		addToCtrlArea(buttons);
-	}
-	
-	final protected void addPlayers(){
-		JComboBox players = new JComboBox();
-		
-		
-	}	
-	
-	final protected void addQuitButton(JPanel panelBotones){
-		
-		JButton quitButton = new JButton("Quit");
-		
-		quitButton.addActionListener(new ActionListener(){
-			
-			public void actionPerformed(ActionEvent e){
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent arg0){
 				quit();
 			}
 		});
-		
-		panelBotones.add(quitButton);
-	}
-	
-	final protected void addRestartButton(JPanel panelBotones){
-		
-		JButton restartButton = new JButton("Restart");
-		
-		restartButton.addActionListener(new ActionListener(){
-			
-			public void actionPerformed(ActionEvent e){
-				try{
-					ctrl.restart();
-				}
-				catch(GameError _e){
-					
-				}
-			}
-		});
-		
-		panelBotones.add(restartButton);
 	}
 	
 	final protected void quit() {
@@ -297,69 +181,343 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		
 	}
 	
+	// --------------------------------------------------------------------------------
+	
 
 	/** GAME OBSERVER CALLBACKS **/
 
 	@Override
 	public void onGameStart(Board roBoard, String gameDesc, List<Piece> roPieces,Piece turn) {
 		SwingUtilities.invokeLater(new Runnable() {
-			public void run(){handGameStart(roBoard,gameDesc,roPieces,turn);}
-			});
+			public void run(){handleGameStart(roBoard,gameDesc,roPieces,turn);}
+		});
 	}
 
-	private void handGameStart(Board roBoard, String gameDesc, List<Piece> roPieces,Piece turn) {
+	private void handleGameStart(Board roBoard, String gameDesc, List<Piece> roPieces,Piece turn) {
 		
-		this.setTitle(gameDesc);
-	
 		this.pieceColors = new HashMap<>();
 		this.playerTypes = new HashMap<>();
 		this.board = roBoard;
 		this.pieces = roPieces;
 		this.turn = turn;
-		
+		this.inPlay = true;
+
+		pieceColorCombo.removeAllItems();
 		for(Piece p : pieces) {
 			if(pieceColors.get(p) == null) {
-				this.pieceColors.put(p, colorsIter.next());
-				this.playerTypes.put(p, PlayerMode.MANUAL);
+				setPieceColor(p, colorsIter.next());
 			}
-			//this.pieceColorComboBox.addItem(p);
+			this.pieceColorCombo.addItem(p);
 		}
 		
-		this.pd.ponerPiezas(this.pieces);
-		// TODO Preguntar
+
+		if (localPiece == null){
+			for (Piece p : pieces) {
+				if(playerTypes.get(p) == null){
+					playerTypes.put(p, PlayerMode.MANUAL);
+					this.playerModesCombo.addItem(p);
+				}
+			}
+		}else{
+			if(playerTypes.get(localPiece) == null){
+				playerTypes.put(localPiece, PlayerMode.MANUAL);
+				this.playerModesCombo.addItem(localPiece);
+			}
+		}
 		
-			//turn.equals(this.localPiece)?:
-			
-		
-		
-			
-		
+
+		disableView();
+		handleChangeTurn(board,turn);
+		this.setTitle(gameDesc);
+		this.redrawBoard();
 		
 	}
 
 	@Override
 	public void onGameOver(final Board board, final State state, final Piece winner) {
-		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {handleGameOver(board, state, winner);}
+		});
+	}
+	
+	protected void handleGameOver(Board board, State state, Piece winner) {
+		this.board = board;
+		addStatusMessages("Game Over!!");
+		this.redrawBoard();
+		addStatusMessages("Game Status: " + state);
+		if (state == State.Won) {
+			addStatusMessages("Winner: " + winner);
+		}
 	}
 
 	@Override
 	public void onMoveStart(Board board, Piece turn) {
-		
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {handleMoveStart(board, turn);}
+		});
+	}
+	
+	protected void handleMoveStart(Board board2, Piece turn2) {
+		//TODO implementar
 	}
 
 	@Override
 	public void onMoveEnd(Board board, Piece turn, boolean success) {
-
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {handleMoveEnd(board, turn, success);}
+		});
+	}
+	
+	protected void handleMoveEnd(Board board2, Piece turn2, boolean success) {
+		//TODO implementar
 	}
 
 	@Override
 	public void onChangeTurn(Board board, final Piece turn) {
-
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {handleChangeTurn(board, turn);}
+		});
+	}
+	
+	protected void handleChangeTurn(Board board2, Piece turn2) {
+		this.board = board2;
+		this.turn = turn2;
+		
+		this.redrawBoard();
+		addStatusMessages("Turn for " + turn);
 	}
 
 	@Override
 	public void onError(String msg) {
-
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {addStatusMessages(msg);}
+		});
 	}
+
+
+	// --------------------------------------------------------------------------------
+		
+	
+	protected abstract void initBoardGui();
+	protected abstract void activateBoard();
+	protected abstract void deActivateBoard();
+	protected abstract void redrawBoard();
+	
+
+	final protected Board getBoard() { 
+		return board; 
+	}
+	
+	final protected Piece getTurn() { 
+		return turn; 
+	}
+	
+	final protected Color getPieceColor(Piece p) { 
+		return pieceColors.get(p);
+	}
+	
+	final protected List<Piece> getPieces() { 
+		return pieces; 
+	}
+	
+	final protected Color setPieceColor(Piece p, Color c) { 
+		return pieceColors.put(p,c); 
+	}
+	
+	final protected void setBoardArea(JComponent c) { 
+		leftPanel.add(c,BorderLayout.CENTER);
+	}
+	
+	protected void disableView() {
+		this.leftPanel.setEnabled(false);
+	}
+	
+	protected void enableView() {
+		this.leftPanel.setEnabled(true);
+	}
+	
+	final protected void addStatusMessages(String msg) { 
+		statusMessages.append(msg + '\n');
+	}
+	
+	// --------------------------------------------------------------------------------
+	
+		
+	private void statusMessagesPanel() {
+		statusPanel = new JPanel( new BorderLayout());
+		statusPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Status Messages"));
+		statusMessages= new JTextArea();
+		statusMessages.setEditable(false);
+		statusMessages.setLineWrap(true);
+		statusMessages.setWrapStyleWord(true);
+		JScrollPane jp = new JScrollPane(statusMessages, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		statusPanel.add(jp);
+		statusPanel.setPreferredSize(new Dimension(100,100));
+		rigthPanel.add(statusPanel);
+	}
+	
+	final protected void playerInformationPanel() {
+		playerPanel = new JPanel( new BorderLayout());
+		playerPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Player Information"));
+		
+		playerInformationTable = new TableModel();
+		table = new JTable(playerInformationTable){
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int col){
+				Component comp =  super.prepareRenderer(renderer, row, col);
+				Color c = pieceColors.get(pieces.get(row));
+				 comp.setBackground(c);
+				return  comp;
+			}
+		};
+		
+		JScrollPane jp = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
+		playerPanel.setPreferredSize(new Dimension(100,100));
+		playerPanel.add(jp);
+		rigthPanel.add(playerPanel);		
+		
+	}
+	
+	private void pieceColorPanel() {
+		pieceColorPanel = new JPanel ();
+		pieceColorPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Piece Color"));
+		pieceColorCombo = new JComboBox<Piece>();
+
+		pieceColorButton = new JButton("Choose Color");
+		pieceColorButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){ choose(); }
+		});
+
+		pieceColorPanel.add(pieceColorCombo);
+		pieceColorPanel.add(pieceColorButton);
+		rigthPanel.add(pieceColorPanel);
+		
+	}
+	
+	protected void choose() {
+		Piece p = (Piece) this.pieceColorCombo.getSelectedItem();
+		ColorChooser c = new ColorChooser(new JFrame(), "Select color", pieceColors.get(p));
+		Color color = c.getColor();
+		if ( color != null ) {
+			pieceColors.put(p,color);
+			playerInformationTable.refresh();
+		}
+		this.redrawBoard();
+	}
+	
+	private void playerModesPanel() {
+		playerModesPanel = new JPanel ();
+		
+		playerModesPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Player Modes"));
+		playerModesCombo = new JComboBox<Piece>();
+		typeModesCombo = new JComboBox<PlayerMode>();
+		playerModesButton = new JButton("Set");
+		playerModesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){ set();}
+		});
+		this.typeModesCombo.addItem(PlayerMode.MANUAL);
+		this.typeModesCombo.addItem(PlayerMode.RANDOM);
+		this.typeModesCombo.addItem(PlayerMode.AI);
+		playerModesPanel.add(playerModesCombo);
+		playerModesPanel.add(typeModesCombo);
+		
+		playerModesPanel.add(playerModesButton);
+		rigthPanel.add(playerModesPanel);
+	}
+	
+	protected void set() {
+		Piece p = (Piece) playerModesCombo.getSelectedItem();
+		PlayerMode pm = (PlayerMode) typeModesCombo.getSelectedItem();
+		playerTypes.put(p,pm);
+		playerInformationTable.refresh();
+	}
+	
+	private void AutomaticMovesPanel() {
+		automaticMovesPanel = new JPanel();
+		automaticMovesPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Automatic Moves"));
+		randomAutomaticMovesButton = new JButton("Random");
+		randomAutomaticMovesButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {ctrl.makeMove(ramdomPlayer);}
+		});
+		inteligenteAutomaticMovesButton = new JButton("Intelligent");
+		inteligenteAutomaticMovesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){ ctrl.makeMove(aiPlayer);}
+		});
+		automaticMovesPanel.add(randomAutomaticMovesButton);
+		automaticMovesPanel.add(inteligenteAutomaticMovesButton);
+		rigthPanel.add(automaticMovesPanel);
+	}
+	
+	
+	private void quitRestartPanel() {
+		quitRestarPanel = new JPanel ();
+		quitButton = new JButton("Quit");
+		quitButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {quit();}
+		});
+		restartButton = new JButton("Restart");
+		restartButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){ ctrl.restart();
+			playerInformationTable.refresh();
+			addStatusMessages("--Restarted--");}
+		});
+
+		quitRestarPanel.add(quitButton);
+		quitRestarPanel.add(restartButton);
+		rigthPanel.add(quitRestarPanel);
+	}
+	
+	
+	// --------------------------------------------------------------------------------
+	
+	
+	private class TableModel extends AbstractTableModel{
+		
+		private static final long serialVersionUID = 1L;
+		
+		private String[] columsNames = new String[] {"Player","Mode","Pieces"};
+		
+		@Override
+		public String getColumnName(int column){
+			return columsNames[column];
+			
+		}
+		
+		@Override
+		public int getRowCount() {
+			return pieces == null ? 0 : pieces.size();
+		}
+
+		@Override
+		public int getColumnCount() {
+			return columsNames.length;
+		}
+
+		public void refresh() {
+			fireTableStructureChanged();
+		}
+		
+		@Override
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			switch (columnIndex) {
+			case 0:
+				return pieces.get(rowIndex);
+			case 1:
+				return playerTypes.get(pieces.get(rowIndex));
+			case 2:
+				return board.getPieceCount(pieces.get(rowIndex));
+			default:
+				break;
+			}
+			return columnIndex;
+		}
+		
+			
+	}
+	
 
 }
