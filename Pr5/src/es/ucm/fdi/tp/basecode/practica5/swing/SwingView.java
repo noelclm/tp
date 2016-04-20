@@ -46,7 +46,6 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	private Piece localPiece;
 	private Piece turn;
 	private List<Piece> pieces;
-	private List<Piece> roPieces;
 
 	private Board board;
 	private Map<Piece, Color> pieceColors;
@@ -55,28 +54,18 @@ public abstract class SwingView extends JFrame implements GameObserver {
 
 	Iterator<Color> colorsIter;
 	
-	enum PlayerMode {
-		MANUAL("m", "Manual"), RANDOM("r", "Random"), AI("a", "Automatics");
+	public enum PlayerMode {
+		MANUAL("Manual"), RANDOM("Random"), AI("Automatics");
 
-		private String id;
 		private String desc;
 
-		PlayerMode(String id, String desc) {
-			this.id = id;
+		PlayerMode(String desc) {
 			this.desc = desc;
-		}
-
-		public String getId() {
-			return id;
-		}
-
-		public String getDesc() {
-			return desc;
 		}
 
 		@Override
 		public String toString() {
-			return id;
+			return desc;
 		}
 	}
 

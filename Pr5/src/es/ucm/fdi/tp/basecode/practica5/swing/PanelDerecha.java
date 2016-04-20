@@ -1,22 +1,31 @@
 package es.ucm.fdi.tp.basecode.practica5.swing;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.AbstractTableModel;
 
+import es.ucm.fdi.tp.basecode.bgame.control.Controller;
+import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 
 public class PanelDerecha extends JPanel{
 	
 	//private List<Piece> pieces;
+	protected Controller ctrl;
 	
 	private JTextArea status;
 	private JTable information;
@@ -37,15 +46,14 @@ public class PanelDerecha extends JPanel{
 	private JComboBox combo2;
 	private JComboBox combo3;
 	private List<Piece> pieces;
+	private JScrollPane statusAreaScroll;
 	
 	public enum PlayerMode {
 		MANUAL("Manual"), RANDOM("Random"), AI("Automatics");
 
-		//private String id;
 		private String desc;
 
 		PlayerMode(String desc) {
-			//this.id = id;
 			this.desc = desc;
 		}
 
@@ -58,11 +66,7 @@ public class PanelDerecha extends JPanel{
 	
 	public PanelDerecha(){
 		
-		this.setLayout(new GridLayout(6, 1));
-		this.status=new JTextArea("status");
-		this.statusPanel=new JPanel();
-		statusPanel.setBorder(BorderFactory.createTitledBorder("Status Messages"));
-		statusPanel.add(status);
+		
 		
 		this.playerPanel=new JPanel();
 		playerPanel.setBorder(BorderFactory.createTitledBorder("Player Information"));
@@ -73,12 +77,15 @@ public class PanelDerecha extends JPanel{
 		this.piecePanel=new JPanel();
 		piecePanel.setBorder(BorderFactory.createTitledBorder("Piece Colors"));
 		piecePanel.setLayout(new FlowLayout());
+		
 		this.playerModePanel=new JPanel();
 		playerModePanel.setBorder(BorderFactory.createTitledBorder("Player Modes"));
 		playerModePanel.setLayout(new FlowLayout());
+		
 		this.automaticPanel=new JPanel();
 		automaticPanel.setBorder(BorderFactory.createTitledBorder("Automatic Moves"));
 		automaticPanel.setLayout(new FlowLayout());
+		
 		this.abajoPanel=new JPanel();
 		abajoPanel.setLayout(new FlowLayout());
 		this.combo1=new JComboBox();
@@ -101,14 +108,7 @@ public class PanelDerecha extends JPanel{
 		this.restart=new JButton("Restart");
 		abajoPanel.add(restart);
 		
-
 		
-	//	for (Pieces p:pieces){
-		//	pieceColor.put(p.colorsItem.next());
-			//playerColor(B.addItem(p));
-		//}
-		
-		this.add(statusPanel);
 		this.add(playerPanel);
 		this.add(piecePanel);
 		this.add(playerModePanel);
@@ -116,18 +116,20 @@ public class PanelDerecha extends JPanel{
 		this.add(abajoPanel);
 	}
 private class Tabla extends AbstractTableModel{
+	
+	private static final long serialVersionUID = 1L;
 	private String[]columnas={"Player","Mode", "#Pieces"};
 	
 	@Override
 	public String getColumnName(int index){
-		return columnas[1];
+		return columnas[index];
 		
 	}
 
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
-		return 2;
+		return 2;//pieces == null ? 0 : pieces.size();
 	}
 
 	@Override
@@ -153,4 +155,6 @@ public void ponerPiezas (List<Piece> pieces){
 		combo3.addItem(p);
 	}
 }
+
+
 }
