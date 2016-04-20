@@ -66,7 +66,12 @@ public class PanelDerecha extends JPanel{
 	
 	public PanelDerecha(){
 		
-		
+		this.setLayout(new GridLayout(6, 1));
+		this.status=new JTextArea(5,20);
+		this.statusPanel=new JPanel();
+		statusPanel.setBorder(BorderFactory.createTitledBorder("Status Messages"));
+		statusAreaScroll = new JScrollPane(status);
+		statusPanel.add(statusAreaScroll);
 		
 		this.playerPanel=new JPanel();
 		playerPanel.setBorder(BorderFactory.createTitledBorder("Player Information"));
@@ -108,7 +113,7 @@ public class PanelDerecha extends JPanel{
 		this.restart=new JButton("Restart");
 		abajoPanel.add(restart);
 		
-		
+		this.add(statusPanel);
 		this.add(playerPanel);
 		this.add(piecePanel);
 		this.add(playerModePanel);
@@ -155,6 +160,8 @@ public void ponerPiezas (List<Piece> pieces){
 		combo3.addItem(p);
 	}
 }
-
+private void statusMessages(){
+	
+}
 
 }
