@@ -26,7 +26,7 @@ public class ConnectNSwingView extends RectBoardSwingView {
 	}
 
 	@Override
-	protected void handleMouseClick(int row, int col, int clickCount, int mouseButton) {
+	protected void handleMouseClick(int row, int col, int mouseButton) {
 	 // do nothing if the board is not active	
 		player.setMoveValue(row, col);
 	    decideMakeManualMove(player);
@@ -42,11 +42,13 @@ public class ConnectNSwingView extends RectBoardSwingView {
 		// - declare the board active, so handleMouseClick accepts moves
 		// - add corresponding message to the status messages indicating
 		//   what to do for making a move, etc.
+		this.enableView();
 	}
 
 	@Override
 	protected void deActivateBoard() {
 		// declare the board inactive, so handleMouseClick rejects moves
+		this.disableView();
 	}
 
 }
