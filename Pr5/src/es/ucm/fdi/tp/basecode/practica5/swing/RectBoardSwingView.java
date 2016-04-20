@@ -26,6 +26,10 @@ public abstract class RectBoardSwingView extends SwingView {
 	protected void initBoardGui() {
 		boardComp = new BoardComponent(){
 			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			@Override
 			protected void mouseClicked(int row, int col, int mouseButton) {
 				handleMouseClick(row,col,mouseButton);
