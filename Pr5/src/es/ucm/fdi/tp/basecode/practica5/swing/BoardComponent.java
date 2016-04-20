@@ -24,7 +24,7 @@ public abstract class BoardComponent extends JPanel{
 
 	protected abstract Color getPieceColor(Piece p);
 	protected abstract boolean isPlayerPiece(Piece p);
-	protected abstract void mouseClicked(int row, int col, int mouseButton);
+	protected abstract void mouseClicked(int mouseButton, int row, int col);
 	
 	
 	public void redraw(Board b){
@@ -41,6 +41,7 @@ public abstract class BoardComponent extends JPanel{
 	private void initGUI() {
 
 		addMouseListener(new MouseAdapter() {
+
 			//controlar que el pulsar y soltar sean los mismos: mouse Release y pressed
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -54,6 +55,7 @@ public abstract class BoardComponent extends JPanel{
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				BoardComponent.this.mouseClicked(e.getButton(), e.getY()/_CELL_HEIGHT, e.getX()/_CELL_WIDTH);
 			} 
 		});

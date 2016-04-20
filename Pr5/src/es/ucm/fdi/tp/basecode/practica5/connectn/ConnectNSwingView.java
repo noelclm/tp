@@ -26,15 +26,14 @@ public class ConnectNSwingView extends RectBoardSwingView {
 	}
 
 	@Override
-	protected void handleMouseClick(int row, int col, int mouseButton) {
-	 // do nothing if the board is not active	
+	protected void handleMouseClick(int mouseButton, int row, int col) {
 		player.setMoveValue(row, col);
 	    decideMakeManualMove(player);
+	    this.redrawBoard();
 	}
 
 	private void decideMakeManualMove(ConnectNSwingPlayer player2) {
-		// TODO Auto-generated method stub
-		
+		this.move(player2);
 	}
 
 	@Override

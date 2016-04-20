@@ -15,6 +15,9 @@ public class AtaxxSwingView extends RectBoardSwingView {
 	 */
 	private static final long serialVersionUID = 1L;
 	private AtaxxSwingPlayer player;
+	private int count = 0;
+	private int rowI;
+	private int colI;
 
 	public AtaxxSwingView(Observable<GameObserver> g, Controller c, Piece localPiece, Player randomPlayer,
 			Player autoPlayer) {
@@ -25,10 +28,20 @@ public class AtaxxSwingView extends RectBoardSwingView {
 	}
 
 	@Override
-	protected void handleMouseClick(int row, int col, int mouseButton) {
+	protected void handleMouseClick(int mouseButton, int row, int col) {
 	 // do nothing if the board is not active	
-		player.setMoveValue(row, col);
-	    decideMakeManualMove(player);
+		System.out.println(mouseButton +" " +row +" " + col);
+		if(count == 0){
+			rowI = row;
+			colI = col;
+			count++;
+		}else{
+			player.setMoveValue(row, col);
+		    decideMakeManualMove(player);
+		    this.redrawBoard();
+			count = 0;
+		}
+		
 	}
 
 	private void decideMakeManualMove(AtaxxSwingPlayer player2) {
