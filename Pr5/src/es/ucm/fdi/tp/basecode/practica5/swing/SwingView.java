@@ -201,14 +201,22 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		this.inPlay = true;
 
 		pieceColorCombo.removeAllItems();
+		
 		for(Piece p : pieces) {
 			if(pieceColors.get(p) == null) {
 				setPieceColor(p, colorsIter.next());
 			}
-			this.pieceColorCombo.addItem(p);
 		}
 		
-
+		if (localPiece == null){
+			for(Piece p : pieces) {
+				this.pieceColorCombo.addItem(p);
+			}
+		}else{	
+			this.pieceColorCombo.addItem(localPiece);
+		}
+		
+		playerModesCombo.removeAllItems();
 		if (localPiece == null){
 			for (Piece p : pieces) {
 				if(playerTypes.get(p) == null){
@@ -223,11 +231,16 @@ public abstract class SwingView extends JFrame implements GameObserver {
 			}
 		}
 		
-
 		disableView();
 		handleChangeTurn(board,turn);
-		this.setTitle(gameDesc);
+		if(this.localPiece != null){
+		    this.setTitle(gameDesc + " Player: " + localPiece.getId());
+		}else{
+			this.setTitle(gameDesc);
+		}
+		
 		this.redrawBoard();
+		playerInformationTable.refresh();
 		
 	}
 
@@ -280,6 +293,14 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	protected void handleChangeTurn(Board board2, Piece turn2) {
 		this.board = board2;
 		this.turn = turn2;
+		
+		if(this.localPiece != null){
+			if(this.turn.getId().equalsIgnoreCase(this.localPiece.getId())){
+				enableView();
+			}else{
+				disableView();
+			}
+		}
 		
 		this.redrawBoard();
 		addStatusMessages("Turn for " + turn);
@@ -372,7 +393,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 			public Component prepareRenderer(TableCellRenderer renderer, int row, int col){
 				Component comp =  super.prepareRenderer(renderer, row, col);
 				Color c = pieceColors.get(pieces.get(row));
-				 comp.setBackground(c);
+				comp.setBackground(c);
 				return  comp;
 			}
 		};
