@@ -1,5 +1,7 @@
 package es.ucm.fdi.tp.basecode.practica5.ttt;
 
+import javax.swing.SwingUtilities;
+
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
 import es.ucm.fdi.tp.basecode.bgame.control.Player;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
@@ -9,10 +11,27 @@ import es.ucm.fdi.tp.basecode.ttt.TicTacToeFactory;
 
 public class TicTacToeFactoryExt extends TicTacToeFactory{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TicTacToeFactoryExt() {
+		super();
+	}
+
 	@Override
 	public void createSwingView(final Observable<GameObserver> g, final Controller c, final Piece viewPiece,
 			Player random, Player ai) {
-		throw new UnsupportedOperationException("There is no swing view");
-	}
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				new TicTacToeSwingView(g, c, viewPiece, random, ai);
+			}
+			
+		});
 
+	}
 }

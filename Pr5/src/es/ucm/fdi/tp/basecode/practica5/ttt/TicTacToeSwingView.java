@@ -1,4 +1,4 @@
-package es.ucm.fdi.tp.basecode.practica5.attt;
+package es.ucm.fdi.tp.basecode.practica5.ttt;
 
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
 import es.ucm.fdi.tp.basecode.bgame.control.Player;
@@ -7,40 +7,30 @@ import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.practica5.swing.RectBoardSwingView;
 
-public class AdvancedTTTSwingView extends RectBoardSwingView {
-
+public class TicTacToeSwingView extends RectBoardSwingView{
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private AdvancedTTTSwingPlayer player;
-	private int count = 0;
-	private int rowI;
-	private int colI;
+	private TicTacToeSwingPlayer player;
 
-	public AdvancedTTTSwingView(Observable<GameObserver> g, Controller c, Piece localPiece, Player randomPlayer,
+	public TicTacToeSwingView(Observable<GameObserver> g, Controller c, Piece localPiece, Player randomPlayer,
 			Player autoPlayer) {
 		
 		super(g, c, localPiece, randomPlayer, autoPlayer);
-		player = new AdvancedTTTSwingPlayer();
+		player = new TicTacToeSwingPlayer();
 		
 	}
 
 	@Override
 	protected void handleMouseClick(int row, int col, int mouseButton) {
-		if(count == 0){
-			rowI = row;
-			colI = col;
-			count++;
-		}else{
-	    	count = 0;
-			player.setMoveValue(rowI, colI, row, col);
-		    decideMakeManualMove(player);
-		    this.redrawBoard();
-		}
+		player.setMoveValue(row, col);
+	    decideMakeManualMove(player);
+	    this.redrawBoard();
 	}
 
-	private void decideMakeManualMove(AdvancedTTTSwingPlayer player2) {
+	private void decideMakeManualMove(TicTacToeSwingPlayer player2) {
 		this.move(player2);
 	}
 
@@ -57,5 +47,4 @@ public class AdvancedTTTSwingView extends RectBoardSwingView {
 		// declare the board inactive, so handleMouseClick rejects moves
 		this.disableView();
 	}
-
 }

@@ -12,6 +12,8 @@ import es.ucm.fdi.tp.basecode.attt.AdvancedTTTMove;
 @SuppressWarnings("serial")
 public class AdvancedTTTSwingPlayer extends Player {
 
+	private int rowI;
+	private int colI;
 	private int row;
 	private int col;
 
@@ -20,16 +22,18 @@ public class AdvancedTTTSwingPlayer extends Player {
 
 	@Override
 	public GameMove requestMove(Piece p, Board board, List<Piece> pieces, GameRules rules) {
-		return createMove(row, col, p);
+		return createMove(rowI, colI, row, col, p);
 	}
 
-	public void setMoveValue(int row, int col) {
+	public void setMoveValue(int rowI, int colI , int row, int col) {
+		this.rowI = rowI;
+		this.colI = colI;
 		this.row = row;
 		this.col = col;
 	}
 	
-	protected GameMove createMove(int row, int col, Piece p) {
-		return new AdvancedTTTMove(row, col, p);
+	protected GameMove createMove(int rowI, int colI,int row, int col, Piece p) {
+		return new AdvancedTTTMove(rowI, colI, row, col, p);
 	}
 	
 }
