@@ -24,7 +24,7 @@ public abstract class BoardComponent extends JPanel{
 
 	protected abstract Color getPieceColor(Piece p);
 	protected abstract boolean isPlayerPiece(Piece p);
-	protected abstract void mouseClicked(int mouseButton, int row, int col);
+	protected abstract void mouseClicked(int row, int col, int mouseButton);
 	
 	
 	public void redraw(Board b){
@@ -56,7 +56,7 @@ public abstract class BoardComponent extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				BoardComponent.this.mouseClicked(e.getButton(), e.getY()/_CELL_HEIGHT, e.getX()/_CELL_WIDTH);
+				BoardComponent.this.mouseClicked(e.getY()/_CELL_HEIGHT, e.getX()/_CELL_WIDTH, e.getButton());
 			} 
 		});
 		this.setSize(new Dimension(rows * _CELL_HEIGHT, cols * _CELL_WIDTH));

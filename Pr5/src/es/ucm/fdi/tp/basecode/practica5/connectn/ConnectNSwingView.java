@@ -26,7 +26,7 @@ public class ConnectNSwingView extends RectBoardSwingView {
 	}
 
 	@Override
-	protected void handleMouseClick(int mouseButton, int row, int col) {
+	protected void handleMouseClick(int row, int col, int mouseButton) {
 		player.setMoveValue(row, col);
 	    decideMakeManualMove(player);
 	    this.redrawBoard();

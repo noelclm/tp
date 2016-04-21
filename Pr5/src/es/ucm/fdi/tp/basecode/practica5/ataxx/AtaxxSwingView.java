@@ -28,7 +28,7 @@ public class AtaxxSwingView extends RectBoardSwingView {
 	}
 
 	@Override
-	protected void handleMouseClick(int mouseButton, int row, int col) {
+	protected void handleMouseClick(int row, int col, int mouseButton) {
 	 // do nothing if the board is not active	
 		if(count == 0){
 			rowI = row;
