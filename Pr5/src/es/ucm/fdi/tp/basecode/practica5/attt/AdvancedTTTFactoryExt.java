@@ -1,5 +1,7 @@
 package es.ucm.fdi.tp.basecode.practica5.attt;
 
+import javax.swing.SwingUtilities;
+
 import es.ucm.fdi.tp.basecode.attt.AdvancedTTTFactory;
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
 import es.ucm.fdi.tp.basecode.bgame.control.Player;
@@ -9,9 +11,26 @@ import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 
 public class AdvancedTTTFactoryExt  extends AdvancedTTTFactory{
 	
+	private static final long serialVersionUID = 1L;
+
+	public AdvancedTTTFactoryExt() {
+		super();
+	}
+	
+	
 	@Override
 	public void createSwingView(final Observable<GameObserver> g, final Controller c, final Piece viewPiece,
 			Player random, Player ai) {
-		throw new UnsupportedOperationException("There is no swing view");
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				GameObserver o = new AdvancedTTTSwingView(g, c, viewPiece, random, ai);
+				g.addObserver(o);
+			}
+			
+		});
+
 	}
 }
