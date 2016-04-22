@@ -294,10 +294,8 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		
 		if(this.localPiece != null){
 			if(this.turn.getId().equalsIgnoreCase(this.localPiece.getId())){
-				System.out.println("Activa ventana " + this.localPiece.getId());
 				activateBoard();
 			}else{
-				System.out.println("Desactiva ventana " + this.localPiece.getId());
 				deActivateBoard();
 			}
 		}
