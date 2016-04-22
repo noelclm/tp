@@ -37,7 +37,6 @@ import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.bgame.model.Game.State;
 import es.ucm.fdi.tp.basecode.bgame.model.GameError;
-import es.ucm.fdi.tp.basecode.practica5.connectn.ConnectNSwingPlayer;
 
 
 @SuppressWarnings("serial")

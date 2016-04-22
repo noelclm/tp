@@ -2,7 +2,6 @@ package es.ucm.fdi.tp.basecode.practica5.swing;
 
 import java.awt.Color;
 
-import es.ucm.fdi.tp.basecode.bgame.Utils;
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
 import es.ucm.fdi.tp.basecode.bgame.control.Player;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
