@@ -71,18 +71,5 @@ public class AtaxxSwingView extends RectBoardSwingView {
 		this.move(player2);
 	}
 
-	@Override
-	protected void activateBoard() {
-		// - declare the board active, so handleMouseClick accepts moves
-		// - add corresponding message to the status messages indicating
-		//   what to do for making a move, etc.
-    	count = 0;
-		this.enableView();
-	}
-
-	@Override
-	protected void deActivateBoard() {
-		// declare the board inactive, so handleMouseClick rejects moves
-		this.disableView();
-	}
+	
 }
