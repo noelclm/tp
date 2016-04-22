@@ -256,6 +256,8 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		if (state == State.Won) {
 			addStatusMessages("Winner: " + winner);
 		}
+
+		deActivateBoard();
 	}
 
 	@Override
@@ -266,7 +268,6 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	}
 	
 	protected void handleMoveStart(Board board2, Piece turn2) {
-		//TODO implementar
 	}
 
 	@Override
@@ -277,7 +278,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	}
 	
 	protected void handleMoveEnd(Board board2, Piece turn2, boolean success) {
-		//TODO implementar
+		
 	}
 
 	@Override
@@ -293,9 +294,11 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		
 		if(this.localPiece != null){
 			if(this.turn.getId().equalsIgnoreCase(this.localPiece.getId())){
-				enableView();
+				System.out.println("Activa ventana " + this.localPiece.getId());
+				activateBoard();
 			}else{
-				disableView();
+				System.out.println("Desactiva ventana " + this.localPiece.getId());
+				deActivateBoard();
 			}
 		}
 		
@@ -319,13 +322,20 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	protected abstract void deActivateBoard();
 	protected abstract void redrawBoard();
 	
-
+	final protected Piece getLocalPiece() { 
+		return localPiece; 
+	}
+	
 	final protected Board getBoard() { 
 		return board; 
 	}
 	
 	final protected Piece getTurn() { 
 		return turn; 
+	}
+	
+	final protected Piece getPiece(int x, int y) { 
+		return board.getPosition(x, y); 
 	}
 	
 	final protected Color getPieceColor(Piece p) { 
@@ -462,11 +472,11 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		automaticMovesPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Automatic Moves"));
 		randomAutomaticMovesButton = new JButton("Random");
 		randomAutomaticMovesButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {ctrl.makeMove(ramdomPlayer);}
+			public void actionPerformed(ActionEvent e) {move(ramdomPlayer);}
 		});
 		inteligenteAutomaticMovesButton = new JButton("Intelligent");
 		inteligenteAutomaticMovesButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){ ctrl.makeMove(aiPlayer);}
+			public void actionPerformed(ActionEvent e){ move(aiPlayer);}
 		});
 		automaticMovesPanel.add(randomAutomaticMovesButton);
 		automaticMovesPanel.add(inteligenteAutomaticMovesButton);

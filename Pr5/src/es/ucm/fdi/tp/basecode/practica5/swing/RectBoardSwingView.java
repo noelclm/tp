@@ -2,6 +2,7 @@ package es.ucm.fdi.tp.basecode.practica5.swing;
 
 import java.awt.Color;
 
+import es.ucm.fdi.tp.basecode.bgame.Utils;
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
 import es.ucm.fdi.tp.basecode.bgame.control.Player;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
@@ -34,20 +35,24 @@ public abstract class RectBoardSwingView extends SwingView {
 			protected void mouseClicked(int row, int col, int mouseButton) {
 				handleMouseClick(row,col,mouseButton);
 			}
+			
 			@Override
 			protected Color getPieceColor(Piece p) {
-				if(p.getId().equalsIgnoreCase("*"))
-					return RectBoardSwingView.this.getPieceColor(p); // TODO poner color para obstaculo
-				return RectBoardSwingView.this.getPieceColor(p);
-				// get the color from the colours table, and if not
-				// available (e.g., for obstacles) set it to have a color
-			};
+				
+				if(RectBoardSwingView.this.getPieceColor(p) == null)
+					return Color.BLACK; 
+				else
+					return RectBoardSwingView.this.getPieceColor(p);
+				
+			}
+			
 			@Override
 			protected boolean isPlayerPiece(Piece p) {
+				// return true if p is a player piece, false if not (e.g, an obstacle)
 				if(p.getId().equalsIgnoreCase("*"))
 					return false;
 				return true;
-				// return true if p is a player piece, false if not (e.g, an obstacle)
+				
 			};
 			
 		};

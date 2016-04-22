@@ -29,19 +29,42 @@ public class AtaxxSwingView extends RectBoardSwingView {
 
 	@Override
 	protected void handleMouseClick(int row, int col, int mouseButton) {
-	 // do nothing if the board is not active	
-		if(count == 0){
-			rowI = row;
-			colI = col;
-			count++;
+	 // do nothing if the board is not active
+		if(getLocalPiece() != null){ // Si esta el modo multiventana
+			if(getLocalPiece().getId().equalsIgnoreCase(getTurn().getId())){ // Si es el turno del jugador
+				if(count == 0){ // Si es la primera vez que pincha
+					if(getPiece(row, col) != null && getTurn().getId().equalsIgnoreCase(getPiece(row, col).getId())){
+						rowI = row;
+						colI = col;
+						count++;
+					}else{
+						addStatusMessages("It's not your piece.");
+					}
+				}else{ // Si es la segunda vez
+					count = 0;
+					player.setMoveValue(rowI, colI, row, col);
+				    decideMakeManualMove(player);
+				    this.redrawBoard();
+				}
+			}else{ // Si no es el turno
+				addStatusMessages("Out of turn.");
+			}
 		}else{
-	    	count = 0;
-			player.setMoveValue(rowI, colI, row, col);
-		    decideMakeManualMove(player);
-		    this.redrawBoard();
-			
+			if(count == 0){
+				if(getPiece(row, col) != null && getTurn().getId().equalsIgnoreCase(getPiece(row, col).getId())){
+					rowI = row;
+					colI = col;
+					count++;
+				}else{
+					addStatusMessages("It's not your piece.");
+				}
+			}else{
+		    	count = 0;
+				player.setMoveValue(rowI, colI, row, col);
+			    decideMakeManualMove(player);
+			    this.redrawBoard();
+			}
 		}
-		
 	}
 
 	private void decideMakeManualMove(AtaxxSwingPlayer player2) {
@@ -60,7 +83,6 @@ public class AtaxxSwingView extends RectBoardSwingView {
 	@Override
 	protected void deActivateBoard() {
 		// declare the board inactive, so handleMouseClick rejects moves
-    	count = 0;
 		this.disableView();
 	}
 }
