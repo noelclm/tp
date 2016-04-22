@@ -233,11 +233,8 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		
 		disableView();
 		handleChangeTurn(board,turn);
-		if(this.localPiece != null){
-		    this.setTitle(gameDesc + " Player: " + localPiece.getId());
-		}else{
-			this.setTitle(gameDesc);
-		}
+		this.setTitle("Board Games: " + gameDesc + (localPiece == null ?
+				"" : " (" + localPiece + ")"));
 		
 		this.redrawBoard();
 		playerInformationTable.refresh();
