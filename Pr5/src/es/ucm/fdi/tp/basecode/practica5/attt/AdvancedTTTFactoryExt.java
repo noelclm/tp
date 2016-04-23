@@ -26,8 +26,7 @@ public class AdvancedTTTFactoryExt  extends AdvancedTTTFactory{
 			
 			@Override
 			public void run() {
-				GameObserver o = new AdvancedTTTSwingView(g, c, viewPiece, random, ai);
-				g.addObserver(o);
+				new AdvancedTTTSwingView(g, c, viewPiece, random, ai);
 			}
 			
 		});

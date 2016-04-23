@@ -301,11 +301,10 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		
 		this.redrawBoard();
 		addStatusMessages("Turn for " + turn);
-		
-		if(playerTypes.get(this.turn).equals(PlayerMode.AI)){
+		if(this.playerTypes.get(this.turn) != null && this.playerTypes.get(this.turn).equals(PlayerMode.AI)){
 			move(aiPlayer);
 		}
-		if(playerTypes.get(this.turn).equals(PlayerMode.RANDOM)){
+		if(this.playerTypes.get(this.turn) != null && this.playerTypes.get(this.turn).equals(PlayerMode.RANDOM)){
 			move(ramdomPlayer);
 		}	
 		
