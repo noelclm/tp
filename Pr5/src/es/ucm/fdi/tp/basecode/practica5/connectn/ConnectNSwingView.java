@@ -27,9 +27,36 @@ public class ConnectNSwingView extends RectBoardSwingView {
 
 	@Override
 	protected void handleMouseClick(int row, int col, int mouseButton) {
-		player.setMoveValue(row, col);
-	    decideMakeManualMove(player);
-	    this.redrawBoard();
+		
+		if(getInPlay()){
+			
+			if(getLocalPiece() != null){ // Si esta el modo multiventana
+				
+				if(getLocalPiece().getId().equalsIgnoreCase(getTurn().getId())){
+					if(getPiece(row, col) != null){
+						addStatusMessages("(" + row + "," + col + ") is already occupied!");
+					}else{
+						player.setMoveValue(row, col);
+					    decideMakeManualMove(player);
+					    this.redrawBoard();
+					}
+				}else{ // Si no es el turno
+					addStatusMessages("Out of turn.");
+				}
+				
+			}else{ // Si esta el modo una ventana
+				
+				if(getPiece(row, col) != null){
+					addStatusMessages("(" + row + "," + col + ") is already occupied!");
+				}else{
+					player.setMoveValue(row, col);
+				    decideMakeManualMove(player);
+				    this.redrawBoard();
+				}
+				
+			}
+		}
+		
 	}
 
 	private void decideMakeManualMove(ConnectNSwingPlayer player2) {

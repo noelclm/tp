@@ -194,7 +194,6 @@ public class AtaxxRules implements GameRules {
 
 	@Override
 	public double evaluate(Board board, List<Piece> pieces, Piece turn, Piece p) {
-		// TODO En el resto esta relleno por lo que habra que hacerlo
 		return 0;
 	}
 

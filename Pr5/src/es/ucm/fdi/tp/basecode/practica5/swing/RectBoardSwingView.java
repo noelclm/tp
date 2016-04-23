@@ -65,21 +65,5 @@ public abstract class RectBoardSwingView extends SwingView {
 	}
 	
 	protected abstract void handleMouseClick(int row, int col, int mouseButton);
-	
-	@Override
-	protected void activateBoard() {
-		// - declare the board active, so handleMouseClick accepts moves
-		// - add corresponding message to the status messages indicating
-		//   what to do for making a move, etc.
-		boardComp.setEnabled(true);
-		this.enableView();
-	}
-
-	@Override
-	protected void deActivateBoard() {
-		// declare the board inactive, so handleMouseClick rejects moves
-		boardComp.setEnabled(false);
-		this.disableView();
-	}
 
 }

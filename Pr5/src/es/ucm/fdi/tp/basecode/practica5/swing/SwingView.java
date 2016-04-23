@@ -255,7 +255,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		if (state == State.Won) {
 			addStatusMessages("Winner: " + winner);
 		}
-
+		inPlay = false;
 		deActivateBoard();
 	}
 
@@ -301,6 +301,14 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		
 		this.redrawBoard();
 		addStatusMessages("Turn for " + turn);
+		
+		if(playerTypes.get(this.turn).equals(PlayerMode.AI)){
+			move(aiPlayer);
+		}
+		if(playerTypes.get(this.turn).equals(PlayerMode.RANDOM)){
+			move(ramdomPlayer);
+		}	
+		
 	}
 
 	@Override
@@ -329,6 +337,10 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	
 	final protected Piece getTurn() { 
 		return turn; 
+	}
+	
+	final protected boolean getInPlay() { 
+		return inPlay; 
 	}
 	
 	final protected Piece getPiece(int x, int y) { 
@@ -462,6 +474,15 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		PlayerMode pm = (PlayerMode) typeModesCombo.getSelectedItem();
 		playerTypes.put(p,pm);
 		playerInformationTable.refresh();
+		
+		if(p.getId().equalsIgnoreCase(turn.getId())){
+			if(playerTypes.get(this.turn).equals(PlayerMode.RANDOM)){
+				move(ramdomPlayer);
+			}
+			if(playerTypes.get(this.turn).equals(PlayerMode.AI)){
+				move(aiPlayer);
+			}
+		}
 	}
 	
 	private void AutomaticMovesPanel() {
@@ -473,7 +494,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		});
 		inteligenteAutomaticMovesButton = new JButton("Intelligent");
 		inteligenteAutomaticMovesButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){ move(aiPlayer);}
+			public void actionPerformed(ActionEvent e){move(aiPlayer);}
 		});
 		automaticMovesPanel.add(randomAutomaticMovesButton);
 		automaticMovesPanel.add(inteligenteAutomaticMovesButton);
