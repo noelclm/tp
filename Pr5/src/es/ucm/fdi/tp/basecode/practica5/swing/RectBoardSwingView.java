@@ -49,6 +49,7 @@ public abstract class RectBoardSwingView extends SwingView {
 			@Override
 			protected boolean isPlayerPiece(Piece p) {
 				// return true if p is a player piece, false if not (e.g, an obstacle)
+				System.out.println(getPieces());
 				if(p.getId().equalsIgnoreCase("*"))
 					return false;
 				return true;
