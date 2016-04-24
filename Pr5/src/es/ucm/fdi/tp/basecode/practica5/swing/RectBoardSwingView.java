@@ -24,6 +24,7 @@ public abstract class RectBoardSwingView extends SwingView {
 	
 	@Override
 	protected void initBoardGui() {
+		
 		boardComp = new BoardComponent(){
 			
 			/**
@@ -56,6 +57,7 @@ public abstract class RectBoardSwingView extends SwingView {
 			
 		};
 		setBoardArea(boardComp); // Pone el tablero en la vista
+		
 	}
 	
 	
