@@ -28,15 +28,34 @@ public class AdvancedTTTSwingView extends RectBoardSwingView {
 
 	@Override
 	protected void handleMouseClick(int row, int col, int mouseButton) {
-		if(count == 0){
-			rowI = row;
-			colI = col;
-			count++;
-		}else{
-	    	count = 0;
-			player.setMoveValue(rowI, colI, row, col);
-		    decideMakeManualMove(player);
-		    this.redrawBoard();
+		if(getInPlay()){
+			if(getLocalPiece() != null){ // Si esta el modo multiventana
+				if(getLocalPiece().getId().equalsIgnoreCase(getTurn().getId())){ // Si es el turno del jugador
+					if(count == 0){
+						rowI = row;
+						colI = col;
+						count++;
+					}else{
+				    	count = 0;
+						player.setMoveValue(rowI, colI, row, col);
+					    decideMakeManualMove(player);
+					    this.redrawBoard();
+					}
+				}else{ // Si no es el turno
+					addStatusMessages("Out of turn.");
+				}
+			}else{ // Si esta el modo una ventana
+				if(count == 0){
+					rowI = row;
+					colI = col;
+					count++;
+				}else{
+			    	count = 0;
+					player.setMoveValue(rowI, colI, row, col);
+				    decideMakeManualMove(player);
+				    this.redrawBoard();
+				}
+			}
 		}
 	}
 

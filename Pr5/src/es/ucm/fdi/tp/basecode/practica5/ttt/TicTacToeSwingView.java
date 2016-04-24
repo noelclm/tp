@@ -31,7 +31,7 @@ public class TicTacToeSwingView extends RectBoardSwingView{
 	}
 
 	private void decideMakeManualMove(TicTacToeSwingPlayer player2) {
-		this.move(player2);
+		//this.move(player2);
 	}
 
 	@Override
