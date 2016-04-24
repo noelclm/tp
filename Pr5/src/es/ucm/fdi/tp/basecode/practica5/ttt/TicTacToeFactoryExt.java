@@ -9,6 +9,17 @@ import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.ttt.TicTacToeFactory;
 
+/**
+ * A Factory for Tic-Tac-Toe. It basically the same as the of ConnectN. Except
+ * that it uses a different console player, creates different rules, and is
+ * restricted to two players only.
+ * 
+ * <p>
+ * Factoría del juego Tic-Tac-Toe (3 en raya). Es fundamentalmente el mismo
+ * juego que ConnectN, excepto que utiliza un jugador de modo consola diferente
+ * y crea reglas diferentes.
+ * 
+ */
 public class TicTacToeFactoryExt extends TicTacToeFactory{
 	
 	/**
@@ -16,6 +27,9 @@ public class TicTacToeFactoryExt extends TicTacToeFactory{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructor por defecto.
+	 */
 	public TicTacToeFactoryExt() {
 		super();
 	}

@@ -17,7 +17,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * 
+ * Clase que elige el color.
+ *
+ */
 public class ColorChooser extends JDialog {
 
 	/**
@@ -27,6 +31,12 @@ public class ColorChooser extends JDialog {
 	JColorChooser colorChooser;
 	Color color;
 
+	/**
+	 * Constructor parametrizado.
+	 * @param parent ventana.
+	 * @param title titulo.
+	 * @param initColor color inicial.
+	 */
 	public ColorChooser(JFrame parent, String title, Color initColor) {
 		super(parent, title);
 		setModalityType(DEFAULT_MODALITY_TYPE);
@@ -64,6 +74,9 @@ public class ColorChooser extends JDialog {
 		setVisible(true);
 	}
 
+	/**
+	 * Cierre de la ventana.
+	 */
 	private void closeDialog() {
 		setVisible(false);
 		dispose();
@@ -72,6 +85,8 @@ public class ColorChooser extends JDialog {
 	// override the createRootPane inherited by the JDialog, to create the
 	// rootPane.
 	// create functionality to close the window when "Escape" button is pressed
+	
+
 	public JRootPane createRootPane() {
 		JRootPane rootPane = new JRootPane();
 		KeyStroke stroke = KeyStroke.getKeyStroke("ESCAPE");
@@ -88,6 +103,10 @@ public class ColorChooser extends JDialog {
 		return rootPane;
 	}
 
+	/**
+	 * Devuelve un color.
+	 * @return Color.
+	 */
 	public Color getColor() {
 		return color;
 	}

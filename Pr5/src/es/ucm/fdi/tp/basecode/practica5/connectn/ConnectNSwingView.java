@@ -8,7 +8,11 @@ import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.practica5.swing.RectBoardSwingView;
 
 
-
+/**
+ * 
+ * Vista para el connectN.
+ *
+ */
 public class ConnectNSwingView extends RectBoardSwingView {
 
 	/**
@@ -16,7 +20,14 @@ public class ConnectNSwingView extends RectBoardSwingView {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ConnectNSwingPlayer player;
-
+	/**
+	 * Constructor parametrizado.
+	 * @param g observable
+	 * @param c controller
+	 * @param localPiece pieza de la multiventana
+	 * @param randomPlayer jugador ramdon
+	 * @param autoPlayer jugador IA.
+	 */
 	public ConnectNSwingView(Observable<GameObserver> g, Controller c, Piece localPiece, Player randomPlayer,
 			Player autoPlayer) {
 		
@@ -59,6 +70,10 @@ public class ConnectNSwingView extends RectBoardSwingView {
 		
 	}
 
+	/**
+	 * Hace el movimiento manual del jugador.
+	 * @param player2 jugador.
+	 */
 	private void decideMakeManualMove(ConnectNSwingPlayer player2) {
 		this.move(player2);
 	}

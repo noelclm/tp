@@ -8,6 +8,11 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameMove;
 import es.ucm.fdi.tp.basecode.bgame.model.GameRules;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 
+/**
+ * 
+ * Jugador para ttt.
+ *
+ */
 public class TicTacToeSwingPlayer extends Player {
 
 	/**
@@ -17,6 +22,9 @@ public class TicTacToeSwingPlayer extends Player {
 	private int row;
 	private int col;
 
+	/**
+	 * Constructor por defecto.
+	 */
 	public TicTacToeSwingPlayer() {
 	}
 
@@ -25,11 +33,22 @@ public class TicTacToeSwingPlayer extends Player {
 		return createMove(row, col, p);
 	}
 
+	/**
+	 * Guarda las coordenadas al jugador.
+	 * @param row coordenada de fila final.
+	 * @param col coordenada de columna final.
+	 */
 	public void setMoveValue(int row, int col) {
 		this.row = row;
 		this.col = col;
 	}
-	
+	/**
+	 * Crea un movimiento.
+	 * @param row coordenada de fila final.
+	 * @param col coordenada de columna final.
+	 * @param p pieza del jugador.
+	 * @return null.
+	 */
 	protected GameMove createMove(int row, int col, Piece p) {
 		return null;//new TicTacToeMove(row, col, p);
 	}

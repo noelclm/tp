@@ -6,7 +6,11 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.practica5.swing.RectBoardSwingView;
-
+/**
+ * 
+ * Vista para el connectN.
+ *
+ */
 public class TicTacToeSwingView extends RectBoardSwingView{
 	
 	/**
@@ -15,6 +19,14 @@ public class TicTacToeSwingView extends RectBoardSwingView{
 	private static final long serialVersionUID = 1L;
 	private TicTacToeSwingPlayer player;
 
+	/**
+	 * Constructor parametrizado.
+	 * @param g observable
+	 * @param c controller
+	 * @param localPiece pieza de la multiventana
+	 * @param randomPlayer jugador ramdon
+	 * @param autoPlayer jugador IA.
+	 */
 	public TicTacToeSwingView(Observable<GameObserver> g, Controller c, Piece localPiece, Player randomPlayer,
 			Player autoPlayer) {
 		
@@ -30,6 +42,10 @@ public class TicTacToeSwingView extends RectBoardSwingView{
 	    this.redrawBoard();
 	}
 
+	/**
+	 * Hace el movimiento manual del jugador.
+	 * @param player2 jugador.
+	 */
 	private void decideMakeManualMove(TicTacToeSwingPlayer player2) {
 		//this.move(player2);
 	}

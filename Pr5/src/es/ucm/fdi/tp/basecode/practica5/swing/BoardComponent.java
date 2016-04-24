@@ -10,7 +10,11 @@ import javax.swing.JPanel;
 
 import es.ucm.fdi.tp.basecode.bgame.model.Board;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
-
+/**
+ * 
+ * Clase que contiene el tablero.
+ *
+ */
 public abstract class BoardComponent extends JPanel{
 
 	private static final long serialVersionUID = 1L;
@@ -21,23 +25,45 @@ public abstract class BoardComponent extends JPanel{
 	private int rows;
 	private int cols;
 	
-
+	/**
+	 * Devuelve el color de la pieza.
+	 * @param p pieza del jugador.
+	 * @return Color.
+	 */
 	protected abstract Color getPieceColor(Piece p);
+	/**
+	 * Devuelve si es una pieza.
+	 * @param p pieza del jugador.
+	 * @return boolean.
+	 */
 	protected abstract boolean isPlayerPiece(Piece p);
+	/**
+	 * Accion de cuando pinchas el raton.
+	 * @param row coordenada de la fila.
+	 * @param col coordenadad de la columna.
+	 * @param mouseButton boton del raton.
+	 */
 	protected abstract void mouseClicked(int row, int col, int mouseButton);
 	
-	
+	/**
+	 * Repinta el tablaro.
+	 * @param b tablero.
+	 */
 	public void redraw(Board b){
 		this.board = b;
 		this.cols = b.getCols();
 		this.rows = b.getRows();
 		repaint();
 	}
-
+	/**
+	 * Constructor por defecto.
+	 */
 	public BoardComponent() {
 		initGUI();
 	}
-
+	/**
+	 * Inicia el tablero del entorno grafico.
+	 */
 	private void initGUI() {
 
 		addMouseListener(new MouseAdapter() {
@@ -63,6 +89,9 @@ public abstract class BoardComponent extends JPanel{
 		repaint();
 	}
 
+	/**
+	 * Pinta los componentes del tablero.
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if ( board == null ) {
@@ -75,7 +104,12 @@ public abstract class BoardComponent extends JPanel{
 			for (int j = 0; j < cols; j++)
 				drawCell(i, j, g);
 	}
-
+	/**
+	 * Pinta las celdas.
+	 * @param row coordenada de la fila.
+	 * @param col coordenada de la columna.
+	 * @param g  grafico.
+	 */
 	private void drawCell(int row, int col, Graphics g) {
 		int x = col * _CELL_WIDTH;
 		int y = row * _CELL_HEIGHT;

@@ -7,7 +7,11 @@ import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.practica5.ataxx.AtaxxSwingPlayer;
 import es.ucm.fdi.tp.basecode.practica5.swing.RectBoardSwingView;
-
+/**
+ * 
+ * Vista para el ataxx.
+ *
+ */
 public class AtaxxSwingView extends RectBoardSwingView {
 	
 	/**
@@ -18,7 +22,14 @@ public class AtaxxSwingView extends RectBoardSwingView {
 	private int count = 0;
 	private int rowI;
 	private int colI;
-
+	/**
+	 * Constructor parametrizado.
+	 * @param g observable
+	 * @param c controller
+	 * @param localPiece pieza de la multiventana
+	 * @param randomPlayer jugador ramdon
+	 * @param autoPlayer jugador IA.
+	 */
 	public AtaxxSwingView(Observable<GameObserver> g, Controller c, Piece localPiece, Player randomPlayer,
 			Player autoPlayer) {
 		
@@ -76,7 +87,10 @@ public class AtaxxSwingView extends RectBoardSwingView {
 			}
 		}
 	}
-
+	/**
+	 * Hace el movimiento manual del jugador.
+	 * @param player2 jugador.
+	 */
 	private void decideMakeManualMove(AtaxxSwingPlayer player2) {
 		this.move(player2);
 	}
