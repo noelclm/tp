@@ -1,13 +1,7 @@
 package es.ucm.fdi.tp.basecode.attt;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import es.ucm.fdi.tp.basecode.bgame.control.ConsolePlayer;
 import es.ucm.fdi.tp.basecode.bgame.control.Player;
-import es.ucm.fdi.tp.basecode.bgame.model.GameMove;
 import es.ucm.fdi.tp.basecode.bgame.model.GameRules;
-import es.ucm.fdi.tp.basecode.connectn.ConnectNMove;
 import es.ucm.fdi.tp.basecode.ttt.TicTacToeFactory;
 
 /**
@@ -29,15 +23,6 @@ public class AdvancedTTTFactory extends TicTacToeFactory {
 	public GameRules gameRules() {
 		return new AdvancedTTTRules();
 	}
-
-	/*
-	@Override
-	public Player createConsolePlayer() {
-		ArrayList<GameMove> possibleMoves = new ArrayList<GameMove>();
-		possibleMoves.add(new AdvancedTTTMove());
-		return new ConsolePlayer(new Scanner(System.in), possibleMoves);
-	}
-   */
 	
 	@Override
 	public Player createRandomPlayer() {
