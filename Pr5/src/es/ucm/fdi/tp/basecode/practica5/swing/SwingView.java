@@ -293,8 +293,12 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		
 		if(this.localPiece != null){
 			if(this.turn.getId().equalsIgnoreCase(this.localPiece.getId())){
+				randomAutomaticMovesButton.setEnabled(true);
+				inteligenteAutomaticMovesButton.setEnabled(true);
 				activateBoard();
 			}else{
+				randomAutomaticMovesButton.setEnabled(false);
+				inteligenteAutomaticMovesButton.setEnabled(false);
 				deActivateBoard();
 			}
 		}
