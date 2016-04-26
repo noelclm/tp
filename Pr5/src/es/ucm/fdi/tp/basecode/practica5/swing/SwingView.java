@@ -134,7 +134,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 			
 			@Override
 			public void run() {
-				game.addObserver(SwingView.this);
+				game.addObserver(SwingView.this);//se registra
 			}
 			
 		});
@@ -292,6 +292,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 
 	@Override
 	public void onMoveStart(Board board, Piece turn) {
+		//TODO deshablitar los botones mientras movimiento
 	}
 
 	@Override
@@ -466,7 +467,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	 * @param player jugador.
 	 */
 	protected void move(Player player) {
-		ctrl.makeMove(player);
+		ctrl.makeMove(player);//TODO con invokelater
 		playerInformationTable.refresh();
 	}
 	

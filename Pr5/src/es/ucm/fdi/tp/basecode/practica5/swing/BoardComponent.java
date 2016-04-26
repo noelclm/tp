@@ -53,7 +53,7 @@ public abstract class BoardComponent extends JPanel{
 		this.board = b;
 		this.cols = b.getCols();
 		this.rows = b.getRows();
-		repaint();
+		repaint();//TODO con invokelater
 	}
 	/**
 	 * Constructor por defecto.

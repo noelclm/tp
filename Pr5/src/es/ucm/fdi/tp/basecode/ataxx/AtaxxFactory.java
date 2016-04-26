@@ -95,11 +95,13 @@ public class AtaxxFactory implements GameFactory {
 
 	@Override
 	public Player createRandomPlayer() {
-		return new AtaxxRandomPlayer();
+		// TODO con if...que no carge el boton return new AtaxxRandomPlayer();
+		return null;
 	}
 
 	@Override
 	public Player createAIPlayer(AIAlgorithm alg) {
+		//TODO que no carge el boton
 		return new DummyAIPlayer(createRandomPlayer(), 1000);
 	}
 
