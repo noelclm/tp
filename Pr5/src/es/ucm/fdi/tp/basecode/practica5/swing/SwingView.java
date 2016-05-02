@@ -52,7 +52,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	 *
 	 */
 	public enum PlayerMode {
-		MANUAL("Manual"), RANDOM("Random"), AI("Intelligent");
+		MANUAL("Manual"), RANDOM("Random"), AI("Automatics");
 
 		private String desc;
 
@@ -102,7 +102,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	
 	private JPanel automaticMovesPanel;
 	private JButton randomAutomaticMovesButton;
-	private JButton intelligentAutomaticMovesButton;
+	private JButton inteligenteAutomaticMovesButton;
 	
 	private JPanel quitRestarPanel;
 	private JButton quitButton;
@@ -317,16 +317,12 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		
 		if(this.localPiece != null){
 			if(this.turn.getId().equalsIgnoreCase(this.localPiece.getId())){
-				if(ramdomPlayer != null)
-					randomAutomaticMovesButton.setEnabled(true);
-				if(aiPlayer != null)
-					intelligentAutomaticMovesButton.setEnabled(true);
+				randomAutomaticMovesButton.setEnabled(true);
+				inteligenteAutomaticMovesButton.setEnabled(true);
 				activateBoard();
 			}else{
-				if(ramdomPlayer != null)
-					randomAutomaticMovesButton.setEnabled(false);
-				if(aiPlayer != null)
-					intelligentAutomaticMovesButton.setEnabled(false);
+				randomAutomaticMovesButton.setEnabled(false);
+				inteligenteAutomaticMovesButton.setEnabled(false);
 				deActivateBoard();
 			}
 		}
@@ -471,18 +467,8 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	 * @param player jugador.
 	 */
 	protected void move(Player player) {
-		
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				ctrl.makeMove(player);
-			}
-			
-		});
-		
+		ctrl.makeMove(player);//TODO con invokelater
 		playerInformationTable.refresh();
-		
 	}
 	
 	// --------------------------------------------------------------------------------
@@ -579,13 +565,8 @@ public abstract class SwingView extends JFrame implements GameObserver {
 			public void actionPerformed(ActionEvent e){ set();}
 		});
 		this.typeModesCombo.addItem(PlayerMode.MANUAL);
-		
-		if(ramdomPlayer != null)
-			this.typeModesCombo.addItem(PlayerMode.RANDOM);
-		
-		if(aiPlayer != null)
-			this.typeModesCombo.addItem(PlayerMode.AI);
-		
+		this.typeModesCombo.addItem(PlayerMode.RANDOM);
+		this.typeModesCombo.addItem(PlayerMode.AI);
 		playerModesPanel.add(playerModesCombo);
 		playerModesPanel.add(typeModesCombo);
 		
@@ -616,28 +597,19 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	 * Crea el panel de los movimientos automaticos.
 	 */
 	private void AutomaticMovesPanel() {
-		if(ramdomPlayer != null || aiPlayer != null){
-			automaticMovesPanel = new JPanel();
-			automaticMovesPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Automatic Moves"));
-			
-			if(ramdomPlayer != null){
-				randomAutomaticMovesButton = new JButton("Random");
-				randomAutomaticMovesButton.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e) {move(ramdomPlayer);}
-				});
-				automaticMovesPanel.add(randomAutomaticMovesButton);
-			}
-			
-			if(aiPlayer != null){
-				intelligentAutomaticMovesButton = new JButton("Intelligent");
-				intelligentAutomaticMovesButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e){move(aiPlayer);}
-				});
-				automaticMovesPanel.add(intelligentAutomaticMovesButton);
-			}
-			
-			rigthPanel.add(automaticMovesPanel);
-		}
+		automaticMovesPanel = new JPanel();
+		automaticMovesPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Automatic Moves"));
+		randomAutomaticMovesButton = new JButton("Random");
+		randomAutomaticMovesButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {move(ramdomPlayer);}
+		});
+		inteligenteAutomaticMovesButton = new JButton("Intelligent");
+		inteligenteAutomaticMovesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){move(aiPlayer);}
+		});
+		automaticMovesPanel.add(randomAutomaticMovesButton);
+		automaticMovesPanel.add(inteligenteAutomaticMovesButton);
+		rigthPanel.add(automaticMovesPanel);
 	}
 	
 	/**

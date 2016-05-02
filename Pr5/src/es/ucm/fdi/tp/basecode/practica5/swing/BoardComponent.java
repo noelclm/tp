@@ -7,7 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import es.ucm.fdi.tp.basecode.bgame.model.Board;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
@@ -51,20 +50,10 @@ public abstract class BoardComponent extends JPanel{
 	 * @param b tablero.
 	 */
 	public void redraw(Board b){
-		
 		this.board = b;
 		this.cols = b.getCols();
 		this.rows = b.getRows();
-		
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				repaint();
-			}
-			
-		});
-		
+		repaint();//TODO con invokelater
 	}
 	/**
 	 * Constructor por defecto.
