@@ -12,7 +12,6 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import es.ucm.fdi.tp.basecode.attt.AdvancedTTTFactory;
 import es.ucm.fdi.tp.basecode.bgame.control.ConsoleCtrl;
 import es.ucm.fdi.tp.basecode.bgame.control.ConsoleCtrlMVC;
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
@@ -22,14 +21,12 @@ import es.ucm.fdi.tp.basecode.bgame.model.AIAlgorithm;
 import es.ucm.fdi.tp.basecode.bgame.model.Game;
 import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
-import es.ucm.fdi.tp.basecode.connectn.ConnectNFactory;
 import es.ucm.fdi.tp.basecode.minmax.MinMax;
 import es.ucm.fdi.tp.basecode.practica5.ataxx.AtaxxFactoryExt;
 import es.ucm.fdi.tp.basecode.practica5.attt.AdvancedTTTFactoryExt;
 import es.ucm.fdi.tp.basecode.practica5.connectn.ConnectNFactoryExt;
 import es.ucm.fdi.tp.basecode.practica5.ttt.TicTacToeFactoryExt;
 import es.ucm.fdi.tp.basecode.practica6.GameServer;
-import es.ucm.fdi.tp.basecode.ttt.TicTacToeFactory;
 
 /**
  * This is the class with the main method for the board games application.
@@ -295,7 +292,15 @@ public class Main {
 	 */
 	private static ViewInfo view;
 	
-	// TODO javadoc
+	/**
+	 * The mode to use. Depending on the selected mode using the -am option or
+	 * the default value {@link #DEFAULT_APLICATIONMODE} if this option was not provided.
+	 * 
+	 * <p>
+	 * Modo a utilizar. Dependiendo del modo seleccionado con la opcion -am o
+	 * el valor por defecto {@link #DEFAULT_APLICATIONMODE} si el argumento -am no se
+	 * proporciona.
+	 */
 	private static AplicationMode aplicationMode;
 
 	/**
@@ -875,13 +880,36 @@ public class Main {
 		
 	}
 	
-	// TODO javadoc
+	/**
+	 * Builds the port (-sp or --server-port) CLI option.
+	 * 
+	 * <p>
+	 * Construye la opcion CLI -sp.
+	 * 
+	 * @return CLI {@link {@link Option} for the port.
+	 *         <p>
+	 *         Objeto {@link Option} de esta opcion.
+	 */
 	private static Option constructPortOptions() {
 		return new Option("sp", "server-port", true,
 				"Port to conect");
 	}
 	
-	// TODO javadoc
+	/**
+	 * Parses the port option (-sp or --server-port). It sets the value of
+	 * {@link #serverPort} accordingly. 
+	 * 
+	 * <p>
+	 * Extrae la opcion port (-sp). Asigna el valor de los atributos
+	 * {@link #serverPort}. 
+	 * 
+	 * @param line
+	 *            CLI {@link CommandLine} object.
+	 * @throws ParseException
+	 *             If an invalid value is provided.
+	 *             <p>
+	 *             Si se proporciona un valor invalido.
+	 */
 	private static void parsePortOptions(CommandLine line) throws ParseException {
 		String portVal = line.getOptionValue("sp", DEFAULT_SERVERPORT.toString());
 		
@@ -897,13 +925,36 @@ public class Main {
 		
 	}
 	
-	// TODO javadoc
+	/**
+	 * Builds the mode (-am or --app-mode) CLI option.
+	 * 
+	 * <p>
+	 * Construye la opcion CLI -o.
+	 * 
+	 * @return CLI {@link {@link Option} for the mode.
+	 *         <p>
+	 *         Objeto {@link Option} de esta opcion.
+	 */
 	private static Option constructModeOptions() {
 		return new Option("am", "app-mode", true,
 				"Aplication mode");
 	}
 	
-	// TODO javadoc
+	/**
+	 * Parses the mode option (-am or --app-mode). It sets the value of
+	 * {@link #aplicationMode} accordingly. 
+	 * 
+	 * <p>
+	 * Extrae la opcion modo (-am). Asigna el valor de los atributos
+	 * {@link #aplicationMode}. 
+	 * 
+	 * @param line
+	 *            CLI {@link CommandLine} object.
+	 * @throws ParseException
+	 *             If an invalid value is provided.
+	 *             <p>
+	 *             Si se proporciona un valor invalido.
+	 */
 	private static void parseModeOptions(CommandLine line) throws ParseException {
 		String modeVal = line.getOptionValue("am", DEFAULT_APLICATIONMODE.getId());
 		AplicationMode selectedMode = null;
@@ -922,13 +973,36 @@ public class Main {
 		}
 	}
 	
-	// TODO javadoc
+	/**
+	 * Builds the host (-o or --obstacles) CLI option.
+	 * 
+	 * <p>
+	 * Construye la opcion CLI -o.
+	 * 
+	 * @return CLI {@link {@link Option} for the host.
+	 *         <p>
+	 *         Objeto {@link Option} de esta opcion.
+	 */
 	private static Option constructHostOptions() {
 		return new Option("sh", "server-host", true,
 				"Server Host");
 	}
 	
-	// TODO javadoc
+	/**
+	 * Parses the host option (-sh or --server-host). It sets the value of
+	 * {@link #serverHost} accordingly. 
+	 * 
+	 * <p>
+	 * Extrae la opcion modo (-am). Asigna el valor de los atributos
+	 * {@link #serverHost}. 
+	 * 
+	 * @param line
+	 *            CLI {@link CommandLine} object.
+	 * @throws ParseException
+	 *             If an invalid value is provided.
+	 *             <p>
+	 *             Si se proporciona un valor invalido.
+	 */
 	private static void parseHostOptions(CommandLine line) throws ParseException {
 		serverHost = line.getOptionValue("sh", DEFAULT_SERVERHOST);
 	}
@@ -1074,13 +1148,29 @@ public class Main {
 		c.start();
 	}
 	
-	// TODO JavaDoc
-		private static void startServer() {
-			GameServer c = new GameServer(gameFactory, pieces, serverPort);
-			c.start();
-		}
+	/**
+	 * Starts a server. Should be called after {@link #parseArgs(String[])} so
+	 * some fields are set to their appropriate values.
+	 * 
+	 * <p>
+	 * Inicia un servidor. Debe llamarse despues de {@link #parseArgs(String[])}
+	 * para que los atributos tengan los valores correctos.
+	 * 
+	 */
+	private static void startServer() {
+		GameServer c = new GameServer(gameFactory, pieces, serverPort);
+		c.start();
+	}
 		
-	// TODO Implemetar y JavaDoc
+	/**
+	 * Starts a client. Should be called after {@link #parseArgs(String[])} so
+	 * some fields are set to their appropriate values.
+	 * 
+	 * <p>
+	 * Inicia un cliente. Debe llamarse despues de {@link #parseArgs(String[])}
+	 * para que los atributos tengan los valores correctos.
+	 * 
+	 */
 	private static void startClient() {
 		/*try {
 			GameClient c = new GameClient(serverHost, serverPort);
