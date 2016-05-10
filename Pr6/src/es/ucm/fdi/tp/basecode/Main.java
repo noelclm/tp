@@ -26,6 +26,7 @@ import es.ucm.fdi.tp.basecode.practica5.ataxx.AtaxxFactoryExt;
 import es.ucm.fdi.tp.basecode.practica5.attt.AdvancedTTTFactoryExt;
 import es.ucm.fdi.tp.basecode.practica5.connectn.ConnectNFactoryExt;
 import es.ucm.fdi.tp.basecode.practica5.ttt.TicTacToeFactoryExt;
+import es.ucm.fdi.tp.basecode.practica6.GameClient;
 import es.ucm.fdi.tp.basecode.practica6.GameServer;
 
 /**
@@ -1172,14 +1173,15 @@ public class Main {
 	 * 
 	 */
 	private static void startClient() {
-		/*try {
+		try {
 			GameClient c = new GameClient(serverHost, serverPort);
 			gameFactory = c.getGameFactoty();
-			gameFactory.createSwingView(c, c, c.getPlayerPiece(), …);
+			// TODO Mirar crear la ventana del cliente
+			//gameFactory.createSwingView(c, c, c.getPlayerPiece(),gameFactory.createRandomPlayer(),gameFactory.createAIPlayer(aiPlayerAlg));
 			c.start();
 		} catch (Exception e) {
-			System.err.println(…);
-		}*/
+			System.err.println("");
+		}
 	}
 
 	/**

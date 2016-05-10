@@ -79,21 +79,27 @@ public class GameServer extends Controller implements GameObserver{
 	
 	@Override
 	public synchronized void stop() {
-		try { super.stop(player); } catch (GameError e) { }
+		// TODO implementar stop
+		//try { super.stop(player); } catch (GameError e) { }
 	}
 	
 	@Override
 	public synchronized void restart() {
-		try { super.restart(player); } catch (GameError e) { }
+		// TODO implementar restart
+		//try { super.restart(player); } catch (GameError e) { }
 	}
 	
 	@Override
 	public void start() {
-		// TODO implementar metodos
-		//controlGUI();
-		//startServer();
+		controlGUI();
+		startServer();
 	}
 	
+	private void startServer() {
+		// TODO implementar startServer
+		
+	}
+
 	private void controlGUI() {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
