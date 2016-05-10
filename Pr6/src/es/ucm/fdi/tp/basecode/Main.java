@@ -12,8 +12,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import es.ucm.fdi.tp.basecode.practica5.ataxx.AtaxxFactoryExt;
-import es.ucm.fdi.tp.basecode.practica5.attt.AdvancedTTTFactoryExt;
+import es.ucm.fdi.tp.basecode.attt.AdvancedTTTFactory;
 import es.ucm.fdi.tp.basecode.bgame.control.ConsoleCtrl;
 import es.ucm.fdi.tp.basecode.bgame.control.ConsoleCtrlMVC;
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
@@ -23,22 +22,28 @@ import es.ucm.fdi.tp.basecode.bgame.model.AIAlgorithm;
 import es.ucm.fdi.tp.basecode.bgame.model.Game;
 import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
+import es.ucm.fdi.tp.basecode.connectn.ConnectNFactory;
+import es.ucm.fdi.tp.basecode.minmax.MinMax;
+import es.ucm.fdi.tp.basecode.practica5.ataxx.AtaxxFactoryExt;
+import es.ucm.fdi.tp.basecode.practica5.attt.AdvancedTTTFactoryExt;
 import es.ucm.fdi.tp.basecode.practica5.connectn.ConnectNFactoryExt;
 import es.ucm.fdi.tp.basecode.practica5.ttt.TicTacToeFactoryExt;
+import es.ucm.fdi.tp.basecode.practica6.GameServer;
+import es.ucm.fdi.tp.basecode.ttt.TicTacToeFactory;
 
 /**
  * This is the class with the main method for the board games application.
  * 
  * It uses the Commons-CLI library for parsing command-line arguments: the game
- * to play, the players list, etc.. More information is available at
- * {@link https://commons.apache.org/proper/commons-cli/}
+ * to play, the players list, etc.. More information is available at the
+ * <a href="https://commons.apache.org/proper/commons-cli"/>commons-cli</a> page
  * 
  * <p>
  * Esta es la clase con el metodo main de inicio del programa. Se utiliza la
  * libreria Commons-CLI para leer argumentos de la linea de ordenes: el juego al
  * que se quiere jugar y la lista de jugadores. Puedes encontrar mas información
- * sobre esta libreria en {@link https://commons.apache.org/proper/commons-cli/}
- * .
+ * sobre esta libreria en la pagina de
+ * <a href="https://commons.apache.org/proper/commons-cli"/>commons-cli</a>
  */
 public class Main {
 
@@ -78,7 +83,8 @@ public class Main {
 	 * Juegos disponibles.
 	 */
 	enum GameInfo {
-		CONNECTN("cn", "ConnectN"), TicTacToe("ttt", "Tic-Tac-Toe"), AdvancedTicTacToe("attt", "Advanced Tic-Tac-Toe"),Ataxx("at","Ataxx");
+		
+		CONNECT_N("cn", "ConnectN"), TIC_TAC_TOE("ttt", "Tic-Tac-Toe"), ADVANCED_TIC_TAC_TOE("attt", "Advanced Tic-Tac-Toe"),Ataxx("at","Ataxx");
 
 		private String id;
 		private String desc;
@@ -132,6 +138,38 @@ public class Main {
 			return id;
 		}
 	}
+
+	/**
+	 * Algorithms for automatic players. The 'none' option means that the
+	 * default behavior is used (i.e., a player that waits for some time and
+	 * then generates a random move)
+	 * 
+	 */
+	private enum AlgorithmForAIPlayer {
+		NONE("none", "No AI Algorithm"), MINMAX("minmax", "MinMax"), MINMAXAB("minmaxab",
+				"MinMax with Alhpa-Beta Prunning");
+
+		private String id;
+		private String desc;
+
+		AlgorithmForAIPlayer(String id, String desc) {
+			this.id = id;
+			this.desc = desc;
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public String getDesc() {
+			return desc;
+		}
+
+		@Override
+		public String toString() {
+			return desc;
+		}
+	}
 	
 	/**
 	 * The possible game mode.
@@ -168,7 +206,7 @@ public class Main {
 	 * <p>
 	 * Juego por defecto.
 	 */
-	final private static GameInfo DEFAULT_GAME = GameInfo.CONNECTN;
+	final private static GameInfo DEFAULT_GAME = GameInfo.CONNECT_N;
 
 	/**
 	 * default view to use.
@@ -177,12 +215,39 @@ public class Main {
 	 */
 	final private static ViewInfo DEFAULT_VIEW = ViewInfo.CONSOLE;
 
+	
 	/**
 	 * Default player mode to use.
 	 * <p>
 	 * Modo de juego por defecto.
 	 */
 	final private static PlayerMode DEFAULT_PLAYERMODE = PlayerMode.MANUAL;
+	
+	/**
+	 * Default port to use.
+	 * <p>
+	 * Puerto por defecto.
+	 */
+	final private static Integer DEFAULT_SERVERPORT = 2000;
+	
+	/**
+	 * Default mode to use.
+	 * <p>
+	 * Modo por defecto.
+	 */
+	final private static AplicationMode DEFAULT_APLICATIONMODE = AplicationMode.NORMAL;
+	
+	/**
+	 * Default equip to use.
+	 * <p>
+	 * Equipo por defecto.
+	 */
+	final private static String DEFAULT_SERVERHOST = "localhost";
+
+	/**
+	 * Default algorithm for automatic player.
+	 */
+	final private static AlgorithmForAIPlayer DEFAULT_AIALG = AlgorithmForAIPlayer.NONE;
 
 	/**
 	 * This field includes a game factory that is constructed after parsing the
@@ -208,12 +273,12 @@ public class Main {
 	private static List<Piece> pieces;
 
 	/**
-	 * A list of players. The i-th player corresponds to the i-th piece in the
-	 * list {@link #pieces}. They correspond to what is provided in the -p
+	 * A list of player modes. The i-th mode corresponds to the i-th piece in
+	 * the list {@link #pieces}. They correspond to what is provided in the -p
 	 * option (or using the default value {@link #DEFAULT_PLAYERMODE}).
 	 * 
 	 * <p>
-	 * Lista de jugadores. El jugador i-esimo corresponde con la ficha i-esima
+	 * Lista de modos de juego. El modo i-esimo corresponde con la ficha i-esima
 	 * de la lista {@link #pieces}. Esta lista contiene lo que se proporciona en
 	 * la opcion -p (o el valor por defecto {@link #DEFAULT_PLAYERMODE}).
 	 */
@@ -230,16 +295,8 @@ public class Main {
 	 */
 	private static ViewInfo view;
 	
-	/**
-	 * The view to use. Depending on the selected view using the -v option or
-	 * the default value {@link #DEFAULT_VIEW} if this option was not provided.
-	 * 
-	 * <p>
-	 * Vista a utilizar. Dependiendo de la vista seleccionada con la opcion -v o
-	 * el valor por defecto {@link #DEFAULT_VIEW} si el argumento -v no se
-	 * proporciona.
-	 */
-	private static AplicationMode mode;
+	// TODO javadoc
+	private static AplicationMode aplicationMode;
 
 	/**
 	 * {@code true} if the option -m was provided, to use a separate view for
@@ -260,7 +317,6 @@ public class Main {
 	 * incluye la opcion -d.
 	 */
 	private static Integer dimRows;
-	
 	/**
 	 * Number of columns provided with the option -d ({@code null} if not
 	 * provided).
@@ -268,8 +324,18 @@ public class Main {
 	 * <p>
 	 * Numero de columnas proporcionadas con la opcion -d, o {@code null} si no
 	 * se incluye la opcion -d.
+	 * 
 	 */
 	private static Integer dimCols;
+
+	/**
+	 * The algorithm to be used by the automatic player. Not used so far, it is
+	 * always {@code null}.
+	 * 
+	 * <p>
+	 * Algoritmo a utilizar por el jugador automatico. 
+	 */
+	private static AIAlgorithm aiPlayerAlg;
 	
 	/**
 	 * Number of obstacles provided with the option -o ({@code null} if not
@@ -287,21 +353,28 @@ public class Main {
 	 * <p>
 	 * Puerto al que conectarse o al que se conectan.
 	 */
-	private static Integer port = 2000;
-
+	private static Integer serverPort;
+	
 	/**
-	 * The algorithm to be used by the automatic player. Not used so far, it is
-	 * always {@code null}.
+	 * PC o IP to connect.
 	 * 
 	 * <p>
-	 * Algoritmo a utilizar por el jugador automatico. Actualmente no se
-	 * utiliza, por lo que siempre es {@code null}.
+	 * Nombre de equipo o ip al que se conectan.
 	 */
-	private static AIAlgorithm aiPlayerAlg;
+	private static String serverHost;
+	
 
 	/**
-	 * Processes the command-line arguments and modify the fields of this
-	 * class with corresponding values. E.g., the factory, the pieces, etc.
+	 * The depth of the maximum depth in the MinMax Algorithm.
+	 * 
+	 * <p>
+	 * La profundidad máxima del árbol MinMax
+	 */
+	private static Integer minmaxTreeDepth;
+
+	/**
+	 * Processes the command-line arguments and modify the fields of this class
+	 * with corresponding values. E.g., the factory, the pieces, etc.
 	 *
 	 * <p>
 	 * Procesa la linea de ordenes del programa y crea los objetos necesarios
@@ -325,12 +398,17 @@ public class Main {
 		cmdLineOptions.addOption(constructHelpOption()); // -h or --help
 		cmdLineOptions.addOption(constructGameOption()); // -g or --game
 		cmdLineOptions.addOption(constructViewOption()); // -v or --view
-		cmdLineOptions.addOption(constructMlutiViewOption()); // -m or
+		cmdLineOptions.addOption(constructMultiViewOption()); // -m or
 																// --multiviews
 		cmdLineOptions.addOption(constructPlayersOption()); // -p or --players
 		cmdLineOptions.addOption(constructDimensionOption()); // -d or --dim
-
 		cmdLineOptions.addOption(constructObstaclesOptions()); // -o or --obstacles
+		cmdLineOptions.addOption(constructPortOptions()); // -sp or --server-port
+		cmdLineOptions.addOption(constructModeOptions()); // -am or --app-mode
+		cmdLineOptions.addOption(constructHostOptions()); // -sh or --server-host
+		cmdLineOptions.addOption(constructMinMaxDepathOption()); // -md or
+																	// --minmax-depth
+		cmdLineOptions.addOption(constructAIAlgOption()); // -aialg ...
 
 		// parse the command line as provided in args
 		//
@@ -338,14 +416,17 @@ public class Main {
 		try {
 			CommandLine line = parser.parse(cmdLineOptions, args);
 			parseHelpOption(line, cmdLineOptions);
-			parseDimOptionn(line);
+			parseDimensionOption(line);
 			parseObstaclesOptions(line);
+			parsePortOptions(line);
+			parseModeOptions(line);
+			parseHostOptions(line);
 			parseGameOption(line);
 			parseViewOption(line);
 			parseMultiViewOption(line);
 			parsePlayersOptions(line);
-			parseModeOption(line);
-			
+			parseMixMaxDepthOption(line);
+			parseAIAlgOption(line);
 
 			// if there are some remaining arguments, then something wrong is
 			// provided in the command line!
@@ -367,6 +448,90 @@ public class Main {
 	}
 
 	/**
+	 * Builds the MinMax tree depth (-md or --minmax-depth) CLI option.
+	 * 
+	 * @return CLI {@link {@link Option} for the MinMax tree depth option.
+	 */
+	private static Option constructMinMaxDepathOption() {
+		Option opt = new Option("md", "minmax-depth", true, "The maximum depth of the MinMax tree");
+		opt.setArgName("number");
+		return opt;
+	}
+
+	/**
+	 * Parses the MinMax tree depth option (-md or --minmax-depth). It sets the
+	 * value of {@link #minmaxTreeDepth} accordingly.
+	 * 
+	 * 
+	 * @param line
+	 *            CLI {@link CommandLine} object.
+	 */
+	private static void parseMixMaxDepthOption(CommandLine line) throws ParseException {
+		String depthVal = line.getOptionValue("md");
+		minmaxTreeDepth = null;
+
+		if (depthVal != null) {
+			try {
+				minmaxTreeDepth = Integer.parseInt(depthVal);
+			} catch (NumberFormatException e) {
+				throw new ParseException("Invalid value for the MinMax depth '" + depthVal + "'");
+			}
+		}
+	}
+
+	/**
+	 * Builds the ai-algorithm (-aialg or --ai-algorithm) CLI option.
+	 * 
+	 * @return CLI {@link {@link Option} for the ai-algorithm option.
+	 */
+	private static Option constructAIAlgOption() {
+		String optionInfo = "The AI algorithm to use ( ";
+		for (AlgorithmForAIPlayer alg : AlgorithmForAIPlayer.values()) {
+			optionInfo += alg.getId() + " [for " + alg.getDesc() + "] ";
+		}
+		optionInfo += "). By defualt, no algorithm is used.";
+		Option opt = new Option("aialg", "ai-algorithm", true, optionInfo);
+		opt.setArgName("algorithm for ai player");
+		return opt;
+	}
+
+	/**
+	 * Parses the ai-algorithm option (-aialg or --ai-algorithm). It sets the
+	 * value of {@link #minmaxTreeDepth} accordingly.
+	 * 
+	 * 
+	 * @param line
+	 *            CLI {@link CommandLine} object.
+	 */
+	private static void parseAIAlgOption(CommandLine line) throws ParseException {
+		String aialg = line.getOptionValue("aialg", DEFAULT_AIALG.getId());
+
+		AlgorithmForAIPlayer selectedAlg = null;
+		for (AlgorithmForAIPlayer a : AlgorithmForAIPlayer.values()) {
+			if (a.getId().equals(aialg)) {
+				selectedAlg = a;
+				break;
+			}
+		}
+
+		if (selectedAlg == null) {
+			throw new ParseException("Uknown AI algorithms '" + aialg + "'");
+		}
+
+		switch (selectedAlg) {
+		case MINMAX:
+			aiPlayerAlg = minmaxTreeDepth == null ? new MinMax(false) : new MinMax(minmaxTreeDepth, false);
+			break;
+		case MINMAXAB:
+			aiPlayerAlg = minmaxTreeDepth == null ? new MinMax() : new MinMax(minmaxTreeDepth);
+			break;
+		case NONE:
+			aiPlayerAlg = null;
+			break;
+		}
+	}
+
+	/**
 	 * Builds the multiview (-m or --multiviews) CLI option.
 	 * 
 	 * <p>
@@ -375,12 +540,10 @@ public class Main {
 	 * @return CLI {@link {@link Option} for the multiview option.
 	 */
 
-	private static Option constructMlutiViewOption() {
+	private static Option constructMultiViewOption() {
 		return new Option("m", "multiviews", false,
 				"Create a separate view for each player (valid only when using the " + ViewInfo.WINDOW + " view)");
 	}
-	
-	
 
 	/**
 	 * Parses the multiview option (-m or --multiview). It sets the value of
@@ -394,56 +557,6 @@ public class Main {
 	 */
 	private static void parseMultiViewOption(CommandLine line) {
 		multiviews = line.hasOption("m");
-	}
-	
-	// TODO Implementar y JavaDoc
-	private static Option constructModeOption() {
-		return new Option("m", "multiviews", false,
-				"Create a separate view for each player (valid only when using the " + ViewInfo.WINDOW + " view)");
-	}
-	
-	// TODO Implementar y JavaDoc
-	private static void parseModeOption(CommandLine line) throws ParseException {
-
-		String modeVal = line.getOptionValue("am");
-/*
-		if (playersVal == null) {
-			// if no -p option, we take the default pieces from the
-			// corresponding
-			// factory, and for each one we use the default player mode.
-			pieces = gameFactory.createDefaultPieces();
-			playerModes = new ArrayList<PlayerMode>();
-			for (int i = 0; i < pieces.size(); i++) {
-				playerModes.add(DEFAULT_PLAYERMODE);
-			}
-		} else {
-			pieces = new ArrayList<Piece>();
-			playerModes = new ArrayList<PlayerMode>();
-			String[] players = playersVal.split(",");
-			for (String player : players) {
-				String[] playerInfo = player.split(":");
-				if (playerInfo.length == 1) { // only the piece name is provided
-					pieces.add(new Piece(playerInfo[0]));
-					playerModes.add(DEFAULT_PLAYERMODE);
-				} else if (playerInfo.length == 2) { // piece name and mode are
-														// provided
-					pieces.add(new Piece(playerInfo[0]));
-					PlayerMode selectedMode = null;
-					for (PlayerMode mode : PlayerMode.values()) {
-						if (mode.getId().equals(playerInfo[1])) {
-							selectedMode = mode;
-						}
-					}
-					if (selectedMode != null) {
-						playerModes.add(selectedMode);
-					} else {
-						throw new ParseException("Invalid player mode in '" + player + "'");
-					}
-				} else {
-					throw new ParseException("Invalid player information '" + player + "'");
-				}
-			}
-		}*/
 	}
 
 	/**
@@ -602,13 +715,13 @@ public class Main {
 	/**
 	 * Parses the game option (-g or --game). It sets the value of
 	 * {@link #gameFactory} accordingly. Usually it requires that
-	 * {@link #parseDimOptionn(CommandLine)} has been called already to parse
-	 * the dimension option.
+	 * {@link #parseDimensionOption(CommandLine)} has been called already to
+	 * parse the dimension option.
 	 * 
 	 * <p>
 	 * Extrae la opcion de juego (-g). Asigna el valor del atributo
 	 * {@link #gameFactory}. Normalmente necesita que se haya llamado antes a
-	 * {@link #parseDimOptionn(CommandLine)} para extraer la dimension del
+	 * {@link #parseDimensionOption(CommandLine)} para extraer la dimension del
 	 * tablero.
 	 * 
 	 * @param line
@@ -624,29 +737,29 @@ public class Main {
 		String gameVal = line.getOptionValue("g", DEFAULT_GAME.getId());
 		GameInfo selectedGame = null;
 
-		for( GameInfo g : GameInfo.values() ) {
-			if ( g.getId().equals(gameVal) ) {
+		for (GameInfo g : GameInfo.values()) {
+			if (g.getId().equals(gameVal)) {
 				selectedGame = g;
 				break;
 			}
 		}
 
-		if ( selectedGame == null ) {
+		if (selectedGame == null) {
 			throw new ParseException("Uknown game '" + gameVal + "'");
 		}
-	
-		switch ( selectedGame ) {
-		case AdvancedTicTacToe:
+
+		switch (selectedGame) {
+		case ADVANCED_TIC_TAC_TOE:
 			gameFactory = new AdvancedTTTFactoryExt();
 			break;
-		case CONNECTN:
+		case CONNECT_N:
 			if (dimRows != null && dimCols != null && dimRows == dimCols) {
 				gameFactory = new ConnectNFactoryExt(dimRows);
 			} else {
 				gameFactory = new ConnectNFactoryExt();
 			}
 			break;
-		case TicTacToe:
+		case TIC_TAC_TOE:
 			gameFactory = new TicTacToeFactoryExt();
 			break;
 		case Ataxx:
@@ -664,7 +777,7 @@ public class Main {
 		default:
 			throw new UnsupportedOperationException("Something went wrong! This program point should be unreachable!");
 		}
-	
+
 	}
 
 	/**
@@ -699,7 +812,7 @@ public class Main {
 	 *             <p>
 	 *             Si se proporciona un valor invalido.
 	 */
-	private static void parseDimOptionn(CommandLine line) throws ParseException {
+	private static void parseDimensionOption(CommandLine line) throws ParseException {
 		String dimVal = line.getOptionValue("d");
 		if (dimVal != null) {
 			try {
@@ -760,6 +873,64 @@ public class Main {
 			
 		}
 		
+	}
+	
+	// TODO javadoc
+	private static Option constructPortOptions() {
+		return new Option("sp", "server-port", true,
+				"Port to conect");
+	}
+	
+	// TODO javadoc
+	private static void parsePortOptions(CommandLine line) throws ParseException {
+		String portVal = line.getOptionValue("sp", DEFAULT_SERVERPORT.toString());
+		
+		if (portVal != null) {
+			
+			try{
+				serverPort = Integer.parseInt(portVal);
+			}catch (NumberFormatException e) {
+				throw new ParseException("Invalid port: " + portVal);
+			}
+			
+		}
+		
+	}
+	
+	// TODO javadoc
+	private static Option constructModeOptions() {
+		return new Option("am", "app-mode", true,
+				"Aplication mode");
+	}
+	
+	// TODO javadoc
+	private static void parseModeOptions(CommandLine line) throws ParseException {
+		String modeVal = line.getOptionValue("am", DEFAULT_APLICATIONMODE.getId());
+		AplicationMode selectedMode = null;
+
+		for (AplicationMode m : AplicationMode.values()) {
+			if (m.getId().equals(modeVal)) {
+				selectedMode = m;
+				break;
+			}
+		}
+
+		if (selectedMode == null) {
+			throw new ParseException("Uknown aplication mode '" + modeVal + "'");
+		}else{
+			aplicationMode = selectedMode;
+		}
+	}
+	
+	// TODO javadoc
+	private static Option constructHostOptions() {
+		return new Option("sh", "server-host", true,
+				"Server Host");
+	}
+	
+	// TODO javadoc
+	private static void parseHostOptions(CommandLine line) throws ParseException {
+		serverHost = line.getOptionValue("sh", DEFAULT_SERVERHOST);
 	}
 
 	/**
@@ -856,16 +1027,15 @@ public class Main {
 	public static void startGame() {
 		Game g = new Game(gameFactory.gameRules());
 		Controller c = null;
-		
-		
+
 		switch (view) {
 		case CONSOLE:
-			
 			ArrayList<Player> players = new ArrayList<Player>();
-			
 			for (int i = 0; i < pieces.size(); i++) {
 				switch (playerModes.get(i)) {
 				case AI:
+					System.out.println(aiPlayerAlg);
+
 					players.add(gameFactory.createAIPlayer(aiPlayerAlg));
 					break;
 				case MANUAL:
@@ -879,14 +1049,10 @@ public class Main {
 							"Something went wrong! This program point should be unreachable!");
 				}
 			}
-			
 			c = new ConsoleCtrlMVC(g, pieces, players, new Scanner(System.in));
-			
 			gameFactory.createConsoleView(g, c);
 			break;
-			
 		case WINDOW:
-			
 			c = new Controller(g,pieces);
 			if(multiviews){
 				for (Piece p : pieces) {
@@ -901,7 +1067,6 @@ public class Main {
 			}
 			
 			break;
-			
 		default:
 			throw new UnsupportedOperationException("Something went wrong! This program point should be unreachable!");
 		}
@@ -909,12 +1074,12 @@ public class Main {
 		c.start();
 	}
 	
-	// TODO Implemetar y JavaDoc
-	private static void startServer() {
-		//GameServer c = new GameServer(gameFactory, pieces, serverPort);
-		//c.start();
-	}
-	
+	// TODO JavaDoc
+		private static void startServer() {
+			GameServer c = new GameServer(gameFactory, pieces, serverPort);
+			c.start();
+		}
+		
 	// TODO Implemetar y JavaDoc
 	private static void startClient() {
 		/*try {
@@ -941,7 +1106,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		parseArgs(args);
-		switch (mode) {
+		switch (aplicationMode) {
 			case NORMAL:
 				startGame();
 				break;
