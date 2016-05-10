@@ -23,6 +23,15 @@ public class AdvancedTTTFactory extends TicTacToeFactory {
 	public GameRules gameRules() {
 		return new AdvancedTTTRules();
 	}
+
+	/*
+	@Override
+	public Player createConsolePlayer() {
+		ArrayList<GameMove> possibleMoves = new ArrayList<GameMove>();
+		possibleMoves.add(new AdvancedTTTMove());
+		return new ConsolePlayer(new Scanner(System.in), possibleMoves);
+	}
+   */
 	
 	@Override
 	public Player createRandomPlayer() {
