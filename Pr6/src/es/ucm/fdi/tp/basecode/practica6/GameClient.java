@@ -7,6 +7,7 @@ public class GameClient {
 
 	public GameClient(String serverHost, Integer serverPort) {
 		// TODO Auto-generated constructor stub
+		
 	}
 
 	public GameFactory getGameFactoty() {
