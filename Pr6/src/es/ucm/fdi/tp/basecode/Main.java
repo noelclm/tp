@@ -226,7 +226,7 @@ public class Main {
 	 * <p>
 	 * Puerto por defecto.
 	 */
-	final private static Integer DEFAULT_SERVERPORT = 2000;
+	final private static Integer DEFAULT_SERVERPORT = 2020;
 	
 	/**
 	 * Default mode to use.
