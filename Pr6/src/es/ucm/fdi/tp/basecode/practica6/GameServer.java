@@ -25,6 +25,7 @@ import javax.swing.SwingUtilities;
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
 import es.ucm.fdi.tp.basecode.bgame.control.GameFactory;
 import es.ucm.fdi.tp.basecode.bgame.control.Player;
+import es.ucm.fdi.tp.basecode.bgame.control.commands.Command;
 import es.ucm.fdi.tp.basecode.bgame.model.Board;
 import es.ucm.fdi.tp.basecode.bgame.model.Game;
 import es.ucm.fdi.tp.basecode.bgame.model.Game.State;
@@ -62,46 +63,72 @@ public class GameServer extends Controller implements GameObserver{
 		
 	}
 	
-	
-	
-	
-	
-	
+
 
 	@Override
 	public void onGameStart(Board board, String gameDesc, List<Piece> pieces,
 			Piece turn) {
-		// TODO Auto-generated method stub
+		
+		try{
+			forwardNotification(new GameStartResponse(board,gameDesc,pieces,turn));
+		}catch (IOException e){log("Fallo");}
+		
 		
 	}
 
+
 	@Override
 	public void onGameOver(Board board, State state, Piece winner) {
-		// TODO Auto-generated method stub
+	
+		try{
+			forwardNotification(new GameOverResponse(board,state,winner));
+		}catch (IOException e){}
 		
 	}
 
 	@Override
 	public void onMoveStart(Board board, Piece turn) {
-		// TODO Auto-generated method stub
+		
+		try{
+			forwardNotification(new MoveStartResponse(board,turn));
+		}catch (IOException e){}
+		
 		
 	}
 
 	@Override
 	public void onMoveEnd(Board board, Piece turn, boolean success) {
-		// TODO Auto-generated method stub
+		
+		try{
+			forwardNotification(new MoveEndResponse(board,turn,success));
+		}catch (IOException e){}
 		
 	}
 
 	@Override
 	public void onChangeTurn(Board board, Piece turn) {
-		// TODO Auto-generated method stub
+		
+		try{
+			forwardNotification(new ChangeTurnResponse(board,turn));
+		}catch (IOException e){}
 		
 	}
 
 	@Override
 	public void onError(String msg) {
-		// TODO Auto-generated method stub
+		
+		try{
+			forwardNotification(new ErrorResponse(msg));
+		}catch (IOException e){}
+		
+		
+	}
+	
+	private void forwardNotification(Response r) throws IOException {
+		
+		for (int i=0;i<clients.size()-1;i++){
+			clients.get(i).sendObject(r);
+		}
 		
 	}
 	
@@ -112,14 +139,14 @@ public class GameServer extends Controller implements GameObserver{
 	
 	@Override
 	public synchronized void stop() {
-		// TODO implementar stop
-		//try { super.stop(player); } catch (GameError e) { }
+		// TODO revisar
+		try { super.stop(); } catch (GameError e) { }
 	}
 	
 	@Override
 	public synchronized void restart() {
-		// TODO implementar restart
-		//try { super.restart(player); } catch (GameError e) { }
+		// TODO revisar
+		try { super.restart(); } catch (GameError e) { }
 	}
 	
 	@Override
@@ -170,34 +197,84 @@ public class GameServer extends Controller implements GameObserver{
 	}
 	
 	private void handleRequest(Socket s) throws IOException,ClassNotFoundException {
-		
-		// Si hay hueco en el servidor se conecta
-		if(this.numPlayers < this.numOfConnectedPlayers){
-			// TODO Mandar datos del juego al cliente
+		//Mandar datos del juego al cliente
+		try{
 			Connection c = new Connection(s);
+			Object clientRequest = c.getObject();
+			if(!(clientRequest instanceof String)&& !((String)clientRequest).equalsIgnoreCase("Connect")){
+				c.sendObject(new GameError("Invalid Request"));	
+				c.stop();
+				return;
+			}
+		
+			// Si hay hueco en el servidor se conecta
+			if(this.numPlayers >= this.numOfConnectedPlayers){
+				c.sendObject(new GameError("Server is full"));	
+				c.stop();
+				return;
+			}
+			c.sendObject("OK");
 			c.sendObject(this.gameFactory);
+			c.sendObject(this.pieces.get(numOfConnectedPlayers));
 			//c
 			this.clients.add(c);
 			this.numOfConnectedPlayers++;
+			if(this.numPlayers == this.numOfConnectedPlayers){
+				game.start(pieces);
+			}
 			
-		}
-		else{
-			
-		}
+			startClientListener(c); //Crea una hebra que esta escuchando al cliente
+				
+		}catch (IOException | ClassNotFoundException e){}
+		
+	}
 	
+	private void startClientListener(Connection c) {
+		// TODO Auto-generated method stub
+		this.gameOver=false;
+		Thread t= new Thread(new Runnable(){
+			@Override
+			public void run() {
+				while(!stopped && !gameOver){
+					try{
+						Command cmd;
+						cmd = (Command) c.getObject();//Recibir un objeto del cliente y hacer un casting a Command.
+						cmd.execute(GameServer.this);
+					}catch (IOException | ClassNotFoundException e){
+						if (!stopped && !gameOver){ //Si hay un error y se esta ejecutando el juego se para.
+							game.stop();
+						} else{
+							try {
+								closeServer();
+							} catch (IOException e1) {}
+							
+						}
+						
+					}
+				}
+			}
+			
+		});
+		t.start();
+		
+	}
+	
+	private void closeServer() throws IOException{
+		this.stopped = true;
+		for (int i=0;i<clients.size()-1;i++){
+			clients.get(i).stop();
+		}
+		this.server.close(); //cierra el servidor.
+		
 	}
 
-	
-	
-	
-	
 
-	
 	
 	//+++++++++++++++++++++++++++++++++++
 	// 				  GUI
 	//+++++++++++++++++++++++++++++++++++
 	
+
 	private void controlGUI() {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
@@ -219,8 +296,8 @@ public class GameServer extends Controller implements GameObserver{
 		// create text area for printing messages
 		this.infoArea= new JTextArea();
 		this.infoArea.setEditable(false);
-		this.infoArea.setLineWrap(true);
-		this.infoArea.setWrapStyleWord(true);
+		this.infoArea.setLineWrap(true); //Salto de linea en cualquier parte de la palabra.
+		this.infoArea.setWrapStyleWord(true); //Salto de lineas buscando espacios entre palabras.
 		JScrollPane jp = new JScrollPane(this.infoArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.infoPanel.add(jp);
 		this.infoPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Info Messages"));
@@ -254,8 +331,7 @@ public class GameServer extends Controller implements GameObserver{
 		if (n == 0) {
 			
 			try {
-				this.stopped = true;
-				this.server.close(); //cierra el servidor.
+				closeServer(); //cierra el servidor.
 			} catch (GameError | IOException _e) {
 			}
 
