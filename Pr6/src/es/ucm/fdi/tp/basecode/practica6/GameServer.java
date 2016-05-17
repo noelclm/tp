@@ -41,7 +41,6 @@ public class GameServer extends Controller implements GameObserver{
 	volatile private ServerSocket server;
 	volatile private boolean stopped;
 	volatile private boolean gameOver;
-	private boolean consoleMode;
 	
 	private JPanel mainPanel;
 	private JPanel buttonPanel;
@@ -141,10 +140,9 @@ public class GameServer extends Controller implements GameObserver{
 		
 		while (!this.stopped) {
 			try {
-				System.out.println("a");
+				log("Waiting for a connection.");
 				Socket s= server.accept(); //Cuando alguien se conecta devuelve un socket para enviar y recibir datos a través de el.
-				log("Type a command (status or exit): ");
-				handleRequest(s); //maneja la petición.
+				handleRequestInAThread(s); //maneja la petición.
 			} catch (IOException | ClassNotFoundException e) {
 				if (!this.stopped) {
 					log("error while waiting for a connection: " + e.getMessage());
@@ -152,75 +150,54 @@ public class GameServer extends Controller implements GameObserver{
 			}
 		}
 		
-		this.server.close(); //cierra el servidor.
+		
 		
 	}
 	
-	public void handleRequest(Socket s) throws IOException, ClassNotFoundException{
-		// TODO Mirar esto
-		int i=0;
-		//PrintStream out = new PrintStream(s.getOutputStream()); //Enviar datos al cliente.
-		//Scanner in = new Scanner (s.getInputStream()); //leer los datos enviados desde el cliente
-		ObjectOutputStream out = new ObjectOutputStream (s.getOutputStream());
-		ObjectInputStream in = new ObjectInputStream (s.getInputStream());
-		do{
-			i = ((MyNumber)in.readObject()).getValue(); // leer el entero enviado por el cliente
-				
-				if (i!=-1){
-					out.writeObject(new MyNumber (2*i));
-					out.flush(); //con flush y reset nos aseguramos que se envia inmediatamente
-					out.reset();
-				}
-			//System.out.println("Recevied:" + i);
-			//out.println(2 + "*" + i + "=" + (2*i)); //enviarle al cliente.
-		} while (i!=-1);
+	public void handleRequestInAThread(Socket s) throws IOException, ClassNotFoundException{
 		
-		s.close();
-	}
-
-	
-	
-	private void log(String msg) {
-		// show the message in infoArea, use invokeLater!!
-		if (consoleMode) {
-			System.out.println("SERVER: " + msg);
-			System.out.flush();
-		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					infoArea.append(msg);
-				}
-			});
-		}
-	}
-	
-	public void launchServer(boolean cosoleMode) throws IOException{
-		this.consoleMode = consoleMode;
-		startServerInAThread(); //Comienza el servidor en una hebra.
-		//control();
-	}
-	
-	private void startServerInAThread() {
-		// TODO Auto-generated method stub
-		new Thread(){//Crea una hebra.
-			public void run(){
-				try{
-					startServer();
-				}catch (IOException e){
-					
+		// Crea una nueva hebra para el cliente
+		new Thread() {
+			@Override
+			public void run() {
+				try {
+					handleRequest(s);
+				} catch (IOException | ClassNotFoundException e) {
 				}
 			}
 		}.start();
 		
 	}
 	
+	private void handleRequest(Socket s) throws IOException,ClassNotFoundException {
+		
+		// Si hay hueco en el servidor se conecta
+		if(this.numPlayers < this.numOfConnectedPlayers){
+			// TODO Mandar datos del juego al cliente
+			Connection c = new Connection(s);
+			c.sendObject(this.gameFactory);
+			//c
+			this.clients.add(c);
+			this.numOfConnectedPlayers++;
+			
+		}
+		else{
+			
+		}
 	
+	}
+
+	
+	
+	
+	
+
 	
 	
 	//+++++++++++++++++++++++++++++++++++
 	// 				  GUI
 	//+++++++++++++++++++++++++++++++++++
+	
 	private void controlGUI() {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
@@ -267,8 +244,9 @@ public class GameServer extends Controller implements GameObserver{
 	
 	/**
 	 * Mostrar la ventana de confirmacion de salir.
+	 * @throws IOException 
 	 */
-	final protected void close() {
+	final protected void close(){
 		
 		int n = JOptionPane.showOptionDialog(new JFrame(), "Are sure you want to quit?", "Quit",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -277,12 +255,25 @@ public class GameServer extends Controller implements GameObserver{
 			
 			try {
 				this.stopped = true;
-			} catch (GameError _e) {
+				this.server.close(); //cierra el servidor.
+			} catch (GameError | IOException _e) {
 			}
 
 			System.exit(0);
 			
 		}
+		
+	}
+	
+	private void log(String msg) {
+		
+		// show the message in infoArea, use invokeLater!!
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				infoArea.append(msg);
+			}
+		});
 		
 	}
 	
