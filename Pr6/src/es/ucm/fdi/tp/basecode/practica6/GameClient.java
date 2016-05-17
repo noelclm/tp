@@ -61,7 +61,7 @@ public class GameClient extends Controller implements Observable<GameObserver> {
 
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
+		
 		this.observers.add((GameObserver) this);
 		
 		this.gameOver = false;

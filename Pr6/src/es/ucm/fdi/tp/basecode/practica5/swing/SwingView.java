@@ -130,14 +130,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		
 		this.colorsIter = Utils.colorsGenerator();
 		
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				game.addObserver(SwingView.this);//se registra
-			}
-			
-		});
+		game.addObserver(SwingView.this);//se registra
 
 		initGUI();
 
