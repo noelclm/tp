@@ -39,6 +39,7 @@ public class GameClient extends Controller implements Observable<GameObserver> {
 		this.connectioToServer= new Connection(new Socket(host,port));
 		this.connectioToServer.sendObject("Connect");
 		Object response = this.connectioToServer.getObject();
+		
 		if(response instanceof Exception){
 			throw (Exception) response;
 		}
@@ -48,7 +49,7 @@ public class GameClient extends Controller implements Observable<GameObserver> {
 		}catch(Exception e){throw new GameError("Unknown server response:" + e.getMessage());}
 	}
 
-	public GameFactory getGameFactoty() {
+	public GameFactory getGameFactory() {
 		
 		return this.gameFactory;
 	}

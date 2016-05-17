@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -58,6 +59,7 @@ public class GameServer extends Controller implements GameObserver{
 		this.numPlayers = pieces.size();
 		this.gameFactory = gameFactory;
 		this.gameOver = false;
+		this.clients = new ArrayList<Connection>();
 		
 		game.addObserver(this);
 		
@@ -126,8 +128,8 @@ public class GameServer extends Controller implements GameObserver{
 	
 	private void forwardNotification(Response r) throws IOException {
 		
-		for (int i=0;i<clients.size()-1;i++){
-			clients.get(i).sendObject(r);
+		for (int i=0;i<this.clients.size()-1;i++){
+			this.clients.get(i).sendObject(r);
 		}
 		
 	}
@@ -207,8 +209,8 @@ public class GameServer extends Controller implements GameObserver{
 				return;
 			}
 		
-			// Si hay hueco en el servidor se conecta
-			if(this.numPlayers >= this.numOfConnectedPlayers){
+			// Si no hay hueco en el servidor no se conecta
+			if(this.numPlayers == this.numOfConnectedPlayers){
 				c.sendObject(new GameError("Server is full"));	
 				c.stop();
 				return;
@@ -216,7 +218,7 @@ public class GameServer extends Controller implements GameObserver{
 			c.sendObject("OK");
 			c.sendObject(this.gameFactory);
 			c.sendObject(this.pieces.get(numOfConnectedPlayers));
-			//c
+			System.out.println(this.clients);
 			this.clients.add(c);
 			this.numOfConnectedPlayers++;
 			if(this.numPlayers == this.numOfConnectedPlayers){
@@ -224,6 +226,7 @@ public class GameServer extends Controller implements GameObserver{
 			}
 			
 			startClientListener(c); //Crea una hebra que esta escuchando al cliente
+			log("Se a conectado el jugador "+this.pieces.get(numOfConnectedPlayers-1));
 				
 		}catch (IOException | ClassNotFoundException e){}
 		
@@ -261,8 +264,10 @@ public class GameServer extends Controller implements GameObserver{
 	
 	private void closeServer() throws IOException{
 		this.stopped = true;
-		for (int i=0;i<clients.size()-1;i++){
-			clients.get(i).stop();
+		if(this.numOfConnectedPlayers > 0){
+			for (int i=0;i<this.clients.size()-1;i++){
+				this.clients.get(i).stop();
+			}
 		}
 		this.server.close(); //cierra el servidor.
 		
@@ -347,7 +352,7 @@ public class GameServer extends Controller implements GameObserver{
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				infoArea.append(msg);
+				infoArea.append(msg + '\n');
 			}
 		});
 		

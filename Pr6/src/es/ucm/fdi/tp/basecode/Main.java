@@ -1175,9 +1175,8 @@ public class Main {
 	private static void startClient() {
 		try {
 			GameClient c = new GameClient(serverHost, serverPort);
-			gameFactory = c.getGameFactoty();
-			// TODO Mirar crear la ventana del cliente
-			//gameFactory.createSwingView(c, c, c.getPlayerPiece(),gameFactory.createRandomPlayer(),gameFactory.createAIPlayer(aiPlayerAlg));
+			gameFactory = c.getGameFactory();
+			gameFactory.createSwingView(c, c, c.getPlayerPiece(),gameFactory.createRandomPlayer(),gameFactory.createAIPlayer(aiPlayerAlg));
 			c.start();
 		} catch (Exception e) {
 			System.err.println("");
