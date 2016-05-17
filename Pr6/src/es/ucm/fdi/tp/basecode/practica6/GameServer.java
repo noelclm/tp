@@ -1,5 +1,7 @@
 package es.ucm.fdi.tp.basecode.practica6;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +13,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -40,9 +43,10 @@ public class GameServer extends Controller implements GameObserver{
 	volatile private boolean gameOver;
 	private boolean consoleMode;
 	
-	private JPanel panel;
+	private JPanel mainPanel;
+	private JPanel buttonPanel;
+	private JPanel infoPanel;
 	private JButton quitButton;
-	private JButton restartButton;
 	private JTextArea infoArea;
 	
 	public GameServer(GameFactory gameFactory, List<Piece> pieces, int port) {
@@ -137,6 +141,7 @@ public class GameServer extends Controller implements GameObserver{
 		
 		while (!this.stopped) {
 			try {
+				System.out.println("a");
 				Socket s= server.accept(); //Cuando alguien se conecta devuelve un socket para enviar y recibir datos a través de el.
 				log("Type a command (status or exit): ");
 				handleRequest(s); //maneja la petición.
@@ -173,40 +178,7 @@ public class GameServer extends Controller implements GameObserver{
 		s.close();
 	}
 
-	private void controlGUI() {
-		try {
-			SwingUtilities.invokeAndWait(new Runnable() {
-				@Override
-				public void run() { constructGUI(); }
-			});
-		} catch (InvocationTargetException | InterruptedException e) {
-			throw new GameError("Something went wrong when constructing the GUI");
-		}
-	}
 	
-	private void constructGUI() {
-		JFrame window = new JFrame("Game Server");
-
-		// create text area for printing messages
-		this.infoArea= new JTextArea();
-		this.infoArea.setEditable(false);
-		this.infoArea.setLineWrap(true);
-		this.infoArea.setWrapStyleWord(true);
-		JScrollPane jp = new JScrollPane(this.infoArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		window.add(jp);
-		// quit button
-		this.quitButton = new JButton("Stop Sever");
-		this.quitButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {stopped = true;}
-		});
-		window.add(this.quitButton);
-		
-		window.setPreferredSize(new Dimension(800, 600) ); 
-		// TODO para que se pueda cerrar mediante la X
-		//window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		window.pack();
-		window.setVisible(true);
-	}
 	
 	private void log(String msg) {
 		// show the message in infoArea, use invokeLater!!
@@ -240,6 +212,77 @@ public class GameServer extends Controller implements GameObserver{
 				}
 			}
 		}.start();
+		
+	}
+	
+	
+	
+	
+	//+++++++++++++++++++++++++++++++++++
+	// 				  GUI
+	//+++++++++++++++++++++++++++++++++++
+	private void controlGUI() {
+		try {
+			SwingUtilities.invokeAndWait(new Runnable() {
+				@Override
+				public void run() { constructGUI(); }
+			});
+		} catch (InvocationTargetException | InterruptedException e) {
+			throw new GameError("Something went wrong when constructing the GUI");
+		}
+	}
+	
+	private void constructGUI() {
+		JFrame window = new JFrame("Game Server");
+		
+		this.mainPanel = new JPanel ();
+		this.buttonPanel = new JPanel ();
+		this.infoPanel = new JPanel (new BorderLayout());
+
+		// create text area for printing messages
+		this.infoArea= new JTextArea();
+		this.infoArea.setEditable(false);
+		this.infoArea.setLineWrap(true);
+		this.infoArea.setWrapStyleWord(true);
+		JScrollPane jp = new JScrollPane(this.infoArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.infoPanel.add(jp);
+		this.infoPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Info Messages"));
+		this.infoPanel.setPreferredSize(new Dimension(600,500));
+		// quit button
+		this.quitButton = new JButton("Stop Sever");
+		this.quitButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {close();}
+		});
+		this.buttonPanel.add(this.quitButton);
+		
+		this.mainPanel.add(this.infoPanel, BorderLayout.CENTER);
+		this.mainPanel.add(this.buttonPanel, BorderLayout.LINE_END);
+		
+		window.add(mainPanel);
+		window.setPreferredSize(new Dimension(800, 600) ); 
+		window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		window.pack();
+		window.setVisible(true);
+	}
+	
+	/**
+	 * Mostrar la ventana de confirmacion de salir.
+	 */
+	final protected void close() {
+		
+		int n = JOptionPane.showOptionDialog(new JFrame(), "Are sure you want to quit?", "Quit",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+		if (n == 0) {
+			
+			try {
+				this.stopped = true;
+			} catch (GameError _e) {
+			}
+
+			System.exit(0);
+			
+		}
 		
 	}
 	
