@@ -2,6 +2,7 @@ package es.ucm.fdi.tp.basecode.practica6;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
@@ -30,6 +31,7 @@ public class GameClient extends Controller implements Observable<GameObserver> {
 		super(null,null);
 		this.host=host;
 		this.port=port;
+		this.observers = new ArrayList<GameObserver>();
 		connect();
 	}
 	
@@ -94,16 +96,15 @@ public class GameClient extends Controller implements Observable<GameObserver> {
 
 	@Override
 	public void addObserver(GameObserver o) {
-		// TODO Auto-generated method stub
-		
+		this.observers.add(o);
 	}
 
 
 	@Override
 	public void removeObserver(GameObserver o) {
-		// TODO Auto-generated method stub
-		
+		this.observers.remove(o);
 	}
+	
 	private void forwardCommand(Command cmd) {
 		try{
 			if(!this.gameOver)

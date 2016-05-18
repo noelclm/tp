@@ -6,8 +6,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -218,7 +216,6 @@ public class GameServer extends Controller implements GameObserver{
 			c.sendObject("OK");
 			c.sendObject(this.gameFactory);
 			c.sendObject(this.pieces.get(numOfConnectedPlayers));
-			System.out.println(this.clients);
 			this.clients.add(c);
 			this.numOfConnectedPlayers++;
 			if(this.numPlayers == this.numOfConnectedPlayers){

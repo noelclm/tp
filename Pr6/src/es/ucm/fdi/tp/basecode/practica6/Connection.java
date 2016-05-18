@@ -5,8 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import es.ucm.fdi.tp.basecode.bgame.control.GameFactory;
-
 public class Connection {
 	
 	private Socket s;
