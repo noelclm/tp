@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -122,6 +123,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		this.game = g;
 		this.ctrl = c;
 		this.localPiece = localPiece;
+		System.out.println(localPiece);
 		this.ramdomPlayer = randPlayer;
 		this.aiPlayer = aiPlayer;
 		this.pieceColors = new HashMap<Piece, Color>();
@@ -200,16 +202,18 @@ public abstract class SwingView extends JFrame implements GameObserver {
 
 	@Override
 	public void onGameStart(Board roBoard, String gameDesc, List<Piece> roPieces,Piece turn) {
-		SwingUtilities.invokeLater(new Runnable() {
+		try{
+		SwingUtilities.invokeAndWait(new Runnable() {
 			public void run(){handleGameStart(roBoard,gameDesc,roPieces,turn);}
 		});
+		}catch(Exception e){}
 	}
 
 	/**
 	 * Se encarga de empezar el juego.
 	 */
 	private void handleGameStart(Board roBoard, String gameDesc, List<Piece> roPieces,Piece turn) {
-		
+		System.out.println("entra?");
 		this.pieceColors = new HashMap<>();
 		this.playerTypes = new HashMap<>();
 		this.board = roBoard;
@@ -260,9 +264,12 @@ public abstract class SwingView extends JFrame implements GameObserver {
 
 	@Override
 	public void onGameOver(final Board board, final State state, final Piece winner) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {handleGameOver(board, state, winner);}
-		});
+		
+		try{
+			SwingUtilities.invokeAndWait(new Runnable() {
+				public void run(){handleGameOver(board, state, winner);}
+			});
+			}catch(Exception e){}
 	}
 	
 	/**
@@ -290,9 +297,14 @@ public abstract class SwingView extends JFrame implements GameObserver {
 
 	@Override
 	public void onMoveEnd(Board board, Piece turn, boolean success) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {handleMoveEnd(board, turn, success);}
-		});
+	
+		try{
+			SwingUtilities.invokeAndWait(new Runnable() {
+				public void run(){handleMoveEnd(board, turn, success);}
+			});
+			}catch(Exception e){}
+		
+		
 	}
 	
 	/**
@@ -320,9 +332,12 @@ public abstract class SwingView extends JFrame implements GameObserver {
 
 	@Override
 	public void onChangeTurn(Board board, final Piece turn) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {handleChangeTurn(board, turn);}
-		});
+	
+		try{
+			SwingUtilities.invokeAndWait(new Runnable() {
+				public void run(){handleChangeTurn(board, turn);}
+			});
+			}catch(Exception e){}
 	}
 	
 	/**
@@ -363,9 +378,12 @@ public abstract class SwingView extends JFrame implements GameObserver {
 
 	@Override
 	public void onError(String msg) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {addStatusMessages(msg);}
-		});
+		
+		try{
+			SwingUtilities.invokeAndWait(new Runnable() {
+				public void run(){addStatusMessages(msg);}
+			});
+			}catch(Exception e){}
 	}
 
 
@@ -496,14 +514,17 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		if(aiPlayer != null)
 			intelligentAutomaticMovesButton.setEnabled(false);
 		
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				ctrl.makeMove(player);
-			}
-			
-		});
+		try{
+			SwingUtilities.invokeAndWait(new Runnable() {
+				
+				@Override
+				public void run() {
+					ctrl.makeMove(player);
+				}
+				
+			});
+		}catch (Exception e){}
+
 		
 		playerInformationTable.refresh();
 		

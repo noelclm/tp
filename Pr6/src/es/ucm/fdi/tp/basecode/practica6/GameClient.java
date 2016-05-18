@@ -12,12 +12,14 @@ import es.ucm.fdi.tp.basecode.bgame.control.commands.Command;
 import es.ucm.fdi.tp.basecode.bgame.control.commands.PlayCommand;
 import es.ucm.fdi.tp.basecode.bgame.control.commands.QuitCommand;
 import es.ucm.fdi.tp.basecode.bgame.control.commands.RestartCommand;
+import es.ucm.fdi.tp.basecode.bgame.model.Board;
+import es.ucm.fdi.tp.basecode.bgame.model.Game.State;
 import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 
-public class GameClient extends Controller implements Observable<GameObserver> {
+public class GameClient extends Controller implements Observable<GameObserver>, GameObserver {
 	
 	private String host;
 	private int port;
@@ -48,6 +50,7 @@ public class GameClient extends Controller implements Observable<GameObserver> {
 		try{
 			this.gameFactory=(GameFactory) this.connectioToServer.getObject();
 			this.localPiece=(Piece) this.connectioToServer.getObject();
+			
 		}catch(Exception e){throw new GameError("Unknown server response:" + e.getMessage());}
 	}
 
@@ -64,7 +67,7 @@ public class GameClient extends Controller implements Observable<GameObserver> {
 	@Override
 	public void start() {
 		
-		this.observers.add((GameObserver) this);
+		this.observers.add(this);
 		
 		this.gameOver = false;
 		
@@ -92,18 +95,6 @@ public class GameClient extends Controller implements Observable<GameObserver> {
 		forwardCommand(new PlayCommand(p));
 		
 	}
-
-
-	@Override
-	public void addObserver(GameObserver o) {
-		this.observers.add(o);
-	}
-
-
-	@Override
-	public void removeObserver(GameObserver o) {
-		this.observers.remove(o);
-	}
 	
 	private void forwardCommand(Command cmd) {
 		try{
@@ -112,6 +103,66 @@ public class GameClient extends Controller implements Observable<GameObserver> {
 		}catch (IOException e){}
 		
 		
+		
+	}
+
+
+	
+
+
+	@Override
+	public void addObserver(GameObserver o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void removeObserver(GameObserver o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onGameStart(Board board, String gameDesc, List<Piece> pieces,
+			Piece turn) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onGameOver(Board board, State state, Piece winner) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onMoveStart(Board board, Piece turn) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onMoveEnd(Board board, Piece turn, boolean success) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onChangeTurn(Board board, Piece turn) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onError(String msg) {
+		// TODO Auto-generated method stub
 		
 	}
 	
