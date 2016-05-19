@@ -12,7 +12,6 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
-import es.ucm.fdi.tp.basecode.practica5.attt.AdvancedTTTSwingView;
 /**
  * A factory for creating ataxx games. See {@link AtaxxRules} for the
  * description of the game.

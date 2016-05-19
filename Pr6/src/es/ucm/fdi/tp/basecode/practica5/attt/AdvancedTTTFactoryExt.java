@@ -12,7 +12,6 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
-import es.ucm.fdi.tp.basecode.practica5.connectn.ConnectNSwingView;
 /**
  * A factory for Advanced Tic-Tac-Toe. See {@link AdvancedTTTRules} for the game
  * rules.

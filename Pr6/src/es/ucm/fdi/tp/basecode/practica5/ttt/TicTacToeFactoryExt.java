@@ -10,7 +10,6 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
-import es.ucm.fdi.tp.basecode.practica5.ataxx.AtaxxSwingView;
 import es.ucm.fdi.tp.basecode.ttt.TicTacToeFactory;
 
 /**
