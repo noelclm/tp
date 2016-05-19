@@ -68,7 +68,7 @@ public class GameServer extends Controller implements GameObserver{
 	@Override
 	public void onGameStart(Board board, String gameDesc, List<Piece> pieces,
 			Piece turn) {
-		
+		log("empieza");
 		try{
 			forwardNotification(new GameStartResponse(board,gameDesc,pieces,turn));
 		}catch (IOException e){log("Fallo");}
@@ -126,7 +126,7 @@ public class GameServer extends Controller implements GameObserver{
 	
 	private void forwardNotification(Response r) throws IOException {
 		
-		for (int i=0;i<this.clients.size()-1;i++){
+		for (int i=0;i<this.clients.size();i++){
 			this.clients.get(i).sendObject(r);
 		}
 		
@@ -139,13 +139,11 @@ public class GameServer extends Controller implements GameObserver{
 	
 	@Override
 	public synchronized void stop() {
-		// TODO revisar
 		try { super.stop(); } catch (GameError e) { }
 	}
 	
 	@Override
 	public synchronized void restart() {
-		// TODO revisar
 		try { super.restart(); } catch (GameError e) { }
 	}
 	
@@ -218,11 +216,14 @@ public class GameServer extends Controller implements GameObserver{
 			c.sendObject(this.pieces.get(numOfConnectedPlayers));
 			this.clients.add(c);
 			this.numOfConnectedPlayers++;
+			
+			startClientListener(c); //Crea una hebra que esta escuchando al cliente
+			
 			if(this.numPlayers == this.numOfConnectedPlayers){
 				game.start(pieces);
 			}
 			
-			startClientListener(c); //Crea una hebra que esta escuchando al cliente
+			
 			log("Se a conectado el jugador "+this.pieces.get(numOfConnectedPlayers-1));
 				
 		}catch (IOException | ClassNotFoundException e){}
@@ -230,7 +231,6 @@ public class GameServer extends Controller implements GameObserver{
 	}
 	
 	private void startClientListener(Connection c) {
-		// TODO Auto-generated method stub
 		this.gameOver=false;
 		Thread t= new Thread(new Runnable(){
 			@Override
@@ -262,7 +262,8 @@ public class GameServer extends Controller implements GameObserver{
 	private void closeServer() throws IOException{
 		this.stopped = true;
 		if(this.numOfConnectedPlayers > 0){
-			for (int i=0;i<this.clients.size()-1;i++){
+			game.stop();
+			for (int i=0;i<this.clients.size();i++){
 				this.clients.get(i).stop();
 			}
 		}

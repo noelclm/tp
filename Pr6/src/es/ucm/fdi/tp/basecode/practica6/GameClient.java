@@ -19,7 +19,7 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 
-public class GameClient extends Controller implements Observable<GameObserver>, GameObserver {
+public class GameClient extends Controller implements Observable<GameObserver>, GameObserver{
 	
 	private String host;
 	private int port;
@@ -106,21 +106,15 @@ public class GameClient extends Controller implements Observable<GameObserver>, 
 		
 	}
 
-
-	
-
-
 	@Override
 	public void addObserver(GameObserver o) {
-		// TODO Auto-generated method stub
-		
+		this.observers.add(o);
 	}
 
 
 	@Override
 	public void removeObserver(GameObserver o) {
-		// TODO Auto-generated method stub
-		
+		this.observers.remove(o);
 	}
 
 
