@@ -86,24 +86,23 @@ public class GameClient extends Controller implements Observable<GameObserver>, 
 	public void stop() {
 		forwardCommand(new QuitCommand());
 	}
+	
 	@Override
 	public void restart() {
 		forwardCommand(new RestartCommand());
-		
 	}
+	
 	@Override
 	public void makeMove(Player p) {
 		forwardCommand(new PlayCommand(p));
-		
 	}
 	
 	private void forwardCommand(Command cmd) {
+		
 		try{
 			if(!this.gameOver)
 				this.connectioToServer.sendObject(cmd);
 		}catch (IOException e){}
-		
-		
 		
 	}
 
@@ -111,7 +110,6 @@ public class GameClient extends Controller implements Observable<GameObserver>, 
 	public void addObserver(GameObserver o) {
 		this.observers.add(o);
 	}
-
 
 	@Override
 	public void removeObserver(GameObserver o) {

@@ -48,6 +48,7 @@ public class GameServer extends Controller implements GameObserver{
 	volatile private ServerSocket server;
 	volatile private boolean stopped;
 	volatile private boolean gameOver;
+	volatile private boolean firstStart;
 	
 	private JPanel mainPanel;
 	private JPanel buttonPanel;
@@ -66,6 +67,7 @@ public class GameServer extends Controller implements GameObserver{
 		this.gameFactory = gameFactory;
 		this.gameOver = false;
 		this.clients = new ArrayList<Connection>();
+		this.firstStart = true;
 		
 		game.addObserver(this);
 		
@@ -176,6 +178,7 @@ public class GameServer extends Controller implements GameObserver{
 			try {
 				log("Waiting for a connection.");
 				Socket s= server.accept(); //Cuando alguien se conecta devuelve un socket para enviar y recibir datos a través de el.
+				
 				handleRequestInAThread(s); //maneja la petición.
 			} catch (IOException | ClassNotFoundException e) {
 				if (!this.stopped) {
@@ -213,7 +216,7 @@ public class GameServer extends Controller implements GameObserver{
 				c.stop();
 				return;
 			}
-		
+			
 			// Si no hay hueco en el servidor no se conecta
 			if(this.numPlayers == this.numOfConnectedPlayers){
 				c.sendObject(new GameError("The server is full"));	
@@ -224,17 +227,22 @@ public class GameServer extends Controller implements GameObserver{
 			c.sendObject(this.gameFactory);
 			c.sendObject(this.pieces.get(numOfConnectedPlayers));
 			this.clients.add(c);
-			this.numOfConnectedPlayers++;
 			
 			startClientListener(c); //Crea una hebra que esta escuchando al cliente
 			
+			log("Conected the player "+this.pieces.get(numOfConnectedPlayers));
+			this.numOfConnectedPlayers++;
+			
 			if(this.numPlayers == this.numOfConnectedPlayers){
-				game.start(pieces);
+				if(this.firstStart){
+					game.start(pieces);
+					this.firstStart = false;
+				}
+				else{
+					game.restart();
+				}
 			}
 			
-			
-			log("Conected the player "+this.pieces.get(numOfConnectedPlayers-1));
-				
 		}catch (IOException | ClassNotFoundException e){}
 		
 	}
@@ -252,6 +260,10 @@ public class GameServer extends Controller implements GameObserver{
 					}catch (IOException | ClassNotFoundException e){
 						if (!stopped && !gameOver){ //Si hay un error y se esta ejecutando el juego se para.
 							game.stop();
+							clients.clear();
+							numOfConnectedPlayers = 0;
+							gameOver = true;
+							log("Stoped game");
 						} else{
 							try {
 								closeServer();
@@ -279,14 +291,11 @@ public class GameServer extends Controller implements GameObserver{
 		this.server.close(); //cierra el servidor.
 		
 	}
-
-
 	
 	//+++++++++++++++++++++++++++++++++++
 	// 				  GUI
 	//+++++++++++++++++++++++++++++++++++
 	
-
 	private void controlGUI() {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {

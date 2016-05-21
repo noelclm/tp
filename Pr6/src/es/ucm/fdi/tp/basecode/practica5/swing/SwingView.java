@@ -288,20 +288,17 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	}
 
 	@Override
-	public void onMoveStart(Board board, Piece turn) {
+	public void onMoveStart(Board board, Piece turn) {	
 	}
 	
 
 	@Override
 	public void onMoveEnd(Board board, Piece turn, boolean success) {
 	
-		
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run(){handleMoveEnd(board, turn, success);}
 			});
-			
-		
-		
+	
 	}
 	
 	/**
@@ -370,6 +367,8 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		if(this.playerTypes.get(this.turn) != null && this.playerTypes.get(this.turn).equals(PlayerMode.RANDOM)){
 			move(ramdomPlayer);
 		}	
+		
+		playerInformationTable.refresh();
 		
 	}
 
@@ -698,6 +697,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 
 		quitRestarPanel.add(quitButton);
 		quitRestarPanel.add(restartButton);
+		//restartButton.setEnabled(false);
 		rigthPanel.add(quitRestarPanel);
 	}
 	
