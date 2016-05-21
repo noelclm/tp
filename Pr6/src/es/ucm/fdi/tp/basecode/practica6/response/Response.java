@@ -1,4 +1,4 @@
-package es.ucm.fdi.tp.basecode.practica6;
+package es.ucm.fdi.tp.basecode.practica6.response;
 
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 

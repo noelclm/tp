@@ -1,11 +1,11 @@
-package es.ucm.fdi.tp.basecode.practica6;
+package es.ucm.fdi.tp.basecode.practica6.response;
 
 import es.ucm.fdi.tp.basecode.bgame.model.Board;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 
-public class ChangeTurnResponse implements Response {
-
+public class MoveStartResponse implements Response {
+	
 	/**
 	 * 
 	 */
@@ -13,15 +13,14 @@ public class ChangeTurnResponse implements Response {
 	private Board board;
 	private Piece turn;
 	
-	public ChangeTurnResponse(Board board, Piece turn){
+	public MoveStartResponse(Board board, Piece turn){
 		this.board=board;
 		this.turn=turn;
 	}
-	
+
 	@Override
 	public void run(GameObserver o) {
-		
-		o.onChangeTurn(board, turn); 
+		o.onMoveStart(board, turn); 
 	}
 
 }

@@ -1,27 +1,27 @@
-package es.ucm.fdi.tp.basecode.practica6;
+package es.ucm.fdi.tp.basecode.practica6.response;
 
 import es.ucm.fdi.tp.basecode.bgame.model.Board;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 
-public class MoveEndResponse implements Response {
+public class ChangeTurnResponse implements Response {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Board board;
 	private Piece turn;
-	private Boolean success;
 	
-	public MoveEndResponse(Board board, Piece turn, Boolean success){
+	public ChangeTurnResponse(Board board, Piece turn){
 		this.board=board;
 		this.turn=turn;
-		this.success=success;
 	}
+	
 	@Override
 	public void run(GameObserver o) {
-		o.onMoveEnd(board,turn,success); 
-
+		
+		o.onChangeTurn(board, turn); 
 	}
 
 }

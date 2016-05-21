@@ -1,11 +1,11 @@
-package es.ucm.fdi.tp.basecode.practica6;
+package es.ucm.fdi.tp.basecode.practica6.response;
 
 import java.util.List;
 
 import es.ucm.fdi.tp.basecode.bgame.model.Board;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
-import es.ucm.fdi.tp.basecode.practica6.Response;
+import es.ucm.fdi.tp.basecode.practica6.response.Response;
 
 public class GameStartResponse implements Response {
 

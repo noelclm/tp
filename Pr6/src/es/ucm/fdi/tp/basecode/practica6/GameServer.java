@@ -31,6 +31,13 @@ import es.ucm.fdi.tp.basecode.bgame.model.Game.State;
 import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
+import es.ucm.fdi.tp.basecode.practica6.response.ChangeTurnResponse;
+import es.ucm.fdi.tp.basecode.practica6.response.ErrorResponse;
+import es.ucm.fdi.tp.basecode.practica6.response.GameOverResponse;
+import es.ucm.fdi.tp.basecode.practica6.response.GameStartResponse;
+import es.ucm.fdi.tp.basecode.practica6.response.MoveEndResponse;
+import es.ucm.fdi.tp.basecode.practica6.response.MoveStartResponse;
+import es.ucm.fdi.tp.basecode.practica6.response.Response;
 
 public class GameServer extends Controller implements GameObserver{
 	private int port;

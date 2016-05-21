@@ -18,6 +18,7 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
+import es.ucm.fdi.tp.basecode.practica6.response.Response;
 
 public class GameClient extends Controller implements Observable<GameObserver>, GameObserver{
 	
