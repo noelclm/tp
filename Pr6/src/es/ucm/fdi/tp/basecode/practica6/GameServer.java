@@ -91,7 +91,7 @@ public class GameServer extends Controller implements GameObserver{
 	
 		try{
 			forwardNotification(new GameOverResponse(board,state,winner));
-		}catch (IOException e){}
+		}catch (IOException e){log(e.toString());}
 		
 	}
 
@@ -100,7 +100,7 @@ public class GameServer extends Controller implements GameObserver{
 		
 		try{
 			forwardNotification(new MoveStartResponse(board,turn));
-		}catch (IOException e){}
+		}catch (IOException e){log(e.toString());}
 		
 		
 	}
@@ -110,7 +110,7 @@ public class GameServer extends Controller implements GameObserver{
 		
 		try{
 			forwardNotification(new MoveEndResponse(board,turn,success));
-		}catch (IOException e){}
+		}catch (IOException e){log(e.toString());}
 		
 	}
 
@@ -119,7 +119,7 @@ public class GameServer extends Controller implements GameObserver{
 		
 		try{
 			forwardNotification(new ChangeTurnResponse(board,turn));
-		}catch (IOException e){}
+		}catch (IOException e){log(e.toString());}
 		
 	}
 
@@ -128,7 +128,7 @@ public class GameServer extends Controller implements GameObserver{
 		
 		try{
 			forwardNotification(new ErrorResponse(msg));
-		}catch (IOException e){}
+		}catch (IOException e){log(e.toString());}
 		
 		
 	}
@@ -143,17 +143,17 @@ public class GameServer extends Controller implements GameObserver{
 	
 	@Override
 	public synchronized void makeMove(Player player) {
-		try { super.makeMove(player); } catch (GameError e) { }
+		try { super.makeMove(player); } catch (GameError e) { log(e.toString()); }
 	}
 	
 	@Override
 	public synchronized void stop() {
-		try { super.stop(); } catch (GameError e) { }
+		try { super.stop(); } catch (GameError e) { log(e.toString()); }
 	}
 	
 	@Override
 	public synchronized void restart() {
-		try { super.restart(); } catch (GameError e) { }
+		try { super.restart(); } catch (GameError e) { log(e.toString()); }
 	}
 	
 	@Override
@@ -162,7 +162,7 @@ public class GameServer extends Controller implements GameObserver{
 		try{
 			startServer();
 		}catch(IOException e){
-			
+			log(e.toString());
 		}
 		
 	}
