@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
@@ -81,6 +82,10 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	boolean inPlay;
 	Iterator<Color> colorsIter;
 	
+	private int segundos;
+	private SwingWorker<Object, Object> sw;
+	private Thread interrupt;
+	
 	private JPanel mainPanel;
 	private JPanel leftPanel;
 	private JPanel rigthPanel;
@@ -109,6 +114,10 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	private JButton quitButton;
 	private JButton restartButton;
 	
+	private JPanel tiempoPanel;
+	private JTextField tiempoText;
+	private JButton tiempoButton;
+	
 
 	/**
 	 * Constructor parametrizado.
@@ -128,7 +137,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		this.pieceColors = new HashMap<Piece, Color>();
 		this.playerTypes = new HashMap<Piece, PlayerMode>();
 		this.inPlay = false;
-		
+		this.segundos = 5;
 		this.colorsIter = Utils.colorsGenerator();
 		
 		game.addObserver(SwingView.this);//se registra
@@ -150,6 +159,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		
 		statusMessagesPanel();
 		playerInformationPanel();
+		tiempoPanel();
 		pieceColorPanel();
 		playerModesPanel();
 		AutomaticMovesPanel();
@@ -171,6 +181,8 @@ public abstract class SwingView extends JFrame implements GameObserver {
 			}
 		});
 	}
+
+
 	/**
 	 * Mostrar la ventana de confirmacion de salir.
 	 */
@@ -344,6 +356,9 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		this.board = board2;
 		this.turn = turn2;
 		
+		if(interrupt!=null && interrupt.isAlive())
+			interrupt.interrupt();
+		
 		if(this.localPiece != null){
 			if(this.turn.getId().equalsIgnoreCase(this.localPiece.getId())){
 				if(ramdomPlayer != null)
@@ -511,16 +526,36 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		if(aiPlayer != null)
 			intelligentAutomaticMovesButton.setEnabled(false);
 		
-		new SwingWorker<Object, Object>(){
+		sw = new SwingWorker<Object, Object>(){
 			 
 			@Override
 			protected Object doInBackground() throws Exception {
+				if(player.equals(aiPlayer)||player.equals(ramdomPlayer))
+					interruptMovement();
 				ctrl.makeMove(player);
 				return null;
 			}	
-		}.execute();
-		
+		};
+		sw.execute();
 		playerInformationTable.refresh();
+		
+	}
+	
+	private void interruptMovement(){
+		
+		interrupt = new Thread(){
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(segundos*1000);
+					sw.cancel(true);
+					playerTypes.put(turn,PlayerMode.MANUAL);
+					playerInformationTable.refresh();
+				} catch (InterruptedException e) {}
+			}
+			
+		};
+		interrupt.start();
 		
 	}
 	
@@ -569,6 +604,37 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		playerPanel.add(jp);
 		rigthPanel.add(playerPanel);		
 		
+	}
+	/**
+	 * Crea el panel de elegir el tiempo
+	 */
+	private void tiempoPanel() {
+		
+		tiempoPanel = new JPanel ();
+		tiempoPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Timer selector"));
+		tiempoText = new JTextField();
+		tiempoText.setPreferredSize(new Dimension(70, 27));
+		tiempoText.setText(String.valueOf(segundos));
+		tiempoButton = new JButton("Set");
+		tiempoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){ time(); }
+			});
+
+		tiempoPanel.add(tiempoText);
+		tiempoPanel.add(tiempoButton);
+		rigthPanel.add(tiempoPanel);
+	}
+	/**
+	 * Coge el tiempo que ha metido el usuario.
+	 */
+	private void time() {
+		
+		String s =  tiempoText.getText();
+		try{
+			this.segundos = Integer.parseInt(s);
+		}catch (NumberFormatException e){
+			addStatusMessages("No se ha introducido bien el tiempo");
+		}
 	}
 	
 	/**
