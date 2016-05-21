@@ -39,6 +39,11 @@ import es.ucm.fdi.tp.basecode.practica6.response.MoveEndResponse;
 import es.ucm.fdi.tp.basecode.practica6.response.MoveStartResponse;
 import es.ucm.fdi.tp.basecode.practica6.response.Response;
 
+/**
+ * 
+ * Clase para el servidor.
+ *
+ */
 public class GameServer extends Controller implements GameObserver{
 	private int port;
 	private int numPlayers;
@@ -57,6 +62,12 @@ public class GameServer extends Controller implements GameObserver{
 	private JButton restartButton;
 	private JTextArea infoArea;
 	
+	/**
+	 * Constructor parametrizado.
+	 * @param gameFactory Factoria del juego.
+	 * @param pieces Lista de piezas del juego.
+	 * @param port numero de puerto.
+	 */
 	public GameServer(GameFactory gameFactory, List<Piece> pieces, int port) {
 		
 		super(new Game(gameFactory.gameRules()), pieces);
@@ -136,7 +147,11 @@ public class GameServer extends Controller implements GameObserver{
 		
 		
 	}
-	
+	/**
+	 * Retorna notificaciones
+	 * @param r notificacion.
+	 * @throws IOException
+	 */
 	private void forwardNotification(Response r) throws IOException {
 		
 		for (int i=0;i<this.clients.size();i++){
@@ -171,6 +186,10 @@ public class GameServer extends Controller implements GameObserver{
 		
 	}
 	
+	/**
+	 * Arranca el servidor.
+	 * @throws IOException
+	 */
 	private void startServer() throws IOException {
 		
 		this.server = new ServerSocket(port);
@@ -192,9 +211,15 @@ public class GameServer extends Controller implements GameObserver{
 		
 	}
 	
+	/**
+	 * Crea una hebra para el cliente.
+	 * @param s Socket.
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public void handleRequestInAThread(Socket s) throws IOException, ClassNotFoundException{
 		
-		// Crea una nueva hebra para el cliente
+		
 		new Thread() {
 			@Override
 			public void run() {
@@ -206,9 +231,14 @@ public class GameServer extends Controller implements GameObserver{
 		}.start();
 		
 	}
-	
+	/**
+	 * Mandar datos del juego al cliente.
+	 * @param s Socket.
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private void handleRequest(Socket s) throws IOException,ClassNotFoundException {
-		//Mandar datos del juego al cliente
+		
 		try{
 			Connection c = new Connection(s);
 			Object clientRequest = c.getObject();
@@ -247,6 +277,10 @@ public class GameServer extends Controller implements GameObserver{
 		
 	}
 	
+	/**
+	 * Inicia la escucha del cliente.
+	 * @param c Conexion.
+	 */
 	private void startClientListener(Connection c) {
 		this.gameOver=false;
 		Thread t= new Thread(new Runnable(){
@@ -283,6 +317,10 @@ public class GameServer extends Controller implements GameObserver{
 		
 	}
 	
+	/**
+	 * Cierra el servidor.
+	 * @throws IOException
+	 */
 	private void closeServer() throws IOException{
 		this.stopped = true;
 		if(this.numOfConnectedPlayers > 0){
@@ -300,7 +338,9 @@ public class GameServer extends Controller implements GameObserver{
 	//+++++++++++++++++++++++++++++++++++
 	// 				  GUI
 	//+++++++++++++++++++++++++++++++++++
-	
+	/**
+	 * Inicia la ventana del servidor.
+	 */
 	private void controlGUI() {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
@@ -312,6 +352,9 @@ public class GameServer extends Controller implements GameObserver{
 		}
 	}
 	
+	/**
+	 * Construye la ventana del servidor.
+	 */
 	private void constructGUI() {
 		JFrame window = new JFrame("Game Server");
 		
@@ -376,6 +419,10 @@ public class GameServer extends Controller implements GameObserver{
 		
 	}
 	
+	/**
+	 * Escribir en el infoArea.
+	 * @param msg mensaje.
+	 */
 	private void log(String msg) {
 		
 		// show the message in infoArea, use invokeLater!!

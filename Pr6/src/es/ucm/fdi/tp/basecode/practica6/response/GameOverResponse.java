@@ -5,6 +5,11 @@ import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.bgame.model.Game.State;
 
+/**
+ * 
+ * Respuesta de Game Over.
+ *
+ */
 public class GameOverResponse implements Response {
 	
 	/**
@@ -15,6 +20,12 @@ public class GameOverResponse implements Response {
 	private State state;
 	private Piece winner;
 	
+	/**
+	 * Constructor parametrizado.
+	 * @param board tablero.
+	 * @param state estado del juego.
+	 * @param winner ganador.
+	 */
 	public GameOverResponse(Board board, State state, Piece winner){
 		this.board=board;
 		this.state=state;

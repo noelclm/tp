@@ -20,6 +20,11 @@ import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
 import es.ucm.fdi.tp.basecode.practica6.response.Response;
 
+/**
+ * 
+ * Clase para el ciente.
+ *
+ */
 public class GameClient extends Controller implements Observable<GameObserver>, GameObserver{
 	
 	private String host;
@@ -30,6 +35,12 @@ public class GameClient extends Controller implements Observable<GameObserver>, 
 	private Connection connectioToServer;
 	private boolean gameOver;
 	
+	/**
+	 * Constructor parametrizado.
+	 * @param host nombre o ip del servidor.
+	 * @param port numero de puerto.
+	 * @throws Exception
+	 */
 	public GameClient(String host, int port)throws Exception{
 		super(null,null);
 		this.host=host;
@@ -39,6 +50,10 @@ public class GameClient extends Controller implements Observable<GameObserver>, 
 	}
 	
 
+	/**
+	 * Hace la conexion al servidor.
+	 * @throws Exception
+	 */
 	private void connect() throws Exception {
 		
 		this.connectioToServer= new Connection(new Socket(host,port));
@@ -55,11 +70,19 @@ public class GameClient extends Controller implements Observable<GameObserver>, 
 		}catch(Exception e){throw new GameError("Unknown server response:" + e.getMessage());}
 	}
 
+	/**
+	 * Devuelve gameFactory
+	 * @return GameFactory
+	 */
 	public GameFactory getGameFactory() {
 		
 		return this.gameFactory;
 	}
 
+	/**
+	 * Devuelve la pieza.
+	 * @return Piece
+	 */
 	public Piece getPlayerPiece() {
 		
 		return this.localPiece;
