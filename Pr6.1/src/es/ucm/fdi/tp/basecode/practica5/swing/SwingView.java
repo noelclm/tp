@@ -540,7 +540,9 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		playerInformationTable.refresh();
 		
 	}
-	
+	/**
+	 * Interrumpe la hebra del movimiento
+	 */
 	private void interruptMovement(){
 		
 		interrupt = new Thread(){
