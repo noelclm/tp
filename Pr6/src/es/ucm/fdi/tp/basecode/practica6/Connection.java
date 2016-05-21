@@ -18,7 +18,7 @@ public class Connection {
 	/**
 	 * Costructor parametrizado
 	 * @param s socket.
-	 * @throws IOException
+	 * @throws IOException Excepcion de entrada-salida
 	 */
 	public Connection(Socket s) throws IOException{
 		this.s = s;
@@ -29,7 +29,7 @@ public class Connection {
 	/**
 	 * Envia un objeto.
 	 * @param r objeto.
-	 * @throws IOException
+	 * @throws IOException Excepcion de entrada-salida
 	 */
 	public void sendObject(Object r) throws IOException {
 		out.writeObject(r);
@@ -39,8 +39,8 @@ public class Connection {
 	/**
 	 * Devuelve un objeto.
 	 * @return Object
-	 * @throws ClassNotFoundException
-	 * @throws IOException
+	 * @throws ClassNotFoundException Excepcion de clase no encontrada
+	 * @throws IOException Excepcion de entrada-salida
 	 */
 	public Object getObject() throws ClassNotFoundException, IOException {
 		return in.readObject();
@@ -48,6 +48,7 @@ public class Connection {
 	
 	/**
 	 * Cierra la conexion.
+	 * @throws IOException Excepcion de entrada-salida
 	 */
 	public void stop() throws IOException {
 		s.close();

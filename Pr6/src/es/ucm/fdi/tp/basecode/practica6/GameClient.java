@@ -39,7 +39,7 @@ public class GameClient extends Controller implements Observable<GameObserver>, 
 	 * Constructor parametrizado.
 	 * @param host nombre o ip del servidor.
 	 * @param port numero de puerto.
-	 * @throws Exception
+	 * @throws Exception  Excepcion generica
 	 */
 	public GameClient(String host, int port)throws Exception{
 		super(null,null);
@@ -52,7 +52,7 @@ public class GameClient extends Controller implements Observable<GameObserver>, 
 
 	/**
 	 * Hace la conexion al servidor.
-	 * @throws Exception
+	 * @throws Exception Excepcion generica
 	 */
 	private void connect() throws Exception {
 		

@@ -150,7 +150,7 @@ public class GameServer extends Controller implements GameObserver{
 	/**
 	 * Retorna notificaciones
 	 * @param r notificacion.
-	 * @throws IOException
+	 * @throws IOException  Excepcion de entrada-salida
 	 */
 	private void forwardNotification(Response r) throws IOException {
 		
@@ -188,7 +188,7 @@ public class GameServer extends Controller implements GameObserver{
 	
 	/**
 	 * Arranca el servidor.
-	 * @throws IOException
+	 * @throws IOException Excepcion de entrada-salida
 	 */
 	private void startServer() throws IOException {
 		
@@ -214,8 +214,8 @@ public class GameServer extends Controller implements GameObserver{
 	/**
 	 * Crea una hebra para el cliente.
 	 * @param s Socket.
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * @throws IOException Excepcion de entrada-salida
+	 * @throws ClassNotFoundException Excepcion de clase no encontrada
 	 */
 	public void handleRequestInAThread(Socket s) throws IOException, ClassNotFoundException{
 		
@@ -234,8 +234,8 @@ public class GameServer extends Controller implements GameObserver{
 	/**
 	 * Mandar datos del juego al cliente.
 	 * @param s Socket.
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * @throws IOException Excepcion de entrada-salida
+	 * @throws ClassNotFoundException Excepcion de clase no encontrada
 	 */
 	private void handleRequest(Socket s) throws IOException,ClassNotFoundException {
 		
@@ -319,7 +319,7 @@ public class GameServer extends Controller implements GameObserver{
 	
 	/**
 	 * Cierra el servidor.
-	 * @throws IOException
+	 * @throws IOException Excepcion de entrada-salida
 	 */
 	private void closeServer() throws IOException{
 		this.stopped = true;
@@ -403,7 +403,7 @@ public class GameServer extends Controller implements GameObserver{
 	
 	/**
 	 * Mostrar la ventana de confirmacion de salir.
-	 * @throws IOException 
+	 * @throws IOException Excepcion de entrada-salida
 	 */
 	final protected void close(){
 		
