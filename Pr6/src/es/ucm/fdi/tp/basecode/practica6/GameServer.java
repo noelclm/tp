@@ -90,7 +90,9 @@ public class GameServer extends Controller implements GameObserver{
 
 	@Override
 	public void onGameOver(Board board, State state, Piece winner) {
-	
+		
+		log("Stoped Game");
+		this.restartButton.setEnabled(false);
 		try{
 			forwardNotification(new GameOverResponse(board,state,winner));
 		}catch (IOException e){log(e.toString());}
@@ -150,12 +152,12 @@ public class GameServer extends Controller implements GameObserver{
 	
 	@Override
 	public synchronized void stop() {
-		try { super.stop(); } catch (GameError e) { log(e.toString()); }
+		try { if(!game.getState().equals(State.Starting))super.stop(); } catch (GameError e) { log(e.toString()); }
 	}
 	
 	@Override
 	public synchronized void restart() {
-		try { super.restart(); } catch (GameError e) { log(e.toString()); }
+		try { if(!game.getState().equals(State.Starting))super.restart(); } catch (GameError e) { log(e.toString()); }
 	}
 	
 	@Override
@@ -178,7 +180,6 @@ public class GameServer extends Controller implements GameObserver{
 			try {
 				log("Waiting for a connection.");
 				Socket s= server.accept(); //Cuando alguien se conecta devuelve un socket para enviar y recibir datos a través de el.
-				
 				handleRequestInAThread(s); //maneja la petición.
 			} catch (IOException | ClassNotFoundException e) {
 				if (!this.stopped) {
@@ -232,7 +233,6 @@ public class GameServer extends Controller implements GameObserver{
 			
 			log("Conected the player "+this.pieces.get(numOfConnectedPlayers));
 			this.numOfConnectedPlayers++;
-			
 			if(this.numPlayers == this.numOfConnectedPlayers){
 				if(this.firstStart){
 					game.start(pieces);
@@ -259,11 +259,14 @@ public class GameServer extends Controller implements GameObserver{
 						cmd.execute(GameServer.this);
 					}catch (IOException | ClassNotFoundException e){
 						if (!stopped && !gameOver){ //Si hay un error y se esta ejecutando el juego se para.
-							game.stop();
+							if(!game.getState().equals(State.Starting)){
+								game.stop();
+							}
 							clients.clear();
 							numOfConnectedPlayers = 0;
 							gameOver = true;
-							log("Stoped game");
+							restartButton.setEnabled(false);
+							log("Stoped game fallo");
 						} else{
 							try {
 								closeServer();
@@ -283,7 +286,9 @@ public class GameServer extends Controller implements GameObserver{
 	private void closeServer() throws IOException{
 		this.stopped = true;
 		if(this.numOfConnectedPlayers > 0){
-			game.stop();
+			if(!game.getState().equals(State.Starting)){
+				game.stop();
+			}
 			for (int i=0;i<this.clients.size();i++){
 				this.clients.get(i).stop();
 			}
