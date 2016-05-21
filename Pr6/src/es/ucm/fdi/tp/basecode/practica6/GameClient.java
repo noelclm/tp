@@ -118,45 +118,30 @@ public class GameClient extends Controller implements Observable<GameObserver>, 
 
 
 	@Override
-	public void onGameStart(Board board, String gameDesc, List<Piece> pieces,
-			Piece turn) {
-		// TODO Auto-generated method stub
+	public void onGameStart(Board board, String gameDesc, List<Piece> pieces, Piece turn) {
 		
 	}
 
 
 	@Override
 	public void onGameOver(Board board, State state, Piece winner) {
-		// TODO Auto-generated method stub
-		
+		this.gameOver = true;
 	}
 
 
 	@Override
-	public void onMoveStart(Board board, Piece turn) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onMoveStart(Board board, Piece turn) {}
 
 
 	@Override
-	public void onMoveEnd(Board board, Piece turn, boolean success) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onMoveEnd(Board board, Piece turn, boolean success) {}
 
 
 	@Override
-	public void onChangeTurn(Board board, Piece turn) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onChangeTurn(Board board, Piece turn) {}
 
 
 	@Override
-	public void onError(String msg) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onError(String msg) {}
 	
 }

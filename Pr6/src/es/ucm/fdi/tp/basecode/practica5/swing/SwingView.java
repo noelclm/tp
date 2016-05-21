@@ -118,7 +118,7 @@ public abstract class SwingView extends JFrame implements GameObserver {
 	 * @param aiPlayer jugador IA.
 	 */
 	public SwingView(Observable<GameObserver> g, Controller c, Piece localPiece, Player randPlayer, Player aiPlayer) {
-		
+	
 		this.game = g;
 		this.ctrl = c;
 		this.localPiece = localPiece;
@@ -696,8 +696,8 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		});
 
 		quitRestarPanel.add(quitButton);
-		quitRestarPanel.add(restartButton);
-		//restartButton.setEnabled(false);
+		if(!game.equals(ctrl))
+			quitRestarPanel.add(restartButton);
 		rigthPanel.add(quitRestarPanel);
 	}
 	
