@@ -25,6 +25,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -510,15 +511,14 @@ public abstract class SwingView extends JFrame implements GameObserver {
 		if(aiPlayer != null)
 			intelligentAutomaticMovesButton.setEnabled(false);
 		
-			SwingUtilities.invokeLater(new Runnable() {
-				
-				@Override
-				public void run() {
-					ctrl.makeMove(player);
-				}
-				
-			});
-
+		new SwingWorker<Object, Object>(){
+			 
+			@Override
+			protected Object doInBackground() throws Exception {
+				ctrl.makeMove(player);
+				return null;
+			}	
+		}.execute();
 		
 		playerInformationTable.refresh();
 		

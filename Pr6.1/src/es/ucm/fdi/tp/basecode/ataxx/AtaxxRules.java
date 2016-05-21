@@ -194,7 +194,23 @@ public class AtaxxRules implements GameRules {
 
 	@Override
 	public double evaluate(Board board, List<Piece> pieces, Piece turn, Piece p) {
-		return 0;
+		
+		double m = 0;
+		double n = 0;
+		
+		for (int j=0; j < pieces.size(); j++){
+			if(pieces.get(j).equals(p)){
+				n = board.getPieceCount(p);//devuelve la cantidad de piezas que tiene el tablero que sean de tipo p.
+			}
+			else{
+				m = m + board.getPieceCount(pieces.get(j));
+			}
+			 
+		}
+		
+		double total = n+m;
+		return (n / total) - (m / total);
+
 	}
 
 	@Override
