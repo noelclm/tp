@@ -53,6 +53,7 @@ public class GameServer extends Controller implements GameObserver{
 	private JPanel buttonPanel;
 	private JPanel infoPanel;
 	private JButton quitButton;
+	private JButton restartButton;
 	private JTextArea infoArea;
 	
 	public GameServer(GameFactory gameFactory, List<Piece> pieces, int port) {
@@ -75,10 +76,11 @@ public class GameServer extends Controller implements GameObserver{
 	@Override
 	public void onGameStart(Board board, String gameDesc, List<Piece> pieces,
 			Piece turn) {
-		log("empieza");
+		log("Strarted Game");
+		this.restartButton.setEnabled(true);
 		try{
 			forwardNotification(new GameStartResponse(board,gameDesc,pieces,turn));
-		}catch (IOException e){log("Fallo");}
+		}catch (IOException e){log("Error to Started Game");}
 		
 		
 	}
@@ -214,7 +216,7 @@ public class GameServer extends Controller implements GameObserver{
 		
 			// Si no hay hueco en el servidor no se conecta
 			if(this.numPlayers == this.numOfConnectedPlayers){
-				c.sendObject(new GameError("Server is full"));	
+				c.sendObject(new GameError("The server is full"));	
 				c.stop();
 				return;
 			}
@@ -231,7 +233,7 @@ public class GameServer extends Controller implements GameObserver{
 			}
 			
 			
-			log("Se a conectado el jugador "+this.pieces.get(numOfConnectedPlayers-1));
+			log("Conected the player "+this.pieces.get(numOfConnectedPlayers-1));
 				
 		}catch (IOException | ClassNotFoundException e){}
 		
@@ -312,11 +314,23 @@ public class GameServer extends Controller implements GameObserver{
 		this.infoPanel.add(jp);
 		this.infoPanel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createLineBorder(Color.BLACK), "Info Messages"));
 		this.infoPanel.setPreferredSize(new Dimension(600,500));
+		
 		// quit button
 		this.quitButton = new JButton("Stop Sever");
 		this.quitButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {close();}
 		});
+		
+		// restart button
+		this.restartButton = new JButton("Restart");
+		this.restartButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){ 
+				log("--Restarted--");
+				game.restart();}
+			});
+		
+		this.restartButton.setEnabled(false);
+		this.buttonPanel.add(this.restartButton);
 		this.buttonPanel.add(this.quitButton);
 		
 		this.mainPanel.add(this.infoPanel, BorderLayout.CENTER);
@@ -327,6 +341,7 @@ public class GameServer extends Controller implements GameObserver{
 		window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		window.pack();
 		window.setVisible(true);
+		
 	}
 	
 	/**
@@ -339,14 +354,10 @@ public class GameServer extends Controller implements GameObserver{
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
 		if (n == 0) {
-			
 			try {
 				closeServer(); //cierra el servidor.
-			} catch (GameError | IOException _e) {
-			}
-
+			} catch (GameError | IOException _e) {}
 			System.exit(0);
-			
 		}
 		
 	}
