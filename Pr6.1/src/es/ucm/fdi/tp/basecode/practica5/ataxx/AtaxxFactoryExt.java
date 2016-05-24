@@ -4,14 +4,14 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.SwingUtilities;
 
-import es.ucm.fdi.tp.basecode.ataxx.AtaxxFactory;
-import es.ucm.fdi.tp.basecode.ataxx.AtaxxRules;
 import es.ucm.fdi.tp.basecode.bgame.control.Controller;
 import es.ucm.fdi.tp.basecode.bgame.control.Player;
 import es.ucm.fdi.tp.basecode.bgame.model.GameError;
 import es.ucm.fdi.tp.basecode.bgame.model.GameObserver;
 import es.ucm.fdi.tp.basecode.bgame.model.Observable;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
+import es.ucm.fdi.tp.basecode.practica4.ataxx.AtaxxFactory;
+import es.ucm.fdi.tp.basecode.practica4.ataxx.AtaxxRules;
 /**
  * A factory for creating ataxx games. See {@link AtaxxRules} for the
  * description of the game.
