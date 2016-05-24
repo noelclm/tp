@@ -108,6 +108,8 @@ public class GameServer extends Controller implements GameObserver{
 			forwardNotification(new GameOverResponse(board,state,winner));
 		}catch (IOException e){log(e.toString());}
 		
+		// TODO desconectar jugadores
+		
 	}
 
 	@Override
@@ -219,16 +221,9 @@ public class GameServer extends Controller implements GameObserver{
 	 */
 	public void handleRequestInAThread(Socket s) throws IOException, ClassNotFoundException{
 		
-		
-		new Thread() {
-			@Override
-			public void run() {
-				try {
-					handleRequest(s);
-				} catch (IOException | ClassNotFoundException e) {
-				}
-			}
-		}.start();
+	
+		handleRequest(s);
+				
 		
 	}
 	/**
@@ -332,7 +327,7 @@ public class GameServer extends Controller implements GameObserver{
 			}
 		}
 		this.server.close(); //cierra el servidor.
-		
+		System.exit(0);
 	}
 	
 	//+++++++++++++++++++++++++++++++++++
