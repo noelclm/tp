@@ -101,14 +101,12 @@ public class GameServer extends Controller implements GameObserver{
 
 	@Override
 	public void onGameOver(Board board, State state, Piece winner) {
+	
+		stopedServer();
 		
-		log("Stoped Game");
-		this.restartButton.setEnabled(false);
 		try{
 			forwardNotification(new GameOverResponse(board,state,winner));
 		}catch (IOException e){log(e.toString());}
-		
-		// TODO desconectar jugadores
 		
 	}
 
@@ -288,14 +286,7 @@ public class GameServer extends Controller implements GameObserver{
 						cmd.execute(GameServer.this);
 					}catch (IOException | ClassNotFoundException e){
 						if (!stopped && !gameOver){ //Si hay un error y se esta ejecutando el juego se para.
-							if(!game.getState().equals(State.Starting)){
-								game.stop();
-							}
-							clients.clear();
-							numOfConnectedPlayers = 0;
-							gameOver = true;
-							restartButton.setEnabled(false);
-							log("Stoped game fallo");
+							stopedServer();
 						} else{
 							try {
 								closeServer();
@@ -310,6 +301,21 @@ public class GameServer extends Controller implements GameObserver{
 		});
 		t.start();
 		
+	}
+	
+	/**
+	 * Para el juego del servidor.
+	 * @throws IOException Excepcion de entrada-salida
+	 */
+	private void stopedServer(){
+		if(!game.getState().equals(State.Starting)){
+			game.stop();
+		}
+		clients.clear();
+		numOfConnectedPlayers = 0;
+		gameOver = true;
+		restartButton.setEnabled(false);
+		log("Stoped game");
 	}
 	
 	/**
