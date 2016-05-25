@@ -1,4 +1,4 @@
-package es.ucm.fdi.tp.basecode.ataxx;
+package es.ucm.fdi.tp.basecode.practica4.ataxx;
 
 import java.util.List;
 

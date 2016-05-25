@@ -2,12 +2,12 @@ package es.ucm.fdi.tp.basecode.practica5.ataxx;
 
 import java.util.List;
 
-import es.ucm.fdi.tp.basecode.ataxx.AtaxxMove;
 import es.ucm.fdi.tp.basecode.bgame.control.Player;
 import es.ucm.fdi.tp.basecode.bgame.model.Board;
 import es.ucm.fdi.tp.basecode.bgame.model.GameMove;
 import es.ucm.fdi.tp.basecode.bgame.model.GameRules;
 import es.ucm.fdi.tp.basecode.bgame.model.Piece;
+import es.ucm.fdi.tp.basecode.practica4.ataxx.AtaxxMove;
 
 /**
  * 
