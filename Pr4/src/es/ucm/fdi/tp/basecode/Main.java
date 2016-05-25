@@ -12,7 +12,6 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import es.ucm.fdi.tp.basecode.ataxx.AtaxxFactory;
 import es.ucm.fdi.tp.basecode.attt.AdvancedTTTFactory;
 import es.ucm.fdi.tp.basecode.bgame.control.ConsoleCtrl;
 import es.ucm.fdi.tp.basecode.bgame.control.ConsoleCtrlMVC;
@@ -78,7 +77,7 @@ public class Main {
 	 * Juegos disponibles.
 	 */
 	enum GameInfo {
-		CONNECTN("cn", "ConnectN"), TicTacToe("ttt", "Tic-Tac-Toe"), AdvancedTicTacToe("attt", "Advanced Tic-Tac-Toe"),Ataxx("at","Ataxx");
+		CONNECTN("cn", "ConnectN"), TicTacToe("ttt", "Tic-Tac-Toe"), AdvancedTicTacToe("attt", "Advanced Tic-Tac-Toe");
 
 		private String id;
 		private String desc;
@@ -226,17 +225,9 @@ public class Main {
 	 * <p>
 	 * Numero de columnas proporcionadas con la opcion -d, o {@code null} si no
 	 * se incluye la opcion -d.
+	 * 
 	 */
 	private static Integer dimCols;
-	/**
-	 * Number of obstacles provided with the option -o ({@code null} if not
-	 * provided).
-	 * 
-	 * <p>
-	 * Numero de obstaculos proporcionados con la opcion -o, o {@code null} si no
-	 * se incluye la opcion -o.
-	 */
-	private static Integer obstacles = 0;
 
 	/**
 	 * The algorithm to be used by the automatic player. Not used so far, it is
@@ -279,8 +270,6 @@ public class Main {
 		cmdLineOptions.addOption(constructPlayersOption()); // -p or --players
 		cmdLineOptions.addOption(constructDimensionOption()); // -d or --dim
 
-		cmdLineOptions.addOption(constructObstaclesOptions()); // -o or --obstacles
-
 		// parse the command line as provided in args
 		//
 		CommandLineParser parser = new DefaultParser();
@@ -288,12 +277,10 @@ public class Main {
 			CommandLine line = parser.parse(cmdLineOptions, args);
 			parseHelpOption(line, cmdLineOptions);
 			parseDimOptionn(line);
-			parseObstaclesOptions(line);
 			parseGameOption(line);
 			parseViewOption(line);
 			parseMultiViewOption(line);
 			parsePlayersOptions(line);
-			
 
 			// if there are some remaining arguments, then something wrong is
 			// provided in the command line!
@@ -545,18 +532,6 @@ public class Main {
 		case TicTacToe:
 			gameFactory = new TicTacToeFactory();
 			break;
-		case Ataxx:
-			if (dimRows != null && dimCols != null && dimRows == dimCols) {
-				if(obstacles == 0){
-					gameFactory = new AtaxxFactory(dimRows);
-				}else{
-					gameFactory = new AtaxxFactory(dimRows,obstacles);
-				}
-				
-			} else {
-				gameFactory = new AtaxxFactory();
-			}
-			break;
 		default:
 			throw new UnsupportedOperationException("Something went wrong! This program point should be unreachable!");
 		}
@@ -611,51 +586,6 @@ public class Main {
 			}
 		}
 
-	}
-	
-	/**
-	 * Builds the obstacles (-o or --obstacles) CLI option.
-	 * 
-	 * <p>
-	 * Construye la opcion CLI -o.
-	 * 
-	 * @return CLI {@link {@link Option} for the obstacles.
-	 *         <p>
-	 *         Objeto {@link Option} de esta opcion.
-	 */
-	private static Option constructObstaclesOptions() {
-		return new Option("o", "obstacles", true,
-				"Obstacles board");
-	}
-	
-	/**
-	 * Parses the obstacles option (-o or --obstacles). It sets the value of
-	 * {@link #obstacles} accordingly. 
-	 * 
-	 * <p>
-	 * Extrae la opcion dimension (-d). Asigna el valor de los atributos
-	 * {@link #obstacles}. 
-	 * 
-	 * @param line
-	 *            CLI {@link CommandLine} object.
-	 * @throws ParseException
-	 *             If an invalid value is provided.
-	 *             <p>
-	 *             Si se proporciona un valor invalido.
-	 */
-	private static void parseObstaclesOptions(CommandLine line) throws ParseException {
-		String obstaclesVal = line.getOptionValue("o");
-		
-		if (obstaclesVal != null) {
-			
-			try{
-				obstacles = Integer.parseInt(obstaclesVal);
-			}catch (NumberFormatException e) {
-				throw new ParseException("Invalid obstacles: " + obstaclesVal);
-			}
-			
-		}
-		
 	}
 
 	/**
