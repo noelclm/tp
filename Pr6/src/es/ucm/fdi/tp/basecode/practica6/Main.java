@@ -80,7 +80,7 @@ public class Main {
 	 */
 	enum GameInfo {
 		
-		CONNECT_N("cn", "ConnectN"), TIC_TAC_TOE("ttt", "Tic-Tac-Toe"), ADVANCED_TIC_TAC_TOE("attt", "Advanced Tic-Tac-Toe"),Ataxx("at","Ataxx");
+		CONNECT_N("cn", "ConnectN"), TIC_TAC_TOE("ttt", "Tic-Tac-Toe"), ADVANCED_TIC_TAC_TOE("attt", "Advanced Tic-Tac-Toe"),Ataxx("ataxx","Ataxx");
 
 		private String id;
 		private String desc;
